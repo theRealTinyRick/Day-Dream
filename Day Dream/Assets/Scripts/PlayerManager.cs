@@ -22,7 +22,9 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private float lowJumpMultiplyer = 3f;
 
     [HideInInspector]public GameObject ladder = null;
-    [HideInInspector]public bool canClimbLadder = false;
+
+    public GameObject shimyPipe = null;
+    public bool isShimyingPipe;
 
     public enum PlayerState { FreeMovement, Traversing, Attacking, Blocking, Dead};
     public PlayerState currentState = PlayerState.FreeMovement;
@@ -36,8 +38,7 @@ public class PlayerManager : MonoBehaviour {
     public int coinCount = 0;
 
 
-    private void Awake()
-    {
+    private void Awake(){
         #region Singleton
         if (instance == null)
             instance = this;
@@ -75,21 +76,30 @@ public class PlayerManager : MonoBehaviour {
         Vector3 movement = new Vector3(h,0,v);
         
         //Jump
-        if (CheckGrounded()){
-            if (Input.GetKeyDown(KeyCode.Space)){
-                if (ladder != null){
-                    move.StartCoroutine(move.ClimbLadder(ladder.GetComponent<Ladder>().bottomPos.position, ladder.GetComponent<Ladder>().topPos.position, ladder.GetComponent<Ladder>().endPos.position));
-                }else{
-                    Debug.Log("Jump");
+        if (Input.GetKeyDown(KeyCode.Space)){
+            if(currentState != PlayerState.Traversing){
+                if (ladder && CheckGrounded()){
+                    move.StartCoroutine(move.ClimbLadder(ladder.GetComponent<Ladder>().bottomPos.position, 
+                    ladder.GetComponent<Ladder>().topPos.position, ladder.GetComponent<Ladder>().endPos.position));
+                }else if(shimyPipe && CheckGrounded()){
+                    move.StartCoroutine(move.ShimyPipeStart(shimyPipe));
+                }else if(CheckGrounded()){
                     move.Jump(jumpHieght); //maybe remove standard jump mech
                     anim.SetBool("isGrounded", false);
+                }
+            }else{
+                if(shimyPipe){
+                    move.EndShimy();
                 }
             }
         }
 
+        //apply move controls
         if (currentState != PlayerState.Traversing && movement != Vector3.zero)
             move.FreeMovement(movement, speed);
-        else
+        else if(currentState == PlayerState.Traversing && shimyPipe && movement != Vector3.zero){
+            move.ShimyPipe(movement, shimyPipe.GetComponent<ShimyPipe>());
+        }else
             anim.SetBool("isMoving", false);
     }
 
@@ -121,13 +131,14 @@ public class PlayerManager : MonoBehaviour {
     public void CheckPlatform(){
         RaycastHit hit;
         if (Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 1.0f)){
-            if (CheckRange(feetLevel.position, hit.point, .15f)){
+            if (CheckRange(feetLevel.position, hit.point, .5f)){
                 if (hit.transform.tag == "Platform"){
                     transform.parent = hit.transform;
-                    Debug.Log(transform.parent.name);
                 }else
                     transform.parent = null;
             }
+        }else{
+            transform.parent = null;
         }
     }
 
@@ -143,6 +154,4 @@ public class PlayerManager : MonoBehaviour {
         else if (rb.velocity.y  > 0 && !Input.GetButton("Jump"))
             rb.velocity += Vector3.up * Physics.gravity.y  * (lowJumpMultiplyer - 1) * Time.deltaTime;
     }
-
-
 }

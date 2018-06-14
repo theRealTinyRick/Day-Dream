@@ -41,9 +41,7 @@ public class EnemyBase : MonoBehaviour {
 
     private IEnumerator PathFinding(){
         yield return new WaitForEndOfFrame();
-        while (!CheckAggro() || !CheckFieldOfView(Player.transform.position) )
-        {
-            Debug.Log("enemy should just patrol");
+        while (!CheckAggro() || !CheckFieldOfView(Player.transform.position)){
             yield return new WaitForEndOfFrame();
         }
 

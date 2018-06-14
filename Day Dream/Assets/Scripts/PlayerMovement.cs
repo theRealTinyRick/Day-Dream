@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
     Rigidbody rb;
-    CapsuleCollider playerCollider;
     private float rotationSpeed = .2f;
     [SerializeField] private float climbSpeed;
 
+    //shimy pipe
+    Vector3 mySide;
+    Vector3 farSide;
+
     private void Start(){
         rb = GetComponent<Rigidbody>();
-        playerCollider = GetComponent<CapsuleCollider>();
     }
 
-    public void FreeMovement(Vector3 movement, float speed)
-    {
+    public void FreeMovement(Vector3 movement, float speed){
         if (PlayerManager.instance.currentState != PlayerManager.PlayerState.Attacking){
             if (movement.x != 0 && movement.z != 0)
                 speed -= speed / 3;
@@ -44,6 +45,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public void Jump(float jumpHeight){
         PlayerManager.instance.rb.velocity = Vector3.up * jumpHeight;
+        PlayerManager.instance.anim.SetBool("isGrounded", false);
         PlayerManager.instance.anim.Play("Jump");
     }
 
@@ -95,5 +97,50 @@ public class PlayerMovement : MonoBehaviour {
         PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
         PlayerManager.instance.ladder = null;
         yield return new WaitForEndOfFrame();
+    }
+
+    public IEnumerator ZipLine(){
+
+        yield return null;
+    }
+
+    public IEnumerator ShimyPipeStart(GameObject pipe){
+        PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
+        rb.isKinematic = true;
+
+        ShimyPipe pipeInfo = pipe.GetComponent<ShimyPipe>();
+        if(Vector3.Distance(transform.position, pipeInfo.sideA.position) < Vector3.Distance(transform.position, pipeInfo.sideB.position)){
+            mySide = pipeInfo.sideA.position;
+            farSide = pipeInfo.sideB.position;
+        }else{
+            mySide = pipeInfo.sideB.position;
+            farSide = pipeInfo.sideA.position;
+        }
+
+        while(Vector3.Distance(transform.position, mySide)>.1f){
+            transform.position = Vector3.Lerp(transform.position, mySide, .1f);
+            Quaternion rot = Quaternion.LookRotation(farSide - transform.position);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, .5f);
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return null;
+    }
+
+    public void ShimyPipe(Vector3 movement, ShimyPipe pipe){
+        if(movement.z > 0){
+            transform.position = Vector3.MoveTowards(transform.position, farSide, 5 * Time.deltaTime);
+            Quaternion rot = Quaternion.LookRotation(farSide - transform.position);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, .5f);
+        }else if(movement.z < 0){
+            transform.position = Vector3.MoveTowards(transform.position, mySide, 5 * Time.deltaTime);
+            Quaternion rot = Quaternion.LookRotation(mySide - transform.position);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, .5f);
+        }
+    }
+
+    public void EndShimy(){
+        PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
+        rb.isKinematic = false;
     }
 }
