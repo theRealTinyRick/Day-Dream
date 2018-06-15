@@ -85,7 +85,7 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _WaterGloss: 10
-    - _WaterSpecular: 3
+    - _WaterSpecular: 0
     - _WaveCycles: 1.5
     - _WaveDirectionZX: 0
     - _WaveHeight: 0.4
