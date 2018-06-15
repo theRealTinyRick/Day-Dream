@@ -49,7 +49,7 @@ public class PlayerManager : MonoBehaviour {
         atk = GetComponent<PlayerAttack>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
-        playerCam = GetComponentInChildren<ThirdPersonCamera>();
+        playerCam = Camera.main.GetComponent<ThirdPersonCamera>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 

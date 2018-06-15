@@ -36,42 +36,40 @@ public class EnemyBase : MonoBehaviour {
             CurrentTarget = Player;
 
         currentHealth = startingHealth;
-        pathFinding = StartCoroutine(PathFinding());
+        StartCoroutine(PathFinding());
     }
 
     private IEnumerator PathFinding(){
-        yield return new WaitForEndOfFrame();
-        while (!CheckAggro() || !CheckFieldOfView(Player.transform.position)){
-            yield return new WaitForEndOfFrame();
-        }
-
-        while (currentState != State.Dead)
-        {
+        while (currentState != State.Dead){
+            while (!CheckAggro() || !CheckFieldOfView(Player.transform.position)){
+                yield return new WaitForEndOfFrame();
+            }
             nav.SetDestination(CurrentTarget.transform.position);
             if(currentState != State.Attacking || currentState != State.Stunned){
-                if (CheckRange(attackRange, CurrentTarget.transform.position)) //check attack range first
-                {
+                if (CheckRange(attackRange, CurrentTarget.transform.position)){
                     nav.isStopped = true;
                     anim.SetBool("isMoving", false);
                     if(currentState == State.Walking)
                         RotateTowardsPlayer(Player.transform.position);
                 }
-                else
-                {
+                else{
                     nav.isStopped = false;
                     anim.SetBool("isMoving", true);
                 }
 
-                if (!CheckAggro())//break out of coroutine if player hides
-                {
+                if (!CheckAggro()){
                     nav.isStopped = true;
                     anim.SetBool("isMoving", false);
-                    StopCoroutine(pathFinding);
                     pathFinding = StartCoroutine(PathFinding());
                 }
+            }else{
+                nav.isStopped = true;
+                anim.SetBool("isMoving", false);
             }
             yield return new WaitForEndOfFrame();
         }
+
+        yield return null;
     }
 
     //utility functions

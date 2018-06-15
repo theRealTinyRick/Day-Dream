@@ -36,8 +36,8 @@ public class ThirdPersonCamera : MonoBehaviour {
         Vector3 dis = new Vector3(0f, 0f, -currentDistance);   // use variables to get offeset and the rotation
         Quaternion rotation = Quaternion.Euler(-currentY, currentX, 0);
 
-        transform.position = camLookAt.position + rotation * dis; //apply rotation and offset to the position of the camera
-
+        Vector3 pos = camLookAt.position + rotation * dis; //apply rotation and offset to the position of the camera
+        transform.position = Vector3.Lerp(transform.position, pos, .5f);
         transform.LookAt(camLookAt.position);  //Look at
     }
 
