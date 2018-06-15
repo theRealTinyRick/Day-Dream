@@ -105,7 +105,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public IEnumerator ShimyPipeStart(GameObject pipe){
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
         rb.isKinematic = true;
 
         ShimyPipe pipeInfo = pipe.GetComponent<ShimyPipe>();
@@ -123,7 +122,7 @@ public class PlayerMovement : MonoBehaviour {
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, .5f);
             yield return new WaitForEndOfFrame();
         }
-
+        PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
         yield return null;
     }
 

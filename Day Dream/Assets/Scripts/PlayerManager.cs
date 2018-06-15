@@ -7,14 +7,13 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 
     public static PlayerManager instance;
+    
     private PlayerMovement move;
     private PlayerAttack atk;
     [HideInInspector]public Animator anim;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public ThirdPersonCamera playerCam;
 
-    [SerializeField] private Transform headLevel;
-    [SerializeField] private Transform midLevel;
     [SerializeField] private Transform feetLevel;
     
     [SerializeField] private float jumpHieght;
