@@ -29,16 +29,15 @@ public class PlayerAttack : MonoBehaviour {
         }
     }
 
-    private void Swing1()
-    {
+    private void Swing1(){
         _time = Time.time;
         PlayerManager.instance.anim.SetBool("Swing2", false);
         currentAtkState = AttackState.Swing1;
         PlayerManager.instance.anim.Play("Swing1");
         PlayerManager.instance.currentState = PlayerManager.PlayerState.Attacking;
     }
-    private void Swing2()
-    {
+    
+    private void Swing2(){
         _time = Time.time;
         currentAtkState = AttackState.Swing2;
         PlayerManager.instance.anim.SetBool("Swing2",true);

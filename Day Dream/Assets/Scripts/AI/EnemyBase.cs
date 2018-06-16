@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -18,66 +19,83 @@ public class EnemyBase : MonoBehaviour {
     public float attackRange;
     public float mobRange;
     public float aggroRange;
-    [SerializeField] private float heightDiff;
+    private float heightDiff = 2;
+
+    public bool isAggro = false;
 
     [HideInInspector] public Animator anim;
     [HideInInspector] public NavMeshAgent nav;
 
     public GameObject Player { get; set; }
-    public GameObject CurrentTarget { get; set; }
-    private Coroutine pathFinding;
+
+    public Transform currentPoint;
+    [SerializeField] Transform[] patrolPoints;
+    [SerializeField] private float switchTime;
 
     private void Start(){
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         nav.speed = moveSpeed;
         Player = PlayerManager.instance.gameObject;
-        if (CurrentTarget == null)
-            CurrentTarget = Player;
-
         currentHealth = startingHealth;
-        StartCoroutine(PathFinding());
+
+        StartCoroutine(SwitchPatrolPoints());
     }
 
-    private IEnumerator PathFinding(){
-        while (currentState != State.Dead){
-            while (!CheckAggro() || !CheckFieldOfView(Player.transform.position)){
-                yield return new WaitForEndOfFrame();
-            }
-            nav.SetDestination(CurrentTarget.transform.position);
-            if(currentState != State.Attacking || currentState != State.Stunned){
-                if (CheckRange(attackRange, CurrentTarget.transform.position)){
-                    nav.isStopped = true;
-                    anim.SetBool("isMoving", false);
-                    if(currentState == State.Walking)
-                        RotateTowardsPlayer(Player.transform.position);
-                }
-                else{
-                    nav.isStopped = false;
-                    anim.SetBool("isMoving", true);
-                }
+    private void Update(){
+        CheckAggro();
+        PathFinding();
+    }
 
-                if (!CheckAggro()){
-                    nav.isStopped = true;
-                    anim.SetBool("isMoving", false);
-                    pathFinding = StartCoroutine(PathFinding());
-                }
+    private void PathFinding(){
+        if(currentState != State.Dead && isAggro){
+            if(currentState != State.Attacking && currentState != State.Stunned && !CheckRange(attackRange, Player.transform.position)){
+                nav.SetDestination(Player.transform.position);
+                nav.isStopped = false;
+                anim.SetBool("isMoving", true);
+            }else{
+                nav.isStopped = true;
+                anim.SetBool("isMoving", false);
+                if(currentState != State.Attacking && currentState != State.Stunned)
+                    RotateTowardsPlayer(Player.transform.position);
+            }
+        }else{/////////////////PATROLING
+             if(!CheckRange(.1f, currentPoint.position)){
+                nav.SetDestination(currentPoint.position);
+                nav.isStopped = false;
+                anim.SetBool("isMoving", true);
             }else{
                 nav.isStopped = true;
                 anim.SetBool("isMoving", false);
             }
-            yield return new WaitForEndOfFrame();
         }
+    }
 
+    private IEnumerator SwitchPatrolPoints(){
+        currentPoint = patrolPoints[0];
+        while(!isAggro){
+            int index = Array.IndexOf(patrolPoints, currentPoint);
+            if(index < (patrolPoints.Length - 1)){
+                currentPoint = patrolPoints[++index];
+            }else{
+                currentPoint = patrolPoints[0];
+            }
+            yield return new WaitForSeconds(switchTime);
+        }
         yield return null;
     }
 
     //utility functions
     public bool CheckAggro(){
-        if (CheckRange(aggroRange, Player.transform.position) 
-            && CheckLineOfSight(Player.transform.position)
-            &&CheckHieghtDifferential(Player.transform.position))
-            return true;
+        if(!isAggro){
+            if (CheckRange(aggroRange, Player.transform.position) 
+                && CheckLineOfSight(Player.transform.position)
+                &&CheckHieghtDifferential(Player.transform.position) &&
+                CheckFieldOfView(Player.transform.position))
+
+                isAggro = true;
+                return true;
+        }
         return false;
     }
 

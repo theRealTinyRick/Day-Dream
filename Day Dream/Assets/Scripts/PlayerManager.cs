@@ -29,11 +29,11 @@ public class PlayerManager : MonoBehaviour {
     public PlayerState currentState = PlayerState.FreeMovement;
 
 
-    [SerializeField] float speed;
+    [SerializeField] private float speed = 5;
+    private Vector3 movement = Vector3.zero;
 
     float currentCamX  = 0.0f;
     float currentCamY  = 0.0f;
-
     public int coinCount = 0;
 
 
@@ -54,15 +54,16 @@ public class PlayerManager : MonoBehaviour {
     }
 
     private void Update(){
-        MoveInput();
         AttackInput();
-    }
-
-    private void LateUpdate(){
+        MoveInput();
         CameraInput();
     }
 
+    private void LateUpdate(){
+    }
+
     private void FixedUpdate(){
+        ApplyMove();
         playerCam.CameraClipping();
         BetterJumpPhysics();
         CheckGrounded();
@@ -72,7 +73,8 @@ public class PlayerManager : MonoBehaviour {
     void MoveInput(){
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-        Vector3 movement = new Vector3(h,0,v);
+        Vector3 m = new Vector3(h,0,v);
+        movement = m;
         
         //Jump
         if (Input.GetKeyDown(KeyCode.Space)){
@@ -92,7 +94,9 @@ public class PlayerManager : MonoBehaviour {
                 }
             }
         }
+    }
 
+    private void ApplyMove(){
         //apply move controls
         if (currentState != PlayerState.Traversing && movement != Vector3.zero)
             move.FreeMovement(movement, speed);

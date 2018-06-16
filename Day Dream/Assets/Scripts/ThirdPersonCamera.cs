@@ -37,15 +37,18 @@ public class ThirdPersonCamera : MonoBehaviour {
         Quaternion rotation = Quaternion.Euler(-currentY, currentX, 0);
 
         Vector3 pos = camLookAt.position + rotation * dis; //apply rotation and offset to the position of the camera
-        transform.position = Vector3.Lerp(transform.position, pos, .5f);
-        transform.LookAt(camLookAt.position);  //Look at
+         // transform.position = Vector3.Lerp(transform.position, pos, .8f);
+       transform.position = pos;
+        // Quaternion rot = Quaternion.LookRotation(camLookAt.position - transform.position);
+        // transform.rotation = Quaternion.Lerp(transform.rotation, rot, .5f);
+        transform.LookAt(camLookAt);    
     }
 
     public void CameraClipping(){
         clippingOrigin.position = camLookAt.position;
         Vector3 camPos = transform.position;
         Vector3 dir = camPos - clippingOrigin.transform.position;
-        float distance = originalCameraDistance + 2f;
+        float distance = originalCameraDistance + 1f;
 
         RaycastHit hit;
         if (Physics.Raycast(clippingOrigin.position, dir, out hit, distance)){

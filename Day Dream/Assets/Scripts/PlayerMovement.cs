@@ -23,15 +23,14 @@ public class PlayerMovement : MonoBehaviour {
             Vector3 dir = PlayerManager.instance.playerCam.transform.position - transform.position;
             dir.y = 0;
             Quaternion rot = Quaternion.LookRotation(-dir);
-
             movement = PlayerManager.instance.playerCam.transform.TransformDirection(movement);
             movement.y = 0;
-            Vector3 v = rb.velocity;
+            // Vector3 v = rb.velocity;
+            // v.x = movement.x * speed;
+            // v.z = movement.z * speed;
+            // rb.velocity = v;
+            transform.Translate(movement * speed * Time.deltaTime, Space.World);
 
-            v.x = movement.x * speed;
-            v.z = movement.z * speed;
-            rb.velocity = v;
-       
             if (movement != Vector3.zero){
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), rotationSpeed);
                 PlayerManager.instance.anim.SetBool("isMoving", true);
@@ -44,7 +43,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Jump(float jumpHeight){
-        PlayerManager.instance.rb.velocity = Vector3.up * jumpHeight;
+        rb.velocity = Vector3.Lerp(rb.velocity, Vector3.up * jumpHeight, .5f) ;
         PlayerManager.instance.anim.SetBool("isGrounded", false);
         PlayerManager.instance.anim.Play("Jump");
     }
