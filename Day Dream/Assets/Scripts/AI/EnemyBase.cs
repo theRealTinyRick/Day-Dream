@@ -38,6 +38,7 @@ public class EnemyBase : MonoBehaviour {
         nav.speed = moveSpeed;
         Player = PlayerManager.instance.gameObject;
         currentHealth = startingHealth;
+        anim.speed = .75f;
 
         StartCoroutine(SwitchPatrolPoints());
     }
@@ -59,16 +60,17 @@ public class EnemyBase : MonoBehaviour {
                 if(currentState != State.Attacking && currentState != State.Stunned)
                     RotateTowardsPlayer(Player.transform.position);
             }
-        }else{/////////////////PATROLING
-             if(!CheckRange(.1f, currentPoint.position)){
-                nav.SetDestination(currentPoint.position);
-                nav.isStopped = false;
-                anim.SetBool("isMoving", true);
-            }else{
-                nav.isStopped = true;
-                anim.SetBool("isMoving", false);
-            }
         }
+        //else{/////////////////PATROLING
+        //      if(!CheckRange(.1f, currentPoint.position)){
+        //         nav.SetDestination(currentPoint.position);
+        //         nav.isStopped = false;
+        //         anim.SetBool("isMoving", true);
+        //     }else{
+        //         nav.isStopped = true;
+        //         anim.SetBool("isMoving", false);
+        //     }
+        // }
     }
 
     private IEnumerator SwitchPatrolPoints(){
@@ -121,7 +123,7 @@ public class EnemyBase : MonoBehaviour {
         Transform fromPos = transform;
 
         float angle = Vector3.Angle(fromPos.forward, -tp);
-        if (angle <= 75f){
+        if (angle <= 60f){
             return true;
         }
         return false;

@@ -4,66 +4,54 @@ using UnityEngine;
 
 public class MeleeAttack : MonoBehaviour {
 
-	EnemyBase ebase;
+	private EnemyBase ebase;
+	private BoxCollider weaponCollider;
+	
 	[SerializeField] private float attackSpeed = 0;
 	[SerializeField] private float attackRecoverDelay = 0;
 
+
 	private void Start(){
 		ebase = GetComponent<EnemyBase>();
-
+		Debug.Log(ebase.Player);
+		weaponCollider = GetComponentInChildren<BoxCollider>();
 		if(attackRecoverDelay>=attackSpeed)
 			attackRecoverDelay = (attackSpeed-.5f);
-		
 		StartCoroutine(AttackPattern());
 	}
 
 	IEnumerator AttackPattern(){
 		while(ebase.currentState != EnemyBase.State.Dead){
-			yield return new WaitForSeconds(attackSpeed);
-			
-			while(!ebase.CheckRange(ebase.attackRange, ebase.Player.transform.position)){
-				yield return new WaitForEndOfFrame();
-			}
-
-			FindRandomAttack();
-			yield return new WaitForSeconds(attackRecoverDelay);
-
-			if(ebase.currentState != EnemyBase.State.Dead || ebase.currentState != EnemyBase.State.Stunned){
-				ebase.currentState = EnemyBase.State.Walking;
+			if(ebase.CheckRange(ebase.attackRange, ebase.Player.transform.position) && ebase.isAggro){
+				FindRandomAttack();
+				yield return new WaitForSeconds(attackRecoverDelay);
+				if(ebase.currentState != EnemyBase.State.Dead || ebase.currentState != EnemyBase.State.Stunned){
+					ebase.currentState = EnemyBase.State.Walking;
+					weaponCollider.enabled = true;
+				}
+				yield return new WaitForSeconds(attackSpeed);
 			}
 			yield return new WaitForEndOfFrame();
 		}
-
 		yield return null;
 	}
 
 	void FindRandomAttack(){
 		int result = Random.Range(0,3);
+		string animation = "";
 		switch(result){
 			case 0:
-				AttackOne();
+				animation = "Attack1";
 				break;
 			case 1:
-				AttackTwo();
+				animation = "Attack2";
 				break;
 			case 2:
-				AttackThree();
+				animation = "Attack3";
 				break;
 		}
-	}
-
-	void AttackOne(){
-		ebase.anim.Play("Attack1");
+		ebase.anim.Play(animation);
 		ebase.currentState = EnemyBase.State.Attacking;
-	}
-
-	void AttackTwo(){
-		ebase.anim.Play("Attack2");
-		ebase.currentState = EnemyBase.State.Attacking;
-	}
-
-	void AttackThree(){
-		ebase.anim.Play("Attack3");
-		ebase.currentState = EnemyBase.State.Attacking;
+		weaponCollider.enabled = false;
 	}
 }
