@@ -59,13 +59,15 @@ public class EnemyBase : MonoBehaviour {
             }
         }
         else{/////////////////PATROLING
-             if(!CheckRange(.1f, currentPoint.position)){
-                nav.SetDestination(currentPoint.position);
-                nav.isStopped = false;
-                anim.SetBool("isMoving", true);
-            }else{
-                nav.isStopped = true;
-                anim.SetBool("isMoving", false);
+            if(patrolPoints.Length > 0){
+                if(!CheckRange(.1f, currentPoint.position)){
+                    nav.SetDestination(currentPoint.position);
+                    nav.isStopped = false;
+                    anim.SetBool("isMoving", true);
+                }else{
+                    nav.isStopped = true;
+                    anim.SetBool("isMoving", false);
+                }
             }
         }
     }
@@ -135,9 +137,10 @@ public class EnemyBase : MonoBehaviour {
         Vector3 dir = adjustedToPos - adjustedFrom;
         RaycastHit hit;
         if (Physics.Raycast(adjustedFrom, dir, out hit, 100f)){
+            Debug.Log(hit.transform.tag);
             if(hit.transform.tag == "player")
                 return true;
-            else if(hit.transform.tag == "Grass"){
+            else if(hit.transform.tag == "Grass" || hit.transform.tag == "Environment"){
                 Debug.Log("Hidden");
                 return false;
             }else
@@ -148,9 +151,8 @@ public class EnemyBase : MonoBehaviour {
 
     private void RotateTowardsPlayer(Vector3 playerPos){
         Vector3 dir = playerPos-transform.position;
-        dir.y = transform.position.y;
+        dir.y = transform.localPosition.y;
         Quaternion rot = Quaternion.LookRotation(dir);
-
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, 0.2f);
     }
 
