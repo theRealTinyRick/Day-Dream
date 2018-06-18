@@ -2101,7 +2101,7 @@ MonoBehaviour:
   currentState: 0
   startingHealth: 100
   currentHealth: 0
-  moveSpeed: 3
+  moveSpeed: 2.5
   attackRange: 4
   mobRange: 6
   aggroRange: 30
