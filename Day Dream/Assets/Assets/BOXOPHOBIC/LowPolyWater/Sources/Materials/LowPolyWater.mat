@@ -69,7 +69,7 @@ Material:
     - _EdgeIntensity: 0.64
     - _EdgeLevels: 10
     - _EdgeOffset: 0
-    - _FresnelPower: 1.83
+    - _FresnelPower: 5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -77,19 +77,19 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _ReflectionBoost: 1
+    - _ReflectionBoost: 1.03
     - _ReflectionIntensity: 0.75
     - _SmoothNormals: 0.6
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WaterGloss: 10
+    - _WaterGloss: 0
     - _WaterSpecular: 0
     - _WaveCycles: 1.5
-    - _WaveDirectionZX: 0
-    - _WaveHeight: 0.4
-    - _WaveSpeed: 25
+    - _WaveDirectionZX: 0.07
+    - _WaveHeight: 7.48
+    - _WaveSpeed: 30.06
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
@@ -97,4 +97,4 @@ Material:
     - _EdgeColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
-    - _WaterColor: {r: 0.11084905, g: 0.27862057, b: 0.4433962, a: 1}
+    - _WaterColor: {r: 0, g: 0.2902822, b: 0.5377358, a: 1}
