@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 114786531184330066}
   m_Layer: 0
   m_Name: Ladder
-  m_TagString: Environment
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -414,9 +414,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1021571238815022}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 10.51, y: 2.0080743, z: -4.88}
-  m_LocalScale: {x: 1.2627579, y: 1, z: 1}
+  m_LocalRotation: {x: -0.037611354, y: -0.65172404, z: -0.018770829, w: 0.7572905}
+  m_LocalPosition: {x: 11.655377, y: -15.389666, z: 9.085779}
+  m_LocalScale: {x: 1.262758, y: 1.0443747, z: 1}
   m_Children:
   - {fileID: 4024336560378468}
   - {fileID: 4981890852111612}
@@ -424,7 +424,7 @@ Transform:
   - {fileID: 4200645437111206}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: -4.671, y: -81.479004, z: 1.184}
 --- !u!4 &4706618709556424
 Transform:
   m_ObjectHideFlags: 1

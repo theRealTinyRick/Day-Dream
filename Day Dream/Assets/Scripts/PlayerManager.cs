@@ -121,14 +121,18 @@ public class PlayerManager : MonoBehaviour {
 
     public bool CheckGrounded(){
         RaycastHit hit;
-        if(Physics.Raycast(feetLevel.position,-Vector3.up, out hit, 1.0f)){
-            if(CheckRange(feetLevel.position, hit.point, .1f)){
-                anim.SetBool("isGrounded", true);
-                return true;
-            }
+        if(Physics.Raycast(feetLevel.position,-Vector3.up, out hit, 0.1f)){
+            anim.SetBool("isGrounded", true);
+            return true;
+        }else{
+            anim.SetBool("isGrounded", false);
+            return false;
         }
-        anim.SetBool("isGrounded", false);
-        return false;
+
+    }
+
+    public void GroundedDelay(){
+        //I created this function to give the player a split second after coming off the ledge to jump
     }
 
     public void CheckPlatform(){
