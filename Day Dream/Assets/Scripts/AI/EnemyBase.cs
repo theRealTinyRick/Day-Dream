@@ -26,17 +26,14 @@ public class EnemyBase : MonoBehaviour {
     [HideInInspector] public Animator anim;
     [HideInInspector] public NavMeshAgent nav;
 
-    public GameObject Player { get; set; }
-
     public Transform currentPoint;
     [SerializeField] Transform[] patrolPoints;
     [SerializeField] private float switchTime;
 
-    private void Start(){
+    private void Awake(){
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         nav.speed = moveSpeed;
-        Player = PlayerManager.instance.gameObject;
         currentHealth = startingHealth;
         anim.speed = .75f;
 
@@ -50,27 +47,27 @@ public class EnemyBase : MonoBehaviour {
 
     private void PathFinding(){
         if(currentState != State.Dead && isAggro){
-            if(currentState != State.Attacking && currentState != State.Stunned && !CheckRange(attackRange, Player.transform.position)){
-                nav.SetDestination(Player.transform.position);
+            if(currentState != State.Attacking && currentState != State.Stunned && !CheckRange(attackRange, PlayerManager.instance.transform.position)){
+                nav.SetDestination(PlayerManager.instance.transform.position);
                 nav.isStopped = false;
                 anim.SetBool("isMoving", true);
             }else{
                 nav.isStopped = true;
                 anim.SetBool("isMoving", false);
                 if(currentState != State.Attacking && currentState != State.Stunned)
-                    RotateTowardsPlayer(Player.transform.position);
+                    RotateTowardsPlayer(PlayerManager.instance.transform.position);
             }
         }
-        //else{/////////////////PATROLING
-        //      if(!CheckRange(.1f, currentPoint.position)){
-        //         nav.SetDestination(currentPoint.position);
-        //         nav.isStopped = false;
-        //         anim.SetBool("isMoving", true);
-        //     }else{
-        //         nav.isStopped = true;
-        //         anim.SetBool("isMoving", false);
-        //     }
-        // }
+        else{/////////////////PATROLING
+             if(!CheckRange(.1f, currentPoint.position)){
+                nav.SetDestination(currentPoint.position);
+                nav.isStopped = false;
+                anim.SetBool("isMoving", true);
+            }else{
+                nav.isStopped = true;
+                anim.SetBool("isMoving", false);
+            }
+        }
     }
 
     private IEnumerator SwitchPatrolPoints(){
@@ -90,13 +87,13 @@ public class EnemyBase : MonoBehaviour {
     //utility functions
     public bool CheckAggro(){
         if(!isAggro){
-            if (CheckRange(aggroRange, Player.transform.position) 
-                && CheckLineOfSight(Player.transform.position)
-                &&CheckHieghtDifferential(Player.transform.position) &&
-                CheckFieldOfView(Player.transform.position))
-
+            if (CheckRange(aggroRange, PlayerManager.instance.transform.position) && CheckLineOfSight(PlayerManager.instance.transform.position) && CheckHieghtDifferential(PlayerManager.instance.transform.position)){
                 isAggro = true;
-                return true;
+            }
+        }else{
+            if (CheckRange(aggroRange, PlayerManager.instance.transform.position) && CheckLineOfSight(PlayerManager.instance.transform.position) && CheckHieghtDifferential(PlayerManager.instance.transform.position) && CheckFieldOfView(transform.position)){
+                isAggro = false ;
+            }
         }
         return false;
     }
@@ -138,14 +135,13 @@ public class EnemyBase : MonoBehaviour {
         Vector3 dir = adjustedToPos - adjustedFrom;
         RaycastHit hit;
         if (Physics.Raycast(adjustedFrom, dir, out hit, 100f)){
-            if(hit.transform.tag == "Player")
+            if(hit.transform.tag == "player")
                 return true;
             else if(hit.transform.tag == "Grass"){
                 Debug.Log("Hidden");
                 return false;
-            }
-            else
-                return false;
+            }else
+                return true;
         }
         return false;
     }

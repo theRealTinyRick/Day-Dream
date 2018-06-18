@@ -13,7 +13,6 @@ public class MeleeAttack : MonoBehaviour {
 
 	private void Start(){
 		ebase = GetComponent<EnemyBase>();
-		Debug.Log(ebase.Player);
 		weaponCollider = GetComponentInChildren<BoxCollider>();
 		if(attackRecoverDelay>=attackSpeed)
 			attackRecoverDelay = (attackSpeed-.5f);
@@ -22,7 +21,7 @@ public class MeleeAttack : MonoBehaviour {
 
 	IEnumerator AttackPattern(){
 		while(ebase.currentState != EnemyBase.State.Dead){
-			if(ebase.CheckRange(ebase.attackRange, ebase.Player.transform.position) && ebase.isAggro){
+			if(ebase.CheckRange(ebase.attackRange, PlayerManager.instance.transform.position) && ebase.isAggro){
 				FindRandomAttack();
 				yield return new WaitForSeconds(attackRecoverDelay);
 				if(ebase.currentState != EnemyBase.State.Dead || ebase.currentState != EnemyBase.State.Stunned){
