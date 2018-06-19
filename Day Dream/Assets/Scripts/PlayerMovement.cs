@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour {
             
             Vector3 dir = PlayerManager.instance.playerCam.transform.position - transform.position;
             dir.y = 0;
-            Quaternion rot = Quaternion.LookRotation(-dir);
             movement = PlayerManager.instance.playerCam.transform.TransformDirection(movement);
             movement.y = 0;
             // Vector3 v = rb.velocity;

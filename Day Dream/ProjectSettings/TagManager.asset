@@ -9,6 +9,7 @@ TagManager:
   - Platform
   - Grass
   - EnemyWeapon
+  - PickUp
   layers:
   - Default
   - TransparentFX

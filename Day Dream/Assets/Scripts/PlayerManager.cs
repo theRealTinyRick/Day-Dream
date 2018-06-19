@@ -10,32 +10,30 @@ public class PlayerManager : MonoBehaviour {
     
     private PlayerMovement move;
     private PlayerAttack atk;
-    [HideInInspector]public Animator anim;
-    [HideInInspector] public Rigidbody rb;
+    private Rigidbody rb;
+    [HideInInspector] public Animator anim;
     [HideInInspector] public ThirdPersonCamera playerCam;
-
-    [SerializeField] private Transform feetLevel;
-    
-    [SerializeField] private float jumpHieght;
-    [SerializeField] private float fallMultiplyer = 2.5f;
-    [SerializeField] private float lowJumpMultiplyer = 3f;
-
-    [HideInInspector]public GameObject ladder = null;
-
-    public GameObject shimyPipe = null;
-    public bool isShimyingPipe;
 
     public enum PlayerState { FreeMovement, Traversing, Attacking, Blocking, Dead};
     public PlayerState currentState = PlayerState.FreeMovement;
 
-
     [SerializeField] private float speed = 5;
     private Vector3 movement = Vector3.zero;
-
     float currentCamX  = 0.0f;
     float currentCamY  = 0.0f;
     public int coinCount = 0;
+    [SerializeField] private float jumpHieght;
+    [SerializeField] private float fallMultiplyer = 2.5f;
+    [SerializeField] private float lowJumpMultiplyer = 3f;
 
+
+    [HideInInspector] public GameObject ladder = null;
+    [HideInInspector] public GameObject shimyPipe = null;
+    public GameObject pickUpObject = null;
+    [SerializeField] private Transform putDownPos;
+    [SerializeField] private Transform feetLevel;
+
+    [SerializeField] private bool isHoldingObject;
 
     private void Awake(){
         #region Singleton
@@ -57,6 +55,7 @@ public class PlayerManager : MonoBehaviour {
         AttackInput();
         MoveInput();
         CameraInput();
+        Interact();
     }
 
     private void LateUpdate(){
@@ -114,7 +113,7 @@ public class PlayerManager : MonoBehaviour {
 
     void AttackInput(){
         if(currentState == PlayerState.FreeMovement || currentState == PlayerState.Attacking){
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && CheckGrounded())
                 atk.Attack();
         }
     }
@@ -129,6 +128,36 @@ public class PlayerManager : MonoBehaviour {
             return false;
         }
 
+    }
+
+    private void Interact(){
+        if(Input.GetKeyDown(KeyCode.F)){
+            if(pickUpObject && isHoldingObject){
+                //drop
+                isHoldingObject = false;
+            }else if(pickUpObject && !isHoldingObject){
+                //pickup
+                isHoldingObject = true;
+                StartCoroutine(PickUpObject());
+            }
+        }
+    }
+
+    private IEnumerator PickUpObject(){
+        Debug.Log("start");
+        while(isHoldingObject){
+            Vector3 tp = transform.position;
+            tp.y = transform.position.y + 2;
+            pickUpObject.transform.position = Vector3.Lerp(pickUpObject.transform.position, tp, .3f);
+            pickUpObject.GetComponent<Rigidbody>().isKinematic = true;
+            pickUpObject.GetComponent<BoxCollider>().enabled = false;
+            speed = 2.5f;
+            yield return new WaitForEndOfFrame();
+        }
+        speed = 5;
+        pickUpObject.GetComponent<Rigidbody>().isKinematic = false;
+        pickUpObject.GetComponent<BoxCollider>().enabled = true;
+        yield return null;
     }
 
     public void GroundedDelay(){
@@ -160,5 +189,11 @@ public class PlayerManager : MonoBehaviour {
             rb.velocity += Vector3.up *  Physics.gravity.y  * (fallMultiplyer - 1) * Time.deltaTime;
         else if (rb.velocity.y  > 0 && !Input.GetButton("Jump"))
             rb.velocity += Vector3.up * Physics.gravity.y  * (lowJumpMultiplyer - 1) * Time.deltaTime;
+    }
+
+    private void OnTriggerEnter(Collider other){
+        if(other.tag == "PickUp"){
+            pickUpObject = other.gameObject;
+        }
     }
 }

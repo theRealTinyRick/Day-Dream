@@ -73,15 +73,17 @@ public class EnemyBase : MonoBehaviour {
     }
 
     private IEnumerator SwitchPatrolPoints(){
-        currentPoint = patrolPoints[0];
-        while(!isAggro){
-            int index = Array.IndexOf(patrolPoints, currentPoint);
-            if(index < (patrolPoints.Length - 1)){
-                currentPoint = patrolPoints[++index];
-            }else{
-                currentPoint = patrolPoints[0];
+        if(patrolPoints.Length > 0){
+            currentPoint = patrolPoints[0];
+            while(!isAggro){
+                int index = Array.IndexOf(patrolPoints, currentPoint);
+                if(index < (patrolPoints.Length - 1)){
+                    currentPoint = patrolPoints[++index];
+                }else{
+                    currentPoint = patrolPoints[0];
+                }
+                yield return new WaitForSeconds(switchTime);
             }
-            yield return new WaitForSeconds(switchTime);
         }
         yield return null;
     }
@@ -137,11 +139,9 @@ public class EnemyBase : MonoBehaviour {
         Vector3 dir = adjustedToPos - adjustedFrom;
         RaycastHit hit;
         if (Physics.Raycast(adjustedFrom, dir, out hit, 100f)){
-            Debug.Log(hit.transform.tag);
             if(hit.transform.tag == "player")
                 return true;
             else if(hit.transform.tag == "Grass" || hit.transform.tag == "Environment"){
-                Debug.Log("Hidden");
                 return false;
             }else
                 return true;
