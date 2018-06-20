@@ -1,22 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour {
 	//this class will have save and load data
 
 	public float coinCount = 0; 
 
-	public List <GameObject> renderedInventoryList;
+	public List <GameObject> renderedInventoryList = new List <GameObject>();
 	public List <GameObject> fullInventory = new List <GameObject>();
 	public List <GameObject> weaponInventory = new List <GameObject>();
 	public List <GameObject> consumableInventory = new List <GameObject>();
 
 	[SerializeField] private GameObject itemPrefab;
-	[SerializeField] private GameObject inventoryParent; 	
+	[SerializeField] private Transform inventoryParent; 	
 
-	public void AddItem(){
-
+	public void AddItem(GameObject item){
+		fullInventory.Add(item);
+		item.GetComponent<BoxCollider>().enabled = false;
+		item.GetComponent<SphereCollider>().enabled = false;
+		PlayerManager.instance.item = null;
+		item.SetActive(false);
 	}
 
 	public void RemoveItem(){
@@ -24,19 +29,21 @@ public class PlayerInventory : MonoBehaviour {
 	}
 
 	public void ClearList(){
-		foreach(GameObject item in renderedInventoryList){
-			Destroy(item);
-			renderedInventoryList.Clear();
+		for(int i = 0; i < fullInventory.Count; i++){
+			Destroy(renderedInventoryList[i]);
 		}
+		renderedInventoryList.Clear();
 	}
 
 	public void RenderList(List <GameObject> inventoryToRender){
 		foreach(GameObject item in inventoryToRender){
 			GameObject newItem = Instantiate(itemPrefab, transform.position, Quaternion.identity);
-			newItem.transform.parent = inventoryParent.transform;
+			newItem.transform.SetParent(inventoryParent);
 			renderedInventoryList.Add(newItem);
 			
 			//set all the images and stuff
+			Item info = item.GetComponent<Item>();
+			newItem.GetComponent<Image>().sprite = info.icon;
 		}
 	}
 }

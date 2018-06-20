@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour {
     
     private PlayerMovement move;
     private PlayerAttack atk;
+    private PlayerInventory inv;
     private Rigidbody rb;
     [HideInInspector] public Animator anim;
     [HideInInspector] public ThirdPersonCamera playerCam;
@@ -19,9 +20,11 @@ public class PlayerManager : MonoBehaviour {
 
     [SerializeField] private float speed = 5;
     private Vector3 movement = Vector3.zero;
+
     float currentCamX  = 0.0f;
     float currentCamY  = 0.0f;
     public int coinCount = 0;
+
     [SerializeField] private float jumpHieght;
     [SerializeField] private float fallMultiplyer = 2.5f;
     [SerializeField] private float lowJumpMultiplyer = 3f;
@@ -34,6 +37,12 @@ public class PlayerManager : MonoBehaviour {
     private bool isHoldingObject;
     private GameObject pickUpObject = null;
 
+    public GameObject item;
+
+    //Menu Items
+    [SerializeField] private GameObject PauseMenu;
+    [SerializeField] private GameObject Inventory;
+
     private void Awake(){
         #region Singleton
         if (instance == null)
@@ -44,6 +53,7 @@ public class PlayerManager : MonoBehaviour {
 
         move = GetComponent<PlayerMovement>();
         atk = GetComponent<PlayerAttack>();
+        inv = GetComponent<PlayerInventory>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
         playerCam = Camera.main.GetComponent<ThirdPersonCamera>();
@@ -55,6 +65,7 @@ public class PlayerManager : MonoBehaviour {
         MoveInput();
         CameraInput();
         Interact();
+        MenuInput();
     }
 
     private void LateUpdate(){
@@ -139,6 +150,8 @@ public class PlayerManager : MonoBehaviour {
                 //pickup
                 isHoldingObject = true;
                 StartCoroutine(PickUpObject());
+            }else if(item){
+                inv.AddItem(item);
             }
         }
     }
@@ -165,6 +178,18 @@ public class PlayerManager : MonoBehaviour {
         pickUpObject.GetComponent<Rigidbody>().isKinematic = false;
         pickUpObject.GetComponent<BoxCollider>().enabled = true;
         yield return null;
+    }
+    
+    private void MenuInput(){
+        if(Input.GetKeyDown(KeyCode.I)){
+            //open and close inventory
+            Inventory.SetActive(!Inventory.activeInHierarchy);
+            if(!Inventory.activeInHierarchy){
+                inv.ClearList();
+            }else{
+                inv.RenderList(inv.fullInventory);
+            }
+        }
     }
 
     public void GroundedDelay(){
@@ -201,12 +226,16 @@ public class PlayerManager : MonoBehaviour {
     private void OnTriggerEnter(Collider other){
         if(other.tag == "PickUp"){
             pickUpObject = other.gameObject;
+        }else if(other.tag == "Item"){
+            item = other.gameObject;
         }
     }
 
     private void OnTriggerExit(Collider other){
         if(other.tag == "PickUp" && !isHoldingObject){
             pickUpObject = null;
+        }else if(other.tag == "Item"){
+            item = null;
         }
     }
 }

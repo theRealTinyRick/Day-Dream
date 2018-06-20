@@ -11,6 +11,7 @@ TagManager:
   - EnemyWeapon
   - PickUp
   - Fire
+  - Item
   layers:
   - Default
   - TransparentFX
