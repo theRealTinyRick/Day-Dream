@@ -66,9 +66,9 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EdgeFalloff: 10
-    - _EdgeIntensity: 0.59
-    - _EdgeLevels: 10
-    - _EdgeOffset: 0
+    - _EdgeIntensity: 0.444
+    - _EdgeLevels: 4
+    - _EdgeOffset: 0.527
     - _FresnelPower: 5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -79,7 +79,7 @@ Material:
     - _Parallax: 0.02
     - _ReflectionBoost: 1.03
     - _ReflectionIntensity: 0.75
-    - _SmoothNormals: 0.6
+    - _SmoothNormals: 0.086
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

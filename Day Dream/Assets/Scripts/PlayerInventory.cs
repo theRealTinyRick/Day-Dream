@@ -43,7 +43,11 @@ public class PlayerInventory : MonoBehaviour {
 			
 			//set all the images and stuff
 			Item info = item.GetComponent<Item>();
-			newItem.GetComponent<Image>().sprite = info.icon;
+			InventoryItem newItemInfo = newItem.GetComponent<InventoryItem>();
+			if(info.icon)
+				newItem.GetComponent<Image>().sprite = info.icon;
+			newItemInfo.item = item;
+			newItemInfo._name = info.name;
 		}
 	}
 }
