@@ -50,6 +50,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4946827438597018}
+  - component: {fileID: 65491542209799348}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -68,6 +69,7 @@ GameObject:
   - component: {fileID: 33079327954834944}
   - component: {fileID: 23178292854294404}
   - component: {fileID: 65888765908472114}
+  - component: {fileID: 65385969305141412}
   - component: {fileID: 114804525307708000}
   m_Layer: 0
   m_Name: Ground Trigger
@@ -406,6 +408,30 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1744220051067754}
   m_Mesh: {fileID: 4300002, guid: c09052c9b19f0ea4987bc4f4f981252f, type: 3}
+--- !u!65 &65385969305141412
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1471702354448788}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8, y: 8, z: 8.000001}
+  m_Center: {x: 0.0000009536743, y: 3.9999695, z: 0}
+--- !u!65 &65491542209799348
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1355545925160670}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.51, y: 2.98, z: 0.12}
+  m_Center: {x: 0, y: 1.48, z: 0}
 --- !u!65 &65888765908472114
 BoxCollider:
   m_ObjectHideFlags: 1

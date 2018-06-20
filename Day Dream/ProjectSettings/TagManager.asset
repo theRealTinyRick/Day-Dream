@@ -10,6 +10,7 @@ TagManager:
   - Grass
   - EnemyWeapon
   - PickUp
+  - Fire
   layers:
   - Default
   - TransparentFX

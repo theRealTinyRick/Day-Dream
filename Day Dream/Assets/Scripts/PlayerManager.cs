@@ -135,6 +135,7 @@ public class PlayerManager : MonoBehaviour {
             if(pickUpObject && isHoldingObject){
                 //drop
                 isHoldingObject = false;
+                StartCoroutine(PutDownObject());
             }else if(pickUpObject && !isHoldingObject){
                 //pickup
                 isHoldingObject = true;
@@ -144,7 +145,6 @@ public class PlayerManager : MonoBehaviour {
     }
 
     private IEnumerator PickUpObject(){
-        Debug.Log("start");
         while(isHoldingObject){
             Vector3 tp = transform.position;
             tp.y = transform.position.y + 2;
@@ -155,6 +155,14 @@ public class PlayerManager : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
         speed = 5;
+
+        yield return null;
+    }
+
+    private IEnumerator PutDownObject(){
+        while(Vector3.Distance(pickUpObject.transform.position, putDownPos.position) > .1){
+            pickUpObject.transform.position = Vector3.Lerp(pickUpObject.transform.position, putDownPos.position, .1f);
+        }
         pickUpObject.GetComponent<Rigidbody>().isKinematic = false;
         pickUpObject.GetComponent<BoxCollider>().enabled = true;
         yield return null;

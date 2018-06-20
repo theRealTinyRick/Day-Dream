@@ -27,7 +27,7 @@ public class ThirdPersonCamera : MonoBehaviour {
 
     public void MouseOrbit(float currentX, float currentY){
         Vector3 tp = PlayerManager.instance.transform.position;
-        tp.y = PlayerManager.instance.transform.position.y + 1f;
+        tp.y = PlayerManager.instance.transform.position.y + 1.5f;
 
         camLookAt.position = tp;
 

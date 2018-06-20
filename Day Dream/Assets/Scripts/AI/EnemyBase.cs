@@ -51,6 +51,9 @@ public class EnemyBase : MonoBehaviour {
                 nav.SetDestination(PlayerManager.instance.transform.position);
                 nav.isStopped = false;
                 anim.SetBool("isMoving", true);
+                if(CheckLineOfSight(PlayerManager.instance.transform.position)){
+                    RotateTowardsPlayer(PlayerManager.instance.transform.position);
+                }
             }else{
                 nav.isStopped = true;
                 anim.SetBool("isMoving", false);
@@ -59,16 +62,16 @@ public class EnemyBase : MonoBehaviour {
             }
         }
         else{/////////////////PATROLING
-            if(patrolPoints.Length > 0){
-                if(!CheckRange(.1f, currentPoint.position)){
-                    nav.SetDestination(currentPoint.position);
-                    nav.isStopped = false;
-                    anim.SetBool("isMoving", true);
-                }else{
-                    nav.isStopped = true;
-                    anim.SetBool("isMoving", false);
-                }
-            }
+            // if(patrolPoints.Length > 0){
+            //     if(!CheckRange(.1f, currentPoint.position)){
+            //         nav.SetDestination(currentPoint.position);
+            //         nav.isStopped = false;
+            //         anim.SetBool("isMoving", true);
+            //     }else{
+            //         nav.isStopped = true;
+            //         anim.SetBool("isMoving", false);
+            //     }
+            // }
         }
     }
 
@@ -91,11 +94,13 @@ public class EnemyBase : MonoBehaviour {
     //utility functions
     public bool CheckAggro(){
         if(!isAggro){
-            if (CheckRange(aggroRange, PlayerManager.instance.transform.position) && CheckLineOfSight(PlayerManager.instance.transform.position) && CheckHieghtDifferential(PlayerManager.instance.transform.position)){
+            if (CheckRange(aggroRange, PlayerManager.instance.transform.position) && CheckLineOfSight(PlayerManager.instance.transform.position) && CheckHieghtDifferential(PlayerManager.instance.transform.position) 
+            && CheckFieldOfView(PlayerManager.instance.transform.position)){
                 isAggro = true;
             }
         }else{
-            if (CheckRange(aggroRange, PlayerManager.instance.transform.position) && CheckLineOfSight(PlayerManager.instance.transform.position) && CheckHieghtDifferential(PlayerManager.instance.transform.position) && CheckFieldOfView(transform.position)){
+            if (CheckRange(aggroRange, PlayerManager.instance.transform.position) && CheckLineOfSight(PlayerManager.instance.transform.position) 
+            && CheckHieghtDifferential(PlayerManager.instance.transform.position)){
                 isAggro = false ;
             }
         }

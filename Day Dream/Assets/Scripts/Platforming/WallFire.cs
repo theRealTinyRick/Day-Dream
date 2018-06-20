@@ -16,14 +16,14 @@ public class WallFire : MonoBehaviour {
 
 		StartCoroutine(FireTimer());
 	}
-	
+
 	private IEnumerator FireTimer(){	
 		yield return new WaitForSeconds(waitTime);
 		flame.Play();
 		dmgCollider.enabled = true;
 		yield return new WaitForSeconds(fireTime);
-		flame.Stop();
 		dmgCollider.enabled = false;
+		flame.Stop();
 		StartCoroutine(FireTimer());
 
 		yield return null;
@@ -33,5 +33,9 @@ public class WallFire : MonoBehaviour {
 		if(other.tag == "Player"){
 			Debug.Log("Deal Fire Damage");
 		}
+	}
+
+	private void OnCollisionEnter(Collision collision){
+		
 	}
 }
