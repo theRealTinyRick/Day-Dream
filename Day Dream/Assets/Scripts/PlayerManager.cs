@@ -26,14 +26,13 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private float fallMultiplyer = 2.5f;
     [SerializeField] private float lowJumpMultiplyer = 3f;
 
-
     [HideInInspector] public GameObject ladder = null;
     [HideInInspector] public GameObject shimyPipe = null;
-    public GameObject pickUpObject = null;
     [SerializeField] private Transform putDownPos;
     [SerializeField] private Transform feetLevel;
 
-    [SerializeField] private bool isHoldingObject;
+    private bool isHoldingObject;
+    private GameObject pickUpObject = null;
 
     private void Awake(){
         #region Singleton
@@ -202,6 +201,12 @@ public class PlayerManager : MonoBehaviour {
     private void OnTriggerEnter(Collider other){
         if(other.tag == "PickUp"){
             pickUpObject = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit(Collider other){
+        if(other.tag == "PickUp" && !isHoldingObject){
+            pickUpObject = null;
         }
     }
 }
