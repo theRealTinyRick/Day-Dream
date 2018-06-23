@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour {
     private PlayerMovement move;
     private PlayerAttack atk;
     private PlayerInventory inv;
+    public PlayerTargeting targeting;
     private Rigidbody rb;
     [HideInInspector] public Animator anim;
     [HideInInspector] public ThirdPersonCamera playerCam;
@@ -20,6 +21,7 @@ public class PlayerManager : MonoBehaviour {
 
     [SerializeField] private float speed = 5;
     private Vector3 movement = Vector3.zero;
+    public bool isLockedOn = false;
 
     float currentCamX  = 0.0f;
     float currentCamY  = 0.0f;
@@ -66,6 +68,7 @@ public class PlayerManager : MonoBehaviour {
         CameraInput();
         Interact();
         MenuInput();
+        LockOnInput();
     }
 
     private void LateUpdate(){
@@ -116,9 +119,13 @@ public class PlayerManager : MonoBehaviour {
     }
 
     void CameraInput(){
-        currentCamX += Input.GetAxis("Mouse X");
-        currentCamY += Input.GetAxis("Mouse Y"); 
-        playerCam.MouseOrbit(currentCamX, currentCamY );
+        if(!isLockedOn){
+            currentCamX += Input.GetAxis("Mouse X");
+            currentCamY += Input.GetAxis("Mouse Y"); 
+            playerCam.MouseOrbit(currentCamX, currentCamY );
+        }else{
+            playerCam.LockedOnCam();
+        }
     }
 
     void AttackInput(){
@@ -126,6 +133,13 @@ public class PlayerManager : MonoBehaviour {
             if (Input.GetMouseButtonDown(0) && CheckGrounded())
                 atk.Attack();
         }
+    }
+
+    private void LockOnInput(){
+        if(Input.GetMouseButtonDown(2)){
+            targeting.ToggleLockedOnEnemies();
+        }
+        targeting.transform.position = transform.position;
     }
 
     public bool CheckGrounded(){

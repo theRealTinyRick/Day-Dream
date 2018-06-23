@@ -35,7 +35,7 @@ public class EnemyBase : MonoBehaviour {
         nav = GetComponent<NavMeshAgent>();
         nav.speed = moveSpeed;
         currentHealth = startingHealth;
-        anim.speed = .75f;
+        anim.speed = .65f;
 
         StartCoroutine(SwitchPatrolPoints());
     }
@@ -62,16 +62,16 @@ public class EnemyBase : MonoBehaviour {
             }
         }
         else{/////////////////PATROLING
-            // if(patrolPoints.Length > 0){
-            //     if(!CheckRange(.1f, currentPoint.position)){
-            //         nav.SetDestination(currentPoint.position);
-            //         nav.isStopped = false;
-            //         anim.SetBool("isMoving", true);
-            //     }else{
-            //         nav.isStopped = true;
-            //         anim.SetBool("isMoving", false);
-            //     }
-            // }
+            if(patrolPoints.Length > 0){
+                if(!CheckRange(aggroRange, currentPoint.position)){
+                    nav.SetDestination(currentPoint.position);
+                    nav.isStopped = false;
+                    anim.SetBool("isMoving", true);
+                }else{
+                    nav.isStopped = true;
+                    anim.SetBool("isMoving", false);
+                }
+            }
         }
     }
 
@@ -93,15 +93,16 @@ public class EnemyBase : MonoBehaviour {
 
     //utility functions
     public bool CheckAggro(){
-        if(!isAggro){
-            if (CheckRange(aggroRange, PlayerManager.instance.transform.position) && CheckLineOfSight(PlayerManager.instance.transform.position) && CheckHieghtDifferential(PlayerManager.instance.transform.position) 
-            && CheckFieldOfView(PlayerManager.instance.transform.position)){
-                isAggro = true;
-            }
-        }else{
-            if (CheckRange(aggroRange, PlayerManager.instance.transform.position) && CheckLineOfSight(PlayerManager.instance.transform.position) 
-            && CheckHieghtDifferential(PlayerManager.instance.transform.position)){
-                isAggro = false ;
+        if(PlayerManager.instance){
+            if(!isAggro){
+                if (CheckRange(aggroRange, PlayerManager.instance.transform.position) && CheckLineOfSight(PlayerManager.instance.transform.position) && CheckHieghtDifferential(PlayerManager.instance.transform.position) 
+                && CheckFieldOfView(PlayerManager.instance.transform.position)){
+                    isAggro = true;
+                }
+            }else{
+                if (!CheckLineOfSight(PlayerManager.instance.transform.position)){
+                    isAggro = false ;
+                }
             }
         }
         return false;
@@ -158,7 +159,7 @@ public class EnemyBase : MonoBehaviour {
         Vector3 dir = playerPos-transform.position;
         dir.y = transform.localPosition.y;
         Quaternion rot = Quaternion.LookRotation(dir);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, 0.2f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, 0.05f);
     }
 
     //anim events below this line ???????///////////////////////////////////////////////////////////////

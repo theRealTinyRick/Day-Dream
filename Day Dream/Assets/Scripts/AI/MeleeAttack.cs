@@ -20,7 +20,7 @@ public class MeleeAttack : MonoBehaviour {
 	}
 
 	IEnumerator AttackPattern(){
-		while(ebase.currentState != EnemyBase.State.Dead){
+		while(ebase.currentState != EnemyBase.State.Dead && PlayerManager.instance){
 			if(ebase.CheckRange(ebase.attackRange, PlayerManager.instance.transform.position) && ebase.isAggro){
 				FindRandomAttack();
 				yield return new WaitForSeconds(attackRecoverDelay);

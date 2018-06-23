@@ -12,6 +12,7 @@ TagManager:
   - PickUp
   - Fire
   - Item
+  - LockOnTarget
   layers:
   - Default
   - TransparentFX
