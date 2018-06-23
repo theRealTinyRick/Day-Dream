@@ -104,9 +104,38 @@ public class PlayerMovement : MonoBehaviour {
         yield return new WaitForEndOfFrame();
     }
 
+    public IEnumerator Warp(GameObject warpPad){
+        WarpPad pad = warpPad.GetComponent<WarpPad>();
+        SkinnedMeshRenderer renderers = PlayerManager.instance.GetComponentInChildren<SkinnedMeshRenderer>();
+		MeshRenderer renderer = PlayerManager.instance.GetComponentInChildren<MeshRenderer>();
+        PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
+		renderers.enabled = false;
+		renderer.enabled = false;
+        rb.isKinematic = true;
+		while(Vector3.Distance(PlayerManager.instance.transform.position, pad.pointB.position) > .1f){
+			PlayerManager.instance.transform.position = Vector3.Slerp(PlayerManager.instance.transform.position, pad.pointB.position, .1f);
+			yield return new WaitForEndOfFrame();
+		}
+		PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
+		renderers.enabled = true;
+		renderer.enabled = true;
+        rb.isKinematic = false;
+		yield return null;
+    }
+
     public IEnumerator ZipLine(){
 
         yield return null;
+    }
+
+    public void MoveBlock(Vector3 move){
+        // transform.LookAt(PlayerManager.instance.pushBlock.transform.position);
+        PlayerManager.instance.pushBlock.transform.SetParent(transform);
+        if(move.z > 0){
+            transform.Translate(PlayerManager.instance.transform.forward * 2 * Time.deltaTime);
+        }else if(move.z < 0){
+            transform.Translate(-PlayerManager.instance.transform.forward * 2 * Time.deltaTime);
+        }
     }
 
     public IEnumerator ShimyPipeStart(GameObject pipe){

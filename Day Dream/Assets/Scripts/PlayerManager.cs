@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private float speed = 5;
     private Vector3 movement = Vector3.zero;
     public bool isLockedOn = false;
+    private bool hasUsedDoubleJump = false;
 
     float currentCamX  = 0.0f;
     float currentCamY  = 0.0f;
@@ -38,8 +39,9 @@ public class PlayerManager : MonoBehaviour {
 
     private bool isHoldingObject;
     private GameObject pickUpObject = null;
-
     public GameObject item;
+    public GameObject pushBlock;
+    public bool isPushingBlock;
 
     //Menu Items
     [SerializeField] private GameObject PauseMenu;
@@ -98,7 +100,9 @@ public class PlayerManager : MonoBehaviour {
                     move.StartCoroutine(move.ShimyPipeStart(shimyPipe));
                 }else if(CheckGrounded()){
                     move.Jump(jumpHieght); //maybe remove standard jump mech
-                    anim.SetBool("isGrounded", false);
+                }else if(!CheckGrounded() && !hasUsedDoubleJump){
+                    hasUsedDoubleJump = true;
+                    move.Jump(jumpHieght); //maybe remove standard jump mech
                 }
             }else{
                 if(shimyPipe){
@@ -110,10 +114,12 @@ public class PlayerManager : MonoBehaviour {
 
     private void ApplyMove(){
         //apply move controls
-        if (currentState != PlayerState.Traversing && movement != Vector3.zero)
-            move.FreeMovement(movement, speed);
-        else if(currentState == PlayerState.Traversing && shimyPipe && movement != Vector3.zero){
+        if(currentState == PlayerState.Traversing && shimyPipe && movement != Vector3.zero){
             move.ShimyPipe(movement, shimyPipe.GetComponent<ShimyPipe>());
+        }else if(pushBlock && isPushingBlock){
+            move.MoveBlock(movement);
+        }else if(currentState != PlayerState.Traversing && movement != Vector3.zero){
+            move.FreeMovement(movement, speed);
         }else
             anim.SetBool("isMoving", false);
     }
@@ -149,6 +155,7 @@ public class PlayerManager : MonoBehaviour {
         RaycastHit hit;
         if(Physics.Raycast(feetLevel.position,-Vector3.up, out hit, 0.1f)){
             anim.SetBool("isGrounded", true);
+            hasUsedDoubleJump = false;
             return true;
         }else{
             anim.SetBool("isGrounded", false);
@@ -169,6 +176,12 @@ public class PlayerManager : MonoBehaviour {
                 StartCoroutine(PickUpObject());
             }else if(item){
                 inv.AddItem(item);
+            }else if(pushBlock && !isPushingBlock){
+                isPushingBlock = true;
+                transform.LookAt(pushBlock.transform.position);
+            }else if(pushBlock && isPushingBlock){
+                isPushingBlock = false;
+                pushBlock.transform.SetParent(null);
             }
         }
     }
@@ -245,6 +258,8 @@ public class PlayerManager : MonoBehaviour {
             pickUpObject = other.gameObject;
         }else if(other.tag == "Item"){
             item = other.gameObject;
+        }else if(other.tag == "WarpPad"){
+            move.StartCoroutine(move.Warp(other.gameObject));
         }
     }
 

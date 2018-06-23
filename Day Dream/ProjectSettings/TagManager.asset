@@ -13,6 +13,8 @@ TagManager:
   - Fire
   - Item
   - LockOnTarget
+  - PlayerWeapon
+  - WarpPad
   layers:
   - Default
   - TransparentFX
