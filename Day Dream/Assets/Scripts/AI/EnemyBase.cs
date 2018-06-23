@@ -83,7 +83,6 @@ public class EnemyBase : MonoBehaviour {
         }else{
             trueRange = mobRange;
         }
-        Debug.Log(trueRange);
     }
 
     private IEnumerator SwitchPatrolPoints(){

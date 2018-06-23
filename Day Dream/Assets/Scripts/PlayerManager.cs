@@ -23,6 +23,7 @@ public class PlayerManager : MonoBehaviour {
     private Vector3 movement = Vector3.zero;
     public bool isLockedOn = false;
     private bool hasUsedDoubleJump = false;
+    public bool isVulnerable = true;
 
     float currentCamX  = 0.0f;
     float currentCamY  = 0.0f;
@@ -98,11 +99,14 @@ public class PlayerManager : MonoBehaviour {
                     ladder.GetComponent<Ladder>().topPos.position, ladder.GetComponent<Ladder>().endPos.position));
                 }else if(shimyPipe && CheckGrounded()){
                     move.StartCoroutine(move.ShimyPipeStart(shimyPipe));
+                }else if(CheckGrounded() && isLockedOn){
+                    Debug.Log("roll");
+                    move.Evade(jumpHieght);
                 }else if(CheckGrounded()){
                     move.Jump(jumpHieght); //maybe remove standard jump mech
                 }else if(!CheckGrounded() && !hasUsedDoubleJump){
                     hasUsedDoubleJump = true;
-                    move.Jump(jumpHieght); //maybe remove standard jump mech
+                    move.Jump(jumpHieght - (jumpHieght/4)); //maybe remove standard jump mech
                 }
             }else{
                 if(shimyPipe){

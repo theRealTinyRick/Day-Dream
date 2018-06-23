@@ -47,6 +47,18 @@ public class PlayerMovement : MonoBehaviour {
         PlayerManager.instance.anim.Play("Jump");
     }
 
+    public void Evade(float evadeStength){
+        rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * evadeStength, .5f);
+        PlayerManager.instance.anim.Play("Roll");
+        StartCoroutine(Invulnerabe());
+    }
+
+    private IEnumerator Invulnerabe(){
+        PlayerManager.instance.isVulnerable = false;
+        yield return new WaitForSeconds(.5f);
+        PlayerManager.instance.isVulnerable = true;
+    }
+
     public void LookAtTarget(Transform target){
         Vector3 tp = target.position;
         tp.y = transform.position.y;
