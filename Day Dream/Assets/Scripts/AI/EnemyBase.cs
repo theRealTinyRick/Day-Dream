@@ -16,6 +16,7 @@ public class EnemyBase : MonoBehaviour {
     [SerializeField] private float currentHealth;
     [SerializeField] private float moveSpeed;
 
+    private float trueRange;
     public float attackRange;
     public float mobRange;
     public float aggroRange;
@@ -41,13 +42,14 @@ public class EnemyBase : MonoBehaviour {
     }
 
     private void Update(){
+        RangeController();
         CheckAggro();
         PathFinding();
     }
 
     private void PathFinding(){
         if(currentState != State.Dead && isAggro){
-            if(currentState != State.Attacking && currentState != State.Stunned && !CheckRange(attackRange, PlayerManager.instance.transform.position)){
+            if(currentState != State.Attacking && currentState != State.Stunned && !CheckRange(trueRange, PlayerManager.instance.transform.position)){
                 nav.SetDestination(PlayerManager.instance.transform.position);
                 nav.isStopped = false;
                 anim.SetBool("isMoving", true);
@@ -75,6 +77,15 @@ public class EnemyBase : MonoBehaviour {
         }
     }
 
+    private void RangeController(){
+        if(AIManager.instance.activeEnemies.Contains(gameObject)){
+            trueRange = attackRange;
+        }else{
+            trueRange = mobRange;
+        }
+        Debug.Log(trueRange);
+    }
+
     private IEnumerator SwitchPatrolPoints(){
         if(patrolPoints.Length > 0){
             currentPoint = patrolPoints[0];
@@ -88,6 +99,24 @@ public class EnemyBase : MonoBehaviour {
                 yield return new WaitForSeconds(switchTime);
             }
         }
+        yield return null;
+    }
+
+    public IEnumerator Strafe(float timeToStrafe){
+        float t = Time.time;
+        int result = UnityEngine.Random.Range(0,2);
+        Debug.Log(result);
+        if(result == 0){
+            result = -1;
+        }
+
+        while((Time.time - t) < timeToStrafe){
+            nav.isStopped = true;
+            transform.RotateAround(PlayerManager.instance.transform.position, Vector3.up, (15 * result) * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+        nav.isStopped = true;
+        
         yield return null;
     }
 

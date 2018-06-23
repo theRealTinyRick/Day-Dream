@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 114524062858062124}
   m_Layer: 0
   m_Name: Model
-  m_TagString: Untagged
+  m_TagString: LockOnTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2105,8 +2105,8 @@ MonoBehaviour:
   startingHealth: 100
   currentHealth: 0
   moveSpeed: 2.5
-  attackRange: 4
-  mobRange: 6
+  attackRange: 3
+  mobRange: 5
   aggroRange: 30
   isAggro: 0
   anim: {fileID: 0}

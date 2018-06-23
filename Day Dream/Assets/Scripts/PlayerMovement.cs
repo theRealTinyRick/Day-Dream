@@ -47,6 +47,13 @@ public class PlayerMovement : MonoBehaviour {
         PlayerManager.instance.anim.Play("Jump");
     }
 
+    public void LookAtTarget(Transform target){
+        Vector3 tp = target.position;
+        tp.y = transform.position.y;
+        Quaternion rot = Quaternion.LookRotation(tp - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rot, .2f);
+    }
+
     public IEnumerator ClimbLadder(Vector3 bottomPos, Vector3 topPos, Vector3 endPos){
         PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
 

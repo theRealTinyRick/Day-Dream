@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ProtoTyping.unity
-    guid: 0d70965379266304dac46322e66ea15f
+    path: Assets/Scenes/WorldOneLevelOne.unity
+    guid: f00ad80ac9bb67a4abd8c7920a2200f6
   m_configObjects: {}

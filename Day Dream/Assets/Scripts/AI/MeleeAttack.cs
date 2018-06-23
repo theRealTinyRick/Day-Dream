@@ -21,14 +21,21 @@ public class MeleeAttack : MonoBehaviour {
 
 	IEnumerator AttackPattern(){
 		while(ebase.currentState != EnemyBase.State.Dead && PlayerManager.instance){
-			if(ebase.CheckRange(ebase.attackRange, PlayerManager.instance.transform.position) && ebase.isAggro){
-				FindRandomAttack();
-				yield return new WaitForSeconds(attackRecoverDelay);
-				if(ebase.currentState != EnemyBase.State.Dead || ebase.currentState != EnemyBase.State.Stunned){
-					ebase.currentState = EnemyBase.State.Walking;
-					weaponCollider.enabled = true;
+			if(ebase.isAggro){
+				if(ebase.CheckRange(ebase.attackRange, PlayerManager.instance.transform.position)){
+					FindRandomAttack();
+					yield return new WaitForSeconds(attackRecoverDelay);
+					if(ebase.currentState != EnemyBase.State.Dead || ebase.currentState != EnemyBase.State.Stunned){
+						ebase.currentState = EnemyBase.State.Walking;
+						weaponCollider.enabled = true;
+					}
+					yield return new WaitForSeconds(attackSpeed);
+				}else{
+					if(!AIManager.instance.activeEnemies.Contains(gameObject)){
+						ebase.StartCoroutine(ebase.Strafe(3));
+						yield return new WaitForSeconds(5);
+					}
 				}
-				yield return new WaitForSeconds(attackSpeed);
 			}
 			yield return new WaitForEndOfFrame();
 		}

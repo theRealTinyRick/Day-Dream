@@ -45,17 +45,15 @@ public class ThirdPersonCamera : MonoBehaviour {
     }
 
     public void LockedOnCam(){
-        Vector3 tp = -currentDistance * Vector3.Normalize(PlayerManager.instance.targeting.currentTarget.transform.position -
-                           PlayerManager.instance.transform.position) + PlayerManager.instance.transform.position;
+        Vector3 tp = -currentDistance * Vector3.Normalize(PlayerManager.instance.targeting.currentTarget.transform.position - PlayerManager.instance.transform.position) + PlayerManager.instance.transform.position;
         tp.y = PlayerManager.instance.transform.position.y + 2.5f;
-        //transform.position = tp;
+        // transform.position = tp;
         transform.position = Vector3.Lerp(transform.position, tp, .4f);
 
         Vector3 lookAtTP = PlayerManager.instance.targeting.currentTarget.transform.position;
         if (PlayerManager.instance.targeting.currentTarget.transform.localScale.y > 1){
             lookAtTP.y = PlayerManager.instance.targeting.currentTarget.transform.position.y + 2f;
         }
-        //transform.LookAt(lookAtTP);
         Quaternion rot = Quaternion.LookRotation(lookAtTP - transform.position);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, .4f);
     }

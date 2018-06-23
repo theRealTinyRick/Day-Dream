@@ -133,6 +133,9 @@ public class PlayerManager : MonoBehaviour {
             if (Input.GetMouseButtonDown(0) && CheckGrounded())
                 atk.Attack();
         }
+        if(currentState == PlayerState.Attacking && isLockedOn){
+            move.LookAtTarget(targeting.currentTarget.transform);
+        }
     }
 
     private void LockOnInput(){
