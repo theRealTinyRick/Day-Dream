@@ -58,6 +58,11 @@ public class ThirdPersonCamera : MonoBehaviour {
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, .4f);
     }
 
+    public void ClimbingCamera(Vector3 tp){
+        transform.position = Vector3.Lerp(transform.position, tp, .3f);
+        transform.LookAt(camLookAt);
+    }
+
     public void CameraClipping(){
         clippingOrigin.position = camLookAt.position;
         Vector3 camPos = transform.position;

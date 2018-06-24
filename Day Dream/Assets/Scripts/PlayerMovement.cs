@@ -12,7 +12,11 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 mySide;
     Vector3 farSide;
 
+    Vector3 bottom;
+    Vector3 top;
+
     [SerializeField] ParticleSystem warpFX;
+    [SerializeField] ParticleSystem hitFX;
 
     private void Start(){
         rb = GetComponent<Rigidbody>();
@@ -69,66 +73,18 @@ public class PlayerMovement : MonoBehaviour {
         transform.rotation = Quaternion.Slerp(transform.rotation, rot, .2f);
     }
 
-    public IEnumerator ClimbLadder(Vector3 bottomPos, Vector3 topPos, Vector3 endPos){
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
-
-        Vector3 start;
-        Vector3 end;
-        if (Vector3.Distance(transform.position, bottomPos) < Vector3.Distance(transform.position, topPos)){
-            start = bottomPos;
-            end = topPos;
-        }
-        else{
-            start = topPos;
-            end = bottomPos;
-        }
-
-        //play ready anim
-        rb.isKinematic = true;
-        transform.position = start;
-
-        //move up
-        while (Vector3.Distance(transform.position, end) > .1f){
-            PlayerManager.instance.anim.SetBool("isClimbing",true);
-            PlayerManager.instance.anim.speed = 1.5f;
-            transform.position = Vector3.MoveTowards(transform.position, end, climbSpeed * Time.deltaTime);
-
-            //rotate towards the ladder
-            Vector3 tp = transform.position - bottomPos;
-            tp.y = transform.position.y;
-            Quaternion rot = Quaternion.LookRotation(-PlayerManager.instance.ladder.transform.forward);
-            transform.rotation = rot;
-
-            yield return new WaitForEndOfFrame();
-        }
-
-        PlayerManager.instance.anim.SetBool("isClimbing", false);
-        PlayerManager.instance.anim.speed = 1f;
-
-        if (end == topPos){
-            while (Vector3.Distance(transform.position, endPos) > .1f){
-                transform.position = Vector3.MoveTowards(transform.position, endPos, climbSpeed * Time.deltaTime);
-                yield return new WaitForEndOfFrame();
-            }
-        }
-
-        rb.isKinematic = false;
-        yield return new WaitForEndOfFrame();
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
-        PlayerManager.instance.ladder = null;
-        yield return new WaitForEndOfFrame();
-    }
-
     public IEnumerator Warp(GameObject warpPad){
         WarpPad pad = warpPad.GetComponent<WarpPad>();
         SkinnedMeshRenderer renderers = PlayerManager.instance.GetComponentInChildren<SkinnedMeshRenderer>();
 		MeshRenderer renderer = PlayerManager.instance.GetComponentInChildren<MeshRenderer>();
         PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
-		renderers.enabled = false;
-		renderer.enabled = false;
         rb.isKinematic = true;
         transform.LookAt(pad.pointB.position);
+        transform.position = warpPad.transform.position;
+        renderers.enabled = false;
+		renderer.enabled = false;
         warpFX.Play();
+        yield return new WaitForSeconds(1f);
 		while(Vector3.Distance(PlayerManager.instance.transform.position, pad.pointB.position) > .1f){
 			PlayerManager.instance.transform.position = Vector3.Lerp(PlayerManager.instance.transform.position, pad.pointB.position, .05f);
 			yield return new WaitForEndOfFrame();
@@ -137,6 +93,7 @@ public class PlayerMovement : MonoBehaviour {
 		renderers.enabled = true;
 		renderer.enabled = true;
         rb.isKinematic = false;
+        warpFX.Play();
 		yield return null;
     }
 
@@ -153,6 +110,56 @@ public class PlayerMovement : MonoBehaviour {
         }else if(move.z < 0){
             transform.Translate(-PlayerManager.instance.transform.forward * 2 * Time.deltaTime);
         }
+    }
+
+    public IEnumerator LadderStart(GameObject ladder){
+
+        Ladder ladderInfo = ladder.GetComponent<Ladder>();
+        Vector3 startSide = new Vector3(0,0,0);
+        if(Vector3.Distance(transform.position, ladderInfo.topPos.position) < Vector3.Distance(transform.position, ladderInfo.bottomPos.position)){
+            startSide = ladderInfo.topPos.position;
+        }else{
+            startSide = ladderInfo.bottomPos.position;
+        }
+
+        PlayerManager.instance.anim.SetBool("isClimbing", true);
+        rb.isKinematic = true;
+        while(Vector3.Distance(transform.position, startSide)>.1f){
+            transform.position = Vector3.Lerp(transform.position, startSide, .1f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, ladderInfo.topPos.rotation, .5f);
+            yield return new WaitForEndOfFrame();
+        }
+
+        PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
+        yield return null;
+    }
+
+    public void ClimbLadder(Vector3 move, GameObject ladder){
+        //add ending the ladder climb
+        Ladder ladderInfo = ladder.GetComponent<Ladder>();
+        transform.rotation = Quaternion.Lerp(transform.rotation, ladderInfo.topPos.rotation, .5f);
+        if(move.z > 0){
+            transform.position = Vector3.MoveTowards(transform.position, ladderInfo.topPos.position, 2 * Time.deltaTime);
+            PlayerManager.instance.anim.SetBool("isClimbingUp", true);
+            PlayerManager.instance.anim.SetBool("isClimbingDown", false);
+            PlayerManager.instance.anim.speed = 1.5f;
+        }else if(move.z < 0){
+            transform.position = Vector3.MoveTowards(transform.position, ladderInfo.bottomPos.position, 2 * Time.deltaTime);
+            PlayerManager.instance.anim.SetBool("isClimbingUp", false);
+            PlayerManager.instance.anim.SetBool("isClimbingDown", true);
+            PlayerManager.instance.anim.speed = 1.5f;
+        }else{
+            PlayerManager.instance.anim.speed = 0f;
+        }
+    }
+
+    public void LadderEnd(){
+        rb.isKinematic = false;
+        PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
+        PlayerManager.instance.anim.SetBool("isClimbing", false);
+        PlayerManager.instance.anim.SetBool("isClimbingUp", false);
+        PlayerManager.instance.anim.SetBool("isClimbingDown", false);
+        PlayerManager.instance.anim.speed = 1f;
     }
 
     public IEnumerator ShimyPipeStart(GameObject pipe){

@@ -27,13 +27,15 @@ public class PlayerManager : MonoBehaviour {
 
     float currentCamX  = 0.0f;
     float currentCamY  = 0.0f;
+    [SerializeField] Transform climbingCamPoint;
+
     public int coinCount = 0;
 
     [SerializeField] private float jumpHieght;
     [SerializeField] private float fallMultiplyer = 2.5f;
     [SerializeField] private float lowJumpMultiplyer = 3f;
 
-    [HideInInspector] public GameObject ladder = null;
+     public GameObject ladder = null;
     [HideInInspector] public GameObject shimyPipe = null;
     [SerializeField] private Transform putDownPos;
     [SerializeField] private Transform feetLevel;
@@ -91,12 +93,11 @@ public class PlayerManager : MonoBehaviour {
         Vector3 m = new Vector3(h,0,v);
         movement = m;
         
-        //Jump
+        //Jump - climb and rolls
         if (Input.GetKeyDown(KeyCode.Space)){
             if(currentState != PlayerState.Traversing){
                 if (ladder && CheckGrounded()){
-                    move.StartCoroutine(move.ClimbLadder(ladder.GetComponent<Ladder>().bottomPos.position, 
-                    ladder.GetComponent<Ladder>().topPos.position, ladder.GetComponent<Ladder>().endPos.position));
+                    move.StartCoroutine(move.LadderStart(ladder));
                 }else if(shimyPipe && CheckGrounded()){
                     move.StartCoroutine(move.ShimyPipeStart(shimyPipe));
                 }else if(CheckGrounded() && isLockedOn){
@@ -110,6 +111,9 @@ public class PlayerManager : MonoBehaviour {
             }else{
                 if(shimyPipe){
                     move.EndShimy();
+                }else if(ladder){
+                    move.LadderEnd();
+                    move.Jump(jumpHieght);
                 }
             }
         }
@@ -117,18 +121,22 @@ public class PlayerManager : MonoBehaviour {
 
     private void ApplyMove(){
         //apply move controls
-        if(currentState == PlayerState.Traversing && shimyPipe && movement != Vector3.zero){
+        if(currentState == PlayerState.Traversing && shimyPipe){
             move.ShimyPipe(movement, shimyPipe.GetComponent<ShimyPipe>());
+        }else if(ladder && currentState == PlayerState.Traversing){
+            move.ClimbLadder(movement, ladder);
         }else if(pushBlock && isPushingBlock){
             move.MoveBlock(movement);
         }else if(currentState != PlayerState.Traversing && movement != Vector3.zero){
             move.FreeMovement(movement, speed);
-        }else
+        }else if(movement == Vector3.zero)
             anim.SetBool("isMoving", false);
     }
 
     void CameraInput(){
-        if(!isLockedOn){
+        if(ladder && currentState == PlayerState.Traversing){
+            playerCam.ClimbingCamera(climbingCamPoint.position);
+        }else if(!isLockedOn){
             currentCamX += Input.GetAxis("Mouse X");
             currentCamY += Input.GetAxis("Mouse Y"); 
             playerCam.MouseOrbit(currentCamX, currentCamY );
