@@ -100,7 +100,6 @@ public class PlayerManager : MonoBehaviour {
                 }else if(shimyPipe && CheckGrounded()){
                     move.StartCoroutine(move.ShimyPipeStart(shimyPipe));
                 }else if(CheckGrounded() && isLockedOn){
-                    Debug.Log("roll");
                     move.Evade(jumpHieght);
                 }else if(CheckGrounded()){
                     move.Jump(jumpHieght); //maybe remove standard jump mech

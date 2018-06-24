@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
+
     Rigidbody rb;
     private float rotationSpeed = .2f;
     [SerializeField] private float climbSpeed;
@@ -10,6 +11,8 @@ public class PlayerMovement : MonoBehaviour {
     //shimy pipe
     Vector3 mySide;
     Vector3 farSide;
+
+    [SerializeField] ParticleSystem warpFX;
 
     private void Start(){
         rb = GetComponent<Rigidbody>();
@@ -48,7 +51,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Evade(float evadeStength){
-        rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * evadeStength, .5f);
+        rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * (evadeStength + (evadeStength * 0.5f)), .5f);
         PlayerManager.instance.anim.Play("Roll");
         StartCoroutine(Invulnerabe());
     }
@@ -124,8 +127,10 @@ public class PlayerMovement : MonoBehaviour {
 		renderers.enabled = false;
 		renderer.enabled = false;
         rb.isKinematic = true;
+        transform.LookAt(pad.pointB.position);
+        warpFX.Play();
 		while(Vector3.Distance(PlayerManager.instance.transform.position, pad.pointB.position) > .1f){
-			PlayerManager.instance.transform.position = Vector3.Slerp(PlayerManager.instance.transform.position, pad.pointB.position, .1f);
+			PlayerManager.instance.transform.position = Vector3.Lerp(PlayerManager.instance.transform.position, pad.pointB.position, .05f);
 			yield return new WaitForEndOfFrame();
 		}
 		PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
