@@ -142,14 +142,14 @@ public class PlayerMovement : MonoBehaviour {
             transform.position = Vector3.MoveTowards(transform.position, ladderInfo.topPos.position, 2 * Time.deltaTime);
             PlayerManager.instance.anim.SetBool("isClimbingUp", true);
             PlayerManager.instance.anim.SetBool("isClimbingDown", false);
-            PlayerManager.instance.anim.speed = 1.5f;
+            PlayerManager.instance.anim.speed = Mathf.Lerp(PlayerManager.instance.anim.speed, 1.5f, .3f);
         }else if(move.z < 0){
             transform.position = Vector3.MoveTowards(transform.position, ladderInfo.bottomPos.position, 2 * Time.deltaTime);
             PlayerManager.instance.anim.SetBool("isClimbingUp", false);
             PlayerManager.instance.anim.SetBool("isClimbingDown", true);
-            PlayerManager.instance.anim.speed = 1.5f;
+            PlayerManager.instance.anim.speed = Mathf.Lerp(PlayerManager.instance.anim.speed, 1.5f, .3f);
         }else{
-            PlayerManager.instance.anim.speed = 0f;
+            PlayerManager.instance.anim.speed = Mathf.Lerp(PlayerManager.instance.anim.speed, 0, .3f);
         }
     }
 
