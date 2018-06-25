@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: BlockoutSceneSettings_ProtoTyping
   m_EditorClassIdentifier: 
   sceneName: ProtoTyping
-  currentTheme: 3
+  currentTheme: 5
   currentTexture: 0
   cameraAnchor: []
   assetDictionary: []
