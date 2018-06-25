@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviour {
     [HideInInspector] public Animator anim;
     [HideInInspector] public ThirdPersonCamera playerCam;
 
-    public enum PlayerState { FreeMovement, Traversing, Attacking, Blocking, Dead};
+    public enum PlayerState { FreeMovement, CanNotMove, Traversing, Attacking, Blocking, Dead};
     public PlayerState currentState = PlayerState.FreeMovement;
 
     [SerializeField] private float speed = 5;
@@ -123,11 +123,11 @@ public class PlayerManager : MonoBehaviour {
         //apply move controls
         if(currentState == PlayerState.Traversing && shimyPipe){
             move.ShimyPipe(movement, shimyPipe.GetComponent<ShimyPipe>());
-        }else if(ladder && currentState == PlayerState.Traversing){
+        }else if(ladder && currentState == PlayerState.Traversing && currentState != PlayerState.CanNotMove){
             move.ClimbLadder(movement, ladder);
         }else if(pushBlock && isPushingBlock){
             move.MoveBlock(movement);
-        }else if(currentState != PlayerState.Traversing && movement != Vector3.zero){
+        }else if(currentState != PlayerState.Traversing && movement != Vector3.zero && currentState != PlayerState.CanNotMove){
             move.FreeMovement(movement, speed);
         }else if(movement == Vector3.zero)
             anim.SetBool("isMoving", false);

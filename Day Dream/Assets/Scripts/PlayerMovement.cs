@@ -121,15 +121,14 @@ public class PlayerMovement : MonoBehaviour {
         }else{
             startSide = ladderInfo.bottomPos.position;
         }
-
         PlayerManager.instance.anim.SetBool("isClimbing", true);
         rb.isKinematic = true;
+        PlayerManager.instance.currentState = PlayerManager.PlayerState.CanNotMove;
         while(Vector3.Distance(transform.position, startSide)>.1f){
             transform.position = Vector3.Lerp(transform.position, startSide, .1f);
             transform.rotation = Quaternion.Lerp(transform.rotation, ladderInfo.topPos.rotation, .5f);
             yield return new WaitForEndOfFrame();
         }
-
         PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
         yield return null;
     }

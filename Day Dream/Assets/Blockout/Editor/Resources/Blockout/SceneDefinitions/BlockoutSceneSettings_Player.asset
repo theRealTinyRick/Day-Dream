@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Player
   currentTheme: 1
-  currentTexture: 2
+  currentTexture: 0
   cameraAnchor: []
   assetDictionary: []
