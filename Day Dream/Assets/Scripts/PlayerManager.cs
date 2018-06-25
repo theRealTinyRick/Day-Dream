@@ -159,6 +159,10 @@ public class PlayerManager : MonoBehaviour {
         if(Input.GetMouseButtonDown(2)){
             targeting.ToggleLockedOnEnemies();
         }
+
+        if(Input.GetKeyDown(KeyCode.Tab)){
+            targeting.LockOff();
+        }
         targeting.transform.position = transform.position;
     }
 
@@ -186,7 +190,7 @@ public class PlayerManager : MonoBehaviour {
                 isHoldingObject = true;
                 StartCoroutine(PickUpObject());
             }else if(item){
-                inv.AddItem(item);
+                inv.AddItem(item.GetComponent<Item>());
             }else if(pushBlock && !isPushingBlock){
                 isPushingBlock = true;
                 transform.LookAt(pushBlock.transform.position);
@@ -228,7 +232,7 @@ public class PlayerManager : MonoBehaviour {
             if(!Inventory.activeInHierarchy){
                 inv.ClearList();
             }else{
-                inv.RenderList(inv.fullInventory);
+                inv.RenderList();
             }
         }
     }

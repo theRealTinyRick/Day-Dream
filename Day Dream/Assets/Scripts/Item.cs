@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Item : MonoBehaviour {
+
 	public enum ItemType{Consumable, Weapon}
 	public ItemType itemType;
 

@@ -65,7 +65,8 @@ public class EnemyBase : MonoBehaviour {
         }
         else{/////////////////PATROLING
             if(patrolPoints.Length > 0){
-                if(!CheckRange(aggroRange, currentPoint.position)){
+                Debug.Log("Patrol");
+                if(!CheckRange(attackRange, currentPoint.position)){
                     nav.SetDestination(currentPoint.position);
                     nav.isStopped = false;
                     anim.SetBool("isMoving", true);

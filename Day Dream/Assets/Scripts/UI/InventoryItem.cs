@@ -6,6 +6,5 @@ using UnityEngine.UI;
 public class InventoryItem : MonoBehaviour {
 	public Image icon;
 	public string _name;
-
-	public GameObject item;
+	public Item item;
 }

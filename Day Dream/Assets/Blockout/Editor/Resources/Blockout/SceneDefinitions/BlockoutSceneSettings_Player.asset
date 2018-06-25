@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: BlockoutSceneSettings_Player
   m_EditorClassIdentifier: 
   sceneName: Player
-  currentTheme: 5
-  currentTexture: 3
+  currentTheme: 2
+  currentTexture: 4
   cameraAnchor: []
   assetDictionary: []

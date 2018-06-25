@@ -9,19 +9,23 @@ public class PlayerInventory : MonoBehaviour {
 	public float coinCount = 0; 
 
 	public List <GameObject> renderedInventoryList = new List <GameObject>();
-	public List <GameObject> fullInventory = new List <GameObject>();
-	public List <GameObject> weaponInventory = new List <GameObject>();
+	public List <Item> fullInventory = new List <Item>();
+	public GameObject[] allWeapons;
 	public List <GameObject> consumableInventory = new List <GameObject>();
 
 	[SerializeField] private GameObject itemPrefab;
 	[SerializeField] private Transform inventoryParent; 	
 
-	public void AddItem(GameObject item){
+	public void AddItem(Item item){
 		fullInventory.Add(item);
 		item.GetComponent<BoxCollider>().enabled = false;
 		item.GetComponent<SphereCollider>().enabled = false;
+		Item itemInfo = item.GetComponent<Item>();
+		if(itemInfo.itemType == Item.ItemType.Weapon){
+			//enable the use of the item
+		}
+		item.gameObject.SetActive(false);
 		PlayerManager.instance.item = null;
-		item.SetActive(false);
 	}
 
 	public void RemoveItem(){
@@ -35,19 +39,20 @@ public class PlayerInventory : MonoBehaviour {
 		renderedInventoryList.Clear();
 	}
 
-	public void RenderList(List <GameObject> inventoryToRender){
-		foreach(GameObject item in inventoryToRender){
+	public void RenderList(){
+		foreach(Item item in fullInventory){
 			GameObject newItem = Instantiate(itemPrefab, transform.position, Quaternion.identity);
 			newItem.transform.SetParent(inventoryParent);
-			renderedInventoryList.Add(newItem);
+			renderedInventoryList.Add(newItem);//gives the clear list function access to the rendered ui
 			
 			//set all the images and stuff
 			Item info = item.GetComponent<Item>();
 			InventoryItem newItemInfo = newItem.GetComponent<InventoryItem>();
 			if(info.icon)
 				newItem.GetComponent<Image>().sprite = info.icon;
+
 			newItemInfo.item = item;
-			newItemInfo._name = info.name;
+			newItemInfo._name = info._name;
 		}
 	}
 }
