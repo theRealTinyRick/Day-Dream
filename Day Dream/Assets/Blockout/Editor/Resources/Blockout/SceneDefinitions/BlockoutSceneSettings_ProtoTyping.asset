@@ -8,11 +8,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5a117cf368dd7e4faa602390226be41, type: 3}
+  m_Script: {fileID: 1560485659, guid: e06a193c50359fd438d7742ef2819252, type: 3}
   m_Name: BlockoutSceneSettings_ProtoTyping
   m_EditorClassIdentifier: 
   sceneName: ProtoTyping
-  currentTheme: 5
+  currentTheme: 0
   currentTexture: 0
   cameraAnchor: []
   assetDictionary: []
