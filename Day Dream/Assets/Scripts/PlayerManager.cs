@@ -35,8 +35,9 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private float fallMultiplyer = 2.5f;
     [SerializeField] private float lowJumpMultiplyer = 3f;
 
-     public GameObject ladder = null;
+    [HideInInspector] public GameObject ladder = null;
     [HideInInspector] public GameObject shimyPipe = null;
+    [HideInInspector] public GameObject ledge;
     [SerializeField] private Transform putDownPos;
     [SerializeField] private Transform feetLevel;
 
@@ -100,6 +101,8 @@ public class PlayerManager : MonoBehaviour {
                     move.StartCoroutine(move.LadderStart(ladder));
                 }else if(shimyPipe && CheckGrounded()){
                     move.StartCoroutine(move.ShimyPipeStart(shimyPipe));
+                }else if(ledge){
+                    move.StartCoroutine(move.GrabLedge(ledge));
                 }else if(CheckGrounded() && isLockedOn){
                     move.Evade(jumpHieght);
                 }else if(CheckGrounded()){
@@ -127,6 +130,8 @@ public class PlayerManager : MonoBehaviour {
             move.ClimbLadder(movement, ladder);
         }else if(pushBlock && isPushingBlock){
             move.MoveBlock(movement);
+        }else if(currentState == PlayerState.Traversing && ledge){
+            move.ShimyLedge(movement);
         }else if(currentState == PlayerState.FreeMovement && movement != Vector3.zero){
             move.FreeMovement(movement, speed);
         }else if(movement == Vector3.zero)
@@ -176,7 +181,6 @@ public class PlayerManager : MonoBehaviour {
             anim.SetBool("isGrounded", false);
             return false;
         }
-
     }
 
     private void Interact(){
@@ -275,6 +279,8 @@ public class PlayerManager : MonoBehaviour {
             item = other.gameObject;
         }else if(other.tag == "WarpPad"){
             move.StartCoroutine(move.Warp(other.gameObject));
+        }else if(other.tag == "Ledge"){
+            ledge = other.gameObject;
         }
     }
 
@@ -283,6 +289,11 @@ public class PlayerManager : MonoBehaviour {
             pickUpObject = null;
         }else if(other.tag == "Item"){
             item = null;
+        }else if(other.tag == "Ledge"){
+           if(ledge && currentState == PlayerState.Traversing){
+               move.DropLedge();
+           }
+            ledge = null;
         }
     }
 }

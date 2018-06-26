@@ -31,10 +31,7 @@ public class PlayerMovement : MonoBehaviour {
             dir.y = 0;
             movement = PlayerManager.instance.playerCam.transform.TransformDirection(movement);
             movement.y = 0;
-            // Vector3 v = rb.velocity;
-            // v.x = movement.x * speed;
-            // v.z = movement.z * speed;
-            // rb.velocity = v;
+
             transform.Translate(movement * speed * Time.deltaTime, Space.World);
 
             if (movement != Vector3.zero){
@@ -49,7 +46,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Jump(float jumpHeight){
-        rb.velocity = Vector3.Lerp(rb.velocity, Vector3.up * jumpHeight, .5f) ;
+        rb.velocity = new Vector3(0,jumpHeight, 0);
         PlayerManager.instance.anim.SetBool("isGrounded", false);
         PlayerManager.instance.anim.Play("Jump");
     }
@@ -198,5 +195,37 @@ public class PlayerMovement : MonoBehaviour {
     public void EndShimy(){
         PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
         rb.isKinematic = false;
+    }
+
+    public IEnumerator GrabLedge(GameObject ledge){
+        RaycastHit hit;
+        Vector3 origin = transform.position;
+        origin.y = transform.position.y + 1;
+        if(Physics.Raycast(origin, transform.forward, out hit, 5)){
+            PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
+            rb.isKinematic = true;
+            Vector3  topOfLedge = new Vector3(hit.point.x, ledge.transform.position.y - 1, hit.point.z);
+            while(Vector3.Distance(transform.position, topOfLedge) > .5f){
+                transform.position = Vector3.Lerp(transform.position, topOfLedge, .1f);
+                Vector3 tp = topOfLedge;    
+                tp.y = transform.position.y;
+                transform.LookAt(tp);
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        yield return null;
+    }
+
+    public void ShimyLedge(Vector3 move){
+        if(move.x > 0){
+            transform.Translate(Vector3.right * 3 * Time.deltaTime);
+        }else if(move.x < 0){
+            transform.Translate(-Vector3.right * 3 * Time.deltaTime);
+        }
+    }
+
+    public void DropLedge(){
+        rb.isKinematic = false;
+        PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
     }
 }

@@ -15,6 +15,7 @@ TagManager:
   - LockOnTarget
   - PlayerWeapon
   - WarpPad
+  - Ledge
   layers:
   - Default
   - TransparentFX
