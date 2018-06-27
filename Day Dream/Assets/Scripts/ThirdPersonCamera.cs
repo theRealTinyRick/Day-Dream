@@ -7,6 +7,8 @@ public class ThirdPersonCamera : MonoBehaviour {
     private Transform camLookAt;
     private Transform clippingOrigin;
 
+    [SerializeField] private Transform camClimbingPoint;
+
     private float currentDistance = 5;
     private float originalCameraDistance = 5;
     private float Y_ANGLE_MIN = -30;
@@ -24,6 +26,10 @@ public class ThirdPersonCamera : MonoBehaviour {
         camLookAt.transform.parent = PlayerManager.instance.transform;
         clippingOrigin.transform.parent = PlayerManager.instance.transform;
     }
+    
+    private void FixedUpdate(){
+        CameraClipping();
+    }
 
     public void MouseOrbit(float currentX, float currentY){
         Vector3 tp = PlayerManager.instance.transform.position;
@@ -38,7 +44,7 @@ public class ThirdPersonCamera : MonoBehaviour {
 
         Vector3 pos = camLookAt.position + rotation * dis; //apply rotation and offset to the position of the camera
         transform.position = Vector3.Lerp(transform.position, pos, .7f);
-    //    transform.position = pos;
+        //transform.position = pos;
         // Quaternion rot = Quaternion.LookRotation(camLookAt.position - transform.position);
         // transform.rotation = Quaternion.Lerp(transform.rotation, rot, .5f);
         transform.LookAt(camLookAt);    
@@ -58,8 +64,8 @@ public class ThirdPersonCamera : MonoBehaviour {
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, .4f);
     }
 
-    public void ClimbingCamera(Vector3 tp){
-        transform.position = Vector3.Lerp(transform.position, tp, .3f);
+    public void ClimbingCamera(){
+        transform.position = Vector3.Lerp(transform.position, camClimbingPoint.position, .3f);
         transform.LookAt(camLookAt);
     }
 

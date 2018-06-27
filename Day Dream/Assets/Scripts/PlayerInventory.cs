@@ -25,7 +25,6 @@ public class PlayerInventory : MonoBehaviour {
 			//enable the use of the item
 		}
 		item.gameObject.SetActive(false);
-		PlayerManager.instance.item = null;
 	}
 
 	public void RemoveItem(){

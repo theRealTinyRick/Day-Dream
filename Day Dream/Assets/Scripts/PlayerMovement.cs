@@ -4,22 +4,28 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
+    PlayerController pController;
     Rigidbody rb;
-    private float rotationSpeed = .2f;
-    [SerializeField] private float climbSpeed;
+    GameObject pCamera;
+
+    private float fallMultiplyer = 10f;
+    private float lowJumpMultiplyer = 3f;
+
+    [SerializeField] ParticleSystem warpFX;
+    [SerializeField] ParticleSystem hitFX;
 
     //shimy pipe
     Vector3 mySide;
     Vector3 farSide;
 
-    Vector3 bottom;
-    Vector3 top;
-
-    [SerializeField] ParticleSystem warpFX;
-    [SerializeField] ParticleSystem hitFX;
-
     private void Start(){
+        pController = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody>();
+        pCamera = Camera.main.gameObject;
+    }
+
+    private void FixedUpdate(){
+        BetterJumpPhysics();
     }
 
     public void FreeMovement(Vector3 movement, float speed){
@@ -27,33 +33,33 @@ public class PlayerMovement : MonoBehaviour {
             if (movement.x != 0 && movement.z != 0)
                 speed -= speed / 3;
             
-            Vector3 dir = PlayerManager.instance.playerCam.transform.position - transform.position;
+            Vector3 dir = pCamera.transform.position - transform.position;
             dir.y = 0;
-            movement = PlayerManager.instance.playerCam.transform.TransformDirection(movement);
+            movement = pCamera.transform.TransformDirection(movement);
             movement.y = 0;
 
             transform.Translate(movement * speed * Time.deltaTime, Space.World);
 
             if (movement != Vector3.zero){
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), rotationSpeed);
-                PlayerManager.instance.anim.SetBool("isMoving", true);
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), .3f);
+                pController.anim.SetBool("isMoving", true);
             }else
-                PlayerManager.instance.anim.SetBool("isMoving", false);
+                pController.anim.SetBool("isMoving", false);
         }
         else{
-            PlayerManager.instance.anim.SetBool("isMoving", false);
+            pController.anim.SetBool("isMoving", false);
         }
     }
 
     public void Jump(float jumpHeight){
         rb.velocity = new Vector3(0,jumpHeight, 0);
-        PlayerManager.instance.anim.SetBool("isGrounded", false);
-        PlayerManager.instance.anim.Play("Jump");
+        pController.anim.SetBool("isGrounded", false);
+        pController.anim.Play("Jump");
     }
 
     public void Evade(float evadeStength){
         rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * (evadeStength + (evadeStength * 0.5f)), .5f);
-        PlayerManager.instance.anim.Play("Roll");
+        pController.anim.Play("Roll");
         StartCoroutine(Invulnerabe());
     }
 
@@ -72,8 +78,8 @@ public class PlayerMovement : MonoBehaviour {
 
     public IEnumerator Warp(GameObject warpPad){
         WarpPad pad = warpPad.GetComponent<WarpPad>();
-        SkinnedMeshRenderer renderers = PlayerManager.instance.GetComponentInChildren<SkinnedMeshRenderer>();
-		MeshRenderer renderer = PlayerManager.instance.GetComponentInChildren<MeshRenderer>();
+        SkinnedMeshRenderer renderers = GetComponentInChildren<SkinnedMeshRenderer>();
+		MeshRenderer renderer = GetComponentInChildren<MeshRenderer>();
         PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
         rb.isKinematic = true;
         transform.LookAt(pad.pointB.position);
@@ -82,8 +88,8 @@ public class PlayerMovement : MonoBehaviour {
 		renderer.enabled = false;
         warpFX.Play();
         yield return new WaitForSeconds(1f);
-		while(Vector3.Distance(PlayerManager.instance.transform.position, pad.pointB.position) > .1f){
-			PlayerManager.instance.transform.position = Vector3.Lerp(PlayerManager.instance.transform.position, pad.pointB.position, .05f);
+		while(Vector3.Distance(transform.position, pad.pointB.position) > .1f){
+			transform.position = Vector3.Lerp(transform.position, pad.pointB.position, .05f);
 			yield return new WaitForEndOfFrame();
 		}
 		PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
@@ -99,16 +105,6 @@ public class PlayerMovement : MonoBehaviour {
         yield return null;
     }
 
-    public void MoveBlock(Vector3 move){
-        // transform.LookAt(PlayerManager.instance.pushBlock.transform.position);
-        PlayerManager.instance.pushBlock.transform.SetParent(transform);
-        if(move.z > 0){
-            transform.Translate(PlayerManager.instance.transform.forward * 2 * Time.deltaTime);
-        }else if(move.z < 0){
-            transform.Translate(-PlayerManager.instance.transform.forward * 2 * Time.deltaTime);
-        }
-    }
-
     public IEnumerator LadderStart(GameObject ladder){
 
         Ladder ladderInfo = ladder.GetComponent<Ladder>();
@@ -118,7 +114,7 @@ public class PlayerMovement : MonoBehaviour {
         }else{
             startSide = ladderInfo.bottomPos.position;
         }
-        PlayerManager.instance.anim.SetBool("isClimbing", true);
+        pController.anim.SetBool("isClimbing", true);
         rb.isKinematic = true;
         PlayerManager.instance.currentState = PlayerManager.PlayerState.CanNotMove;
         while(Vector3.Distance(transform.position, startSide)>.1f){
@@ -136,26 +132,26 @@ public class PlayerMovement : MonoBehaviour {
         transform.rotation = Quaternion.Lerp(transform.rotation, ladderInfo.topPos.rotation, .5f);
         if(move.z > 0){
             transform.position = Vector3.MoveTowards(transform.position, ladderInfo.topPos.position, 2 * Time.deltaTime);
-            PlayerManager.instance.anim.SetBool("isClimbingUp", true);
-            PlayerManager.instance.anim.SetBool("isClimbingDown", false);
-            PlayerManager.instance.anim.speed = Mathf.Lerp(PlayerManager.instance.anim.speed, 1.5f, .3f);
+            pController.anim.SetBool("isClimbingUp", true);
+            pController.anim.SetBool("isClimbingDown", false);
+            pController.anim.speed = Mathf.Lerp(pController.anim.speed, 1.5f, .3f);
         }else if(move.z < 0){
             transform.position = Vector3.MoveTowards(transform.position, ladderInfo.bottomPos.position, 2 * Time.deltaTime);
-            PlayerManager.instance.anim.SetBool("isClimbingUp", false);
-            PlayerManager.instance.anim.SetBool("isClimbingDown", true);
-            PlayerManager.instance.anim.speed = Mathf.Lerp(PlayerManager.instance.anim.speed, 1.5f, .3f);
+            pController.anim.SetBool("isClimbingUp", false);
+            pController.anim.SetBool("isClimbingDown", true);
+            pController.anim.speed = Mathf.Lerp(pController.anim.speed, 1.5f, .3f);
         }else{
-            PlayerManager.instance.anim.speed = Mathf.Lerp(PlayerManager.instance.anim.speed, 0, .3f);
+            pController.anim.speed = Mathf.Lerp(pController.anim.speed, 0, .3f);
         }
     }
 
     public void LadderEnd(){
         rb.isKinematic = false;
         PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
-        PlayerManager.instance.anim.SetBool("isClimbing", false);
-        PlayerManager.instance.anim.SetBool("isClimbingUp", false);
-        PlayerManager.instance.anim.SetBool("isClimbingDown", false);
-        PlayerManager.instance.anim.speed = 1f;
+        pController.anim.SetBool("isClimbing", false);
+        pController.anim.SetBool("isClimbingUp", false);
+        pController.anim.SetBool("isClimbingDown", false);
+        pController.anim.speed = 1f;
     }
 
     public IEnumerator ShimyPipeStart(GameObject pipe){
@@ -227,5 +223,12 @@ public class PlayerMovement : MonoBehaviour {
     public void DropLedge(){
         rb.isKinematic = false;
         PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
+    }
+
+    private void BetterJumpPhysics(){
+        if (rb.velocity.y  < 0) 
+            rb.velocity += Vector3.up *  Physics.gravity.y  * (fallMultiplyer - 1) * Time.deltaTime;
+        else if (rb.velocity.y  > 0 && !Input.GetButton("Jump"))
+            rb.velocity += Vector3.up * Physics.gravity.y  * (lowJumpMultiplyer - 1) * Time.deltaTime;
     }
 }
