@@ -17,12 +17,10 @@ public class PlayerController : MonoBehaviour {
 
 	//JUMP VARS
 	private float jumpHieght = 20;
-    private float fallMultiplyer = 10f;
-    private float lowJumpMultiplyer = 3f;
 	private bool hasUsedDoubleJump = false;
 
 	//PLATFORMS
-	private GameObject ladder = null;
+	[SerializeField]private GameObject ladder = null;
     private GameObject shimyPipe = null;
     private GameObject ledge = null;
 
@@ -55,16 +53,19 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void Update () {
-		MoveInput();
 		PlatFormingInput();
 		AttackInput();
-		CamerInput();
 		LockOnInput();
 		InteractInput();
 	}
 
+    private void LateUpdate(){
+		CamerInput();
+    }
+
 	private void FixedUpdate(){
 		CheckGrounded();
+		MoveInput();
 	}
 
 	private void MoveInput(){
@@ -72,12 +73,12 @@ public class PlayerController : MonoBehaviour {
         float v = Input.GetAxisRaw("Vertical");
         Vector3 moveDir = new Vector3(h,0,v);
 
-		if(pManager.currentState == PlayerManager.PlayerState.Traversing && pManager.shimyPipe){
+		if(pManager.currentState == PlayerManager.PlayerState.Traversing && shimyPipe){
             pMove.ShimyPipe(moveDir, shimyPipe.GetComponent<ShimyPipe>());
         }else if(ladder && pManager.currentState == PlayerManager.PlayerState.Traversing){
             pMove.ClimbLadder(moveDir, ladder);
         }else if(pManager.currentState == PlayerManager.PlayerState.Traversing && ledge){
-            pMove.ShimyLedge(moveDir);
+            pMove.ShimyLedge(moveDir, ledge.transform);
         }else if(pManager.currentState == PlayerManager.PlayerState.FreeMovement && moveDir != Vector3.zero){
             pMove.FreeMovement(moveDir, speed);
         }else if(moveDir == Vector3.zero)
@@ -92,7 +93,9 @@ public class PlayerController : MonoBehaviour {
                 }else if(shimyPipe && CheckGrounded()){
                     pMove.StartCoroutine(pMove.ShimyPipeStart(shimyPipe));
                 }else if(ledge){
-                    pMove.StartCoroutine(pMove.GrabLedge(ledge));
+                    if(!pMove.CanGrabLedge(ledge) && CheckGrounded()){
+                        pMove.Jump(jumpHieght); //maybe remove standard jump mech
+                    }
                 }else if(CheckGrounded() && pManager.isLockedOn){
                     pMove.Evade(jumpHieght);
                 }else if(CheckGrounded()){
@@ -107,6 +110,8 @@ public class PlayerController : MonoBehaviour {
                 }else if(ladder){
                     pMove.LadderEnd();
                     pMove.Jump(jumpHieght);
+                }else if(ledge){
+                    pMove.DropLedge();
                 }
             }
         }
@@ -118,7 +123,7 @@ public class PlayerController : MonoBehaviour {
                 pAttack.Attack();
         }
         if(pManager.currentState == PlayerManager.PlayerState.Attacking && pManager.isLockedOn){
-            pMove.LookAtTarget(pManager.targeting.currentTarget.transform);
+            pMove.LookAtTarget(pTargeting.currentTarget.transform);
         }
 	}
 	
@@ -240,7 +245,9 @@ public class PlayerController : MonoBehaviour {
             ledge = other.gameObject;
         }else if(other.tag == "Ladder"){
 			ladder = other.gameObject;
-		}
+		}else if(other.tag == "ShimyPipe"){
+            shimyPipe = other.gameObject;
+        }
     }
 
     private void OnTriggerExit(Collider other){
@@ -255,6 +262,8 @@ public class PlayerController : MonoBehaviour {
         	ledge = null;
         }else if(other.tag == "Ladder"){
 			ladder = null;
-		}
+		}else if(other.tag == "ShimyPipe"){
+            shimyPipe = null;
+        }
     }
 }

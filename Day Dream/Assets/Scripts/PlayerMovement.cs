@@ -38,13 +38,14 @@ public class PlayerMovement : MonoBehaviour {
             movement = pCamera.transform.TransformDirection(movement);
             movement.y = 0;
 
-            transform.Translate(movement * speed * Time.deltaTime, Space.World);
+            rb.velocity = new Vector3(movement.x * speed, rb.velocity.y, movement.z * speed);
 
             if (movement != Vector3.zero){
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), .3f);
                 pController.anim.SetBool("isMoving", true);
-            }else
+            }else{
                 pController.anim.SetBool("isMoving", false);
+            }
         }
         else{
             pController.anim.SetBool("isMoving", false);
@@ -53,12 +54,13 @@ public class PlayerMovement : MonoBehaviour {
 
     public void Jump(float jumpHeight){
         rb.velocity = new Vector3(0,jumpHeight, 0);
+        // rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
         pController.anim.SetBool("isGrounded", false);
         pController.anim.Play("Jump");
     }
 
     public void Evade(float evadeStength){
-        rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * (evadeStength + (evadeStength * 0.5f)), .5f);
+        // rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * (evadeStength + (evadeStength * 0.5f)), .5f);
         pController.anim.Play("Roll");
         StartCoroutine(Invulnerabe());
     }
@@ -193,26 +195,34 @@ public class PlayerMovement : MonoBehaviour {
         rb.isKinematic = false;
     }
 
-    public IEnumerator GrabLedge(GameObject ledge){
+    public bool CanGrabLedge(GameObject ledge){
         RaycastHit hit;
         Vector3 origin = transform.position;
         origin.y = transform.position.y + 1;
         if(Physics.Raycast(origin, transform.forward, out hit, 5)){
-            PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
-            rb.isKinematic = true;
-            Vector3  topOfLedge = new Vector3(hit.point.x, ledge.transform.position.y - 1, hit.point.z);
-            while(Vector3.Distance(transform.position, topOfLedge) > .5f){
-                transform.position = Vector3.Lerp(transform.position, topOfLedge, .1f);
-                Vector3 tp = topOfLedge;    
-                tp.y = transform.position.y;
-                transform.LookAt(tp);
-                yield return new WaitForEndOfFrame();
-            }
+            StartCoroutine(GrabLedge(ledge, hit.point));
+            return true;
+        }
+        return false;
+    }
+
+    public IEnumerator GrabLedge(GameObject ledge, Vector3 hit){
+        PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
+        rb.isKinematic = true;
+        Vector3  topOfLedge = new Vector3(hit.x, ledge.transform.position.y - 1, hit.z);
+        topOfLedge.z = topOfLedge.z + .5f;
+        while(Vector3.Distance(transform.position, topOfLedge) > .5f){
+            transform.position = Vector3.Lerp(transform.position, topOfLedge, .1f);
+            Vector3 tp = topOfLedge;    
+            tp.y = transform.position.y;
+            transform.LookAt(tp);
+            yield return new WaitForEndOfFrame();
         }
         yield return null;
     }
 
-    public void ShimyLedge(Vector3 move){
+    public void ShimyLedge(Vector3 move, Transform ledge){
+        transform.rotation = ledge.rotation;
         if(move.x > 0){
             transform.Translate(Vector3.right * 3 * Time.deltaTime);
         }else if(move.x < 0){

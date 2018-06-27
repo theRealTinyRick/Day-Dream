@@ -5,6 +5,8 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 
+pack
+
 # Visual Studio cache directory
 .vs/
 
@@ -23,6 +25,8 @@ ExportedObj/
 *.svd
 *.pdb
 *.opendb
+
+find . -size +100M | cat >> .gitignore
 
 # Unity3D generated meta files
 *.pidb.meta
