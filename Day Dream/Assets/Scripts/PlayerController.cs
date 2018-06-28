@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] private PlayerTargeting pTargeting;
 	private ThirdPersonCamera pCamera;
 	public Animator anim{get; set;}
+    private Rigidbody rb;
 
 	private float speed = 8;
 
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour {
 		pInv = GetComponent<PlayerInventory>();
 		pCamera = Camera.main.GetComponent<ThirdPersonCamera>();
 		anim = GetComponentInChildren<Animator>();
+        rb = GetComponent<Rigidbody>();
 	}
 	
 	void Update () {
@@ -81,13 +83,10 @@ public class PlayerController : MonoBehaviour {
             pMove.ShimyLedge(moveDir, ledge.transform);
         }else if(pManager.currentState == PlayerManager.PlayerState.FreeMovement && moveDir != Vector3.zero){
             pMove.FreeMovement(moveDir, speed);
-            // if(moveDir != Vector3.zero && CheckGrounded()){
-            //     anim.speed = Mathf.Abs(h);
-            // }else{
-            //     anim.speed = 1;
-            // }
-        }else if(moveDir == Vector3.zero)
+        }else if(moveDir == Vector3.zero && CheckGrounded()){
             anim.SetBool("isMoving", false);
+            rb.velocity = new Vector3(0, rb.velocity.y, 0); //stop the player from sliding on platforms
+        }
         
 	}
 

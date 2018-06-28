@@ -360,6 +360,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1442082409737878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4602340175096104}
+  m_Layer: 0
+  m_Name: Start Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1522123552859878
 GameObject:
   m_ObjectHideFlags: 1
@@ -1136,13 +1151,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1581615783936122}
   m_LocalRotation: {x: -0, y: 0.55368096, z: -0, w: -0.8327289}
-  m_LocalPosition: {x: 23.44, y: 24.99, z: 39.25}
+  m_LocalPosition: {x: 37.43, y: 24.83, z: -9.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4477224297054768}
   - {fileID: 4815350756433358}
   - {fileID: 224435986555448394}
   - {fileID: 4293010705135192}
+  - {fileID: 4602340175096104}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 292.76, z: 0}
@@ -1383,6 +1399,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4477224297054768}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4602340175096104
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1442082409737878}
+  m_LocalRotation: {x: -0, y: -0.55368096, z: -0, w: -0.8327289}
+  m_LocalPosition: {x: 40.425156, y: -30.06, z: 38.779114}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4253269337468166}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4642126003154086
 Transform:
@@ -1723,14 +1752,14 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1625389872662310}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 5
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!65 &65253200474604554
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2005,6 +2034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pTargeting: {fileID: 114913900649369826}
+  ladder: {fileID: 0}
   item: {fileID: 0}
   pushBlock: {fileID: 0}
   isPushingBlock: 0
@@ -2235,19 +2265,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a80fac141d7ff24db4a5c79644b62db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targeting: {fileID: 114913900649369826}
-  anim: {fileID: 0}
-  playerCam: {fileID: 0}
   currentState: 0
-  speed: 5
   isLockedOn: 0
   isVulnerable: 1
-  climbingCamPoint: {fileID: 4450496280601576}
-  ladder: {fileID: 0}
-  shimyPipe: {fileID: 0}
-  ledge: {fileID: 0}
-  putDownPos: {fileID: 4281141689549258}
-  feetLevel: {fileID: 4584227854807914}
+  startPosition: {fileID: 4602340175096104}
 --- !u!114 &114446264230517060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2301,6 +2322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706d116c3e2402f4d8450e467cdb0401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pTargeting: {fileID: 114913900649369826}
   camClimbingPoint: {fileID: 4450496280601576}
 --- !u!114 &114558558014135880
 MonoBehaviour:

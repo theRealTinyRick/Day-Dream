@@ -137,6 +137,10 @@ public class PlayerMovement : MonoBehaviour {
             pController.anim.SetBool("isClimbingUp", true);
             pController.anim.SetBool("isClimbingDown", false);
             pController.anim.speed = Mathf.Lerp(pController.anim.speed, 1.5f, .3f);
+            if(Vector3.Distance(transform.position, ladderInfo.topPos.position) <= .1){
+                LadderEnd();
+                Jump(20);
+            }
         }else if(move.z < 0){
             transform.position = Vector3.MoveTowards(transform.position, ladderInfo.bottomPos.position, 2 * Time.deltaTime);
             pController.anim.SetBool("isClimbingUp", false);
