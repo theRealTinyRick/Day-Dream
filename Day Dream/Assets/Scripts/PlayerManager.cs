@@ -14,6 +14,8 @@ public class PlayerManager : MonoBehaviour {
     public bool isLockedOn = false; //stay
     public bool isVulnerable = true;
 
+    [SerializeField] private Transform startPosition;
+
     private void Awake(){
         #region Singleton
         if (instance == null)
@@ -23,6 +25,12 @@ public class PlayerManager : MonoBehaviour {
         #endregion
 
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Update(){
+        if(Input.GetKeyDown(KeyCode.F1)){
+            transform.position = startPosition.position;
+        }
     }
 
 }

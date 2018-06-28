@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour {
 	private ThirdPersonCamera pCamera;
 	public Animator anim{get; set;}
 
-	private float speed = 5;
+	private float speed = 8;
 
 	//JUMP VARS
 	private float jumpHieght = 20;
@@ -81,12 +81,18 @@ public class PlayerController : MonoBehaviour {
             pMove.ShimyLedge(moveDir, ledge.transform);
         }else if(pManager.currentState == PlayerManager.PlayerState.FreeMovement && moveDir != Vector3.zero){
             pMove.FreeMovement(moveDir, speed);
+            // if(moveDir != Vector3.zero && CheckGrounded()){
+            //     anim.speed = Mathf.Abs(h);
+            // }else{
+            //     anim.speed = 1;
+            // }
         }else if(moveDir == Vector3.zero)
             anim.SetBool("isMoving", false);
+        
 	}
 
 	private void PlatFormingInput(){
-		if (Input.GetKeyDown(KeyCode.Space)){
+		if (Input.GetButtonDown("Jump")){
             if(pManager.currentState != PlayerManager.PlayerState.Traversing){
                 if (ladder && CheckGrounded()){
                     pMove.StartCoroutine(pMove.LadderStart(ladder));
@@ -129,10 +135,13 @@ public class PlayerController : MonoBehaviour {
 	
 	private void CamerInput(){
 	    if(ladder && pManager.currentState == PlayerManager.PlayerState.Traversing){
-            pCamera.ClimbingCamera();
+            // pCamera.ClimbingCamera();
+            currentCamX += Input.GetAxisRaw("Mouse X") * 2;
+            currentCamY += Input.GetAxisRaw("Mouse Y") * 2; 
+            pCamera.MouseOrbit(currentCamX, currentCamY );
         }else if(!pManager.isLockedOn){
-            currentCamX += Input.GetAxis("Mouse X");
-            currentCamY += Input.GetAxis("Mouse Y"); 
+            currentCamX += Input.GetAxisRaw("Mouse X") * 2;
+            currentCamY += Input.GetAxisRaw("Mouse Y") * 2; 
             pCamera.MouseOrbit(currentCamX, currentCamY );
         }else{
             pCamera.LockedOnCam();

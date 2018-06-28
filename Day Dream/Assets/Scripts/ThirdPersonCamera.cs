@@ -12,7 +12,7 @@ public class ThirdPersonCamera : MonoBehaviour {
     [SerializeField] private Transform camClimbingPoint;
 
     private float currentDistance = 5;
-    private float originalCameraDistance = 5;
+    private float originalCameraDistance = 8;
     private float Y_ANGLE_MIN = -30;
     private float Y_ANGLE_MAX = 12;
 
@@ -39,7 +39,12 @@ public class ThirdPersonCamera : MonoBehaviour {
 
         camLookAt.position = tp;
 
-        currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);  //set and check variables
+        // currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);  //set and check variables
+        if(currentY < Y_ANGLE_MIN){
+            currentY = Y_ANGLE_MIN + .01f;
+        }else if(currentY > Y_ANGLE_MAX){
+            currentY = Y_ANGLE_MAX;
+        }
 
         Vector3 dis = new Vector3(0f, 0f, -currentDistance);   // use variables to get offeset and the rotation
         Quaternion rotation = Quaternion.Euler(-currentY, currentX, 0);
@@ -67,8 +72,8 @@ public class ThirdPersonCamera : MonoBehaviour {
     }
 
     public void ClimbingCamera(){
-        transform.position = Vector3.Lerp(transform.position, camClimbingPoint.position, .3f);
-        transform.LookAt(camLookAt);
+        transform.position = Vector3.Lerp(transform.position, camClimbingPoint.position, .1f);
+        transform.rotation = camClimbingPoint.rotation;
     }
 
     public void CameraClipping(){

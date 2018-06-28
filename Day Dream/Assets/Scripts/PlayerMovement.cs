@@ -239,6 +239,6 @@ public class PlayerMovement : MonoBehaviour {
         if (rb.velocity.y  < 0) 
             rb.velocity += Vector3.up *  Physics.gravity.y  * (fallMultiplyer - 1) * Time.deltaTime;
         else if (rb.velocity.y  > 0 && !Input.GetButton("Jump"))
-            rb.velocity += Vector3.up * Physics.gravity.y  * (lowJumpMultiplyer - 1) * Time.deltaTime;
+            rb.velocity += Vector3.up * Physics.gravity.y *2 * Time.deltaTime;
     }
 }
