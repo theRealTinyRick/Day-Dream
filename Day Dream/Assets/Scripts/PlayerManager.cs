@@ -33,4 +33,10 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
+    private void OnTriggerEnter(Collider other){
+        if(other.tag == "Water"){
+            transform.position = startPosition.position;
+        }
+    }
+
 }

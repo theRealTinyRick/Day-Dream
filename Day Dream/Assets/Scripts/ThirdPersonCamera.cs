@@ -12,7 +12,7 @@ public class ThirdPersonCamera : MonoBehaviour {
     [SerializeField] private Transform camClimbingPoint;
 
     private float currentDistance = 5;
-    private float originalCameraDistance = 8;
+    public float originalCameraDistance = 8;
     private float Y_ANGLE_MIN = -30;
     private float Y_ANGLE_MAX = 12;
 
@@ -29,13 +29,13 @@ public class ThirdPersonCamera : MonoBehaviour {
         clippingOrigin.transform.parent = PlayerManager.instance.transform;
     }
     
-    private void FixedUpdate(){
+    private void Update(){
         CameraClipping();
     }
 
     public void MouseOrbit(float currentX, float currentY){
         Vector3 tp = PlayerManager.instance.transform.position;
-        tp.y = PlayerManager.instance.transform.position.y + 1.5f;
+        tp.y = PlayerManager.instance.transform.position.y + 1.75f;
 
         camLookAt.position = tp;
 
@@ -80,14 +80,14 @@ public class ThirdPersonCamera : MonoBehaviour {
         clippingOrigin.position = camLookAt.position;
         Vector3 camPos = transform.position;
         Vector3 dir = camPos - clippingOrigin.transform.position;
-        float distance = originalCameraDistance + 1f;
+        float distance = originalCameraDistance + 1.75f;
 
         RaycastHit hit;
         if (Physics.Raycast(clippingOrigin.position, dir, out hit, distance)){
             if (hit.collider.tag == "Environment"){
-                float newDistance = Vector3.Distance(clippingOrigin.position, hit.point) - .5F;
-                if(newDistance < 0){
-                    newDistance = 0;
+                float newDistance = Vector3.Distance(clippingOrigin.position, hit.point) - .75F;
+                if(newDistance <= 0){
+                    newDistance = 0.1f;
                 }
                 currentDistance = Mathf.Lerp(currentDistance, newDistance, .8f);
             }

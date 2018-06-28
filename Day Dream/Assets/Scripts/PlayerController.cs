@@ -21,9 +21,9 @@ public class PlayerController : MonoBehaviour {
 	private bool hasUsedDoubleJump = false;
 
 	//PLATFORMS
-	[SerializeField]private GameObject ladder = null;
+	private GameObject ladder = null;
     private GameObject shimyPipe = null;
-    private GameObject ledge = null;
+    public GameObject ledge = null;
 
 	// 
 	private bool isHoldingObject;
@@ -272,6 +272,8 @@ public class PlayerController : MonoBehaviour {
 			ladder = null;
 		}else if(other.tag == "ShimyPipe"){
             shimyPipe = null;
-        }
+        }else if(other.gameObject.name == "Camera Distance Changer"){
+            Debug.Log("hsfsdf");
+        }   
     }
 }

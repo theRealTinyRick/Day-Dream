@@ -16,6 +16,7 @@ TagManager:
   - PlayerWeapon
   - WarpPad
   - Ledge
+  - Water
   layers:
   - Default
   - TransparentFX

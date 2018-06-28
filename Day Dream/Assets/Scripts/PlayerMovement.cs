@@ -223,7 +223,11 @@ public class PlayerMovement : MonoBehaviour {
             transform.position = Vector3.Lerp(transform.position, topOfLedge, .1f);
             Vector3 tp = topOfLedge;    
             tp.y = transform.position.y;
-            transform.LookAt(tp);
+
+            if(!pController.ledge){
+                DropLedge();
+                yield break;
+            }
             yield return new WaitForEndOfFrame();
         }
         yield return null;
