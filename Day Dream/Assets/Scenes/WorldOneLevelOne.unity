@@ -11919,6 +11919,11 @@ Prefab:
       propertyPath: m_TagString
       value: Water
       objectReference: {fileID: 0}
+    - target: {fileID: 114371343409755702, guid: 28dd4d9daf6cef146ada427f31b8fc35,
+        type: 2}
+      propertyPath: m_ReflectLayers.m_Bits
+      value: 4294967247
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28dd4d9daf6cef146ada427f31b8fc35, type: 2}
   m_IsPrefabParent: 0
