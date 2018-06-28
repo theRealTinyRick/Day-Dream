@@ -146,6 +146,9 @@ public class PlayerMovement : MonoBehaviour {
             pController.anim.SetBool("isClimbingUp", false);
             pController.anim.SetBool("isClimbingDown", true);
             pController.anim.speed = Mathf.Lerp(pController.anim.speed, 1.5f, .3f);
+            if(Vector3.Distance(transform.position, ladderInfo.bottomPos.position) <= .1){
+                LadderEnd();
+            }
         }else{
             pController.anim.speed = Mathf.Lerp(pController.anim.speed, 0, .3f);
         }
@@ -154,6 +157,7 @@ public class PlayerMovement : MonoBehaviour {
     public void LadderEnd(){
         rb.isKinematic = false;
         PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
+        pController.anim.Play("Idle");
         pController.anim.SetBool("isClimbing", false);
         pController.anim.SetBool("isClimbingUp", false);
         pController.anim.SetBool("isClimbingDown", false);
