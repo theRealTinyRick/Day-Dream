@@ -11,7 +11,7 @@ public class PlayerManager : MonoBehaviour {
     public enum PlayerState { FreeMovement, CanNotMove, Traversing, Attacking, Blocking, Dead};
     public PlayerState currentState = PlayerState.FreeMovement;
 
-    public bool isLockedOn = false; //stay
+    public bool isLockedOn = false;
     public bool isVulnerable = true;
 
     [SerializeField] private Transform startPosition;

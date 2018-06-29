@@ -108,7 +108,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public IEnumerator LadderStart(GameObject ladder){
-
         Ladder ladderInfo = ladder.GetComponent<Ladder>();
         Vector3 startSide = new Vector3(0,0,0);
         if(Vector3.Distance(transform.position, ladderInfo.topPos.position) < Vector3.Distance(transform.position, ladderInfo.bottomPos.position)){
@@ -250,7 +249,7 @@ public class PlayerMovement : MonoBehaviour {
     private void BetterJumpPhysics(){
         if (rb.velocity.y  < 0) 
             rb.velocity += Vector3.up *  Physics.gravity.y  * (fallMultiplyer - 1) * Time.deltaTime;
-        else if (rb.velocity.y  > 0 && !Input.GetButton("Jump"))
+        else if (rb.velocity.y  > 0 /*&& !Input.GetButton("Jump")*/)
             rb.velocity += Vector3.up * Physics.gravity.y *2 * Time.deltaTime;
     }
 }

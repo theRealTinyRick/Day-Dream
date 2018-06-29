@@ -249,9 +249,12 @@ public class PlayerController : MonoBehaviour {
     private void SetGroundShadow(){
         RaycastHit hit; 
         if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 100)){
+            shadow.SetActive(true);
             Vector3 tp = hit.point;
             tp.y = hit.point.y + 0.1f;
             shadow.transform.position = Vector3.Lerp(shadow.transform.position, tp, 1f);
+        }else{
+            shadow.SetActive(false);
         }
     }
 	
