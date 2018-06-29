@@ -40,7 +40,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private Transform feetLevel;
 
 	[SerializeField] Transform climbingCamPoint;
-
+    [SerializeField] GameObject shadow;
+    //UI Elements
 	[SerializeField] private GameObject PauseMenu;
     [SerializeField] private GameObject Inventory;
 
@@ -59,14 +60,17 @@ public class PlayerController : MonoBehaviour {
 		AttackInput();
 		LockOnInput();
 		InteractInput();
+        SetGroundShadow();
 	}
 
     private void LateUpdate(){
 		CamerInput();
+        // SetGroundShadow();
     }
 
 	private void FixedUpdate(){
 		CheckGrounded();
+        // SetGroundShadow();
 		MoveInput();
 	}
 
@@ -240,6 +244,15 @@ public class PlayerController : MonoBehaviour {
         pickUpObject.GetComponent<Rigidbody>().isKinematic = false;
         pickUpObject.GetComponent<BoxCollider>().enabled = true;
         yield return null;
+    }
+
+    private void SetGroundShadow(){
+        RaycastHit hit; 
+        if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 100)){
+            Vector3 tp = hit.point;
+            tp.y = hit.point.y + 0.1f;
+            shadow.transform.position = Vector3.Lerp(shadow.transform.position, tp, 1f);
+        }
     }
 	
 	private void OnTriggerEnter(Collider other){
