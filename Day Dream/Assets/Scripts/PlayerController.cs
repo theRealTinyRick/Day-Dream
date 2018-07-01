@@ -218,6 +218,7 @@ public class PlayerController : MonoBehaviour {
         }else{
             anim.SetBool("isGrounded", false);
 			transform.SetParent(null);
+            speed = 8;
             return false;
         }
     }
