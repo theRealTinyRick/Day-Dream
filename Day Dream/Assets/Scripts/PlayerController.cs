@@ -17,8 +17,11 @@ public class PlayerController : MonoBehaviour {
 	private float speed = 8;
 
 	//JUMP VARS
-	private float jumpHieght = 25;
+	private float jumpHieght = 30;
 	private bool hasUsedDoubleJump = false;
+    private float timeSinceGrounded;
+    //LayerMask
+    public LayerMask playerMask = 8;
 
 	//PLATFORMS
 	private GameObject ladder = null;
@@ -53,6 +56,8 @@ public class PlayerController : MonoBehaviour {
 		pCamera = Camera.main.GetComponent<ThirdPersonCamera>();
 		anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
+
+        timeSinceGrounded = Time.time;
 	}
 	
 	void Update () {
@@ -65,12 +70,10 @@ public class PlayerController : MonoBehaviour {
 
     private void LateUpdate(){
 		CamerInput();
-        // SetGroundShadow();
     }
 
 	private void FixedUpdate(){
 		CheckGrounded();
-        // SetGroundShadow();
 		MoveInput();
 	}
 
@@ -102,11 +105,11 @@ public class PlayerController : MonoBehaviour {
                     pMove.StartCoroutine(pMove.ShimyPipeStart(shimyPipe));
                 }else if(CheckGrounded() && pManager.isLockedOn){
                     pMove.Evade(jumpHieght);
-                }else if(CheckGrounded()){
+                }else if(CheckGrounded() || Time.time - timeSinceGrounded < .2f){
+                    timeSinceGrounded = Time.time;
                     pMove.Jump(jumpHieght); //maybe remove standard jump mech
-                }else if(!CheckGrounded() && !hasUsedDoubleJump){
-                    // hasUsedDoubleJump = true;
-                    // pMove.Jump(jumpHieght - (jumpHieght/4)); //maybe remove standard jump mech
+                }else if(!CheckGrounded()){
+                   WallJump();
                 }
             }else{
                 if(shimyPipe){
@@ -116,8 +119,10 @@ public class PlayerController : MonoBehaviour {
                     pMove.Jump(jumpHieght);
                 }else if(ledge && Input.GetAxisRaw("Vertical") > 0){
                    pMove.StartCoroutine(pMove.MoveToNextLedge());
-                }else if(ledge){
+                }else if(ledge && Input.GetAxisRaw("Vertical") < 0){
                     pMove.Drop();
+                }else if(ledge){
+                    WallJump();
                 }
             }
         }
@@ -135,7 +140,6 @@ public class PlayerController : MonoBehaviour {
 	
 	private void CamerInput(){
 	    if(ladder && pManager.currentState == PlayerManager.PlayerState.Traversing){
-            // pCamera.ClimbingCamera();
             currentCamX += Input.GetAxisRaw("Mouse X") * 2;
             currentCamY += Input.GetAxisRaw("Mouse Y") * 2; 
             pCamera.MouseOrbit(currentCamX, currentCamY );
@@ -158,10 +162,6 @@ public class PlayerController : MonoBehaviour {
         }
 
         pTargeting.transform.position = transform.position;
-	}
-
-	private void SkillInput(){
-
 	}
 
 	private void InteractInput(){
@@ -198,26 +198,32 @@ public class PlayerController : MonoBehaviour {
 
 	public bool CheckGrounded(){
         RaycastHit hit;
-        if(Physics.Raycast(feetLevel.position,-Vector3.up, out hit, 0.5f)){
-			if(Vector3.Distance(hit.point, feetLevel.position) <= .2f){
-				anim.SetBool("isGrounded", true);
-				hasUsedDoubleJump = false;
+        if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 0.2f)){
+            timeSinceGrounded = Time.time;
 
-				if(hit.transform.tag == "Platform"){
-					transform.SetParent(hit.transform);
-				}else{
-					transform.SetParent(null);
-				}
-			}else{
-				transform.SetParent(null);
-			}
+            anim.SetBool("isGrounded", true);
+
+            if(hit.transform.tag == "Platform"){
+                transform.SetParent(hit.transform);
+            }else{
+                transform.SetParent(null);
+            }
             return true;
+
         }else{
             anim.SetBool("isGrounded", false);
-            // ledge = null;
-			transform.SetParent(null);
-            speed = 8;
+            transform.SetParent(null);
             return false;
+        }
+    }
+
+    private void WallJump(){
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, transform.forward, out hit, .75f)){
+            Debug.Log(hit.transform.name);
+            if(hit.normal.y < 0.1f && hit.transform.tag != "Player" && !CheckGrounded()){
+                pMove.WallJump(transform.position - hit.point, jumpHieght);
+            }
         }
     }
 

@@ -19,11 +19,14 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 mySide;
     Vector3 farSide;
 
+    float timeOfLastClimb;
+
     private void Start(){
         pManager = PlayerManager.instance;
         pController = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody>();
         pCamera = Camera.main.gameObject;
+        timeOfLastClimb = Time.time;
     }
 
     private void FixedUpdate(){
@@ -32,8 +35,12 @@ public class PlayerMovement : MonoBehaviour {
 
     public void FreeMovement(Vector3 movement, float speed){
         if (PlayerManager.instance.currentState != PlayerManager.PlayerState.Attacking){
-            if (movement.x != 0 && movement.z != 0)
-                speed -= speed / 3;
+            if(!pController.CheckGrounded()){
+                speed = speed / 1.5f;
+            }
+
+            // if (movement.x != 0 && movement.z != 0)
+            //     speed -= speed / 3;
             
             Vector3 dir = pCamera.transform.position - transform.position;
             dir.y = 0;
@@ -43,7 +50,8 @@ public class PlayerMovement : MonoBehaviour {
             rb.velocity = new Vector3(movement.x * speed, rb.velocity.y, movement.z * speed);
 
             if (movement != Vector3.zero){
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), .3f);
+                if(pController.CheckGrounded())
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), .3f);
                 pController.anim.SetBool("isMoving", true);
             }else{
                 pController.anim.SetBool("isMoving", false);
@@ -59,6 +67,16 @@ public class PlayerMovement : MonoBehaviour {
         // rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
         pController.anim.SetBool("isGrounded", false);
         pController.anim.Play("Jump");
+    }
+
+    public void WallJump(Vector3 dir, float jumpHeight){
+        if(/*pManager.currentState != PlayerManager.PlayerState.Traversing &&*/ Time.time - timeOfLastClimb > 0.75f){
+            Quaternion rot = Quaternion.LookRotation(dir);
+            transform.rotation = rot;
+            // rb.velocity = new Vector3(transform.forward.x * jumpHeight, jumpHeight, transform.forward.z * jumpHeight);
+            rb.velocity = new Vector3(dir.x * jumpHeight * 1.5f, jumpHeight, dir.z * jumpHeight * 1.5f);
+            Drop();
+        }
     }
 
     public void Evade(float evadeStength){
@@ -207,6 +225,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public IEnumerator GrabLedge(GameObject ledge){
+        timeOfLastClimb = Time.time;
         RaycastHit hit;
         Vector3 origin = transform.position;
         if(Physics.Raycast(origin, transform.forward, out hit, .75F)){
@@ -218,24 +237,30 @@ public class PlayerMovement : MonoBehaviour {
 
             pController.ledge = ledge;
         }
+       
 
         yield return null;
     }
 
     public IEnumerator MoveToNextLedge(){
-        Vector3 tp = transform.position;
-        tp.y = transform.position.y + 4;
-        GetComponent<CapsuleCollider>().enabled = false;
-        while(transform.position !=  tp){
-            transform.position = Vector3.MoveTowards(transform.position, tp, 20 * Time.deltaTime);
-            yield return new WaitForEndOfFrame();
-        }
-        rb.isKinematic = false;
-        GetComponent<CapsuleCollider>().enabled = true;
+        if(Time.time - timeOfLastClimb > 0.5f){
+            timeOfLastClimb = Time.time;
+            Vector3 tp = transform.position;
+            tp.y = transform.position.y + 4;
+            GetComponent<CapsuleCollider>().enabled = false;
+            while(transform.position !=  tp){
+                transform.position = Vector3.MoveTowards(transform.position, tp, 20 * Time.deltaTime);
+                
+                yield return new WaitForEndOfFrame();
+            }
+            rb.isKinematic = false;
+            GetComponent<CapsuleCollider>().enabled = true;
 
-        if(!pController.ledge){
-            Drop();
+            if(!pController.ledge){
+                Drop();
+            }
         }
+        
         yield return null;
     }
 
