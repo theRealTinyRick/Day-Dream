@@ -17,21 +17,12 @@ public class Platform : MonoBehaviour {
     }
 
     void FixedUpdate(){
-        // mesh.GetComponent<Rigidbody>().MovePosition(mesh.transform.position + direction * speed * Time.fixedDeltaTime);
         mesh.transform.Translate(direction * speed * Time.deltaTime);
 
         if(Vector3.Distance(mesh.transform.position, destination.position) <=  /*speed * Time.fixedDeltaTime*/ .2f){
             SetDestination(destination == aPos ? bPos : aPos);
         }
     }
-
-    // void OnDrawGizmos(){
-    //     Gizmos.color = Color.green;
-    //     Gizmos.DrawWireCube(aPos.position, new Vector3(2,1,2));
-
-    //     Gizmos.color = Color.red;
-    //     Gizmos.DrawWireCube(bPos.position, new Vector3(2,1,2));
-    // }
 
     void SetDestination(Transform dest){
         destination = dest;

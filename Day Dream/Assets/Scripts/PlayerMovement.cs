@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour {
             movement.y = 0;
 
             rb.velocity = new Vector3(movement.x * speed, rb.velocity.y, movement.z * speed);
-            // rb.MovePosition(transform.position + movement * speed* Time.fixedDeltaTime);
 
             if (movement != Vector3.zero){
                 if(pController.CheckGrounded())
