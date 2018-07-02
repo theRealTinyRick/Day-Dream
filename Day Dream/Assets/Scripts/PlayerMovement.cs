@@ -37,17 +37,17 @@ public class PlayerMovement : MonoBehaviour {
         if (PlayerManager.instance.currentState != PlayerManager.PlayerState.Attacking){
             if(!pController.CheckGrounded()){
                 speed = speed / 1.5f;
+            }else if(movement.x != 0 && movement.z != 0){
+                speed -= speed / 3;
             }
 
-            // if (movement.x != 0 && movement.z != 0)
-            //     speed -= speed / 3;
-            
             Vector3 dir = pCamera.transform.position - transform.position;
             dir.y = 0;
             movement = pCamera.transform.TransformDirection(movement);
             movement.y = 0;
 
             rb.velocity = new Vector3(movement.x * speed, rb.velocity.y, movement.z * speed);
+            // rb.MovePosition(transform.position + movement * speed* Time.fixedDeltaTime);
 
             if (movement != Vector3.zero){
                 if(pController.CheckGrounded())
@@ -217,28 +217,21 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    public bool CanGrabLedge(GameObject ledge){
-        if(!pController.CheckGrounded() ){
-            StartCoroutine(GrabLedge(ledge));
-        }
-        return false;
-    }
-
     public IEnumerator GrabLedge(GameObject ledge){
-        timeOfLastClimb = Time.time;
-        RaycastHit hit;
-        Vector3 origin = transform.position;
-        if(Physics.Raycast(origin, transform.forward, out hit, .75F)){
-            PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
-            rb.isKinematic = true;
-            Vector3 tp = (Vector3.Distance(transform.position, hit.point) - 0.5f ) * Vector3.Normalize(hit.point - transform.position) + transform.position;
-            tp.y = ledge.transform.position.y - 1.5f;
-            transform.position = tp;
+        if(!pController.CheckGrounded()){
+            timeOfLastClimb = Time.time;
+            RaycastHit hit;
+            Vector3 origin = transform.position;
+            if(Physics.Raycast(origin, transform.forward, out hit, .75F)){
+                PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
+                rb.isKinematic = true;
+                Vector3 tp = (Vector3.Distance(transform.position, hit.point) - 0.5f ) * Vector3.Normalize(hit.point - transform.position) + transform.position;
+                tp.y = ledge.transform.position.y - 1.5f;
+                transform.position = tp;
 
-            pController.ledge = ledge;
+                pController.ledge = ledge;
+            }
         }
-       
-
         yield return null;
     }
 

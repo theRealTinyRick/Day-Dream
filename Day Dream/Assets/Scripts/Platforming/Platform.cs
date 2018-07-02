@@ -4,47 +4,38 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour {
 
-    [SerializeField] private Transform aPos;
-    [SerializeField] private Transform bPos;
-    [SerializeField] private GameObject mesh;
-    [SerializeField] private float speed;
-    [SerializeField] private float timeToWait;
+    [SerializeField] Transform aPos;
+    [SerializeField] Transform bPos;
+    [SerializeField] GameObject mesh;
+    [SerializeField] float speed;
 
-    public float range;
-
-    public enum Dir {A, B, Paused };
-    public Dir currentDirection = Dir.B;
-
-    private void Update()
-    {
-        if (currentDirection == Dir.B)
-        {
-            mesh.transform.position = Vector3.MoveTowards(mesh.transform.position, bPos.position, speed * Time.deltaTime);
-            if (Vector3.Distance(mesh.transform.position, bPos.position) < range)
-            {
-                StartCoroutine(SwitchDir(Dir.A));
-                mesh.transform.position = bPos.position;
-            }
-        }
-        else if (currentDirection == Dir.A)
-        {
-            mesh.transform.position = Vector3.MoveTowards(mesh.transform.position, aPos.position, speed * Time.deltaTime);
-            if (Vector3.Distance(mesh.transform.position, aPos.position) < range)
-            {
-                mesh.transform.position = aPos.position;
-                StartCoroutine(SwitchDir(Dir.B));
-            }
-        }
-        else
-            return;
+    public Vector3 direction;
+    Transform destination;
+    
+    void Start(){
+        SetDestination(aPos);
     }
 
-    IEnumerator SwitchDir(Dir switchTo)
-    {
-        currentDirection = Dir.Paused;
-        yield return new WaitForSeconds(timeToWait);
-        currentDirection = switchTo;
+    void FixedUpdate(){
+        // mesh.GetComponent<Rigidbody>().MovePosition(mesh.transform.position + direction * speed * Time.fixedDeltaTime);
+        mesh.transform.Translate(direction * speed * Time.deltaTime);
 
+        if(Vector3.Distance(mesh.transform.position, destination.position) <=  /*speed * Time.fixedDeltaTime*/ .2f){
+            SetDestination(destination == aPos ? bPos : aPos);
+        }
+    }
+
+    // void OnDrawGizmos(){
+    //     Gizmos.color = Color.green;
+    //     Gizmos.DrawWireCube(aPos.position, new Vector3(2,1,2));
+
+    //     Gizmos.color = Color.red;
+    //     Gizmos.DrawWireCube(bPos.position, new Vector3(2,1,2));
+    // }
+
+    void SetDestination(Transform dest){
+        destination = dest;
+        direction = (destination.position - mesh.transform.position)/*.normalized*/;
     }
 
 }

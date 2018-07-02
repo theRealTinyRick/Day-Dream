@@ -271,8 +271,7 @@ public class PlayerController : MonoBehaviour {
         }else if(other.tag == "WarpPad"){
             pMove.StartCoroutine(pMove.Warp(other.gameObject));
         }else if(other.tag == "Ledge"){
-            Debug.Log("dlkjsfhas");
-            pMove.CanGrabLedge(other.gameObject);
+            pMove.StartCoroutine(pMove.GrabLedge(other.gameObject));
         }else if(other.tag == "Ladder"){
 			ladder = other.gameObject;
 		}else if(other.tag == "ShimyPipe"){
