@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
+    PlayerManager pManager;
     PlayerController pController;
     Rigidbody rb;
     GameObject pCamera;
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 farSide;
 
     private void Start(){
+        pManager = PlayerManager.instance;
         pController = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody>();
         pCamera = Camera.main.gameObject;
@@ -197,37 +199,42 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    public void EndShimy(){
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
-        rb.isKinematic = false;
-    }
-
     public bool CanGrabLedge(GameObject ledge){
-        RaycastHit hit;
-        Vector3 origin = transform.position;
-        origin.y = transform.position.y + 1;
-        if(Physics.Raycast(origin, transform.forward, out hit, 5)){
-            StartCoroutine(GrabLedge(ledge, hit.point));
-            return true;
+        if(!pController.CheckGrounded() ){
+            StartCoroutine(GrabLedge(ledge));
         }
         return false;
     }
 
-    public IEnumerator GrabLedge(GameObject ledge, Vector3 hit){
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
-        rb.isKinematic = true;
-        Vector3  topOfLedge = new Vector3(hit.x, ledge.transform.position.y - 1, hit.z);
-        topOfLedge.z = topOfLedge.z + .5f;
-        while(Vector3.Distance(transform.position, topOfLedge) > .5f){
-            transform.position = Vector3.Lerp(transform.position, topOfLedge, .1f);
-            Vector3 tp = topOfLedge;    
-            tp.y = transform.position.y;
+    public IEnumerator GrabLedge(GameObject ledge){
+        RaycastHit hit;
+        Vector3 origin = transform.position;
+        if(Physics.Raycast(origin, transform.forward, out hit, .75F)){
+            PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
+            rb.isKinematic = true;
+            Vector3 tp = (Vector3.Distance(transform.position, hit.point) - 0.5f ) * Vector3.Normalize(hit.point - transform.position) + transform.position;
+            tp.y = ledge.transform.position.y - 1.5f;
+            transform.position = tp;
 
-            if(!pController.ledge){
-                DropLedge();
-                yield break;
-            }
+            pController.ledge = ledge;
+        }
+
+        yield return null;
+    }
+
+    public IEnumerator MoveToNextLedge(){
+        Vector3 tp = transform.position;
+        tp.y = transform.position.y + 4;
+        GetComponent<CapsuleCollider>().enabled = false;
+        while(transform.position !=  tp){
+            transform.position = Vector3.MoveTowards(transform.position, tp, 20 * Time.deltaTime);
             yield return new WaitForEndOfFrame();
+        }
+        rb.isKinematic = false;
+        GetComponent<CapsuleCollider>().enabled = true;
+
+        if(!pController.ledge){
+            Drop();
         }
         yield return null;
     }
@@ -241,9 +248,11 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    public void DropLedge(){
+    public void Drop(){
+        //stop climbing
         rb.isKinematic = false;
         PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
+        pController.ledge = null;
     }
 
     private void BetterJumpPhysics(){

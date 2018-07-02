@@ -5,19 +5,19 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	//this class will handel all player actions
-	private PlayerManager pManager;
-	private PlayerMovement pMove;
-	private PlayerAttack pAttack;
-	private PlayerInventory pInv;
+	private PlayerManager pManager{get; set;}
+	private PlayerMovement pMove{get; set;}
+	private PlayerAttack pAttack{get; set;}
+	private PlayerInventory pInv{get; set;}
 	[SerializeField] private PlayerTargeting pTargeting;
-	private ThirdPersonCamera pCamera;
+	private ThirdPersonCamera pCamera{get; set;}
 	public Animator anim{get; set;}
-    private Rigidbody rb;
+    private Rigidbody rb{get; set;}
 
 	private float speed = 8;
 
 	//JUMP VARS
-	private float jumpHieght = 20;
+	private float jumpHieght = 25;
 	private bool hasUsedDoubleJump = false;
 
 	//PLATFORMS
@@ -91,7 +91,6 @@ public class PlayerController : MonoBehaviour {
             anim.SetBool("isMoving", false);
             rb.velocity = new Vector3(0, rb.velocity.y, 0); //stop the player from sliding on platforms
         }
-        
 	}
 
 	private void PlatFormingInput(){
@@ -101,26 +100,24 @@ public class PlayerController : MonoBehaviour {
                     pMove.StartCoroutine(pMove.LadderStart(ladder));
                 }else if(shimyPipe && CheckGrounded()){
                     pMove.StartCoroutine(pMove.ShimyPipeStart(shimyPipe));
-                }else if(ledge){
-                    if(!pMove.CanGrabLedge(ledge) && CheckGrounded()){
-                        pMove.Jump(jumpHieght); //maybe remove standard jump mech
-                    }
                 }else if(CheckGrounded() && pManager.isLockedOn){
                     pMove.Evade(jumpHieght);
                 }else if(CheckGrounded()){
                     pMove.Jump(jumpHieght); //maybe remove standard jump mech
                 }else if(!CheckGrounded() && !hasUsedDoubleJump){
-                    hasUsedDoubleJump = true;
-                    pMove.Jump(jumpHieght - (jumpHieght/4)); //maybe remove standard jump mech
+                    // hasUsedDoubleJump = true;
+                    // pMove.Jump(jumpHieght - (jumpHieght/4)); //maybe remove standard jump mech
                 }
             }else{
                 if(shimyPipe){
-                    pMove.EndShimy();
+                    pMove.Drop();
                 }else if(ladder){
                     pMove.LadderEnd();
                     pMove.Jump(jumpHieght);
+                }else if(ledge && Input.GetAxisRaw("Vertical") > 0){
+                   pMove.StartCoroutine(pMove.MoveToNextLedge());
                 }else if(ledge){
-                    pMove.DropLedge();
+                    pMove.Drop();
                 }
             }
         }
@@ -217,6 +214,7 @@ public class PlayerController : MonoBehaviour {
             return true;
         }else{
             anim.SetBool("isGrounded", false);
+            // ledge = null;
 			transform.SetParent(null);
             speed = 8;
             return false;
@@ -267,7 +265,8 @@ public class PlayerController : MonoBehaviour {
         }else if(other.tag == "WarpPad"){
             pMove.StartCoroutine(pMove.Warp(other.gameObject));
         }else if(other.tag == "Ledge"){
-            ledge = other.gameObject;
+            Debug.Log("dlkjsfhas");
+            pMove.CanGrabLedge(other.gameObject);
         }else if(other.tag == "Ladder"){
 			ladder = other.gameObject;
 		}else if(other.tag == "ShimyPipe"){
@@ -280,17 +279,16 @@ public class PlayerController : MonoBehaviour {
             pickUpObject = null;
         }else if(other.tag == "Item"){
             item = null;
-        }else if(other.tag == "Ledge"){
-           	if(ledge && pManager.currentState == PlayerManager.PlayerState.Traversing){
-               pMove.DropLedge();
-           	}
-        	ledge = null;
         }else if(other.tag == "Ladder"){
 			ladder = null;
 		}else if(other.tag == "ShimyPipe"){
             shimyPipe = null;
-        }else if(other.gameObject.name == "Camera Distance Changer"){
+        }else if(other.tag == "Ledge"){
+            ledge = null;
+            pMove.Drop();
+        }
+        else if(other.gameObject.name == "Camera Distance Changer"){
             Debug.Log("hsfsdf");
-        }   
+        } 
     }
 }
