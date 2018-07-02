@@ -242,11 +242,11 @@ public class PlayerMovement : MonoBehaviour {
             GetComponent<CapsuleCollider>().enabled = false;
             while(transform.position !=  tp){
                 transform.position = Vector3.MoveTowards(transform.position, tp, 20 * Time.deltaTime);
-                
                 yield return new WaitForEndOfFrame();
             }
-            rb.isKinematic = false;
+
             GetComponent<CapsuleCollider>().enabled = true;
+            Drop();
 
             if(!pController.ledge){
                 Drop();

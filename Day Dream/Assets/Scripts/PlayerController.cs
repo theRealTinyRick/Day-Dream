@@ -20,8 +20,6 @@ public class PlayerController : MonoBehaviour {
 	private float jumpHieght = 30;
 	private bool hasUsedDoubleJump = false;
     private float timeSinceGrounded;
-    //LayerMask
-    public LayerMask playerMask = 8;
 
 	//PLATFORMS
 	private GameObject ladder = null;
@@ -139,11 +137,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	private void CamerInput(){
-	    if(ladder && pManager.currentState == PlayerManager.PlayerState.Traversing){
-            currentCamX += Input.GetAxisRaw("Mouse X") * 2;
-            currentCamY += Input.GetAxisRaw("Mouse Y") * 2; 
-            pCamera.MouseOrbit(currentCamX, currentCamY );
-        }else if(!pManager.isLockedOn){
+	if(!pManager.isLockedOn){
             currentCamX += Input.GetAxisRaw("Mouse X") * 2;
             currentCamY += Input.GetAxisRaw("Mouse Y") * 2; 
             pCamera.MouseOrbit(currentCamX, currentCamY );
