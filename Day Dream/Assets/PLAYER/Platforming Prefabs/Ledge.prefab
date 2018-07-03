@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4161553650804008}
-  - component: {fileID: 65711518068356008}
+  - component: {fileID: 65898045682687380}
   m_Layer: 0
   m_Name: Ledge
   m_TagString: Ledge
@@ -50,14 +50,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1727752078213620}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.25, y: 4, z: 29}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000014901159}
+  m_LocalPosition: {x: -18.068424, y: 10.3660345, z: -40.487087}
+  m_LocalScale: {x: 0.7147951, y: 0.6701816, z: 0.6701816}
   m_Children:
   - {fileID: 4231542883031136}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180.00002, z: 0}
 --- !u!4 &4231542883031136
 Transform:
   m_ObjectHideFlags: 1
@@ -65,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1690942071718054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.23}
   m_LocalScale: {x: 7.25, y: 0.5, z: 0.0733881}
   m_Children: []
   m_Father: {fileID: 4161553650804008}
@@ -113,7 +113,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1690942071718054}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65711518068356008
+--- !u!65 &65898045682687380
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -123,5 +123,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.1, y: 3.08, z: 3.85}
-  m_Center: {x: 0, y: -1.23, z: 0}
+  m_Size: {x: 7.2, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: -0.19}

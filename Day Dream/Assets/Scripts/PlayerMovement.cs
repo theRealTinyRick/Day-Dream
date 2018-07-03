@@ -242,6 +242,17 @@ public class PlayerMovement : MonoBehaviour {
             GetComponent<CapsuleCollider>().enabled = false;
             while(transform.position !=  tp){
                 transform.position = Vector3.MoveTowards(transform.position, tp, 20 * Time.deltaTime);
+                
+                RaycastHit hit;
+                if(Physics.Raycast(transform.position, transform.forward, out hit, 0.75f)){
+                    if(hit.transform.tag != "Player"){
+                        //we good
+                    }else
+                        Drop();
+                }else{
+                    Drop();
+                }
+
                 yield return new WaitForEndOfFrame();
             }
 

@@ -137,10 +137,10 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	private void CamerInput(){
-	if(!pManager.isLockedOn){
-            currentCamX += Input.GetAxisRaw("Mouse X") * 2;
-            currentCamY += Input.GetAxisRaw("Mouse Y") * 2; 
-            pCamera.MouseOrbit(currentCamX, currentCamY );
+        if(!pManager.isLockedOn){
+                currentCamX += Input.GetAxisRaw("Mouse X") * 2;
+                currentCamY += Input.GetAxisRaw("Mouse Y") * 2; 
+                pCamera.MouseOrbit(currentCamX, currentCamY );
         }else{
             pCamera.LockedOnCam();
         }	

@@ -7,10 +7,11 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Blockout_Theme_1_Water
-  m_Shader: {fileID: 4800000, guid: 34a41adb962323d4eb748f1d7994322b, type: 3}
+  m_Shader: {fileID: 4800000, guid: 7427acf51b280e94996c59936f919b71, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -19,6 +20,10 @@ Material:
     m_TexEnvs:
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 403ab31ff043eff4ea4124a30eb5cdcc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ReflectionTex:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tex:
@@ -33,18 +38,38 @@ Material:
     - _Alpha: 0.72
     - _Blend: 2.17
     - _Cutoff: 0.5
+    - _DepthFalloff: 2
+    - _DepthOffset: 1
     - _Depth_Fade: 3.17
+    - _EdgeFalloff: 10
+    - _EdgeIntensity: 0.65
+    - _EdgeLevels: 10
+    - _EdgeOffset: 0
+    - _FresnelPower: 0.75
     - _Gloss: 0.72
     - _Glossiness: 0.5
     - _Metallic: 0
+    - _ReflectionBoost: 0.75
+    - _ReflectionIntensity: 0.75
     - _Refraction: 2.2
+    - _SmoothNormals: 0.5
     - _Spec: 0.433
     - _Speed: 1
     - _Tex_World_Scale: 0.2
     - _Time: 2
+    - _WaterGloss: 3
+    - _WaterSpecular: 1
     - _Water_Power: 2
+    - _WaveCycles: 1.5
+    - _WaveDirectionZX: 0
+    - _WaveHeight: 0.7
+    - _WaveSpeed: 25
+    - __dirty: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color_1: {r: 0.2947664, g: 0.59887546, b: 0.85294116, a: 1}
     - _Color_2: {r: 0.5808823, g: 0.80974257, b: 1, a: 1}
     - _Depth_Color: {r: 0.5661765, g: 0.79794514, b: 1, a: 1}
+    - _EdgeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
+    - _WaterColor: {r: 0, g: 0.5, b: 1, a: 1}
