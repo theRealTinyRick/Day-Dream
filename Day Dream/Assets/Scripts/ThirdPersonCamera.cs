@@ -29,7 +29,7 @@ public class ThirdPersonCamera : MonoBehaviour {
         clippingOrigin.transform.parent = PlayerManager.instance.transform;
     }
     
-    private void Update(){
+    private void FixedUpdate(){
         CameraClipping();
     }
 

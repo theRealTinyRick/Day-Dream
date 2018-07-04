@@ -12,14 +12,18 @@ public class PlayerAttack : MonoBehaviour {
 
     private PlayerController pController;
 
+    private TrailRenderer trail;
+
     private void Start(){
         pController = GetComponent<PlayerController>();
+        trail = GetComponentInChildren<TrailRenderer>();
     }
 
     private void Update(){
         if ((Time.time - _time) > timeToAtk && PlayerManager.instance.currentState != PlayerManager.PlayerState.Traversing){
             currentAtkState = AttackState.NotAttacking;
             PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
+            trail.enabled = false;
         }
     }
 
@@ -41,6 +45,7 @@ public class PlayerAttack : MonoBehaviour {
         currentAtkState = AttackState.Swing1;
         pController.anim.Play("Swing1");
         PlayerManager.instance.currentState = PlayerManager.PlayerState.Attacking;
+        trail.enabled = true;
     }
     
     private void Swing2(){
@@ -48,5 +53,6 @@ public class PlayerAttack : MonoBehaviour {
         currentAtkState = AttackState.Swing2;
         pController.anim.SetBool("Swing2",true);
         PlayerManager.instance.currentState = PlayerManager.PlayerState.Attacking;
+        trail.enabled = true;
     }
 }
