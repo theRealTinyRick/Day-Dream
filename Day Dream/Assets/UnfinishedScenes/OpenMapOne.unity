@@ -125,7 +125,6 @@ GameObject:
   - component: {fileID: 4244648}
   - component: {fileID: 4244647}
   - component: {fileID: 4244646}
-  - component: {fileID: 4244645}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (17)
   m_TagString: Environment
@@ -146,20 +145,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 88.880005}
---- !u!114 &4244645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 4244643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &4244646
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -480,7 +465,6 @@ GameObject:
   - component: {fileID: 36848475}
   - component: {fileID: 36848474}
   - component: {fileID: 36848473}
-  - component: {fileID: 36848472}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (46)
   m_TagString: Environment
@@ -501,20 +485,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 45
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &36848472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 36848470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &36848473
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -612,7 +582,6 @@ GameObject:
   - component: {fileID: 50321260}
   - component: {fileID: 50321259}
   - component: {fileID: 50321258}
-  - component: {fileID: 50321257}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (14)
   m_TagString: Environment
@@ -633,20 +602,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &50321257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 50321255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &50321258
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -701,47 +656,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 50321255}
   m_Mesh: {fileID: 4300000, guid: c463daf7d169982488d41dbe9657280d, type: 3}
---- !u!1 &50734943
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 50734944}
-  - component: {fileID: 50734945}
-  m_Layer: 0
-  m_Name: Foliage
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &50734944
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 50734943}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 404125312}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &50734945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 50734943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1364368062, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Section: 5
 --- !u!1 &61551542
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,7 +667,6 @@ GameObject:
   - component: {fileID: 61551547}
   - component: {fileID: 61551546}
   - component: {fileID: 61551545}
-  - component: {fileID: 61551544}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (27)
   m_TagString: Environment
@@ -774,20 +687,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &61551544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 61551542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &61551545
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -853,7 +752,6 @@ GameObject:
   - component: {fileID: 64270014}
   - component: {fileID: 64270013}
   - component: {fileID: 64270012}
-  - component: {fileID: 64270011}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (14)
   m_TagString: Environment
@@ -874,20 +772,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &64270011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 64270009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &64270012
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -953,7 +837,6 @@ GameObject:
   - component: {fileID: 71032174}
   - component: {fileID: 71032173}
   - component: {fileID: 71032172}
-  - component: {fileID: 71032171}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (59)
   m_TagString: Environment
@@ -974,20 +857,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 58
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -450}
---- !u!114 &71032171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 71032169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &71032172
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1425,7 +1294,6 @@ GameObject:
   - component: {fileID: 112648940}
   - component: {fileID: 112648939}
   - component: {fileID: 112648938}
-  - component: {fileID: 112648937}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (85)
   m_TagString: Environment
@@ -1446,20 +1314,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 54
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -180.00002}
---- !u!114 &112648937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 112648935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &112648938
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1664,7 +1518,6 @@ GameObject:
   - component: {fileID: 121081242}
   - component: {fileID: 121081241}
   - component: {fileID: 121081240}
-  - component: {fileID: 121081239}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (12)
   m_TagString: Environment
@@ -1685,20 +1538,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -91.119}
---- !u!114 &121081239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 121081237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &121081240
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1902,7 +1741,6 @@ GameObject:
   - component: {fileID: 132627908}
   - component: {fileID: 132627907}
   - component: {fileID: 132627906}
-  - component: {fileID: 132627905}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (35)
   m_TagString: Environment
@@ -1923,20 +1761,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &132627905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 132627903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &132627906
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2335,7 +2159,6 @@ GameObject:
   - component: {fileID: 162237555}
   - component: {fileID: 162237554}
   - component: {fileID: 162237553}
-  - component: {fileID: 162237552}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (6)
   m_TagString: Environment
@@ -2356,20 +2179,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &162237552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 162237550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &162237553
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2493,7 +2302,6 @@ GameObject:
   - component: {fileID: 163342209}
   - component: {fileID: 163342208}
   - component: {fileID: 163342207}
-  - component: {fileID: 163342206}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (13)
   m_TagString: Environment
@@ -2514,20 +2322,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &163342206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 163342204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &163342207
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2717,7 +2511,6 @@ GameObject:
   - component: {fileID: 169884118}
   - component: {fileID: 169884117}
   - component: {fileID: 169884116}
-  - component: {fileID: 169884115}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (47)
   m_TagString: Environment
@@ -2738,20 +2531,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 46
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &169884115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 169884113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &169884116
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3046,7 +2825,6 @@ GameObject:
   - component: {fileID: 174413642}
   - component: {fileID: 174413641}
   - component: {fileID: 174413640}
-  - component: {fileID: 174413639}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (45)
   m_TagString: Environment
@@ -3067,20 +2845,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 44
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &174413639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 174413637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &174413640
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3269,7 +3033,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4505691806356784, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 17.799986
+      value: 17.33
       objectReference: {fileID: 0}
     - target: {fileID: 4505691806356784, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3345,7 +3109,6 @@ GameObject:
   - component: {fileID: 205666415}
   - component: {fileID: 205666414}
   - component: {fileID: 205666413}
-  - component: {fileID: 205666412}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (70)
   m_TagString: Environment
@@ -3366,20 +3129,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &205666412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 205666410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &205666413
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3445,7 +3194,6 @@ GameObject:
   - component: {fileID: 210278307}
   - component: {fileID: 210278306}
   - component: {fileID: 210278305}
-  - component: {fileID: 210278304}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (24)
   m_TagString: Environment
@@ -3466,20 +3214,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 30.009}
---- !u!114 &210278304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 210278302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &210278305
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3545,7 +3279,6 @@ GameObject:
   - component: {fileID: 211788479}
   - component: {fileID: 211788478}
   - component: {fileID: 211788477}
-  - component: {fileID: 211788476}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (61)
   m_TagString: Environment
@@ -3566,20 +3299,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 60
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -540}
---- !u!114 &211788476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 211788474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &211788477
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3645,7 +3364,6 @@ GameObject:
   - component: {fileID: 221692795}
   - component: {fileID: 221692794}
   - component: {fileID: 221692793}
-  - component: {fileID: 221692792}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (56)
   m_TagString: Environment
@@ -3666,20 +3384,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 55
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -360}
---- !u!114 &221692792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 221692790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &221692793
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3800,7 +3504,6 @@ GameObject:
   - component: {fileID: 233945385}
   - component: {fileID: 233945384}
   - component: {fileID: 233945383}
-  - component: {fileID: 233945382}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (26)
   m_TagString: Environment
@@ -3821,20 +3524,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &233945382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 233945380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &233945383
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3900,7 +3589,6 @@ GameObject:
   - component: {fileID: 250404783}
   - component: {fileID: 250404782}
   - component: {fileID: 250404781}
-  - component: {fileID: 250404780}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (49)
   m_TagString: Environment
@@ -3921,20 +3609,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 48
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &250404780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 250404778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &250404781
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4019,7 +3693,6 @@ GameObject:
   - component: {fileID: 261534242}
   - component: {fileID: 261534241}
   - component: {fileID: 261534240}
-  - component: {fileID: 261534239}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (39)
   m_TagString: Environment
@@ -4040,20 +3713,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &261534239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 261534237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &261534240
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4119,7 +3778,6 @@ GameObject:
   - component: {fileID: 268941918}
   - component: {fileID: 268941917}
   - component: {fileID: 268941916}
-  - component: {fileID: 268941915}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (34)
   m_TagString: Environment
@@ -4140,20 +3798,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &268941915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 268941913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &268941916
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4221,15 +3865,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4478885473819570, guid: 7a2f60312a7bb14469e4867b8b49bdc5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.2
+      value: 21.2
       objectReference: {fileID: 0}
     - target: {fileID: 4478885473819570, guid: 7a2f60312a7bb14469e4867b8b49bdc5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 18.2
+      value: 24.85
       objectReference: {fileID: 0}
     - target: {fileID: 4478885473819570, guid: 7a2f60312a7bb14469e4867b8b49bdc5, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -114.6
+      value: -114.69
       objectReference: {fileID: 0}
     - target: {fileID: 4478885473819570, guid: 7a2f60312a7bb14469e4867b8b49bdc5, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4237,7 +3881,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4478885473819570, guid: 7a2f60312a7bb14469e4867b8b49bdc5, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.9633845
+      value: 0.55231637
       objectReference: {fileID: 0}
     - target: {fileID: 4478885473819570, guid: 7a2f60312a7bb14469e4867b8b49bdc5, type: 2}
       propertyPath: m_LocalRotation.z
@@ -4245,7 +3889,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4478885473819570, guid: 7a2f60312a7bb14469e4867b8b49bdc5, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.2681239
+      value: -0.8336347
       objectReference: {fileID: 0}
     - target: {fileID: 4478885473819570, guid: 7a2f60312a7bb14469e4867b8b49bdc5, type: 2}
       propertyPath: m_RootOrder
@@ -4258,7 +3902,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4478885473819570, guid: 7a2f60312a7bb14469e4867b8b49bdc5, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 148.895
+      value: 292.948
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a2f60312a7bb14469e4867b8b49bdc5, type: 2}
@@ -4274,7 +3918,6 @@ GameObject:
   - component: {fileID: 276892945}
   - component: {fileID: 276892944}
   - component: {fileID: 276892943}
-  - component: {fileID: 276892942}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (37)
   m_TagString: Environment
@@ -4295,20 +3938,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &276892942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 276892940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &276892943
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4444,7 +4073,6 @@ GameObject:
   - component: {fileID: 289894041}
   - component: {fileID: 289894040}
   - component: {fileID: 289894039}
-  - component: {fileID: 289894038}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (47)
   m_TagString: Environment
@@ -4465,20 +4093,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 360}
---- !u!114 &289894038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 289894036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &289894039
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4602,7 +4216,6 @@ GameObject:
   - component: {fileID: 295649095}
   - component: {fileID: 295649094}
   - component: {fileID: 295649093}
-  - component: {fileID: 295649092}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (38)
   m_TagString: Environment
@@ -4623,20 +4236,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 29.988}
---- !u!114 &295649092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 295649090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &295649093
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4760,7 +4359,6 @@ GameObject:
   - component: {fileID: 302397484}
   - component: {fileID: 302397483}
   - component: {fileID: 302397482}
-  - component: {fileID: 302397481}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (8)
   m_TagString: Environment
@@ -4781,20 +4379,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -91.119}
---- !u!114 &302397481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 302397479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &302397482
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4963,7 +4547,6 @@ GameObject:
   - component: {fileID: 318842857}
   - component: {fileID: 318842856}
   - component: {fileID: 318842855}
-  - component: {fileID: 318842854}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (43)
   m_TagString: Environment
@@ -4984,20 +4567,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 360}
---- !u!114 &318842854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 318842852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &318842855
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5139,7 +4708,6 @@ GameObject:
   - component: {fileID: 332566754}
   - component: {fileID: 332566753}
   - component: {fileID: 332566752}
-  - component: {fileID: 332566751}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (23)
   m_TagString: Environment
@@ -5160,20 +4728,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.1190001}
---- !u!114 &332566751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 332566749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &332566752
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5239,7 +4793,6 @@ GameObject:
   - component: {fileID: 346459381}
   - component: {fileID: 346459380}
   - component: {fileID: 346459379}
-  - component: {fileID: 346459378}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (22)
   m_TagString: Environment
@@ -5260,20 +4813,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &346459378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 346459376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &346459379
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5415,7 +4954,6 @@ GameObject:
   - component: {fileID: 357689854}
   - component: {fileID: 357689853}
   - component: {fileID: 357689852}
-  - component: {fileID: 357689851}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (28)
   m_TagString: Environment
@@ -5436,20 +4974,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &357689851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 357689849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &357689852
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5755,7 +5279,6 @@ GameObject:
   - component: {fileID: 376831020}
   - component: {fileID: 376831019}
   - component: {fileID: 376831018}
-  - component: {fileID: 376831017}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (62)
   m_TagString: Environment
@@ -5776,20 +5299,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 61
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -450}
---- !u!114 &376831017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 376831015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &376831018
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5935,7 +5444,6 @@ GameObject:
   - component: {fileID: 386605553}
   - component: {fileID: 386605552}
   - component: {fileID: 386605551}
-  - component: {fileID: 386605550}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (21)
   m_TagString: Environment
@@ -5956,20 +5464,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &386605550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 386605548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &386605551
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6144,7 +5638,6 @@ GameObject:
   - component: {fileID: 394725566}
   - component: {fileID: 394725565}
   - component: {fileID: 394725564}
-  - component: {fileID: 394725563}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (20)
   m_TagString: Environment
@@ -6165,20 +5658,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &394725563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 394725561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &394725564
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6361,7 +5840,6 @@ GameObject:
   - component: {fileID: 403400699}
   - component: {fileID: 403400698}
   - component: {fileID: 403400697}
-  - component: {fileID: 403400696}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (57)
   m_TagString: Environment
@@ -6382,20 +5860,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 56
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -450}
---- !u!114 &403400696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 403400694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &403400697
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6526,12 +5990,6 @@ Transform:
   - {fileID: 1471423742}
   - {fileID: 1706740683}
   - {fileID: 1430902714}
-  - {fileID: 1066925665}
-  - {fileID: 50734944}
-  - {fileID: 1303362976}
-  - {fileID: 1721860770}
-  - {fileID: 2034805932}
-  - {fileID: 1426287762}
   m_Father: {fileID: 0}
   m_RootOrder: 49
   m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
@@ -6554,6 +6012,86 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 29b42e009815cd142a070498cc5cb6ab, type: 3}
+--- !u!1001 &405923017
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 21.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 27.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -169.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.95594037
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.2935611
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_RootOrder
+      value: 141
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.9541517
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.9541517
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1.9541517
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992559430955086, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_Name
+      value: SM_Tree_Generic_Giant_01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -145.85701
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &405923018 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1992559430955086, guid: 5301afbcc2367b5469f618258a227b39,
+    type: 2}
+  m_PrefabInternal: {fileID: 405923017}
+--- !u!136 &405923019
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 405923018}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.86
+  m_Height: 9.135986
+  m_Direction: 1
+  m_Center: {x: 0.26, y: 3.425293, z: -0.04}
 --- !u!4 &406179424 stripped
 Transform:
   m_PrefabParentObject: {fileID: 405988, guid: 527fa9e5a993752478e3f10c46b015ff, type: 2}
@@ -6569,7 +6107,6 @@ GameObject:
   - component: {fileID: 406195172}
   - component: {fileID: 406195171}
   - component: {fileID: 406195170}
-  - component: {fileID: 406195169}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (33)
   m_TagString: Environment
@@ -6590,20 +6127,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &406195169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 406195167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &406195170
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6669,7 +6192,6 @@ GameObject:
   - component: {fileID: 413109006}
   - component: {fileID: 413109005}
   - component: {fileID: 413109004}
-  - component: {fileID: 413109003}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (23)
   m_TagString: Environment
@@ -6690,20 +6212,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &413109003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 413109001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &413109004
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6788,7 +6296,6 @@ GameObject:
   - component: {fileID: 429251315}
   - component: {fileID: 429251314}
   - component: {fileID: 429251313}
-  - component: {fileID: 429251312}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (90)
   m_TagString: Environment
@@ -6809,20 +6316,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 59
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -180.00002}
---- !u!114 &429251312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 429251310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &429251313
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6942,7 +6435,6 @@ GameObject:
   - component: {fileID: 438759178}
   - component: {fileID: 438759177}
   - component: {fileID: 438759176}
-  - component: {fileID: 438759175}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (83)
   m_TagString: Environment
@@ -6963,20 +6455,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 52
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -180.00002}
---- !u!114 &438759175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 438759173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &438759176
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7035,6 +6513,86 @@ MeshFilter:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 2b127815fd0f2074eae3a0c6a4786d0b, type: 2}
   m_PrefabInternal: {fileID: 1465724695}
+--- !u!1001 &446264806
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -111.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 12.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -105.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.750426
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -0.6609545
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_RootOrder
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.5694902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.5694902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1.5694902
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992559430955086, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_Name
+      value: SM_Tree_Generic_Giant_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869555021460592, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -262.745
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 5301afbcc2367b5469f618258a227b39, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &446264807 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1992559430955086, guid: 5301afbcc2367b5469f618258a227b39,
+    type: 2}
+  m_PrefabInternal: {fileID: 446264806}
+--- !u!136 &446264808
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 446264807}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.86
+  m_Height: 9.135986
+  m_Direction: 1
+  m_Center: {x: 0.26, y: 3.425293, z: -0.04}
 --- !u!1001 &449159522
 Prefab:
   m_ObjectHideFlags: 0
@@ -7116,7 +6674,6 @@ GameObject:
   - component: {fileID: 458996725}
   - component: {fileID: 458996724}
   - component: {fileID: 458996723}
-  - component: {fileID: 458996722}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (41)
   m_TagString: Environment
@@ -7137,20 +6694,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 29.988}
---- !u!114 &458996722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 458996720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &458996723
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7290,7 +6833,6 @@ GameObject:
   - component: {fileID: 463838460}
   - component: {fileID: 463838459}
   - component: {fileID: 463838458}
-  - component: {fileID: 463838457}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (28)
   m_TagString: Environment
@@ -7311,20 +6853,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 66
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &463838457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 463838455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &463838458
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7390,7 +6918,6 @@ GameObject:
   - component: {fileID: 480775853}
   - component: {fileID: 480775852}
   - component: {fileID: 480775851}
-  - component: {fileID: 480775850}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (43)
   m_TagString: Environment
@@ -7411,20 +6938,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 42
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &480775850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 480775848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &480775851
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7824,7 +7337,6 @@ GameObject:
   - component: {fileID: 533163931}
   - component: {fileID: 533163930}
   - component: {fileID: 533163929}
-  - component: {fileID: 533163928}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (33)
   m_TagString: Environment
@@ -7845,20 +7357,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 29.988}
---- !u!114 &533163928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 533163926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &533163929
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7928,7 +7426,6 @@ GameObject:
   - component: {fileID: 545543780}
   - component: {fileID: 545543779}
   - component: {fileID: 545543778}
-  - component: {fileID: 545543777}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (55)
   m_TagString: Environment
@@ -7949,20 +7446,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 54
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -270}
---- !u!114 &545543777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 545543775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &545543778
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8478,7 +7961,6 @@ GameObject:
   - component: {fileID: 575931235}
   - component: {fileID: 575931234}
   - component: {fileID: 575931233}
-  - component: {fileID: 575931232}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (69)
   m_TagString: Environment
@@ -8499,20 +7981,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 38
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &575931232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 575931230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &575931233
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8672,7 +8140,6 @@ GameObject:
   - component: {fileID: 596632771}
   - component: {fileID: 596632770}
   - component: {fileID: 596632769}
-  - component: {fileID: 596632768}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (4)
   m_TagString: Environment
@@ -8693,20 +8160,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &596632768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 596632766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &596632769
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8915,7 +8368,6 @@ GameObject:
   - component: {fileID: 607416829}
   - component: {fileID: 607416828}
   - component: {fileID: 607416827}
-  - component: {fileID: 607416826}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (34)
   m_TagString: Environment
@@ -8936,20 +8388,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 29.988}
---- !u!114 &607416826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 607416824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &607416827
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9410,7 +8848,6 @@ GameObject:
   - component: {fileID: 637788852}
   - component: {fileID: 637788851}
   - component: {fileID: 637788850}
-  - component: {fileID: 637788849}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (17)
   m_TagString: Environment
@@ -9431,20 +8868,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &637788849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 637788847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &637788850
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9514,7 +8937,6 @@ GameObject:
   - component: {fileID: 639674799}
   - component: {fileID: 639674798}
   - component: {fileID: 639674797}
-  - component: {fileID: 639674796}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (60)
   m_TagString: Environment
@@ -9535,20 +8957,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 59
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -450}
---- !u!114 &639674796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 639674794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &639674797
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9676,7 +9084,6 @@ GameObject:
   - component: {fileID: 652553780}
   - component: {fileID: 652553779}
   - component: {fileID: 652553778}
-  - component: {fileID: 652553777}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (12)
   m_TagString: Environment
@@ -9697,20 +9104,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &652553777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 652553775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &652553778
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9776,7 +9169,6 @@ GameObject:
   - component: {fileID: 653665112}
   - component: {fileID: 653665111}
   - component: {fileID: 653665110}
-  - component: {fileID: 653665109}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (15)
   m_TagString: Environment
@@ -9797,20 +9189,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -181.11899}
---- !u!114 &653665109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 653665107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &653665110
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9965,7 +9343,6 @@ GameObject:
   - component: {fileID: 660659862}
   - component: {fileID: 660659861}
   - component: {fileID: 660659860}
-  - component: {fileID: 660659859}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (16)
   m_TagString: Environment
@@ -9986,20 +9363,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &660659859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 660659857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &660659860
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10065,7 +9428,6 @@ GameObject:
   - component: {fileID: 679257985}
   - component: {fileID: 679257984}
   - component: {fileID: 679257983}
-  - component: {fileID: 679257982}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (79)
   m_TagString: Environment
@@ -10086,20 +9448,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 48
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -180.00002}
---- !u!114 &679257982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 679257980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &679257983
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10339,7 +9687,6 @@ GameObject:
   - component: {fileID: 688554272}
   - component: {fileID: 688554271}
   - component: {fileID: 688554270}
-  - component: {fileID: 688554269}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (41)
   m_TagString: Environment
@@ -10360,20 +9707,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 90.00001}
---- !u!114 &688554269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 688554267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &688554270
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10514,7 +9847,6 @@ GameObject:
   - component: {fileID: 694960949}
   - component: {fileID: 694960948}
   - component: {fileID: 694960947}
-  - component: {fileID: 694960946}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (26)
   m_TagString: Environment
@@ -10535,20 +9867,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -91.119}
---- !u!114 &694960946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 694960944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &694960947
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10690,7 +10008,6 @@ GameObject:
   - component: {fileID: 698840396}
   - component: {fileID: 698840395}
   - component: {fileID: 698840394}
-  - component: {fileID: 698840393}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (15)
   m_TagString: Environment
@@ -10711,20 +10028,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &698840393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 698840391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &698840394
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10914,7 +10217,6 @@ GameObject:
   - component: {fileID: 720896882}
   - component: {fileID: 720896881}
   - component: {fileID: 720896880}
-  - component: {fileID: 720896879}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (24)
   m_TagString: Environment
@@ -10935,20 +10237,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &720896879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 720896877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &720896880
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11014,7 +10302,6 @@ GameObject:
   - component: {fileID: 722795246}
   - component: {fileID: 722795245}
   - component: {fileID: 722795244}
-  - component: {fileID: 722795243}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (40)
   m_TagString: Environment
@@ -11035,20 +10322,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &722795243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 722795241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &722795244
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11130,7 +10403,6 @@ GameObject:
   - component: {fileID: 741414358}
   - component: {fileID: 741414357}
   - component: {fileID: 741414356}
-  - component: {fileID: 741414355}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (24)
   m_TagString: Environment
@@ -11151,20 +10423,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 88.881004}
---- !u!114 &741414355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 741414353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &741414356
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11230,7 +10488,6 @@ GameObject:
   - component: {fileID: 743418391}
   - component: {fileID: 743418390}
   - component: {fileID: 743418389}
-  - component: {fileID: 743418388}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (72)
   m_TagString: Environment
@@ -11251,20 +10508,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 41
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &743418388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 743418386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &743418389
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11627,7 +10870,6 @@ GameObject:
   - component: {fileID: 786130130}
   - component: {fileID: 786130129}
   - component: {fileID: 786130128}
-  - component: {fileID: 786130127}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (5)
   m_TagString: Environment
@@ -11648,20 +10890,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &786130127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 786130125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &786130128
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11735,7 +10963,6 @@ GameObject:
   - component: {fileID: 800664750}
   - component: {fileID: 800664749}
   - component: {fileID: 800664748}
-  - component: {fileID: 800664747}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (63)
   m_TagString: Environment
@@ -11756,20 +10983,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 62
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -540}
---- !u!114 &800664747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 800664745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &800664748
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11835,7 +11048,6 @@ GameObject:
   - component: {fileID: 800681849}
   - component: {fileID: 800681848}
   - component: {fileID: 800681847}
-  - component: {fileID: 800681846}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (74)
   m_TagString: Environment
@@ -11856,20 +11068,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 43
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -26.672}
---- !u!114 &800681846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 800681844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &800681847
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11935,7 +11133,6 @@ GameObject:
   - component: {fileID: 810797104}
   - component: {fileID: 810797103}
   - component: {fileID: 810797102}
-  - component: {fileID: 810797101}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (27)
   m_TagString: Environment
@@ -11956,20 +11153,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &810797101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 810797099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &810797102
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12035,7 +11218,6 @@ GameObject:
   - component: {fileID: 813443775}
   - component: {fileID: 813443774}
   - component: {fileID: 813443773}
-  - component: {fileID: 813443772}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (25)
   m_TagString: Environment
@@ -12056,20 +11238,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &813443772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 813443770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &813443773
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12135,7 +11303,6 @@ GameObject:
   - component: {fileID: 815324433}
   - component: {fileID: 815324432}
   - component: {fileID: 815324431}
-  - component: {fileID: 815324430}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (14)
   m_TagString: Environment
@@ -12156,20 +11323,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -181.11899}
---- !u!114 &815324430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 815324428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &815324431
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12235,7 +11388,6 @@ GameObject:
   - component: {fileID: 817616839}
   - component: {fileID: 817616838}
   - component: {fileID: 817616837}
-  - component: {fileID: 817616836}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (86)
   m_TagString: Environment
@@ -12256,20 +11408,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 55
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -180.00002}
---- !u!114 &817616836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 817616834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &817616837
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12390,7 +11528,6 @@ GameObject:
   - component: {fileID: 823441874}
   - component: {fileID: 823441873}
   - component: {fileID: 823441872}
-  - component: {fileID: 823441871}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (19)
   m_TagString: Environment
@@ -12411,20 +11548,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &823441871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 823441869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &823441872
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13236,7 +12359,6 @@ GameObject:
   - component: {fileID: 871960231}
   - component: {fileID: 871960230}
   - component: {fileID: 871960229}
-  - component: {fileID: 871960228}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (27)
   m_TagString: Environment
@@ -13257,20 +12379,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -91.119}
---- !u!114 &871960228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 871960226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &871960229
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13336,7 +12444,6 @@ GameObject:
   - component: {fileID: 878039116}
   - component: {fileID: 878039115}
   - component: {fileID: 878039114}
-  - component: {fileID: 878039113}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (38)
   m_TagString: Environment
@@ -13357,20 +12464,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &878039113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 878039111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &878039114
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13436,7 +12529,6 @@ GameObject:
   - component: {fileID: 893063521}
   - component: {fileID: 893063520}
   - component: {fileID: 893063519}
-  - component: {fileID: 893063518}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (2)
   m_TagString: Environment
@@ -13457,20 +12549,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.1190001}
---- !u!114 &893063518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 893063516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &893063519
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13610,7 +12688,6 @@ GameObject:
   - component: {fileID: 906360761}
   - component: {fileID: 906360760}
   - component: {fileID: 906360759}
-  - component: {fileID: 906360758}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (25)
   m_TagString: Environment
@@ -13631,20 +12708,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &906360758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 906360756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &906360759
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14108,7 +13171,6 @@ GameObject:
   - component: {fileID: 940297183}
   - component: {fileID: 940297182}
   - component: {fileID: 940297181}
-  - component: {fileID: 940297180}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (22)
   m_TagString: Environment
@@ -14129,20 +13191,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -91.119}
---- !u!114 &940297180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 940297178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &940297181
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14642,7 +13690,6 @@ GameObject:
   - component: {fileID: 963325546}
   - component: {fileID: 963325545}
   - component: {fileID: 963325544}
-  - component: {fileID: 963325543}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (22)
   m_TagString: Environment
@@ -14663,20 +13710,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963325543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 963325541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &963325544
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14815,7 +13848,6 @@ GameObject:
   - component: {fileID: 966315410}
   - component: {fileID: 966315409}
   - component: {fileID: 966315408}
-  - component: {fileID: 966315407}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (44)
   m_TagString: Environment
@@ -14836,20 +13868,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 360}
---- !u!114 &966315407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 966315405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &966315408
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14915,7 +13933,6 @@ GameObject:
   - component: {fileID: 975630426}
   - component: {fileID: 975630425}
   - component: {fileID: 975630424}
-  - component: {fileID: 975630423}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (19)
   m_TagString: Environment
@@ -14936,20 +13953,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.1190001}
---- !u!114 &975630423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 975630421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &975630424
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15042,7 +14045,6 @@ GameObject:
   - component: {fileID: 1001197542}
   - component: {fileID: 1001197541}
   - component: {fileID: 1001197540}
-  - component: {fileID: 1001197539}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (5)
   m_TagString: Environment
@@ -15063,20 +14065,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: -179.99998}
---- !u!114 &1001197539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1001197537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1001197540
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15142,7 +14130,6 @@ GameObject:
   - component: {fileID: 1006069138}
   - component: {fileID: 1006069137}
   - component: {fileID: 1006069136}
-  - component: {fileID: 1006069135}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (39)
   m_TagString: Environment
@@ -15163,20 +14150,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 29.988}
---- !u!114 &1006069135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1006069133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1006069136
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15407,7 +14380,6 @@ GameObject:
   - component: {fileID: 1058567667}
   - component: {fileID: 1058567666}
   - component: {fileID: 1058567665}
-  - component: {fileID: 1058567664}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (54)
   m_TagString: Environment
@@ -15428,20 +14400,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 53
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &1058567664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1058567662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1058567665
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15496,47 +14454,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1058567662}
   m_Mesh: {fileID: 4300000, guid: 4036c277db2266e469999c80c0e6280e, type: 3}
---- !u!1 &1066925664
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1066925665}
-  - component: {fileID: 1066925666}
-  m_Layer: 0
-  m_Name: Dynamic
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1066925665
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1066925664}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 404125312}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1066925666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1066925664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1364368062, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Section: 4
 --- !u!1 &1092834477
 GameObject:
   m_ObjectHideFlags: 0
@@ -15663,7 +14580,6 @@ GameObject:
   - component: {fileID: 1103854049}
   - component: {fileID: 1103854048}
   - component: {fileID: 1103854047}
-  - component: {fileID: 1103854046}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (64)
   m_TagString: Environment
@@ -15684,20 +14600,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 63
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -540}
---- !u!114 &1103854046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1103854044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1103854047
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16368,7 +15270,6 @@ GameObject:
   - component: {fileID: 1152407282}
   - component: {fileID: 1152407281}
   - component: {fileID: 1152407280}
-  - component: {fileID: 1152407279}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (21)
   m_TagString: Environment
@@ -16389,20 +15290,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &1152407279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1152407277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1152407280
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16632,7 +15519,6 @@ GameObject:
   - component: {fileID: 1160602291}
   - component: {fileID: 1160602290}
   - component: {fileID: 1160602289}
-  - component: {fileID: 1160602288}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (73)
   m_TagString: Environment
@@ -16653,20 +15539,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 42
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &1160602288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1160602286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1160602289
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16732,7 +15604,6 @@ GameObject:
   - component: {fileID: 1171258137}
   - component: {fileID: 1171258136}
   - component: {fileID: 1171258135}
-  - component: {fileID: 1171258134}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (23)
   m_TagString: Environment
@@ -16753,20 +15624,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1171258134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1171258132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1171258135
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16878,7 +15735,6 @@ GameObject:
   - component: {fileID: 1173657989}
   - component: {fileID: 1173657988}
   - component: {fileID: 1173657987}
-  - component: {fileID: 1173657986}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (3)
   m_TagString: Environment
@@ -16899,20 +15755,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &1173657986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1173657984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1173657987
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16978,7 +15820,6 @@ GameObject:
   - component: {fileID: 1182819810}
   - component: {fileID: 1182819809}
   - component: {fileID: 1182819808}
-  - component: {fileID: 1182819807}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (84)
   m_TagString: Environment
@@ -16999,20 +15840,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 53
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -180.00002}
---- !u!114 &1182819807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1182819805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1182819808
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17327,7 +16154,6 @@ GameObject:
   - component: {fileID: 1200008310}
   - component: {fileID: 1200008309}
   - component: {fileID: 1200008308}
-  - component: {fileID: 1200008307}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (71)
   m_TagString: Environment
@@ -17348,20 +16174,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &1200008307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1200008305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1200008308
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17477,7 +16289,6 @@ GameObject:
   - component: {fileID: 1202138289}
   - component: {fileID: 1202138288}
   - component: {fileID: 1202138287}
-  - component: {fileID: 1202138286}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (1)
   m_TagString: Environment
@@ -17498,20 +16309,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1202138286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1202138284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1202138287
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17707,7 +16504,6 @@ GameObject:
   - component: {fileID: 1212779480}
   - component: {fileID: 1212779479}
   - component: {fileID: 1212779478}
-  - component: {fileID: 1212779477}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (18)
   m_TagString: Environment
@@ -17728,20 +16524,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &1212779477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1212779475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1212779478
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17807,7 +16589,6 @@ GameObject:
   - component: {fileID: 1218275341}
   - component: {fileID: 1218275340}
   - component: {fileID: 1218275339}
-  - component: {fileID: 1218275338}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (32)
   m_TagString: Environment
@@ -17828,20 +16609,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &1218275338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1218275336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1218275339
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17909,7 +16676,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4005204135589666, guid: 1000cad1907db004b8d52ddf62c1ae94, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 10.48
+      value: 11.22
       objectReference: {fileID: 0}
     - target: {fileID: 4005204135589666, guid: 1000cad1907db004b8d52ddf62c1ae94, type: 2}
       propertyPath: m_LocalPosition.z
@@ -18094,7 +16861,6 @@ GameObject:
   - component: {fileID: 1224227615}
   - component: {fileID: 1224227614}
   - component: {fileID: 1224227613}
-  - component: {fileID: 1224227612}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (58)
   m_TagString: Environment
@@ -18115,20 +16881,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 57
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -450}
---- !u!114 &1224227612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1224227610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1224227613
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18307,7 +17059,6 @@ GameObject:
   - component: {fileID: 1239166178}
   - component: {fileID: 1239166177}
   - component: {fileID: 1239166176}
-  - component: {fileID: 1239166175}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (5)
   m_TagString: Environment
@@ -18328,20 +17079,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.1190001}
---- !u!114 &1239166175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1239166173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1239166176
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18478,7 +17215,6 @@ GameObject:
   - component: {fileID: 1247599630}
   - component: {fileID: 1247599629}
   - component: {fileID: 1247599628}
-  - component: {fileID: 1247599627}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (19)
   m_TagString: Environment
@@ -18499,20 +17235,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1247599627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1247599625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1247599628
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18578,7 +17300,6 @@ GameObject:
   - component: {fileID: 1259860470}
   - component: {fileID: 1259860469}
   - component: {fileID: 1259860468}
-  - component: {fileID: 1259860467}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (13)
   m_TagString: Environment
@@ -18599,20 +17320,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -91.119}
---- !u!114 &1259860467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1259860465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1259860468
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18763,7 +17470,6 @@ GameObject:
   - component: {fileID: 1275247159}
   - component: {fileID: 1275247158}
   - component: {fileID: 1275247157}
-  - component: {fileID: 1275247156}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar)
   m_TagString: Untagged
@@ -18784,20 +17490,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 360}
---- !u!114 &1275247156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1275247154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1275247157
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18852,6 +17544,64 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1275247154}
   m_Mesh: {fileID: 4300000, guid: 4036c277db2266e469999c80c0e6280e, type: 3}
+--- !u!1001 &1281010463
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4271728572718218, guid: bce0c9523691df448b83c8c972060b2c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 3.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271728572718218, guid: bce0c9523691df448b83c8c972060b2c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 15.750002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271728572718218, guid: bce0c9523691df448b83c8c972060b2c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -169.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271728572718218, guid: bce0c9523691df448b83c8c972060b2c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271728572718218, guid: bce0c9523691df448b83c8c972060b2c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271728572718218, guid: bce0c9523691df448b83c8c972060b2c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271728572718218, guid: bce0c9523691df448b83c8c972060b2c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271728572718218, guid: bce0c9523691df448b83c8c972060b2c, type: 2}
+      propertyPath: m_RootOrder
+      value: 138
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271728572718218, guid: bce0c9523691df448b83c8c972060b2c, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.7453433
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271728572718218, guid: bce0c9523691df448b83c8c972060b2c, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.7453431
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271728572718218, guid: bce0c9523691df448b83c8c972060b2c, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1.7453431
+      objectReference: {fileID: 0}
+    - target: {fileID: 1809296932901464, guid: bce0c9523691df448b83c8c972060b2c, type: 2}
+      propertyPath: m_Name
+      value: SM_Tree_Birch_04 (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: bce0c9523691df448b83c8c972060b2c, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1281551630
 GameObject:
   m_ObjectHideFlags: 0
@@ -18863,7 +17613,6 @@ GameObject:
   - component: {fileID: 1281551635}
   - component: {fileID: 1281551634}
   - component: {fileID: 1281551633}
-  - component: {fileID: 1281551632}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (36)
   m_TagString: Environment
@@ -18884,20 +17633,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 29.988}
---- !u!114 &1281551632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1281551630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1281551633
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18963,7 +17698,6 @@ GameObject:
   - component: {fileID: 1287201287}
   - component: {fileID: 1287201286}
   - component: {fileID: 1287201285}
-  - component: {fileID: 1287201284}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (35)
   m_TagString: Environment
@@ -18984,20 +17718,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 72.051}
---- !u!114 &1287201284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1287201282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1287201285
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19052,47 +17772,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1287201282}
   m_Mesh: {fileID: 4300000, guid: c463daf7d169982488d41dbe9657280d, type: 3}
---- !u!1 &1303362975
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1303362976}
-  - component: {fileID: 1303362977}
-  m_Layer: 0
-  m_Name: Triggers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1303362976
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1303362975}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 404125312}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1303362977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1303362975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1364368062, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Section: 7
 --- !u!1001 &1305449456
 Prefab:
   m_ObjectHideFlags: 0
@@ -19393,7 +18072,6 @@ GameObject:
   - component: {fileID: 1332051137}
   - component: {fileID: 1332051136}
   - component: {fileID: 1332051135}
-  - component: {fileID: 1332051134}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (9)
   m_TagString: Environment
@@ -19414,20 +18092,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.1190001}
---- !u!114 &1332051134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1332051132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1332051135
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19752,7 +18416,6 @@ GameObject:
   - component: {fileID: 1383425029}
   - component: {fileID: 1383425028}
   - component: {fileID: 1383425027}
-  - component: {fileID: 1383425026}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar)
   m_TagString: Environment
@@ -19773,20 +18436,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1383425026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1383425024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1383425027
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20011,47 +18660,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 392f7adf8d214b74cac0d1d2af5802a6, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1426287761
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1426287762}
-  - component: {fileID: 1426287763}
-  m_Layer: 0
-  m_Name: Comments
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1426287762
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1426287761}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 404125312}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1426287763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1426287761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1364368062, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Section: 9
 --- !u!4 &1426927626 stripped
 Transform:
   m_PrefabParentObject: {fileID: 405988, guid: 527fa9e5a993752478e3f10c46b015ff, type: 2}
@@ -20194,7 +18802,6 @@ GameObject:
   - component: {fileID: 1440457641}
   - component: {fileID: 1440457640}
   - component: {fileID: 1440457639}
-  - component: {fileID: 1440457638}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (29)
   m_TagString: Environment
@@ -20215,20 +18822,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 65
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1440457638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1440457636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1440457639
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20294,7 +18887,6 @@ GameObject:
   - component: {fileID: 1442686992}
   - component: {fileID: 1442686991}
   - component: {fileID: 1442686990}
-  - component: {fileID: 1442686989}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (80)
   m_TagString: Environment
@@ -20315,20 +18907,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 49
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -270}
---- !u!114 &1442686989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1442686987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1442686990
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20475,7 +19053,6 @@ GameObject:
   - component: {fileID: 1453142087}
   - component: {fileID: 1453142086}
   - component: {fileID: 1453142085}
-  - component: {fileID: 1453142084}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (7)
   m_TagString: Environment
@@ -20496,20 +19073,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1453142084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1453142082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1453142085
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20646,7 +19209,6 @@ GameObject:
   - component: {fileID: 1465746111}
   - component: {fileID: 1465746110}
   - component: {fileID: 1465746109}
-  - component: {fileID: 1465746108}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (37)
   m_TagString: Environment
@@ -20667,20 +19229,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 29.988}
---- !u!114 &1465746108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1465746106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1465746109
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20746,7 +19294,6 @@ GameObject:
   - component: {fileID: 1469550008}
   - component: {fileID: 1469550007}
   - component: {fileID: 1469550006}
-  - component: {fileID: 1469550005}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (94)
   m_TagString: Environment
@@ -20767,20 +19314,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 63
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -359.999}
---- !u!114 &1469550005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1469550003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1469550006
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20970,7 +19503,6 @@ GameObject:
   - component: {fileID: 1472362334}
   - component: {fileID: 1472362333}
   - component: {fileID: 1472362332}
-  - component: {fileID: 1472362331}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (48)
   m_TagString: Environment
@@ -20991,20 +19523,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 360}
---- !u!114 &1472362331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1472362329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1472362332
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21150,7 +19668,6 @@ GameObject:
   - component: {fileID: 1479871498}
   - component: {fileID: 1479871497}
   - component: {fileID: 1479871496}
-  - component: {fileID: 1479871495}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (20)
   m_TagString: Environment
@@ -21171,20 +19688,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 88.880005}
---- !u!114 &1479871495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1479871493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1479871496
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21384,7 +19887,6 @@ GameObject:
   - component: {fileID: 1491585178}
   - component: {fileID: 1491585177}
   - component: {fileID: 1491585176}
-  - component: {fileID: 1491585175}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (93)
   m_TagString: Environment
@@ -21405,20 +19907,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 62
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &1491585175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1491585173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1491585176
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21742,7 +20230,6 @@ GameObject:
   - component: {fileID: 1503785864}
   - component: {fileID: 1503785863}
   - component: {fileID: 1503785862}
-  - component: {fileID: 1503785861}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (30)
   m_TagString: Environment
@@ -21763,20 +20250,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &1503785861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1503785859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1503785862
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21905,7 +20378,6 @@ GameObject:
   - component: {fileID: 1512583587}
   - component: {fileID: 1512583586}
   - component: {fileID: 1512583585}
-  - component: {fileID: 1512583584}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (40)
   m_TagString: Environment
@@ -21926,20 +20398,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 72.051}
---- !u!114 &1512583584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1512583582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1512583585
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22005,7 +20463,6 @@ GameObject:
   - component: {fileID: 1514677964}
   - component: {fileID: 1514677963}
   - component: {fileID: 1514677962}
-  - component: {fileID: 1514677961}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar)
   m_TagString: Environment
@@ -22026,20 +20483,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1514677961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1514677959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1514677962
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22105,7 +20548,6 @@ GameObject:
   - component: {fileID: 1518574039}
   - component: {fileID: 1518574038}
   - component: {fileID: 1518574037}
-  - component: {fileID: 1518574036}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (4)
   m_TagString: Environment
@@ -22126,20 +20568,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1518574036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1518574034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1518574037
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22205,7 +20633,6 @@ GameObject:
   - component: {fileID: 1523257639}
   - component: {fileID: 1523257638}
   - component: {fileID: 1523257637}
-  - component: {fileID: 1523257636}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (53)
   m_TagString: Environment
@@ -22226,20 +20653,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 52
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &1523257636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1523257634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1523257637
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22305,7 +20718,6 @@ GameObject:
   - component: {fileID: 1525545101}
   - component: {fileID: 1525545100}
   - component: {fileID: 1525545099}
-  - component: {fileID: 1525545098}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (3)
   m_TagString: Environment
@@ -22326,20 +20738,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -91.119}
---- !u!114 &1525545098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1525545096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1525545099
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22475,7 +20873,6 @@ GameObject:
   - component: {fileID: 1536638377}
   - component: {fileID: 1536638376}
   - component: {fileID: 1536638375}
-  - component: {fileID: 1536638374}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (6)
   m_TagString: Environment
@@ -22496,20 +20893,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.1190001}
---- !u!114 &1536638374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1536638372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1536638375
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22625,7 +21008,6 @@ GameObject:
   - component: {fileID: 1544605707}
   - component: {fileID: 1544605706}
   - component: {fileID: 1544605705}
-  - component: {fileID: 1544605704}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (36)
   m_TagString: Environment
@@ -22646,20 +21028,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &1544605704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1544605702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1544605705
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22934,7 +21302,6 @@ GameObject:
   - component: {fileID: 1565069180}
   - component: {fileID: 1565069179}
   - component: {fileID: 1565069178}
-  - component: {fileID: 1565069177}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (7)
   m_TagString: Environment
@@ -22955,20 +21322,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -91.119}
---- !u!114 &1565069177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1565069175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1565069178
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23034,7 +21387,6 @@ GameObject:
   - component: {fileID: 1566374990}
   - component: {fileID: 1566374989}
   - component: {fileID: 1566374988}
-  - component: {fileID: 1566374987}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (82)
   m_TagString: Environment
@@ -23055,20 +21407,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 51
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -270}
---- !u!114 &1566374987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1566374985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1566374988
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23204,7 +21542,6 @@ GameObject:
   - component: {fileID: 1575770331}
   - component: {fileID: 1575770330}
   - component: {fileID: 1575770329}
-  - component: {fileID: 1575770328}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (31)
   m_TagString: Environment
@@ -23225,20 +21562,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &1575770328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1575770326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1575770329
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23304,7 +21627,6 @@ GameObject:
   - component: {fileID: 1616489072}
   - component: {fileID: 1616489071}
   - component: {fileID: 1616489070}
-  - component: {fileID: 1616489069}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (10)
   m_TagString: Environment
@@ -23325,20 +21647,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.1190001}
---- !u!114 &1616489069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1616489067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1616489070
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23711,7 +22019,6 @@ GameObject:
   - component: {fileID: 1633506435}
   - component: {fileID: 1633506434}
   - component: {fileID: 1633506433}
-  - component: {fileID: 1633506432}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (52)
   m_TagString: Environment
@@ -23732,20 +22039,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 51
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &1633506432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1633506430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1633506433
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23862,6 +22155,88 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8b731deaeb6d4c4ca2775dcc3d8538c, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1642463267
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4505691806356784, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 23.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505691806356784, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 23.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505691806356784, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -171.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505691806356784, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505691806356784, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.74701476
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505691806356784, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505691806356784, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -0.6648075
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505691806356784, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
+      propertyPath: m_RootOrder
+      value: 142
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505691806356784, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.3577136
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505691806356784, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.3577136
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505691806356784, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1.3577136
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955666037651256, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
+      propertyPath: m_Name
+      value: SM_Rock_Pile_04 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505691806356784, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -263.335
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 95847599600569320, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: d5c8b482981a2af429dd7551de6af107, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &1642463268 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1955666037651256, guid: d5c8b482981a2af429dd7551de6af107,
+    type: 2}
+  m_PrefabInternal: {fileID: 1642463267}
+--- !u!64 &1642463269
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1642463268}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 07b8536c9f3e64f418b781181a1595ff, type: 3}
 --- !u!1 &1652530887
 GameObject:
   m_ObjectHideFlags: 0
@@ -23873,7 +22248,6 @@ GameObject:
   - component: {fileID: 1652530892}
   - component: {fileID: 1652530891}
   - component: {fileID: 1652530890}
-  - component: {fileID: 1652530889}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (92)
   m_TagString: Environment
@@ -23894,20 +22268,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 61
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -180.00002}
---- !u!114 &1652530889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1652530887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1652530890
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23973,7 +22333,6 @@ GameObject:
   - component: {fileID: 1656724598}
   - component: {fileID: 1656724597}
   - component: {fileID: 1656724596}
-  - component: {fileID: 1656724595}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (87)
   m_TagString: Environment
@@ -23994,20 +22353,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 56
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -180.00002}
---- !u!114 &1656724595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1656724593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1656724596
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24073,7 +22418,6 @@ GameObject:
   - component: {fileID: 1658976522}
   - component: {fileID: 1658976521}
   - component: {fileID: 1658976520}
-  - component: {fileID: 1658976519}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (21)
   m_TagString: Environment
@@ -24094,20 +22438,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 178.88}
---- !u!114 &1658976519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1658976517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1658976520
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24249,7 +22579,6 @@ GameObject:
   - component: {fileID: 1668627934}
   - component: {fileID: 1668627933}
   - component: {fileID: 1668627932}
-  - component: {fileID: 1668627931}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (44)
   m_TagString: Environment
@@ -24270,20 +22599,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 43
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &1668627931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1668627929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1668627932
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24367,7 +22682,6 @@ GameObject:
   - component: {fileID: 1671130679}
   - component: {fileID: 1671130678}
   - component: {fileID: 1671130677}
-  - component: {fileID: 1671130676}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (16)
   m_TagString: Environment
@@ -24388,20 +22702,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1671130676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1671130674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1671130677
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24592,7 +22892,6 @@ GameObject:
   - component: {fileID: 1674370855}
   - component: {fileID: 1674370854}
   - component: {fileID: 1674370853}
-  - component: {fileID: 1674370852}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (26)
   m_TagString: Environment
@@ -24613,20 +22912,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1674370852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1674370850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1674370853
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24692,7 +22977,6 @@ GameObject:
   - component: {fileID: 1677522968}
   - component: {fileID: 1677522967}
   - component: {fileID: 1677522966}
-  - component: {fileID: 1677522965}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (9)
   m_TagString: Environment
@@ -24713,20 +22997,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1677522965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1677522963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1677522966
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24856,7 +23126,6 @@ GameObject:
   - component: {fileID: 1684049856}
   - component: {fileID: 1684049855}
   - component: {fileID: 1684049854}
-  - component: {fileID: 1684049853}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (10)
   m_TagString: Environment
@@ -24877,20 +23146,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &1684049853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1684049851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1684049854
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25093,7 +23348,6 @@ GameObject:
   - component: {fileID: 1709940756}
   - component: {fileID: 1709940755}
   - component: {fileID: 1709940754}
-  - component: {fileID: 1709940753}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (77)
   m_TagString: Environment
@@ -25114,20 +23368,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 46
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -26.672}
---- !u!114 &1709940753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1709940751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1709940754
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25262,47 +23502,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1710971268}
   m_Mesh: {fileID: 4300002, guid: 66a13889798137c498eae4b3acdafe19, type: 3}
---- !u!1 &1721860769
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1721860770}
-  - component: {fileID: 1721860771}
-  m_Layer: 0
-  m_Name: Particles
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1721860770
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1721860769}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 404125312}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1721860771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1721860769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1364368062, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Section: 6
 --- !u!1001 &1738106482
 Prefab:
   m_ObjectHideFlags: 0
@@ -25376,7 +23575,6 @@ GameObject:
   - component: {fileID: 1749662224}
   - component: {fileID: 1749662223}
   - component: {fileID: 1749662222}
-  - component: {fileID: 1749662221}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (18)
   m_TagString: Environment
@@ -25397,20 +23595,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1749662221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1749662219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1749662222
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25601,7 +23785,6 @@ GameObject:
   - component: {fileID: 1754136407}
   - component: {fileID: 1754136406}
   - component: {fileID: 1754136405}
-  - component: {fileID: 1754136404}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (88)
   m_TagString: Environment
@@ -25622,20 +23805,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 57
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -180.00002}
---- !u!114 &1754136404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1754136402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1754136405
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25816,7 +23985,6 @@ GameObject:
   - component: {fileID: 1758862827}
   - component: {fileID: 1758862826}
   - component: {fileID: 1758862825}
-  - component: {fileID: 1758862824}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (50)
   m_TagString: Environment
@@ -25837,20 +24005,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 49
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &1758862824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1758862822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1758862825
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25967,7 +24121,6 @@ GameObject:
   - component: {fileID: 1770627016}
   - component: {fileID: 1770627015}
   - component: {fileID: 1770627014}
-  - component: {fileID: 1770627013}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (46)
   m_TagString: Environment
@@ -25988,20 +24141,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 360}
---- !u!114 &1770627013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1770627011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1770627014
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26129,7 +24268,6 @@ GameObject:
   - component: {fileID: 1799037743}
   - component: {fileID: 1799037742}
   - component: {fileID: 1799037741}
-  - component: {fileID: 1799037740}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (16)
   m_TagString: Environment
@@ -26150,20 +24288,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 88.880005}
---- !u!114 &1799037740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1799037738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1799037741
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26333,7 +24457,6 @@ GameObject:
   - component: {fileID: 1826837314}
   - component: {fileID: 1826837313}
   - component: {fileID: 1826837312}
-  - component: {fileID: 1826837311}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (15)
   m_TagString: Environment
@@ -26354,20 +24477,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1826837311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1826837309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1826837312
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26437,7 +24546,6 @@ GameObject:
   - component: {fileID: 1832352864}
   - component: {fileID: 1832352863}
   - component: {fileID: 1832352862}
-  - component: {fileID: 1832352861}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (78)
   m_TagString: Environment
@@ -26458,20 +24566,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 47
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -26.672}
---- !u!114 &1832352861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1832352859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1832352862
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26537,7 +24631,6 @@ GameObject:
   - component: {fileID: 1833387689}
   - component: {fileID: 1833387688}
   - component: {fileID: 1833387687}
-  - component: {fileID: 1833387686}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (2)
   m_TagString: Environment
@@ -26558,20 +24651,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1833387686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1833387684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1833387687
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26637,7 +24716,6 @@ GameObject:
   - component: {fileID: 1834371593}
   - component: {fileID: 1834371592}
   - component: {fileID: 1834371591}
-  - component: {fileID: 1834371590}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar)
   m_TagString: Environment
@@ -26658,20 +24736,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.1190001}
---- !u!114 &1834371590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1834371588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1834371591
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26737,7 +24801,6 @@ GameObject:
   - component: {fileID: 1839960461}
   - component: {fileID: 1839960460}
   - component: {fileID: 1839960459}
-  - component: {fileID: 1839960458}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (11)
   m_TagString: Environment
@@ -26758,20 +24821,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 90.00001}
---- !u!114 &1839960458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1839960456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1839960459
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26830,6 +24879,64 @@ MeshFilter:
 Transform:
   m_PrefabParentObject: {fileID: 405988, guid: 527fa9e5a993752478e3f10c46b015ff, type: 2}
   m_PrefabInternal: {fileID: 1185758256}
+--- !u!1001 &1850866685
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4466753665643056, guid: 1ea71f643417d124d91e53eae7c666a6, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 13.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466753665643056, guid: 1ea71f643417d124d91e53eae7c666a6, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 15.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466753665643056, guid: 1ea71f643417d124d91e53eae7c666a6, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -169.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466753665643056, guid: 1ea71f643417d124d91e53eae7c666a6, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466753665643056, guid: 1ea71f643417d124d91e53eae7c666a6, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466753665643056, guid: 1ea71f643417d124d91e53eae7c666a6, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466753665643056, guid: 1ea71f643417d124d91e53eae7c666a6, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466753665643056, guid: 1ea71f643417d124d91e53eae7c666a6, type: 2}
+      propertyPath: m_RootOrder
+      value: 139
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466753665643056, guid: 1ea71f643417d124d91e53eae7c666a6, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.8165206
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466753665643056, guid: 1ea71f643417d124d91e53eae7c666a6, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.8165206
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466753665643056, guid: 1ea71f643417d124d91e53eae7c666a6, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1.8165206
+      objectReference: {fileID: 0}
+    - target: {fileID: 1130392368877672, guid: 1ea71f643417d124d91e53eae7c666a6, type: 2}
+      propertyPath: m_Name
+      value: SM_Tree_Birch_01 (13)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 1ea71f643417d124d91e53eae7c666a6, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1851597255
 GameObject:
   m_ObjectHideFlags: 0
@@ -26841,7 +24948,6 @@ GameObject:
   - component: {fileID: 1851597260}
   - component: {fileID: 1851597259}
   - component: {fileID: 1851597258}
-  - component: {fileID: 1851597257}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (20)
   m_TagString: Environment
@@ -26862,20 +24968,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &1851597257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1851597255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1851597258
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27004,7 +25096,6 @@ GameObject:
   - component: {fileID: 1854643124}
   - component: {fileID: 1854643123}
   - component: {fileID: 1854643122}
-  - component: {fileID: 1854643121}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (29)
   m_TagString: Environment
@@ -27025,20 +25116,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.6470001}
---- !u!114 &1854643121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1854643119}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1854643122
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27104,7 +25181,6 @@ GameObject:
   - component: {fileID: 1876808940}
   - component: {fileID: 1876808939}
   - component: {fileID: 1876808938}
-  - component: {fileID: 1876808937}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (91)
   m_TagString: Environment
@@ -27125,20 +25201,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 60
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &1876808937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1876808935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1876808938
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27204,7 +25266,6 @@ GameObject:
   - component: {fileID: 1899724611}
   - component: {fileID: 1899724610}
   - component: {fileID: 1899724609}
-  - component: {fileID: 1899724608}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (42)
   m_TagString: Environment
@@ -27225,20 +25286,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 29.988}
---- !u!114 &1899724608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1899724606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1899724609
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27438,7 +25485,6 @@ GameObject:
   - component: {fileID: 1917202514}
   - component: {fileID: 1917202513}
   - component: {fileID: 1917202512}
-  - component: {fileID: 1917202511}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (48)
   m_TagString: Environment
@@ -27459,20 +25505,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 47
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &1917202511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1917202509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1917202512
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27597,7 +25629,6 @@ GameObject:
   - component: {fileID: 1939485249}
   - component: {fileID: 1939485248}
   - component: {fileID: 1939485247}
-  - component: {fileID: 1939485246}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (68)
   m_TagString: Environment
@@ -27618,20 +25649,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &1939485246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1939485244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1939485247
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27697,7 +25714,6 @@ GameObject:
   - component: {fileID: 1942993083}
   - component: {fileID: 1942993082}
   - component: {fileID: 1942993081}
-  - component: {fileID: 1942993080}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (8)
   m_TagString: Environment
@@ -27718,20 +25734,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1942993080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1942993078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1942993081
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27969,7 +25971,6 @@ GameObject:
   - component: {fileID: 1956806428}
   - component: {fileID: 1956806427}
   - component: {fileID: 1956806426}
-  - component: {fileID: 1956806425}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (11)
   m_TagString: Environment
@@ -27990,20 +25991,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.1190001}
---- !u!114 &1956806425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1956806423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1956806426
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28240,7 +26227,6 @@ GameObject:
   - component: {fileID: 1978582801}
   - component: {fileID: 1978582800}
   - component: {fileID: 1978582799}
-  - component: {fileID: 1978582798}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (18)
   m_TagString: Environment
@@ -28261,20 +26247,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -91.119}
---- !u!114 &1978582798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1978582796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1978582799
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28552,7 +26524,6 @@ GameObject:
   - component: {fileID: 1984038196}
   - component: {fileID: 1984038195}
   - component: {fileID: 1984038194}
-  - component: {fileID: 1984038193}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (81)
   m_TagString: Environment
@@ -28573,20 +26544,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 50
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -180.00002}
---- !u!114 &1984038193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1984038191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1984038194
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29000,7 +26957,6 @@ GameObject:
   - component: {fileID: 1995285334}
   - component: {fileID: 1995285333}
   - component: {fileID: 1995285332}
-  - component: {fileID: 1995285331}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (4)
   m_TagString: Environment
@@ -29021,20 +26977,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -91.119}
---- !u!114 &1995285331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1995285329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1995285332
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29100,7 +27042,6 @@ GameObject:
   - component: {fileID: 1998166100}
   - component: {fileID: 1998166099}
   - component: {fileID: 1998166098}
-  - component: {fileID: 1998166097}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (17)
   m_TagString: Environment
@@ -29121,20 +27062,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 38
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1998166097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1998166095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &1998166098
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29348,47 +27275,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: be29c05fe22794a498aaaca44bd506d6, type: 3}
---- !u!1 &2034805931
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2034805932}
-  - component: {fileID: 2034805933}
-  m_Layer: 0
-  m_Name: Cameras
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2034805932
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2034805931}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 404125312}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2034805933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2034805931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1364368062, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Section: 8
 --- !u!1 &2042237372
 GameObject:
   m_ObjectHideFlags: 0
@@ -29400,7 +27286,6 @@ GameObject:
   - component: {fileID: 2042237377}
   - component: {fileID: 2042237376}
   - component: {fileID: 2042237375}
-  - component: {fileID: 2042237374}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (75)
   m_TagString: Environment
@@ -29421,20 +27306,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 44
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -26.672}
---- !u!114 &2042237374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2042237372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &2042237375
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29642,7 +27513,6 @@ GameObject:
   - component: {fileID: 2055461452}
   - component: {fileID: 2055461451}
   - component: {fileID: 2055461450}
-  - component: {fileID: 2055461449}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (76)
   m_TagString: Environment
@@ -29663,20 +27533,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 45
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 15.392001}
---- !u!114 &2055461449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2055461447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &2055461450
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29991,7 +27847,6 @@ GameObject:
   - component: {fileID: 2064595579}
   - component: {fileID: 2064595578}
   - component: {fileID: 2064595577}
-  - component: {fileID: 2064595576}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (28)
   m_TagString: Environment
@@ -30012,20 +27867,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 64
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2064595576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2064595574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &2064595577
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30202,7 +28043,6 @@ GameObject:
   - component: {fileID: 2077921552}
   - component: {fileID: 2077921551}
   - component: {fileID: 2077921550}
-  - component: {fileID: 2077921549}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (1)
   m_TagString: Environment
@@ -30223,20 +28063,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -1.1190001}
---- !u!114 &2077921549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2077921547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &2077921550
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30302,7 +28128,6 @@ GameObject:
   - component: {fileID: 2078884184}
   - component: {fileID: 2078884183}
   - component: {fileID: 2078884182}
-  - component: {fileID: 2078884181}
   m_Layer: 0
   m_Name: Tri_Wall (Tri-Planar) (25)
   m_TagString: Environment
@@ -30323,20 +28148,6 @@ Transform:
   m_Father: {fileID: 1706740683}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -46.119003}
---- !u!114 &2078884181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2078884179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 2
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &2078884182
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30402,7 +28213,6 @@ GameObject:
   - component: {fileID: 2080827324}
   - component: {fileID: 2080827323}
   - component: {fileID: 2080827322}
-  - component: {fileID: 2080827321}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (42)
   m_TagString: Environment
@@ -30423,20 +28233,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 41
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &2080827321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2080827319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &2080827322
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30569,7 +28365,6 @@ GameObject:
   - component: {fileID: 2091046200}
   - component: {fileID: 2091046199}
   - component: {fileID: 2091046198}
-  - component: {fileID: 2091046197}
   m_Layer: 0
   m_Name: Tri_Floor (Tri-Planar) (51)
   m_TagString: Environment
@@ -30590,20 +28385,6 @@ Transform:
   m_Father: {fileID: 1471423742}
   m_RootOrder: 50
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -90.00001}
---- !u!114 &2091046197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2091046195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 1
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &2091046198
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30669,7 +28450,6 @@ GameObject:
   - component: {fileID: 2099512788}
   - component: {fileID: 2099512787}
   - component: {fileID: 2099512786}
-  - component: {fileID: 2099512785}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (45)
   m_TagString: Environment
@@ -30690,20 +28470,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 360}
---- !u!114 &2099512785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2099512783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &2099512786
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31153,7 +28919,6 @@ GameObject:
   - component: {fileID: 2129847636}
   - component: {fileID: 2129847635}
   - component: {fileID: 2129847634}
-  - component: {fileID: 2129847633}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (59)
   m_TagString: Environment
@@ -31174,20 +28939,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 15.000001}
---- !u!114 &2129847633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2129847631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &2129847634
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31329,7 +29080,6 @@ GameObject:
   - component: {fileID: 2144344622}
   - component: {fileID: 2144344621}
   - component: {fileID: 2144344620}
-  - component: {fileID: 2144344619}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (89)
   m_TagString: Environment
@@ -31350,20 +29100,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 58
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -270}
---- !u!114 &2144344619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2144344617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &2144344620
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31429,7 +29165,6 @@ GameObject:
   - component: {fileID: 2146145252}
   - component: {fileID: 2146145251}
   - component: {fileID: 2146145250}
-  - component: {fileID: 2146145249}
   m_Layer: 0
   m_Name: Tri_Trim (Tri-Planar) (3)
   m_TagString: Environment
@@ -31450,20 +29185,6 @@ Transform:
   m_Father: {fileID: 1430902714}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2146145249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2146145247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 581817693, guid: e06a193c50359fd438d7742ef2819252, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialBlockoutSection: 3
-  ReapplyMaterialTheme: 1
-  IsTriAsset: 1
 --- !u!65 &2146145250
 BoxCollider:
   m_ObjectHideFlags: 0

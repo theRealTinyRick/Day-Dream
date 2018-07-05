@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/WorldOneLevelOne.unity
-    guid: f00ad80ac9bb67a4abd8c7920a2200f6
+    path: Assets/UnfinishedScenes/OpenMapOne.unity
+    guid: 5b831938a073ae34f861a876ac428a03
   m_configObjects: {}
