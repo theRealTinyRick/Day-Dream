@@ -33,7 +33,7 @@ MonoBehaviour:
     m_Settings:
       method: 0
       fxaaSettings:
-        preset: 2
+        preset: 4
       taaSettings:
         jitterSpread: 0.75
         sharpen: 0.3
@@ -42,13 +42,13 @@ MonoBehaviour:
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
-      intensity: 0.2
-      radius: 0.3
-      sampleCount: 3
+      intensity: 0.04
+      radius: 1.47
+      sampleCount: 16
       downsampling: 1
       forceForwardCompatibility: 0
       ambientOnly: 0
-      highPrecision: 0
+      highPrecision: 1
   screenSpaceReflection:
     m_Enabled: 0
     m_Settings:
@@ -71,9 +71,9 @@ MonoBehaviour:
   depthOfField:
     m_Enabled: 1
     m_Settings:
-      focusDistance: 3.46
-      aperture: 2
-      focalLength: 21
+      focusDistance: 4.17
+      aperture: 6.6
+      focalLength: 46
       useCameraFov: 0
       kernelSize: 1
   motionBlur:
@@ -100,11 +100,11 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 0.5
-        threshold: 1.1
+        intensity: 0.3
+        threshold: 1.97
         softKnee: 0.5
         radius: 4
-        antiFlicker: 0
+        antiFlicker: 1
       lensDirt:
         texture: {fileID: 0}
         intensity: 3
@@ -134,8 +134,8 @@ MonoBehaviour:
       colorWheels:
         mode: 1
         log:
-          slope: {r: 1, g: 0.77223814, b: 0.69273853, a: 0}
-          power: {r: 1, g: 1, b: 1, a: 0}
+          slope: {r: 1, g: 0.7403172, b: 0.8171172, a: 0.065395094}
+          power: {r: 1, g: 0.8931292, b: 0.57251704, a: 0}
           offset: {r: 1, g: 1, b: 1, a: 0}
         linear:
           lift: {r: 1, g: 1, b: 1, a: 0}
@@ -317,14 +317,14 @@ MonoBehaviour:
       size: 1
       luminanceContribution: 0.11
   vignette:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       mode: 0
       color: {r: 0, g: 0, b: 0, a: 1}
       center: {x: 0.5, y: 0.5}
       intensity: 0.45
       smoothness: 0.2
-      roundness: 1
+      roundness: 0.845
       mask: {fileID: 0}
       opacity: 1
       rounded: 0
