@@ -31,6 +31,7 @@ public class Level : MonoBehaviour {
 		//call this function from the load function
 		foreach(int index in indexs){
 			keys[index].SetActive(false);
+			foundKeys.Add(keys[index]);
 		}
 	}
 

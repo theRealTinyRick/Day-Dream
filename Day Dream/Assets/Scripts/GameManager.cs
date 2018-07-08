@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start () {
-		//remove the below line for testing menus
 		currentLevel = gameLevels[0];
 		savePath  = Application.persistentDataPath + "/playerData.dat";
 	}
@@ -82,13 +81,11 @@ public class GameManager : MonoBehaviour {
 
 			//load all game data from here
 			foreach(LevelData levelData in data.openLevels){
-				
 				for(int i = 0; i < gameLevels.Length; i ++){
 					if(gameLevels[i].LevelName == levelData.name){
 						if(!openLevels.Contains(gameLevels[i])){
 							openLevels.Add(gameLevels[i]);
 							gameLevels[i].LevelSetUp(levelData.indexOfFoundKeys);
-							Debug.Log("here");
 						}
 					}
 				}
