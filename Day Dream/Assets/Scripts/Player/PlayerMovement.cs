@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-    PlayerManager pManager;
-    PlayerController pController;
-    Rigidbody rb;
-    GameObject pCamera;
+    private PlayerManager pManager;
+    private PlayerController pController;
+    private Rigidbody rb;
+    private GameObject pCamera;
 
     private float fallMultiplyer = 10f;
     private float lowJumpMultiplyer = 3f;
 
+    //shimy pipe
+    private Vector3 mySide;
+    private Vector3 farSide;
+
+    private float timeOfLastClimb;
+
     [SerializeField] ParticleSystem warpFX;
     [SerializeField] ParticleSystem hitFX;
-
-    //shimy pipe
-    Vector3 mySide;
-    Vector3 farSide;
-
-    float timeOfLastClimb;
 
     private void Start(){
         pManager = PlayerManager.instance;
@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void FreeMovement(Vector3 movement, float speed){
-        if (PlayerManager.instance.currentState != PlayerManager.PlayerState.Attacking){
+        if (pManager.currentState != PlayerManager.PlayerState.Attacking){
             if(!pController.CheckGrounded()){
                 speed = speed / 1.5f;
             }else if(movement.x != 0 && movement.z != 0){
@@ -85,9 +85,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private IEnumerator Invulnerabe(){
-        PlayerManager.instance.isVulnerable = false;
+        pManager.isVulnerable = false;
         yield return new WaitForSeconds(.5f);
-        PlayerManager.instance.isVulnerable = true;
+        pManager.isVulnerable = true;
     }
 
     public void LookAtTarget(Transform target){
@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour {
         WarpPad pad = warpPad.GetComponent<WarpPad>();
         SkinnedMeshRenderer renderers = GetComponentInChildren<SkinnedMeshRenderer>();
 		MeshRenderer renderer = GetComponentInChildren<MeshRenderer>();
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
+        pManager.currentState = PlayerManager.PlayerState.Traversing;
         rb.isKinematic = true;
         transform.LookAt(pad.pointB.position);
         transform.position = warpPad.transform.position;
@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour {
 			transform.position = Vector3.Lerp(transform.position, pad.pointB.position, .05f);
 			yield return new WaitForEndOfFrame();
 		}
-		PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
+		pManager.currentState = PlayerManager.PlayerState.FreeMovement;
 		renderers.enabled = true;
 		renderer.enabled = true;
         rb.isKinematic = false;
@@ -136,13 +136,13 @@ public class PlayerMovement : MonoBehaviour {
         }
         pController.anim.SetBool("isClimbing", true);
         rb.isKinematic = true;
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.CanNotMove;
+        pManager.currentState = PlayerManager.PlayerState.CanNotMove;
         while(Vector3.Distance(transform.position, startSide)>.1f){
             transform.position = Vector3.Lerp(transform.position, startSide, .1f);
             transform.rotation = Quaternion.Lerp(transform.rotation, ladderInfo.topPos.rotation, .5f);
             yield return new WaitForEndOfFrame();
         }
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
+        pManager.currentState = PlayerManager.PlayerState.Traversing;
         yield return null;
     }
 
@@ -174,7 +174,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public void LadderEnd(){
         rb.isKinematic = false;
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
+        pManager.currentState = PlayerManager.PlayerState.FreeMovement;
         pController.anim.Play("Idle");
         pController.anim.SetBool("isClimbing", false);
         pController.anim.SetBool("isClimbingUp", false);
@@ -200,7 +200,7 @@ public class PlayerMovement : MonoBehaviour {
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, .5f);
             yield return new WaitForEndOfFrame();
         }
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
+        pManager.currentState = PlayerManager.PlayerState.Traversing;
         yield return null;
     }
 
@@ -222,7 +222,7 @@ public class PlayerMovement : MonoBehaviour {
             RaycastHit hit;
             Vector3 origin = transform.position;
             if(Physics.Raycast(origin, transform.forward, out hit, .75F)){
-                PlayerManager.instance.currentState = PlayerManager.PlayerState.Traversing;
+                pManager.currentState = PlayerManager.PlayerState.Traversing;
                 rb.isKinematic = true;
                 Vector3 tp = (Vector3.Distance(transform.position, hit.point) - 0.5f ) * Vector3.Normalize(hit.point - transform.position) + transform.position;
                 tp.y = ledge.transform.position.y - 1.5f;
@@ -279,7 +279,7 @@ public class PlayerMovement : MonoBehaviour {
     public void Drop(){
         //stop climbing
         rb.isKinematic = false;
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
+        pManager.currentState = PlayerManager.PlayerState.FreeMovement;
         pController.ledge = null;
     }
 

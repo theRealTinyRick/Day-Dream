@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour {
 
 	//JUMP VARS
 	private float jumpHieght = 30;
-	private bool hasUsedDoubleJump = false;
     private float timeSinceGrounded;
 
 	//PLATFORMS

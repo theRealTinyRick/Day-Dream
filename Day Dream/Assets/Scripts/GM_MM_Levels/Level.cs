@@ -19,6 +19,7 @@ public class Level : MonoBehaviour {
 
 	public GameObject[] keys;
 
+	[SerializeField]
 	private List <GameObject> foundKeys = new List<GameObject>();
 	public List <GameObject> FoundKeys{	
 		get{return foundKeys;}
@@ -28,6 +29,7 @@ public class Level : MonoBehaviour {
 
 	public void LevelSetUp(int[] indexs){
 		//deactivate the keys that have already been found
+		//add them back to the found keys list
 		//call this function from the load function
 		foreach(int index in indexs){
 			keys[index].SetActive(false);

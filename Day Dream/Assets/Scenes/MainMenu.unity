@@ -139,15 +139,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4247465276970002, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -87.88
+      value: -44.44
       objectReference: {fileID: 0}
     - target: {fileID: 4247465276970002, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 44.13
+      value: 34.06
       objectReference: {fileID: 0}
     - target: {fileID: 4247465276970002, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 21.47
+      value: -101.12
       objectReference: {fileID: 0}
     - target: {fileID: 4247465276970002, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -171,7 +171,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1137194109481624, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_Name
-      value: Dungeon Key (3)
+      value: Dungeon Key
       objectReference: {fileID: 0}
     - target: {fileID: 4247465276970002, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_LocalScale.x
@@ -284,15 +284,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4247465276970002, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -84.46
+      value: 8.39
       objectReference: {fileID: 0}
     - target: {fileID: 4247465276970002, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 44.13
+      value: 18.29
       objectReference: {fileID: 0}
     - target: {fileID: 4247465276970002, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 25.12
+      value: -175.89
       objectReference: {fileID: 0}
     - target: {fileID: 4247465276970002, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -316,7 +316,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1137194109481624, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_Name
-      value: Dungeon Key (2)
+      value: Dungeon Key
       objectReference: {fileID: 0}
     - target: {fileID: 4247465276970002, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_LocalScale.x
@@ -352,15 +352,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4247465276970002, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -103
+      value: 61.21
       objectReference: {fileID: 0}
     - target: {fileID: 4247465276970002, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 48.91
+      value: 18.57
       objectReference: {fileID: 0}
     - target: {fileID: 4247465276970002, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 23.75
+      value: -66.59
       objectReference: {fileID: 0}
     - target: {fileID: 4247465276970002, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -384,7 +384,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1137194109481624, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_Name
-      value: Dungeon Key (1)
+      value: Dungeon Key
       objectReference: {fileID: 0}
     - target: {fileID: 4247465276970002, guid: baf30cc52c0722e4e953abd244f36f2b, type: 2}
       propertyPath: m_LocalScale.x

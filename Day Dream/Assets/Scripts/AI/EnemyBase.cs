@@ -6,8 +6,8 @@ using UnityEngine.AI;
 
 public class EnemyBase : MonoBehaviour {
 
-	private enum EnemyType { GeneralMelee, ZombieMelee, GeneralRanged, Boss};
-    [SerializeField] private EnemyType thisType = EnemyType.GeneralMelee;
+	// private enum EnemyType { GeneralMelee, ZombieMelee, GeneralRanged, Boss};
+    // [SerializeField] private EnemyType thisType = EnemyType.GeneralMelee;
     
     [HideInInspector] public enum State { Walking, Stunned, Attacking, Dead};
     public State currentState = State.Walking;
