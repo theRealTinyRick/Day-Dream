@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -214,7 +215,6 @@ public class PlayerController : MonoBehaviour {
     private void WallJump(){
         RaycastHit hit;
         if(Physics.Raycast(transform.position, transform.forward, out hit, .75f)){
-            Debug.Log(hit.transform.name);
             if(hit.normal.y < 0.1f && hit.transform.tag != "Player" && !CheckGrounded()){
                 pMove.WallJump(transform.position - hit.point, jumpHieght);
             }
@@ -256,7 +256,11 @@ public class PlayerController : MonoBehaviour {
             shadow.SetActive(false);
         }
     }
-	
+
+    private void PickUpKey(GameObject key){
+        GameManager.instance.gameLevels[Array.IndexOf(GameManager.instance.gameLevels, GameManager.instance.CurrentLevel)].PickUpKey(key);
+    }
+    
 	private void OnTriggerEnter(Collider other){
         if(other.tag == "PickUp"){
             pickUpObject = other.gameObject;
@@ -270,6 +274,8 @@ public class PlayerController : MonoBehaviour {
 			ladder = other.gameObject;
 		}else if(other.tag == "ShimyPipe"){
             shimyPipe = other.gameObject;
+        }else if(other.tag == "DungeonKey"){
+            PickUpKey(other.gameObject);
         }
     }
 

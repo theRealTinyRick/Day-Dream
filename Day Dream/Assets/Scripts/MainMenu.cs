@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void OpenLevelSelect(){
+		GameManager.instance.LoadGame();
 		levelSelectScreen.SetActive(true);
 		levelSelectScreen.GetComponent<LevelSelect>().LoadLevelSelect(GameManager.instance.openLevels);
 	}	

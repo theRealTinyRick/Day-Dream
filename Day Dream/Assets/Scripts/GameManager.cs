@@ -27,25 +27,25 @@ public class GameManager : MonoBehaviour {
 		}else{
 			Destroy(gameObject);
 		}
-
 		DontDestroyOnLoad(gameObject);
 	}
 
 	void Start () {
-		savePath  = Application.persistentDataPath + "playerData.dat";
-		openLevels.Add(gameLevels[0]);
-		Debug.Log(savePath);
+		//remove the below line for testing menus
+		currentLevel = gameLevels[0];
+		savePath  = Application.persistentDataPath + "/playerData.dat";
 	}
 
 	void Update(){
-		// if(Input.GetKeyDown(KeyCode.Space)){
-		// 	SaveGame();
-		// }
+		if(Input.GetKeyDown(KeyCode.Space)){
+			SaveGame();
+		}
 	}
 
 	public void CreateNewGame(){
 		currentLevel = gameLevels[0];
 		UnityEngine.SceneManagement.SceneManager.LoadScene(currentLevel.LevelName);
+		openLevels.Add(currentLevel);
 		SaveGame();
 	}
 
@@ -58,14 +58,18 @@ public class GameManager : MonoBehaviour {
 		BinaryFormatter bf = new BinaryFormatter();
 		FileStream file = File.Create(savePath);
 
-		LevelData[] levelData = new LevelData[openLevels
-		.Count];
+		LevelData[] levelData = new LevelData[openLevels.Count];
 		for(int i = 0; i < openLevels.Count; i++){
-			levelData[i].name = openLevels
-			[i].LevelName;
+			//get and array of indexs off of the level for each found key. 
+			int [] keyIndexs = new int[openLevels[i].FoundKeys.Count];
+			for(int j = 0; j < keyIndexs.Length; j++){
+				keyIndexs[j] = Array.IndexOf(openLevels[i].keys, openLevels[i].FoundKeys[j]); 
+			}
+			levelData[i] = new LevelData(openLevels[i].LevelName, openLevels[i].DungeonOpen, keyIndexs);
 		}
 
 		PlayerData data = new PlayerData(levelData);
+		Debug.Log(data.openLevels[0].name);
 		bf.Serialize(file,data);
 		file.Close();
 	}
@@ -78,12 +82,13 @@ public class GameManager : MonoBehaviour {
 
 			//load all game data from here
 			foreach(LevelData levelData in data.openLevels){
+				
 				for(int i = 0; i < gameLevels.Length; i ++){
-					if(gameLevels[i].name == levelData.name){
-						if(!openLevels
-						.Contains(gameLevels[i])){
-							openLevels
-							.Add(gameLevels[i]);
+					if(gameLevels[i].LevelName == levelData.name){
+						if(!openLevels.Contains(gameLevels[i])){
+							openLevels.Add(gameLevels[i]);
+							gameLevels[i].LevelSetUp(levelData.indexOfFoundKeys);
+							Debug.Log("here");
 						}
 					}
 				}

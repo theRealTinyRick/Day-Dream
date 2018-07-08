@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,15 +12,45 @@ public class Level : MonoBehaviour {
 		get{return levelName;}
 	}
 
-	[SerializeField]
-	GameObject dungeonKeys;
+	private bool dungeonOpen = false;
+	public bool DungeonOpen{
+		get{return dungeonOpen;}
+	}
+
+	public GameObject[] keys;
 
 	private List <GameObject> foundKeys = new List<GameObject>();
-	public int FoundKeys{	
-		get{return foundKeys.Count;}
+	public List <GameObject> FoundKeys{	
+		get{return foundKeys;}
+	}
+
+	private int NumberOfKeysNeeded = 0;
+
+	public void LevelSetUp(int[] indexs){
+		//deactivate the keys that have already been found
+		//call this function from the load function
+		foreach(int index in indexs){
+			keys[index].SetActive(false);
+		}
+	}
+
+	public void CheckDungeonKeys(){
+		if(FoundKeys.Count >= NumberOfKeysNeeded){
+			dungeonOpen = true;
+		}
+	}
+
+	public void PickUpKey(GameObject key){
+		foundKeys.Add(key);
+		key.GetComponent<SphereCollider>().enabled = false;
+		key.GetComponent<MeshRenderer>().enabled = false;
+		key.GetComponentInChildren<ParticleSystem>().Stop();	
+
+		CheckDungeonKeys();	
 	}
 }
 
+[Serializable]
 public class LevelData{
 	public string name = "";
 	public bool complete = false;

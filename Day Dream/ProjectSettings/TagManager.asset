@@ -17,6 +17,7 @@ TagManager:
   - WarpPad
   - Ledge
   - Water
+  - DungeonKey
   layers:
   - Default
   - TransparentFX
