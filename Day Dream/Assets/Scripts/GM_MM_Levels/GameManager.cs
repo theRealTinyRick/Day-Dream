@@ -68,7 +68,6 @@ public class GameManager : MonoBehaviour {
 		}
 
 		PlayerData data = new PlayerData(levelData);
-		Debug.Log(data.openLevels[0].name);
 		bf.Serialize(file,data);
 		file.Close();
 	}
@@ -79,14 +78,13 @@ public class GameManager : MonoBehaviour {
 			FileStream file = File.Open(savePath, FileMode.Open);
 			PlayerData data = (PlayerData)bf.Deserialize(file);
 
-			//load all game data from here
 			foreach(LevelData levelData in data.openLevels){
 				for(int i = 0; i < gameLevels.Length; i ++){
 					if(gameLevels[i].LevelName == levelData.name){
 						if(!openLevels.Contains(gameLevels[i])){
 							openLevels.Add(gameLevels[i]);
-							gameLevels[i].LevelSetUp(levelData.indexOfFoundKeys);
 						}
+						gameLevels[i].LevelSetUp(levelData.indexOfFoundKeys);
 					}
 				}
 			}
