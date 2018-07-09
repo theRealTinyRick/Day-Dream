@@ -7,7 +7,7 @@ public class PlayerAttack : MonoBehaviour {
     private enum AttackState { NotAttacking, Swing1, Swing2};
     [SerializeField] private AttackState currentAtkState = AttackState.NotAttacking;
 
-    private float timeToAtk = 0.5f;//the amount of time between clicks the player will stop attacking
+    private float timeToAtk = 0.75f;//the amount of time between clicks the player will stop attacking
     private float _time;
 
     private PlayerController pController;

@@ -66,10 +66,6 @@ public class PlayerController : MonoBehaviour {
 		LockOnInput();
 		InteractInput();
         SetGroundShadow();
-
-        if(Input.GetButtonDown("RightJoyStick")){
-            Debug.Log("lkjhfglkajsdhfkljasdhfkjl");
-        }
 	}
 
     private void LateUpdate(){
@@ -97,7 +93,7 @@ public class PlayerController : MonoBehaviour {
             anim.SetFloat("velocityY", Mathf.Max(Mathf.Abs(h), Mathf.Abs(v)));
         }else if(moveDir == Vector3.zero && CheckGrounded()){
             anim.SetFloat("velocityY", Mathf.Lerp(anim.GetFloat("velocityY"), 0, .2f));
-            if(pManager.isVulnerable)
+            if(pManager.isVulnerable && pManager.currentState != PlayerManager.PlayerState.Attacking)
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
 	}
@@ -130,7 +126,7 @@ public class PlayerController : MonoBehaviour {
                     WallJump();
                 }
             }
-        }else if(Input.GetButtonDown("Fire2") && CheckGrounded()){
+        }else if(Input.GetButtonDown("BButton") && CheckGrounded()){
             pMove.Evade();
         }
 	}
