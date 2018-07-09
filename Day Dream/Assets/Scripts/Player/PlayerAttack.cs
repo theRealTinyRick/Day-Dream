@@ -11,11 +11,12 @@ public class PlayerAttack : MonoBehaviour {
     private float _time;
 
     private PlayerController pController;
-
+    private Animator anim;
     private TrailRenderer trail;
 
     private void Start(){
         pController = GetComponent<PlayerController>();
+        anim = GetComponent<Animator>();
         trail = GetComponentInChildren<TrailRenderer>();
     }
 
@@ -24,6 +25,8 @@ public class PlayerAttack : MonoBehaviour {
             currentAtkState = AttackState.NotAttacking;
             PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
             trail.enabled = false;
+        }else{
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
     }
 
@@ -41,9 +44,9 @@ public class PlayerAttack : MonoBehaviour {
 
     private void Swing1(){
         _time = Time.time;
-        pController.anim.SetBool("Swing2", false);
+        anim.SetBool("Swing2", false);
         currentAtkState = AttackState.Swing1;
-        pController.anim.Play("Swing1");
+        anim.Play("Swing1");
         PlayerManager.instance.currentState = PlayerManager.PlayerState.Attacking;
         trail.enabled = true;
     }
@@ -51,7 +54,7 @@ public class PlayerAttack : MonoBehaviour {
     private void Swing2(){
         _time = Time.time;
         currentAtkState = AttackState.Swing2;
-        pController.anim.SetBool("Swing2",true);
+        anim.SetBool("Swing2",true);
         PlayerManager.instance.currentState = PlayerManager.PlayerState.Attacking;
         trail.enabled = true;
     }

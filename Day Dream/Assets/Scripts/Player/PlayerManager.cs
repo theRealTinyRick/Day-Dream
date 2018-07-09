@@ -4,6 +4,10 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerAttack))]
 [RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerController))]
+[RequireComponent(typeof(PlayerInventory))]
+[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerManager : MonoBehaviour {
 
     public static PlayerManager instance;
@@ -17,12 +21,10 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private Transform startPosition;
 
     private void Awake(){
-        #region Singleton
         if (instance == null)
             instance = this;
         else if (instance != null)
             Destroy(gameObject);
-        #endregion
 
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -31,6 +33,12 @@ public class PlayerManager : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.F1)){
             transform.position = startPosition.position;
         }
+    }
+    
+    public IEnumerator Invulnerabe(){
+        isVulnerable = false;
+        yield return new WaitForSeconds(.5f);
+        isVulnerable = true;
     }
 
     private void OnTriggerEnter(Collider other){

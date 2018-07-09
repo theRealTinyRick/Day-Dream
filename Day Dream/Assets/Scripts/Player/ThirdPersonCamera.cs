@@ -50,7 +50,7 @@ public class ThirdPersonCamera : MonoBehaviour {
         Quaternion rotation = Quaternion.Euler(-currentY, currentX, 0);
 
         Vector3 pos = camLookAt.position + rotation * dis; //apply rotation and offset to the position of the camera
-        transform.position = Vector3.Lerp(transform.position, pos, .7f);
+        transform.position = Vector3.Lerp(transform.position, pos, .5f);
         //transform.position = pos;
         // Quaternion rot = Quaternion.LookRotation(camLookAt.position - transform.position);
         // transform.rotation = Quaternion.Lerp(transform.rotation, rot, .5f);

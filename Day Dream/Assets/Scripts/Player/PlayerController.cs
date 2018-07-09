@@ -6,16 +6,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	//this class will handel all player actions
-	private PlayerManager pManager{get; set;}
-	private PlayerMovement pMove{get; set;}
-	private PlayerAttack pAttack{get; set;}
-	private PlayerInventory pInv{get; set;}
+	private PlayerManager pManager;
+	private PlayerMovement pMove;
+    private PlayerTraversal pTraverse;
+	private PlayerAttack pAttack;
+	private PlayerInventory pInv;
+	private ThirdPersonCamera pCamera;
+    private Rigidbody rb;
+	private Animator anim{get; set;}
 	[SerializeField] private PlayerTargeting pTargeting;
-	private ThirdPersonCamera pCamera{get; set;}
-	public Animator anim{get; set;}
-    private Rigidbody rb{get; set;}
 
-	private float speed = 8;
+	private float speed = 6.5f;
 
 	//JUMP VARS
 	private float jumpHieght = 30;
@@ -49,10 +50,11 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		pManager = PlayerManager.instance;
 		pMove = GetComponent<PlayerMovement>();
+        pTraverse = GetComponent<PlayerTraversal>();
 		pAttack = GetComponent<PlayerAttack>();
 		pInv = GetComponent<PlayerInventory>();
 		pCamera = Camera.main.GetComponent<ThirdPersonCamera>();
-		anim = GetComponentInChildren<Animator>();
+		anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
 
         timeSinceGrounded = Time.time;
@@ -64,6 +66,10 @@ public class PlayerController : MonoBehaviour {
 		LockOnInput();
 		InteractInput();
         SetGroundShadow();
+
+        if(Input.GetButtonDown("RightJoyStick")){
+            Debug.Log("lkjhfglkajsdhfkljasdhfkjl");
+        }
 	}
 
     private void LateUpdate(){
@@ -81,28 +87,29 @@ public class PlayerController : MonoBehaviour {
         Vector3 moveDir = new Vector3(h,0,v);
 
 		if(pManager.currentState == PlayerManager.PlayerState.Traversing && shimyPipe){
-            pMove.ShimyPipe(moveDir, shimyPipe.GetComponent<ShimyPipe>());
+            pTraverse.ShimyPipe(moveDir, shimyPipe.GetComponent<ShimyPipe>());
         }else if(ladder && pManager.currentState == PlayerManager.PlayerState.Traversing){
-            pMove.ClimbLadder(moveDir, ladder);
+            pTraverse.ClimbLadder(moveDir, ladder);
         }else if(pManager.currentState == PlayerManager.PlayerState.Traversing && ledge){
-            pMove.ShimyLedge(moveDir, ledge.transform);
-        }else if(pManager.currentState == PlayerManager.PlayerState.FreeMovement && moveDir != Vector3.zero){
+            pTraverse.ShimyLedge(moveDir, ledge.transform);
+        }else if(pManager.currentState == PlayerManager.PlayerState.FreeMovement && moveDir != Vector3.zero && pManager.isVulnerable){
             pMove.FreeMovement(moveDir, speed);
+            anim.SetFloat("velocityY", Mathf.Max(Mathf.Abs(h), Mathf.Abs(v)));
         }else if(moveDir == Vector3.zero && CheckGrounded()){
-            anim.SetBool("isMoving", false);
-            rb.velocity = new Vector3(0, rb.velocity.y, 0); //stop the player from sliding on platforms
+            anim.SetFloat("velocityY", Mathf.Lerp(anim.GetFloat("velocityY"), 0, .2f));
+            if(pManager.isVulnerable)
+                rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
 	}
 
 	private void PlatFormingInput(){
 		if (Input.GetButtonDown("Jump")){
-            if(pManager.currentState != PlayerManager.PlayerState.Traversing){
+            if(pManager.currentState != PlayerManager.PlayerState.Traversing &&
+                pManager.currentState != PlayerManager.PlayerState.Attacking){
                 if (ladder && CheckGrounded()){
-                    pMove.StartCoroutine(pMove.LadderStart(ladder));
+                    pMove.StartCoroutine(pTraverse.LadderStart(ladder));
                 }else if(shimyPipe && CheckGrounded()){
-                    pMove.StartCoroutine(pMove.ShimyPipeStart(shimyPipe));
-                }else if(CheckGrounded() && pManager.isLockedOn){
-                    pMove.Evade(jumpHieght);
+                    pMove.StartCoroutine(pTraverse.ShimyPipeStart(shimyPipe));
                 }else if(CheckGrounded() || Time.time - timeSinceGrounded < .2f){
                     timeSinceGrounded = Time.time;
                     pMove.Jump(jumpHieght); //maybe remove standard jump mech
@@ -111,26 +118,32 @@ public class PlayerController : MonoBehaviour {
                 }
             }else{
                 if(shimyPipe){
-                    pMove.Drop();
+                    pTraverse.Drop();
                 }else if(ladder){
-                    pMove.LadderEnd();
+                    pTraverse.LadderEnd();
                     pMove.Jump(jumpHieght);
                 }else if(ledge && Input.GetAxisRaw("Vertical") > 0){
-                   pMove.StartCoroutine(pMove.MoveToNextLedge());
+                   pMove.StartCoroutine(pTraverse.MoveToNextLedge());
                 }else if(ledge && Input.GetAxisRaw("Vertical") < 0){
-                    pMove.Drop();
+                    pTraverse.Drop();
                 }else if(ledge){
                     WallJump();
                 }
             }
+        }else if(Input.GetButtonDown("Fire2") && CheckGrounded()){
+            pMove.Evade();
         }
 	}
 
 	private void AttackInput(){
 		if(pManager.currentState == PlayerManager.PlayerState.FreeMovement || pManager.currentState == PlayerManager.PlayerState.Attacking){
-            if (Input.GetMouseButtonDown(0) && CheckGrounded())
-                pAttack.Attack();
+            if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Fire3")){//X button or click
+                if(CheckGrounded()){
+                    pAttack.Attack();
+                }
+            }
         }
+
         if(pManager.currentState == PlayerManager.PlayerState.Attacking && pManager.isLockedOn){
             pMove.LookAtTarget(pTargeting.currentTarget.transform);
         }
@@ -147,7 +160,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void LockOnInput(){
-		if(Input.GetMouseButtonDown(2)){
+		if(Input.GetMouseButtonDown(2) || Input.GetButtonDown("RightJoyStick")){
             pTargeting.ToggleLockedOnEnemies();
         }
 
@@ -194,7 +207,6 @@ public class PlayerController : MonoBehaviour {
         RaycastHit hit;
         if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 0.2f)){
             timeSinceGrounded = Time.time;
-
             anim.SetBool("isGrounded", true);
 
             if(hit.transform.tag == "Platform"){
@@ -202,20 +214,24 @@ public class PlayerController : MonoBehaviour {
             }else{
                 transform.SetParent(null);
             }
+
+            anim.applyRootMotion = true;
             return true;
 
         }else{
             anim.SetBool("isGrounded", false);
             transform.SetParent(null);
+            anim.applyRootMotion = false;
             return false;
         }
     }
 
+    ///////// Move this
     private void WallJump(){
         RaycastHit hit;
         if(Physics.Raycast(transform.position, transform.forward, out hit, .75f)){
             if(hit.normal.y < 0.1f && hit.transform.tag != "Player" && !CheckGrounded()){
-                pMove.WallJump(transform.position - hit.point, jumpHieght);
+                pTraverse.WallJump(transform.position - hit.point, jumpHieght);
             }
         }
     }
@@ -249,7 +265,7 @@ public class PlayerController : MonoBehaviour {
         if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 100)){
             shadow.SetActive(true);
             Vector3 tp = hit.point;
-            tp.y = hit.point.y + 0.1f;
+            tp.y = hit.point.y + 0.05f;
             shadow.transform.position = Vector3.Lerp(shadow.transform.position, tp, 1f);
         }else{
             shadow.SetActive(false);
@@ -266,9 +282,9 @@ public class PlayerController : MonoBehaviour {
         }else if(other.tag == "Item"){
             item = other.gameObject;
         }else if(other.tag == "WarpPad"){
-            pMove.StartCoroutine(pMove.Warp(other.gameObject));
+            pMove.StartCoroutine(pTraverse.Warp(other.gameObject));
         }else if(other.tag == "Ledge"){
-            pMove.StartCoroutine(pMove.GrabLedge(other.gameObject));
+            pTraverse.StartCoroutine(pTraverse.GrabLedge(other.gameObject));
         }else if(other.tag == "Ladder"){
 			ladder = other.gameObject;
 		}else if(other.tag == "ShimyPipe"){
@@ -289,7 +305,7 @@ public class PlayerController : MonoBehaviour {
             shimyPipe = null;
         }else if(other.tag == "Ledge"){
             ledge = null;
-            pMove.Drop();
+            pTraverse.Drop();
         }
         else if(other.gameObject.name == "Camera Distance Changer"){
             Debug.Log("hsfsdf");
