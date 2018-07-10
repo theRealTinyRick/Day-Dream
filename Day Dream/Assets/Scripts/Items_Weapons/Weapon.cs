@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour {
 	public WeaponType weaponType = WeaponType.SingleHand;
 	//default weapon type is short sword
 
-	public bool _name;
+	public string _name;
 	public bool aquired = false;
 
 	public float baseDamage = 100;

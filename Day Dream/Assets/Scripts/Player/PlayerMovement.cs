@@ -6,6 +6,10 @@ public class PlayerMovement : MonoBehaviour {
 
     private PlayerManager pManager;
     private PlayerController pController;
+
+    [SerializeField]
+    private PlayerTargeting pTargeting;
+
     private Rigidbody rb;
     private Animator anim;
     private GameObject pCamera;
@@ -13,19 +17,12 @@ public class PlayerMovement : MonoBehaviour {
     private float fallMultiplyer = 10f;
     private float lowJumpMultiplyer = 3f;
 
-    //shimy pipe
-    private Vector3 mySide;
-    private Vector3 farSide;
-
-    private float timeOfLastClimb;
-
     private void Start(){
         pManager = PlayerManager.instance;
         pController = GetComponent<PlayerController>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         pCamera = Camera.main.gameObject;
-        timeOfLastClimb = Time.time;
     }
 
     private void FixedUpdate(){
@@ -34,7 +31,9 @@ public class PlayerMovement : MonoBehaviour {
 
     public void FreeMovement(Vector3 movement, float speed){
         if (pManager.currentState != PlayerManager.PlayerState.Attacking){
-            if(!pController.CheckGrounded()){
+            if(pManager.isLockedOn && pManager.isBlocking){
+                speed = speed/2.5f;
+            }else if(!pController.CheckGrounded()){
                 speed = speed / 1.5f;
             }
 
@@ -46,12 +45,27 @@ public class PlayerMovement : MonoBehaviour {
             rb.velocity = new Vector3(movement.x * speed, rb.velocity.y, movement.z * speed);
 
             if(pController.CheckGrounded() && movement != Vector3.zero){
-                float turnSpeed = Mathf.Max(Mathf.Abs(movement.x), Mathf.Abs(movement.z));
-                if(turnSpeed > .5f){
-                    turnSpeed = 0.5f;
+                if(!pManager.isLockedOn || !pManager.isBlocking){
+                    float turnSpeed = Mathf.Max(Mathf.Abs(movement.x), Mathf.Abs(movement.z));
+                    if(turnSpeed > .5f){
+                        turnSpeed = 0.5f;
+                    }
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), turnSpeed);
                 }
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), turnSpeed);
             }
+        }
+    }
+
+    public void AnimatePlayerWalking(Vector3 moveDir){
+        if(pManager.isLockedOn && pManager.isBlocking){
+            if(moveDir.z > 0.5f){
+                moveDir.z = 0.5f;
+            }
+            anim.SetFloat("velocityY", Mathf.Lerp(anim.GetFloat("velocityY"), moveDir.z, .1f));
+            anim.SetFloat("velocityX", Mathf.Lerp(anim.GetFloat("velocityX"), moveDir.x, .1f));
+            LookAtTarget(pTargeting.currentTarget.transform);
+        }else{
+            anim.SetFloat("velocityY", Mathf.Max(Mathf.Abs(moveDir.x), Mathf.Abs(moveDir.z)));
         }
     }
 

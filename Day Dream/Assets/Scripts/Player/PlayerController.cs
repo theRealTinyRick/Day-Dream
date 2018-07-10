@@ -13,8 +13,10 @@ public class PlayerController : MonoBehaviour {
 	private PlayerInventory pInv;
 	private ThirdPersonCamera pCamera;
     private Rigidbody rb;
-	private Animator anim{get; set;}
-	[SerializeField] private PlayerTargeting pTargeting;
+	private Animator anim;
+
+	[SerializeField] 
+    private PlayerTargeting pTargeting;
 
 	private float speed = 6.5f;
 
@@ -63,9 +65,11 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		PlatFormingInput();
 		AttackInput();
+        BlockingInput();
 		LockOnInput();
 		InteractInput();
         SetGroundShadow();
+        MenuInput();
 	}
 
     private void LateUpdate(){
@@ -90,9 +94,10 @@ public class PlayerController : MonoBehaviour {
             pTraverse.ShimyLedge(moveDir, ledge.transform);
         }else if(pManager.currentState == PlayerManager.PlayerState.FreeMovement && moveDir != Vector3.zero && pManager.isVulnerable){
             pMove.FreeMovement(moveDir, speed);
-            anim.SetFloat("velocityY", Mathf.Max(Mathf.Abs(h), Mathf.Abs(v)));
+            pMove.AnimatePlayerWalking(moveDir);
         }else if(moveDir == Vector3.zero && CheckGrounded()){
             anim.SetFloat("velocityY", Mathf.Lerp(anim.GetFloat("velocityY"), 0, .2f));
+            anim.SetFloat("velocityX", Mathf.Lerp(anim.GetFloat("velocityX"), 0, .2f));
             if(pManager.isVulnerable && pManager.currentState != PlayerManager.PlayerState.Attacking)
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
@@ -126,14 +131,16 @@ public class PlayerController : MonoBehaviour {
                     WallJump();
                 }
             }
-        }else if(Input.GetButtonDown("BButton") && CheckGrounded()){
-            pMove.Evade();
+        }else if(Input.GetButtonDown("BButton") || Input.GetKeyDown(KeyCode.E)){
+            if(CheckGrounded()){
+                pMove.Evade();
+            }
         }
 	}
 
 	private void AttackInput(){
 		if(pManager.currentState == PlayerManager.PlayerState.FreeMovement || pManager.currentState == PlayerManager.PlayerState.Attacking){
-            if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Fire3")){//X button or click
+            if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("XButton")){//X button or click
                 if(CheckGrounded()){
                     pAttack.Attack();
                 }
@@ -144,6 +151,16 @@ public class PlayerController : MonoBehaviour {
             pMove.LookAtTarget(pTargeting.currentTarget.transform);
         }
 	}
+
+    private void BlockingInput(){
+        if(Input.GetMouseButton(1) && pManager.currentState == PlayerManager.PlayerState.FreeMovement){
+            anim.SetBool("IsBlocking", true);
+            pManager.isBlocking = true;
+        }else{
+            anim.SetBool("IsBlocking", false);
+            pManager.isBlocking = false;
+        }
+    }
 	
 	private void CamerInput(){
         if(!pManager.isLockedOn){
