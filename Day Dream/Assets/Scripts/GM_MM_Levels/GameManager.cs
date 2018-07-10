@@ -52,6 +52,11 @@ public class GameManager : MonoBehaviour {
 		currentLevel = level;
 		UnityEngine.SceneManagement.SceneManager.LoadScene(currentLevel.LevelName);
 	}
+
+	public void LoadMainMenu(){
+		SaveGame();
+		UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+	}
 	
 	public void SaveGame(){
 		BinaryFormatter bf = new BinaryFormatter();

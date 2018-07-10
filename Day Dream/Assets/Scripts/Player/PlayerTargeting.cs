@@ -52,8 +52,9 @@ public class PlayerTargeting : MonoBehaviour {
     }
 
     private void OnTriggerExit(Collider other){
-        if (other.tag == "LockOnTarget"){
+        if(other.tag == "LockOnTarget"){
             enemiesInArea.Remove(other.gameObject);
+            ToggleLockedOnEnemies();
         }
     }
 }

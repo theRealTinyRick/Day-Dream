@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
 	private PlayerMovement pMove;
     private PlayerTraversal pTraverse;
 	private PlayerAttack pAttack;
+    private PlayerMenu pMenu;
 	private PlayerInventory pInv;
 	private ThirdPersonCamera pCamera;
     private Rigidbody rb;
@@ -45,15 +46,13 @@ public class PlayerController : MonoBehaviour {
 
 	[SerializeField] Transform climbingCamPoint;
     [SerializeField] GameObject shadow;
-    //UI Elements
-	[SerializeField] private GameObject PauseMenu;
-    [SerializeField] private GameObject Inventory;
 
 	void Start () {
 		pManager = PlayerManager.instance;
 		pMove = GetComponent<PlayerMovement>();
         pTraverse = GetComponent<PlayerTraversal>();
 		pAttack = GetComponent<PlayerAttack>();
+        pMenu = GetComponent<PlayerMenu>();
 		pInv = GetComponent<PlayerInventory>();
 		pCamera = Camera.main.GetComponent<ThirdPersonCamera>();
 		anim = GetComponent<Animator>();
@@ -163,13 +162,15 @@ public class PlayerController : MonoBehaviour {
     }
 	
 	private void CamerInput(){
-        if(!pManager.isLockedOn){
+        if(!pManager.IsPaused){
+            if(!pManager.isLockedOn){
                 currentCamX += Input.GetAxisRaw("Mouse X") * 2;
                 currentCamY += Input.GetAxisRaw("Mouse Y") * 2; 
                 pCamera.MouseOrbit(currentCamX, currentCamY );
-        }else{
-            pCamera.LockedOnCam();
-        }	
+            }else{
+                pCamera.LockedOnCam();
+            }	
+        }
 	}
 
 	private void LockOnInput(){
@@ -205,15 +206,21 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void MenuInput(){
+        if(Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("Start")){
+            pMenu.OpenClosePlayerMenu();
+        }
+
 		if(Input.GetKeyDown(KeyCode.I)){
-			//open and close inventory
-			Inventory.SetActive(!Inventory.activeInHierarchy);
-			if(!Inventory.activeInHierarchy){
-				pInv.ClearList();
-			}else{
-				pInv.RenderList();
-			}
+			pInv.OpenCloseInventory();
 		}
+
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            pMenu.CloseAllWindows();
+        }
+
+        if(Input.GetButtonDown("BButton")){
+            pMenu.Back();
+        }
 	}
 
 	public bool CheckGrounded(){

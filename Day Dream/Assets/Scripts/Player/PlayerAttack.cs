@@ -11,11 +11,13 @@ public class PlayerAttack : MonoBehaviour {
     private float _time;
 
     private PlayerController pController;
+    private PlayerInventory pInventory;
     private Animator anim;
     private TrailRenderer trail;
 
     private void Start(){
         pController = GetComponent<PlayerController>();
+        pInventory = GetComponent<PlayerInventory>();
         anim = GetComponent<Animator>();
         trail = GetComponentInChildren<TrailRenderer>();
     }
@@ -31,7 +33,10 @@ public class PlayerAttack : MonoBehaviour {
     }
 
     public void Attack(){
-        Cursor.lockState = CursorLockMode.Locked;
+        if(!pInventory.Equipped){
+            pInventory.EquipWeapons();
+            return;
+        }
         switch ((int)currentAtkState){
             case 0://not attacking
                 Swing1();

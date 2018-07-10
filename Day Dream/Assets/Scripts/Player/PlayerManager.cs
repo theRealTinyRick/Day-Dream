@@ -9,7 +9,6 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerManager : MonoBehaviour {
-
     public static PlayerManager instance;
     
     public enum PlayerState { FreeMovement, CanNotMove, Traversing, Attacking, Dead};
@@ -19,7 +18,16 @@ public class PlayerManager : MonoBehaviour {
     public bool isVulnerable = true;
     public bool isBlocking = false;
 
-    [SerializeField] private Transform startPosition;
+    private bool isPaused = false;
+    public bool IsPaused{
+        get{return isPaused;}
+    }
+
+    [SerializeField]
+    Transform startPosition;
+
+    [SerializeField]
+    GameObject playerMenu;
 
     private void Awake(){
         if (instance == null)
@@ -27,10 +35,29 @@ public class PlayerManager : MonoBehaviour {
         else if (instance != null)
             Destroy(gameObject);
 
+    }
+
+    void Start(){
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update(){
+        ResetPlayerPosition();
+    }
+
+    public void Pause(bool paused){
+        if(paused){
+            isPaused = true;
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+        }else{
+            isPaused = false;
+            Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+    private void ResetPlayerPosition(){
         if(Input.GetKeyDown(KeyCode.F1)){
             transform.position = startPosition.position;
         }

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-
     private PlayerManager pManager;
     private PlayerController pController;
 
     [SerializeField]
-    private PlayerTargeting pTargeting;
+    PlayerTargeting pTargeting;
 
     private Rigidbody rb;
     private Animator anim;

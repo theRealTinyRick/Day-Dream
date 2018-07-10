@@ -33,6 +33,7 @@ public class PlayerTraversal : MonoBehaviour {
             Quaternion rot = Quaternion.LookRotation(dir);
             transform.rotation = rot;
             rb.velocity = new Vector3(dir.x * jumpHeight * 1.5f, jumpHeight, dir.z * jumpHeight * 1.5f);
+            anim.Play("Jump");
             Drop();
         }
     }
