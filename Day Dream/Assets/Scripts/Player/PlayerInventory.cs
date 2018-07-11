@@ -177,11 +177,10 @@ public class PlayerInventory : MonoBehaviour {
 	}
 
 	public void RemoveItem(){
-		if(currentDetailedItem){
+		if(currentDetailedItem && currentWeapon != currentDetailedItem && currentShield != currentDetailedItem){
 			ClearList();
 			fullInventory.Remove(currentDetailedItem);
 			RenderList();
-
 			ShowItemInfo(fullInventory[0]);
 		}
 	}

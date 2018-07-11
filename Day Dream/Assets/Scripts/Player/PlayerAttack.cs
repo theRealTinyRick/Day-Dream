@@ -35,7 +35,6 @@ public class PlayerAttack : MonoBehaviour {
     }
 
     public void Attack(){
-       
         switch ((int)currentAtkState){
             case 0://not attacking
                 if(!pInventory.Equipped){

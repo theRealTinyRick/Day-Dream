@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour {
 	private void AttackInput(){
 		if(pManager.currentState == PlayerManager.PlayerState.FreeMovement || pManager.currentState == PlayerManager.PlayerState.Attacking){
             if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("XButton")){//X button or click
-                if(CheckGrounded()){
+                if(CheckGrounded() && !pManager.IsPaused){
                     pAttack.Attack();
                 }
             }
@@ -208,6 +208,7 @@ public class PlayerController : MonoBehaviour {
                 //StartCoroutine(PickUpObject());
             }else if(item){
                 pInv.AddItem(item.GetComponent<Item>());
+                anim.SetTrigger("PickUpItem");
 				item = null; 
             }else if(pushBlock && isPushingBlock){
                 isPushingBlock = false;
