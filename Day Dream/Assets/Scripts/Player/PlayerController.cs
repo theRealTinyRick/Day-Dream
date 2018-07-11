@@ -178,6 +178,9 @@ public class PlayerController : MonoBehaviour {
 	private void LockOnInput(){
 		if(Input.GetMouseButtonDown(2) || Input.GetButtonDown("RightJoyStick")){
             pTargeting.ToggleLockedOnEnemies();
+            if(!pInv.Equipped){
+                pInv.EquipWeapons();
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.Tab)){

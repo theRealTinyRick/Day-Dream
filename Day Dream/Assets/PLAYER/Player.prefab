@@ -2831,13 +2831,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1162856423448154}
-  m_LocalRotation: {x: 0.07552288, y: -0.70590246, z: -0.7030612, w: 0.04126685}
-  m_LocalPosition: {x: -7.4, y: -4.4, z: -0.9}
-  m_LocalScale: {x: 79.698975, y: 79.69896, z: 79.698975}
+  m_LocalRotation: {x: 0.10484185, y: -0.7035608, z: -0.69929034, w: 0.07073416}
+  m_LocalPosition: {x: -6.9657, y: -4.9625, z: -0.12199}
+  m_LocalScale: {x: 93.247795, y: 93.24777, z: 93.24779}
   m_Children: []
   m_Father: {fileID: 4439955101765144}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -80.523, y: -92.786, z: -89.999}
+  m_LocalEulerAnglesHint: {x: -75.732, y: -92.786, z: -89.999}
 --- !u!4 &4081789226753696
 Transform:
   m_ObjectHideFlags: 1
@@ -5674,6 +5674,8 @@ MonoBehaviour:
   playerShields:
   - {fileID: 114457309667100484}
   - {fileID: 114791579507664538}
+  currentWeapon: {fileID: 0}
+  currentShield: {fileID: 0}
   UIitemPrefab: {fileID: 1155099482066490, guid: 6333186498396c943b7c438c56129e39,
     type: 2}
   inventoryParent: {fileID: 224183171848687472}
@@ -5684,6 +5686,18 @@ MonoBehaviour:
   d_damage: {fileID: 114603048606018274}
   d_damageType: {fileID: 114068869776381560}
   d_discardButton: {fileID: 114892628086542812}
+  e_m_name: {fileID: 114369973718160688}
+  e_m_damage: {fileID: 114523704100129032}
+  e_m_damageType: {fileID: 114476119942301662}
+  e_m_icon: {fileID: 114967002422602264}
+  e_r_name: {fileID: 114099486699079916}
+  e_r_damage: {fileID: 114361823134438866}
+  e_r_damageType: {fileID: 114071364625699626}
+  e_r_icon: {fileID: 114281568395413126}
+  e_s_name: {fileID: 114314221874594702}
+  e_s_damage: {fileID: 114152040195606344}
+  e_s_damageType: {fileID: 114303496629531296}
+  e_s_icon: {fileID: 114904109889204052}
 --- !u!114 &114123523181740420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7439,8 +7453,8 @@ MonoBehaviour:
   isLockedOn: 0
   isVulnerable: 1
   isBlocking: 0
+  isPaused: 0
   startPosition: {fileID: 4163351767920206}
-  playerMenu: {fileID: 1424720038764248}
 --- !u!114 &114503195283200896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9162,7 +9176,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114112110239063126}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114121756083588544}
+        m_MethodName: RemoveItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114904109889204052

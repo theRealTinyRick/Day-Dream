@@ -29,6 +29,7 @@ public class PlayerInventory : MonoBehaviour {
 	[SerializeField] Item[] playerWeapons;
 	[SerializeField] Item[] playerShields;
 
+	[SerializeField]
 	private Item currentWeapon = null;
 	public Item CurrentWeapon{
 		get{return currentWeapon;}
@@ -49,6 +50,7 @@ public class PlayerInventory : MonoBehaviour {
 	[SerializeField]
 	GameObject inventoryScreen;
 
+#region UIInformation
 	//Item Description Tab/////////
 	[SerializeField]
 	TextMeshProUGUI d_type;
@@ -68,11 +70,63 @@ public class PlayerInventory : MonoBehaviour {
 	[SerializeField]
 	Button d_discardButton;
 
+//Equipped Info Tab
+	//melee
+	[SerializeField]
+	TextMeshProUGUI e_m_name;
+
+	[SerializeField]
+	TextMeshProUGUI e_m_damage;
+
+	[SerializeField]
+	TextMeshProUGUI e_m_damageType;
+
+	[SerializeField]
+	Image e_m_icon;
+
+	//Ranged
+	[SerializeField]
+	TextMeshProUGUI e_r_name;
+
+	[SerializeField]
+	TextMeshProUGUI e_r_damage;
+
+	[SerializeField]
+	TextMeshProUGUI e_r_damageType;
+
+	[SerializeField]
+	Image e_r_icon;
+
+	//Shield
+	[SerializeField]
+	TextMeshProUGUI e_s_name;
+
+	[SerializeField]
+	TextMeshProUGUI e_s_damage;
+
+	[SerializeField]
+	TextMeshProUGUI e_s_damageType;
+
+	[SerializeField]
+	Image e_s_icon;
+#endregion
+
 	void Start(){
 		anim = GetComponent<Animator>();
 		pMenu = GetComponent<PlayerMenu>();
 	
 		currentDetailedItem = fullInventory[0];
+
+		if(!currentShield){
+			currentShield = fullInventory[1];
+			ShowEquippedItems();
+		}
+
+		if(!currentWeapon){
+			currentWeapon = fullInventory[0];
+			ShowEquippedItems();
+		}
+
 	}
 
 	public void OpenCloseInventory(){
@@ -123,7 +177,13 @@ public class PlayerInventory : MonoBehaviour {
 	}
 
 	public void RemoveItem(){
+		if(currentDetailedItem){
+			ClearList();
+			fullInventory.Remove(currentDetailedItem);
+			RenderList();
 
+			ShowItemInfo(fullInventory[0]);
+		}
 	}
 
 	public void ShowItemInfo(Item item){
@@ -143,12 +203,10 @@ public class PlayerInventory : MonoBehaviour {
 	}
 
 	public void ClearList(){
-		for(int i = 0; i < fullInventory.Count; i++){
-			if(renderedInventoryList[i])
-				Destroy(renderedInventoryList[i]);
+		foreach(GameObject UIitem in renderedInventoryList){
+			Destroy(UIitem);
 		}
 		renderedInventoryList.Clear();
-		currentDetailedItem = null;
 	}
 
 	public void RenderList(){
@@ -168,6 +226,8 @@ public class PlayerInventory : MonoBehaviour {
 			UInewItemInfo.item = item;
 			UInewItemInfo._name = info._name;
 		}
+
+		ShowItemInfo(fullInventory[0]);
 	}
 
 	public void SetWeaponAsEquipped(){
@@ -186,6 +246,7 @@ public class PlayerInventory : MonoBehaviour {
 			listToSearch = playerWeapons;
 			weaponToUnequip = currentWeapon;
 		}
+
 		foreach(Item pWeapon in listToSearch){
 			if(pWeapon == currentDetailedItem){
 				if(pWeapon.weaponType == Item.WeaponType.Shield){
@@ -200,11 +261,31 @@ public class PlayerInventory : MonoBehaviour {
 						weaponToUnequip.gameObject.SetActive(false);
 					}
 				}
+
+				//show the item info in the equipped panel
+				ShowEquippedItems();
+
 				return;
 			}
 		}
 
 		Debug.Log("no weapon was found");
+	}
+
+	private void ShowEquippedItems(){
+		if(currentWeapon){
+			e_m_name.text = currentWeapon._name;
+			e_m_damage.text = currentWeapon.damage.ToString();
+			e_m_damageType.text = currentWeapon.damageType.ToString();
+			e_m_icon.sprite = currentWeapon.icon;
+		}
+
+		if(currentShield){
+			e_m_name.text = currentShield._name;
+			e_m_damage.text = currentShield.defence.ToString();
+			e_m_damageType.text = currentShield.damageType.ToString();
+			e_s_icon.sprite = currentShield.icon;
+		}
 	}
 
 	public void EquipWeapons(float equipDelay = 0){
