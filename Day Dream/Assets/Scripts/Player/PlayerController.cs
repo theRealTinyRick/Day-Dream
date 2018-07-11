@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour {
         BlockingInput();
 		LockOnInput();
 		InteractInput();
+        EquipmentInput();
         SetGroundShadow();
         MenuInput();
 	}
@@ -158,6 +159,7 @@ public class PlayerController : MonoBehaviour {
         }else{
             anim.SetBool("IsBlocking", false);
             pManager.isBlocking = false;
+            anim.SetFloat("velocityX", 0);
         }
     }
 	
@@ -184,6 +186,12 @@ public class PlayerController : MonoBehaviour {
 
         pTargeting.transform.position = transform.position;
 	}
+
+    private void EquipmentInput(){
+        if(Input.GetKeyDown(KeyCode.G)){
+            pInv.EquipWeapons();
+        }
+    }
 
 	private void InteractInput(){
 		if(Input.GetKeyDown(KeyCode.F)){

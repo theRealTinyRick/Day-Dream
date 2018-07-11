@@ -18,6 +18,7 @@ public class PlayerManager : MonoBehaviour {
     public bool isVulnerable = true;
     public bool isBlocking = false;
 
+    [SerializeField]
     private bool isPaused = false;
     public bool IsPaused{
         get{return isPaused;}
@@ -25,9 +26,6 @@ public class PlayerManager : MonoBehaviour {
 
     [SerializeField]
     Transform startPosition;
-
-    [SerializeField]
-    GameObject playerMenu;
 
     private void Awake(){
         if (instance == null)

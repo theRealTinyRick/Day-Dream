@@ -13,19 +13,42 @@ public class PlayerMenu : MonoBehaviour {
 	private PlayerManager pManager;
 	private PlayerInventory pInventory;
 
+	private bool isOpen = false;
+	public bool IsOpen{
+		get{return isOpen;}
+	}
+
 	void Start(){
 		pManager = PlayerManager.instance;
 		pInventory = GetComponent<PlayerInventory>();
 	}
 
+	void Update(){
+		CheckOpenWindows();
+	}
+
+	public void CheckOpenWindows(){
+		//this function will check of there are windows open and set pause and cursor acordingly
+		if(isOpen || pInventory.IsOpen){
+			pManager.Pause(true);
+		}else{
+			pManager.Pause(false);
+		}
+	}
+
 	public void OpenClosePlayerMenu(){
         playerMenu.SetActive(!playerMenu.activeInHierarchy);
         if(playerMenu.activeInHierarchy){
-            pManager.Pause(true);
+			isOpen = true;
         }else{
-            pManager.Pause(false);
-        }
+			isOpen = false;        
+		}
     }
+
+	public void ClosePlayerMenu(){
+		playerMenu.SetActive(false);
+		isOpen = false;
+	}
 
 	public void CloseAllWindows(){
 		//escape key or a button in the UI
