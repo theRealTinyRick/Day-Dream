@@ -60,6 +60,10 @@ public class PlayerManager : MonoBehaviour {
             transform.position = startPosition.position;
         }
     }
+
+    public void LoadMainMenu(){
+        GameManager.instance.LoadMainMenu();
+    }
     
     public IEnumerator Invulnerabe(){
         isVulnerable = false;

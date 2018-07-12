@@ -103,9 +103,20 @@ public class GameManager : MonoBehaviour {
 public class PlayerData{
 	public string playerName = "Max";
 	public int playerLevel = 1;
+	public float playerHealth = 0;
+	public float playerPosX = 0;
+	public float playerPosY = 0;
+	public float playerPosZ = 0;
+	
+	public string[] inventory;
 	public LevelData[] openLevels;
 
 	public PlayerData(LevelData[] openLevels){
 		this.openLevels = openLevels;
 	}
+}
+
+[Serializable]
+public class ItemData{
+	
 }
