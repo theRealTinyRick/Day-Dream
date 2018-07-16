@@ -136,12 +136,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Blueisland_Character_Mat1
-    second: {fileID: 2100000, guid: 6b504d56fb0887a469e8fb24985ebb2f, type: 2}
+    second: {fileID: 2100000, guid: df4c9b0601e7f4741bd4f9055a835e29, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Blueisland_Character_Mat2
-    second: {fileID: 2100000, guid: b28d78b8d2a42bd4689339e9dc166fe6, type: 2}
+    second: {fileID: 2100000, guid: 00497294d2650c84584d2fb027be464c, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -192,7 +192,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.17220968
+        functionName: AttackStart
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.50800604
+        functionName: EndAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

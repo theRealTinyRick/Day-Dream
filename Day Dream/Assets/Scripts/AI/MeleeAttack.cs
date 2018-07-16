@@ -27,7 +27,7 @@ public class MeleeAttack : MonoBehaviour {
 					yield return new WaitForSeconds(attackRecoverDelay);
 					if(ebase.currentState != EnemyBase.State.Dead || ebase.currentState != EnemyBase.State.Stunned){
 						ebase.currentState = EnemyBase.State.Walking;
-						weaponCollider.enabled = true;
+						// weaponCollider.enabled = true;
 					}
 					yield return new WaitForSeconds(attackSpeed);
 				}else{

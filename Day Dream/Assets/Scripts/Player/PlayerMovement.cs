@@ -81,8 +81,12 @@ public class PlayerMovement : MonoBehaviour {
         anim.Play("Jump");
     }
 
-    public void Evade(){
-        anim.Play("Roll");
+    public void Evade(Vector3 dir = new Vector3()){
+        if(dir == Vector3.zero){
+            anim.Play("StepBack");
+        }else{
+            anim.Play("Roll");
+        }
         pManager.StartCoroutine(pManager.Invulnerabe());
     }
 

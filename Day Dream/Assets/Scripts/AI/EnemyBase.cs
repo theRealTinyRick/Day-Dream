@@ -31,6 +31,8 @@ public class EnemyBase : MonoBehaviour {
     [SerializeField] Transform[] patrolPoints;
     [SerializeField] private float switchTime;
 
+    [SerializeField] ParticleSystem hitFX;
+
     private void Awake(){
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
@@ -104,7 +106,6 @@ public class EnemyBase : MonoBehaviour {
     public IEnumerator Strafe(float timeToStrafe){
         float t = Time.time;
         int result = UnityEngine.Random.Range(0,2);
-        Debug.Log(result);
         if(result == 0){
             result = -1;
         }
@@ -188,6 +189,18 @@ public class EnemyBase : MonoBehaviour {
         dir.y = transform.localPosition.y;
         Quaternion rot = Quaternion.LookRotation(dir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, 0.05f);
+    }
+
+    private void OnTriggerEnter(Collider other){
+        if(other.tag == "PlayerWeapon"){
+            Item playerWeapon = other.GetComponent<Item>();
+            CalculateDamage(playerWeapon);
+        }
+    }
+
+    private void CalculateDamage(Item playerWeapon){
+        anim.Play("Damage_Front");
+        hitFX.Play();
     }
 
     //anim events below this line ???????///////////////////////////////////////////////////////////////

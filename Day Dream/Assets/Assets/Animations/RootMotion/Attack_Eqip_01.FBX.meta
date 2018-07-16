@@ -1,6 +1,5 @@
 fileFormatVersion: 2
 guid: 0b0c18ddefe8d324490b8619f49258bf
-timeCreated: 18446744011573954816
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -132,7 +131,17 @@ ModelImporter:
     7400000: R_Attack_Eqip_01
     9500000: //RootNode
     13700000: Blueisland
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blueisland_Character_Mat1
+    second: {fileID: 2100000, guid: 530b4b51f65fee34f8da9fad5c4f17da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blueisland_Character_Mat2
+    second: {fileID: 2100000, guid: 5404b836a9fb7b846ac1bafee9e70310, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -151,6 +160,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -182,7 +192,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.37205365
+        functionName: AttackStart
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.82642484
+        functionName: EndAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

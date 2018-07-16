@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour {
 
 	[SerializeField] 
     private PlayerTargeting pTargeting;
+    public PlayerTargeting PTargeting{
+        get{return pTargeting;}
+    }
 
 	private float speed = 6.5f;
 
@@ -62,7 +65,6 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void Update () {
-		PlatFormingInput();
 		AttackInput();
         BlockingInput();
 		LockOnInput();
@@ -86,6 +88,10 @@ public class PlayerController : MonoBehaviour {
         float v = Input.GetAxisRaw("Vertical");
         Vector3 moveDir = new Vector3(h,0,v);
 
+        if(pAttack.currentAtkState != PlayerAttack.AttackState.NotAttacking){
+            moveDir = new Vector3(0, 0, 0);
+        }
+
 		if(pManager.currentState == PlayerManager.PlayerState.Traversing && shimyPipe){
             pTraverse.ShimyPipe(moveDir, shimyPipe.GetComponent<ShimyPipe>());
         }else if(ladder && pManager.currentState == PlayerManager.PlayerState.Traversing){
@@ -101,9 +107,11 @@ public class PlayerController : MonoBehaviour {
             if(pManager.isVulnerable && pManager.currentState != PlayerManager.PlayerState.Attacking)
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
+
+        PlatFormingInput(moveDir);
 	}
 
-	private void PlatFormingInput(){
+	private void PlatFormingInput(Vector3 moveDir){
 		if (Input.GetButtonDown("Jump")){
             if(pManager.currentState != PlayerManager.PlayerState.Traversing &&
                 pManager.currentState != PlayerManager.PlayerState.Attacking){
@@ -133,7 +141,7 @@ public class PlayerController : MonoBehaviour {
             }
         }else if(Input.GetButtonDown("BButton") || Input.GetKeyDown(KeyCode.E)){
             if(CheckGrounded()){
-                pMove.Evade();
+                pMove.Evade(moveDir);
             }
         }
 	}
@@ -191,7 +199,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
     private void EquipmentInput(){
-        if(Input.GetKeyDown(KeyCode.G)){
+        if(Input.GetKeyDown(KeyCode.G) && !pManager.isLockedOn && pManager.currentState != PlayerManager.PlayerState.Attacking){
             pInv.EquipWeapons();
         }
     }
@@ -236,6 +244,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public bool CheckGrounded(){
+        if(pManager.currentState == PlayerManager.PlayerState.Attacking)
+            return true;
+        
+
+
         RaycastHit hit;
         if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 0.2f)){
             timeSinceGrounded = Time.time;

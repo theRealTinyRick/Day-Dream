@@ -109,6 +109,14 @@ public class PlayerInventory : MonoBehaviour {
 
 	[SerializeField]
 	Image e_s_icon;
+
+	
+	[SerializeField] 
+	TextMeshProUGUI UIcoinCount;
+
+	[SerializeField]
+	TextMeshProUGUI UIDungeonKeyCount;
+
 #endregion
 
 	void Start(){
@@ -227,6 +235,15 @@ public class PlayerInventory : MonoBehaviour {
 		}
 
 		ShowItemInfo(fullInventory[0]);
+		LoadLevelInformation();
+	}
+
+	public void LoadLevelInformation(){
+		int dungeonKeyCount = GameManager.instance.CurrentLevel.FoundKeys.Count;
+		int dungeonKeyMax = GameManager.instance.CurrentLevel.keys.Length;
+
+		UIcoinCount.text = coinCount.ToString();
+		UIDungeonKeyCount.text = dungeonKeyCount + "/" + dungeonKeyMax;
 	}
 
 	public void SetWeaponAsEquipped(){
@@ -268,7 +285,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 		}
 
-		Debug.Log("no weapon was found");
+		Debug.LogWarning("no weapon was found");
 	}
 
 	private void ShowEquippedItems(){

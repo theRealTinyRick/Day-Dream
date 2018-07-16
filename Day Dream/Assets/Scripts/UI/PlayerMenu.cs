@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerMenu : MonoBehaviour {
 
 	[SerializeField]
+	GameObject playerHUD;
+
+	[SerializeField]
 	GameObject playerMenu;
 
 	[SerializeField]
@@ -31,8 +34,10 @@ public class PlayerMenu : MonoBehaviour {
 		//this function will check of there are windows open and set pause and cursor acordingly
 		if(isOpen || pInventory.IsOpen){
 			pManager.Pause(true);
+			playerHUD.SetActive(false);
 		}else{
 			pManager.Pause(false);
+			playerHUD.SetActive(true);
 		}
 	}
 

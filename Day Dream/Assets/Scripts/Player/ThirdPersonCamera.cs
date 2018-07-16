@@ -59,7 +59,7 @@ public class ThirdPersonCamera : MonoBehaviour {
 
     public void LockedOnCam(){
         Vector3 tp = -currentDistance * Vector3.Normalize(pTargeting.currentTarget.transform.position - PlayerManager.instance.transform.position) + PlayerManager.instance.transform.position;
-        tp.y = PlayerManager.instance.transform.position.y + 3f;
+        tp.y = PlayerManager.instance.transform.position.y + 4f;
         transform.position = Vector3.Lerp(transform.position, tp, .4f);
 
         Vector3 lookAtTP = pTargeting.currentTarget.transform.position;

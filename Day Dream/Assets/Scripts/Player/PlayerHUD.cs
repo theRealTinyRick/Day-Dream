@@ -24,6 +24,6 @@ public class PlayerHUD : MonoBehaviour {
 	}
 
 	private void SetPoiseMeter(){
-
+		//when the poise meter is build
 	}
 }
