@@ -82,12 +82,21 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Evade(Vector3 dir = new Vector3()){
-        if(dir == Vector3.zero){
-            anim.Play("StepBack");
-        }else{
-            anim.Play("Roll");
+        if(pManager.isVulnerable){
+            if(dir == Vector3.zero){
+                if(pManager.isLockedOn){
+                    Vector3 tp = pTargeting.currentTarget.transform.position;
+                    tp.y = transform.position.y;
+
+                    transform.LookAt(tp);
+                }
+                anim.Play("StepBack");
+            }else{
+                anim.Play("Roll");
+            }
+            
+            pManager.StartCoroutine(pManager.Invulnerabe());
         }
-        pManager.StartCoroutine(pManager.Invulnerabe());
     }
 
 

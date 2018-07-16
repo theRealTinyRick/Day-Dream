@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] Transform climbingCamPoint;
     [SerializeField] GameObject shadow;
 
+    Vector3 dir = new Vector3();
+
 	void Start () {
 		pManager = PlayerManager.instance;
 		pMove = GetComponent<PlayerMovement>();
@@ -72,6 +74,7 @@ public class PlayerController : MonoBehaviour {
         EquipmentInput();
         SetGroundShadow();
         MenuInput();
+        PlatFormingInput(dir);
 	}
 
     private void LateUpdate(){
@@ -79,14 +82,15 @@ public class PlayerController : MonoBehaviour {
     }
 
 	private void FixedUpdate(){
+        MoveInput();
 		CheckGrounded();
-		MoveInput();
 	}
 
 	private void MoveInput(){
 		float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         Vector3 moveDir = new Vector3(h,0,v);
+        dir = moveDir;
 
         if(pAttack.currentAtkState != PlayerAttack.AttackState.NotAttacking){
             moveDir = new Vector3(0, 0, 0);
@@ -108,10 +112,9 @@ public class PlayerController : MonoBehaviour {
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
 
-        PlatFormingInput(moveDir);
 	}
 
-	private void PlatFormingInput(Vector3 moveDir){
+	private void PlatFormingInput(Vector3 moveDir = new Vector3()){
 		if (Input.GetButtonDown("Jump")){
             if(pManager.currentState != PlayerManager.PlayerState.Traversing &&
                 pManager.currentState != PlayerManager.PlayerState.Attacking){
@@ -119,7 +122,7 @@ public class PlayerController : MonoBehaviour {
                     pMove.StartCoroutine(pTraverse.LadderStart(ladder));
                 }else if(shimyPipe && CheckGrounded()){
                     pMove.StartCoroutine(pTraverse.ShimyPipeStart(shimyPipe));
-                }else if(CheckGrounded() || Time.time - timeSinceGrounded < .2f){
+                }else if(CheckGrounded() /*|| Time.time - timeSinceGrounded < .2f*/){
                     timeSinceGrounded = Time.time;
                     pMove.Jump(jumpHieght); //maybe remove standard jump mech
                 }else if(!CheckGrounded()){
