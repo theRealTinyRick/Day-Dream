@@ -14,6 +14,9 @@ public class EnemyBase : MonoBehaviour {
 
     [SerializeField] private float startingHealth;
     [SerializeField] private float currentHealth;
+    public float CurrentHealth{
+        get{return currentHealth;}
+    }
     [SerializeField] private float moveSpeed;
 
     private float trueRange;

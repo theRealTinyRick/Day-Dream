@@ -3296,7 +3296,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1137135670298774}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.2}
+  m_LocalPosition: {x: 0, y: -0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4881505810786946}
@@ -3638,8 +3638,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1011217705026102}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 40.4, y: 12.25, z: -12.9}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 154.1, y: 17.7, z: -67.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4585371970057590}
@@ -3833,7 +3833,7 @@ Transform:
   m_GameObject: {fileID: 1658726348129820}
   m_LocalRotation: {x: -0, y: -0.9997046, z: -0, w: 0.024305902}
   m_LocalPosition: {x: 0.30125284, y: 0, z: 0.15878057}
-  m_LocalScale: {x: 1.2547214, y: 1.2547214, z: 1.2547214}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4493026283698616}
   - {fileID: 4565066933178694}
@@ -5178,7 +5178,7 @@ BoxCollider:
   m_GameObject: {fileID: 1897669035635464}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.06259514, y: 1.1366589, z: 0.10123348}
   m_Center: {x: 0.00000022666929, y: 0.41128016, z: 0.018513734}
@@ -5190,9 +5190,9 @@ BoxCollider:
   m_GameObject: {fileID: 1799135471489650}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.24404041, y: 0.8914135, z: 0.0598826}
+  m_Size: {x: 0.42, y: 0.8914135, z: 0.16}
   m_Center: {x: 0.0000004209202, y: 0.32178888, z: 0.00000029802328}
 --- !u!65 &65742202607821886
 BoxCollider:
@@ -5202,7 +5202,7 @@ BoxCollider:
   m_GameObject: {fileID: 1833157596146774}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.08310896, y: 0.43, z: 0.32917595}
   m_Center: {x: -0.0000009372982, y: 0.34, z: 0.11935327}
@@ -5288,7 +5288,7 @@ TrailRenderer:
   m_Time: 0.25
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.05
+    widthMultiplier: 0.08
     widthCurve:
       serializedVersion: 2
       m_Curve:

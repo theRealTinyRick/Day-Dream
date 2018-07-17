@@ -212,11 +212,11 @@ public class PlayerController : MonoBehaviour {
             if(pickUpObject && isHoldingObject){
                 //drop
                 isHoldingObject = false;
-                //StartCoroutine(PutDownObject());
+                StartCoroutine(PutDownObject());
             }else if(pickUpObject && !isHoldingObject){
                 //pickup
                 isHoldingObject = true;
-                //StartCoroutine(PickUpObject());
+                StartCoroutine(PickUpObject());
             }else if(item){
                 pInv.AddItem(item.GetComponent<Item>());
                 anim.SetTrigger("PickUpItem");
