@@ -71,7 +71,7 @@ Material:
     - _EdgeFalloff: 15
     - _EdgeIntensity: 1
     - _EdgeLevels: 3
-    - _EdgeOffset: -2.04
+    - _EdgeOffset: 0.3
     - _FresnelPower: 3
     - _GlossMapScale: 1
     - _Glossiness: 0.5
