@@ -77,4 +77,10 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
+    private void OnCollisionEnter(Collision collision){
+        if(collision.gameObject.tag == "Environment" ){
+            Debug.Log("hit something");
+        }
+    }
+
 }
