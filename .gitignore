@@ -7,7 +7,7 @@ Assets/AssetStoreTools*
 
 pack
 @Themes
-
+@Themes.meta
 # Visual Studio cache directory
 .vs/
 
