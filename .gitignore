@@ -6,6 +6,7 @@
 Assets/AssetStoreTools*
 
 pack
+@Themes
 
 # Visual Studio cache directory
 .vs/
