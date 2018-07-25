@@ -28,13 +28,20 @@ public class PlayerTraversal : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 	}
 
-	public void WallJump(Vector3 dir, float jumpHeight){
-        if(/*pManager.currentState != PlayerManager.PlayerState.Traversing &&*/ Time.time - timeOfLastClimb > 0.75f){
-            Quaternion rot = Quaternion.LookRotation(dir);
-            transform.rotation = rot;
-            rb.velocity = new Vector3(dir.x * jumpHeight * 1.5f, jumpHeight, dir.z * jumpHeight * 1.5f);
-            anim.Play("Jump");
-            Drop();
+	public void WallJump(float jumpHeight){
+        if(Time.time - timeOfLastClimb > 0.75f){
+             RaycastHit hit;
+
+            if(Physics.Raycast(transform.position, transform.forward, out hit, .75f)){
+                if(hit.normal.y < 0.1f && hit.transform.tag != "Player"){
+                    Vector3 dir = transform.position - hit.point;
+                    Quaternion rot = Quaternion.LookRotation(dir);
+                    transform.rotation = rot;
+                    rb.velocity = new Vector3(dir.x * jumpHeight * 1.5f, jumpHeight, dir.z * jumpHeight * 1.5f);
+                    anim.Play("Jump");
+                    Drop();
+                }
+            }
         }
     }
 

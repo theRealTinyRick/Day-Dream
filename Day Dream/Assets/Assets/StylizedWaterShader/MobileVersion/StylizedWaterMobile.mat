@@ -40,8 +40,8 @@ Material:
     - _MainFoamOpacity: 1
     - _MainFoamScale: 17.36
     - _SecondaryFoamIntensity: 4.82
-    - _SecondaryFoamOpacity: 0.507
-    - _SecondaryFoamScale: 17.6
+    - _SecondaryFoamOpacity: 1
+    - _SecondaryFoamScale: 14.71
     m_Colors:
     - _Color0: {r: 0.31617647, g: 1, b: 0.94340754, a: 1}
     - _Color1: {r: 0.13473184, g: 0.24583581, b: 0.6544118, a: 1}

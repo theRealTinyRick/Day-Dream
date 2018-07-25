@@ -11,7 +11,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
     public static PlayerManager instance;
     
-    public enum PlayerState { FreeMovement, CanNotMove, Traversing, Attacking, Dead};
+    public enum PlayerState { FreeMovement, CanNotMove, Traversing, FreeClimbing, Attacking, Dead};
     public PlayerState currentState = PlayerState.FreeMovement;
 
     public bool isLockedOn = false;

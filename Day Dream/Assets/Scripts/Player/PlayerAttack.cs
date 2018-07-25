@@ -1,13 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour {
-        
-    public enum AttackState { NotAttacking, Equip, Lunge, Swing1, Swing2, Swing3};
-    [SerializeField] public AttackState currentAtkState = AttackState.NotAttacking;
 
-    private float timeToAtk = 0.9f;//the amount of time between clicks the player will stop attacking
+    
+    public bool isAttacking = false;
+    public bool IsAttacking{
+        get{return isAttacking;}
+    }
+
+    string[] attackAnimations = new string[] {"Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6"};
+    public List <string> attackQueue = new List <string>();
+    public int numberOfClicks = 0;
+    int maxNumberOfClicks = 0;
+    private float timeToAtk = .75f;//the amount of time between clicks the player will stop attacking
     private float _time;
 
     private float timeToEnEquip = 5f;
@@ -23,111 +31,94 @@ public class PlayerAttack : MonoBehaviour {
     private PlayerInventory pInventory;
     private PlayerTargeting pTargeting;
     private Animator anim;
-    private TrailRenderer trail;
 
     private void Start(){
         pController = GetComponent<PlayerController>();
         pInventory = GetComponent<PlayerInventory>();
         anim = GetComponent<Animator>();
-        trail = GetComponentInChildren<TrailRenderer>();
 
         pManager = PlayerManager.instance;
         pTargeting = pController.PTargeting;
 
+        maxNumberOfClicks = attackAnimations.Length;
+
     }
 
     private void Update(){
-        if((Time.time - _time) > timeToAtk && PlayerManager.instance.currentState != PlayerManager.PlayerState.Traversing && currentAtkState != AttackState.Lunge){
-            currentAtkState = AttackState.NotAttacking;
-            PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
-            trail.enabled = false;
+        ClickTimer();
+    }
 
-            BoxCollider collider = GetComponentInChildren<BoxCollider>();
-            if(collider){
-                collider.enabled = false;
+    public void ClickTimer(){
+        if((Time.time - _time) > timeToAtk){
+            foreach(string animation in attackAnimations){
+                if(anim.GetCurrentAnimatorStateInfo(0).IsName(animation)){
+                    isAttacking = true;
+                    return;
+                }
             }
+
+            foreach(string a in attackAnimations){
+                anim.SetBool(a, false);
+            }
+
+            isAttacking = false;
+            numberOfClicks = 0;
+        }else{
+            isAttacking = true;
         }
     }
 
     public void Attack(){
-        switch ((int)currentAtkState){
-            case 0://not attacking
-                if(CheckLunge()){
-                    StartCoroutine(LungeAttack());
-                    if(!pInventory.Equipped)
-                        pInventory.EquipWeapons(0.35f);
-                    break;
-                }
-
-                if(!pInventory.Equipped){
-                    pInventory.EquipWeapons(0.35f);
-                    EquipedAttack();
-                    break;
-                }
-
-                Swing1();
-                break;
-            case 3:
-                Swing2();
-                break;
-        }
-    }
-
-    private void EquipedAttack(){
-        _time = Time.time;
-        anim.Play("EquipedAttack");
-        currentAtkState = AttackState.Equip;
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.Attacking;
-        trail.enabled = true;
-    }
-
-    private IEnumerator LungeAttack(){
-        anim.SetTrigger("Lunge");
-        trail.enabled = true;
-
-        Vector3 tp = pTargeting.currentTarget.transform.position;
-        tp.y = transform.position.y;
-
-        currentAtkState = AttackState.Lunge;
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.Attacking;
-        transform.LookAt(tp);
-
-        while(Vector3.Distance(transform.position, tp) > 1){
-            transform.position = Vector3.Lerp(transform.position, tp, 0.2f);
-            _time = Time.time;
-            yield return new WaitForEndOfFrame();
+        if(!pInventory.Equipped){
+            pInventory.EquipWeapons();
         }
 
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
-        yield return null;
-    }
+        numberOfClicks++;
+        if(numberOfClicks > maxNumberOfClicks){
+            numberOfClicks = maxNumberOfClicks;
+            return;   
+        }
 
-    private void Swing1(){
+        string a = "";
+        foreach(string animation in attackAnimations){
+            if(anim.GetCurrentAnimatorStateInfo(0).IsName(animation)){
+                a = animation;
+            }
+        }
+
+        int i = Array.IndexOf(attackAnimations, a);
+
+        if(i > numberOfClicks)
+            return;
+
         _time = Time.time;
-        anim.SetTrigger("Swing1");
-        currentAtkState = AttackState.Swing1;
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.Attacking;
-        trail.enabled = true;
-    }
-    
-    private void Swing2(){
-        _time = Time.time;
-        anim.SetTrigger("Swing2");
-        currentAtkState = AttackState.Swing2;
-        PlayerManager.instance.currentState = PlayerManager.PlayerState.Attacking;
-        trail.enabled = true;
+        anim.SetBool(attackAnimations[numberOfClicks - 1], true);
     }
 
     public void AttackStart(){
         BoxCollider collider = GetComponentInChildren<BoxCollider>();
-        collider.enabled = true;
+        if(collider)
+            collider.enabled = true;
     }
 
     public void EndAttack(){
         BoxCollider collider = GetComponentInChildren<BoxCollider>();
-        collider.enabled = false;
+        if(collider)
+            collider.enabled = false;
 
-        currentAtkState = AttackState.NotAttacking;
+        isAttacking = false;
+
+        numberOfClicks--;
+        if(numberOfClicks < 0)
+            numberOfClicks = 0;
+
+        foreach(string animation in attackAnimations){
+            if(anim.GetCurrentAnimatorStateInfo(0).IsName(animation)){
+                int animIndex = Array.IndexOf(attackAnimations, animation);
+                anim.SetBool(attackAnimations[animIndex], false);
+                return;
+            }
+        }
     }
 
     //Utilities

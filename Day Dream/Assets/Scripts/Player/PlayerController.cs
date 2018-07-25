@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
 	//this class will handel all player actions
 	private PlayerManager pManager;
 	private PlayerMovement pMove;
+    private FreeClimb freeClimb;
     private PlayerTraversal pTraverse;
 	private PlayerAttack pAttack;
     private PlayerMenu pMenu;
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		pManager = PlayerManager.instance;
 		pMove = GetComponent<PlayerMovement>();
+        freeClimb = GetComponent<FreeClimb>();
         pTraverse = GetComponent<PlayerTraversal>();
 		pAttack = GetComponent<PlayerAttack>();
         pMenu = GetComponent<PlayerMenu>();
@@ -92,12 +94,16 @@ public class PlayerController : MonoBehaviour {
         Vector3 moveDir = new Vector3(h,0,v);
         dir = moveDir;
 
-        if(pAttack.currentAtkState != PlayerAttack.AttackState.NotAttacking){
+        if(freeClimb.isClimbing){
             moveDir = new Vector3(0, 0, 0);
+            anim.SetFloat("velocityY", Mathf.Max(Mathf.Abs(moveDir.x), Mathf.Abs(moveDir.z)));
+            return;
         }
 
-		if(pManager.currentState == PlayerManager.PlayerState.Traversing && shimyPipe){
-            pTraverse.ShimyPipe(moveDir, shimyPipe.GetComponent<ShimyPipe>());
+        if(pAttack.IsAttacking){
+            moveDir = new Vector3(0, 0, 0);
+            anim.SetFloat("velocityY", Mathf.Max(Mathf.Abs(moveDir.x), Mathf.Abs(moveDir.z)));
+            return;
         }else if(ladder && pManager.currentState == PlayerManager.PlayerState.Traversing){
             pTraverse.ClimbLadder(moveDir, ladder);
         }else if(pManager.currentState == PlayerManager.PlayerState.Traversing && ledge){
@@ -111,7 +117,6 @@ public class PlayerController : MonoBehaviour {
             if(pManager.isVulnerable && pManager.currentState != PlayerManager.PlayerState.Attacking)
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
-
 	}
 
 	private void PlatFormingInput(Vector3 moveDir = new Vector3()){
@@ -122,11 +127,14 @@ public class PlayerController : MonoBehaviour {
                     pMove.StartCoroutine(pTraverse.LadderStart(ladder));
                 }else if(shimyPipe && CheckGrounded()){
                     pMove.StartCoroutine(pTraverse.ShimyPipeStart(shimyPipe));
+                }else if(CheckForClimb()){
+                    return;
+                    // freeClimb.InitClimb();
                 }else if(CheckGrounded() /*|| Time.time - timeSinceGrounded < .2f*/){
                     timeSinceGrounded = Time.time;
                     pMove.Jump(jumpHieght); //maybe remove standard jump mech
                 }else if(!CheckGrounded()){
-                   WallJump();
+                   pTraverse.WallJump(jumpHieght);
                 }
             }else{
                 if(shimyPipe){
@@ -139,7 +147,7 @@ public class PlayerController : MonoBehaviour {
                 }else if(ledge && Input.GetAxisRaw("Vertical") < 0){
                     pTraverse.Drop();
                 }else if(ledge){
-                    WallJump();
+                   pTraverse.WallJump(jumpHieght);
                 }
             }
         }else if(Input.GetButtonDown("BButton") || Input.GetKeyDown(KeyCode.E)){
@@ -249,8 +257,6 @@ public class PlayerController : MonoBehaviour {
 	public bool CheckGrounded(){
         if(pManager.currentState == PlayerManager.PlayerState.Attacking)
             return true;
-        
-
 
         RaycastHit hit;
         if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 0.2f)){
@@ -267,21 +273,26 @@ public class PlayerController : MonoBehaviour {
             return true;
 
         }else{
-            anim.SetBool("isGrounded", false);
+            if(pManager.currentState != PlayerManager.PlayerState.FreeClimbing)
+                anim.SetBool("isGrounded", false);
+                
             transform.SetParent(null);
             anim.applyRootMotion = false;
             return false;
         }
     }
 
-    ///////// Move this
-    private void WallJump(){
+    public bool CheckForClimb(){
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, transform.forward, out hit, .75f)){
-            if(hit.normal.y < 0.1f && hit.transform.tag != "Player" && !CheckGrounded()){
-                pTraverse.WallJump(transform.position - hit.point, jumpHieght);
+        Vector3 origin = transform.position;
+        origin.y += 2; 
+        if(Physics.Raycast(origin, transform.forward, out hit, 1)){
+            if(hit.transform.tag == "Climbable"){
+                freeClimb.InitForClimb(hit);
+                return true;
             }
         }
+        return false;
     }
 
 	private IEnumerator PickUpObject(){

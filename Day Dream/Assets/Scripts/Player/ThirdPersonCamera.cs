@@ -84,7 +84,7 @@ public class ThirdPersonCamera : MonoBehaviour {
 
         RaycastHit hit;
         if (Physics.Raycast(clippingOrigin.position, dir, out hit, distance)){
-            if (hit.collider.tag == "Environment"){
+            if (hit.collider.tag == "Environment" || hit.collider.tag == "Climbable"){
                 float newDistance = Vector3.Distance(clippingOrigin.position, hit.point) - .75F;
                 if(newDistance <= 0){
                     newDistance = 0.1f;

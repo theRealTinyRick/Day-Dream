@@ -18,6 +18,7 @@ TagManager:
   - Ledge
   - Water
   - DungeonKey
+  - Climbable
   layers:
   - Default
   - TransparentFX

@@ -64,7 +64,8 @@ public class PlayerMovement : MonoBehaviour {
             anim.SetFloat("velocityX", Mathf.Lerp(anim.GetFloat("velocityX"), moveDir.x, .1f));
             LookAtTarget(pTargeting.currentTarget.transform);
         }else{
-            anim.SetFloat("velocityY", Mathf.Max(Mathf.Abs(moveDir.x), Mathf.Abs(moveDir.z)));
+            float val = Mathf.Lerp(anim.GetFloat("velocityY"), Mathf.Max(Mathf.Abs(moveDir.x), Mathf.Abs(moveDir.z)), 0.3f);
+            anim.SetFloat("velocityY", val);
         }
     }
 
