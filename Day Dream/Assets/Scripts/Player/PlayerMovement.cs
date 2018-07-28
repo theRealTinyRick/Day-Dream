@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour {
             if(pManager.isLockedOn && pManager.isBlocking){
                 speed = speed/2.5f;
             }else if(!pController.CheckGrounded()){
-                speed = speed / 1.5f;
+                // speed = speed / 1.5f;
             }
 
             // Vector3 dir = pCamera.transform.position - transform.position;
@@ -76,8 +76,9 @@ public class PlayerMovement : MonoBehaviour {
         transform.rotation = Quaternion.Slerp(transform.rotation, rot, .2f);
     }
 
-    public void Jump(float jumpHeight){
-        rb.velocity = new Vector3(0,jumpHeight, 0);
+    public void Jump(float jumpHeight, Vector3 dir = new Vector3()){
+        rb.velocity = new Vector3(0, jumpHeight, 0 );
+        // rb.AddForce(dir * 100, ForceMode.Impulse);
         anim.SetBool("isGrounded", false);
         anim.Play("Jump");
     }

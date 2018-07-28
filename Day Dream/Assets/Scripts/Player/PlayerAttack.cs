@@ -15,7 +15,7 @@ public class PlayerAttack : MonoBehaviour {
     public List <string> attackQueue = new List <string>();
     public int numberOfClicks = 0;
     int maxNumberOfClicks = 0;
-    private float timeToAtk = .75f;//the amount of time between clicks the player will stop attacking
+    private float timeToAtk = .4f;//the amount of time between clicks the player will stop attacking
     private float _time;
 
     private float timeToEnEquip = 5f;
@@ -51,6 +51,8 @@ public class PlayerAttack : MonoBehaviour {
     public void ClickTimer(){
         if((Time.time - _time) > timeToAtk){
             foreach(string animation in attackAnimations){
+                int index = Array.IndexOf(attackAnimations, animation);
+
                 if(anim.GetCurrentAnimatorStateInfo(0).IsName(animation)){
                     isAttacking = true;
                     return;
@@ -108,7 +110,7 @@ public class PlayerAttack : MonoBehaviour {
 
         isAttacking = false;
 
-        numberOfClicks--;
+        // numberOfClicks--;
         if(numberOfClicks < 0)
             numberOfClicks = 0;
 

@@ -127,12 +127,11 @@ public class PlayerController : MonoBehaviour {
                     pMove.StartCoroutine(pTraverse.LadderStart(ladder));
                 }else if(shimyPipe && CheckGrounded()){
                     pMove.StartCoroutine(pTraverse.ShimyPipeStart(shimyPipe));
-                }else if(CheckForClimb()){
+                }else if(freeClimb.CheckForClimb()){
                     return;
-                    // freeClimb.InitClimb();
                 }else if(CheckGrounded() /*|| Time.time - timeSinceGrounded < .2f*/){
                     timeSinceGrounded = Time.time;
-                    pMove.Jump(jumpHieght); //maybe remove standard jump mech
+                    pMove.Jump(jumpHieght, dir); //maybe remove standard jump mech
                 }else if(!CheckGrounded()){
                    pTraverse.WallJump(jumpHieght);
                 }
@@ -259,7 +258,7 @@ public class PlayerController : MonoBehaviour {
             return true;
 
         RaycastHit hit;
-        if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 0.2f)){
+        if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 0.25f)){
             timeSinceGrounded = Time.time;
             anim.SetBool("isGrounded", true);
 
@@ -280,19 +279,6 @@ public class PlayerController : MonoBehaviour {
             anim.applyRootMotion = false;
             return false;
         }
-    }
-
-    public bool CheckForClimb(){
-        RaycastHit hit;
-        Vector3 origin = transform.position;
-        origin.y += 2; 
-        if(Physics.Raycast(origin, transform.forward, out hit, 1)){
-            if(hit.transform.tag == "Climbable"){
-                freeClimb.InitForClimb(hit);
-                return true;
-            }
-        }
-        return false;
     }
 
 	private IEnumerator PickUpObject(){

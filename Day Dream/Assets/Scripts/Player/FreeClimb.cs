@@ -27,6 +27,19 @@ public class FreeClimb : MonoBehaviour {
 		helper.name = "Climb Helper";
 	}
 
+	public bool CheckForClimb(){
+        RaycastHit hit;
+        Vector3 origin = transform.position;
+        origin.y += 2; 
+        if(Physics.Raycast(origin, transform.forward, out hit, 1)){
+            if(hit.transform.tag == "Climbable"){
+                InitForClimb(hit);
+                return true;
+            }
+        }
+        return false;
+    }
+
 	public void InitForClimb(RaycastHit hit){
 		isClimbing = true;
 		GetComponent<Rigidbody>().isKinematic = true;
@@ -93,12 +106,15 @@ public class FreeClimb : MonoBehaviour {
 		if(moveDir.y > 0){
 			Vector3 o = transform.position;
 			o.y += 2.5f;
-
 			RaycastHit ledgeHit;
 			Debug.DrawRay(o, transform.forward, Color.green, 5);
-			if(Physics.Raycast(o, transform.forward * 5, out ledgeHit, 1, layermask)){
-				
+			if(Physics.Raycast(o, transform.forward * 5, out ledgeHit, 5, layermask)){
+				if(ledgeHit.transform.tag != "Climbable"){
+					return false;
+				}
 			}else{
+				Vector3 ledgePostion = o + (transform.forward * 1.5f);
+				StartCoroutine(JumpOnLedge(ledgePostion));
 				return false;
 			}
 		}
@@ -174,8 +190,9 @@ public class FreeClimb : MonoBehaviour {
 		inPosition = false;
 	}
 	
-	IEnumerator JumpOnLedge(){
-		Debug.Log("jump on ledge");
+	IEnumerator JumpOnLedge(Vector3 tp){
+		Drop();
+		GetComponent<PlayerMovement>().Jump(25);
 		yield return null;
 	}
 }

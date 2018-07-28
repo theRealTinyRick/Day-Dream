@@ -173,7 +173,7 @@ ModelImporter:
       name: R_Attack_08
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 30
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -200,7 +200,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.7611131
+      - time: 0.6666431
         functionName: EndAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
