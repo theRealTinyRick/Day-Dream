@@ -77,20 +77,23 @@ public class ThirdPersonCamera : MonoBehaviour {
     }
 
     public void CameraClipping(){
+        int layermask = 1<<8;
+		layermask = ~layermask;
+
         clippingOrigin.position = camLookAt.position;
         Vector3 camPos = transform.position;
         Vector3 dir = camPos - clippingOrigin.transform.position;
         float distance = originalCameraDistance + 1.75f;
 
         RaycastHit hit;
-        if (Physics.Raycast(clippingOrigin.position, dir, out hit, distance)){
-            if (hit.collider.tag == "Environment" || hit.collider.tag == "Climbable"){
+        if (Physics.Raycast(clippingOrigin.position, dir, out hit, distance, layermask)){
+            // if (hit.collider.tag == "Environment" || hit.collider.tag == "Climbable"){
                 float newDistance = Vector3.Distance(clippingOrigin.position, hit.point) - .75F;
                 if(newDistance <= 0){
                     newDistance = 0.1f;
                 }
                 currentDistance = Mathf.Lerp(currentDistance, newDistance, .8f);
-            }
+            // }
         }else
             currentDistance = Mathf.Lerp(currentDistance, originalCameraDistance, .1f);
     }

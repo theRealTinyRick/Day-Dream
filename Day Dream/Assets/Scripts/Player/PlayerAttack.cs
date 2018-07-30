@@ -12,13 +12,10 @@ public class PlayerAttack : MonoBehaviour {
     }
 
     string[] attackAnimations = new string[] {"Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6"};
-    public List <string> attackQueue = new List <string>();
     public int numberOfClicks = 0;
     int maxNumberOfClicks = 0;
     private float timeToAtk = .4f;//the amount of time between clicks the player will stop attacking
-    private float _time;
-
-    private float timeToEnEquip = 5f;
+    private float _time = 0;
 
     [SerializeField]
     float attackRangeMin  = 5f;
@@ -51,8 +48,6 @@ public class PlayerAttack : MonoBehaviour {
     public void ClickTimer(){
         if((Time.time - _time) > timeToAtk){
             foreach(string animation in attackAnimations){
-                int index = Array.IndexOf(attackAnimations, animation);
-
                 if(anim.GetCurrentAnimatorStateInfo(0).IsName(animation)){
                     isAttacking = true;
                     return;
@@ -65,6 +60,7 @@ public class PlayerAttack : MonoBehaviour {
 
             isAttacking = false;
             numberOfClicks = 0;
+            
         }else{
             isAttacking = true;
         }
@@ -109,10 +105,6 @@ public class PlayerAttack : MonoBehaviour {
             collider.enabled = false;
 
         isAttacking = false;
-
-        // numberOfClicks--;
-        if(numberOfClicks < 0)
-            numberOfClicks = 0;
 
         foreach(string animation in attackAnimations){
             if(anim.GetCurrentAnimatorStateInfo(0).IsName(animation)){
