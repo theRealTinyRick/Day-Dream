@@ -30,7 +30,7 @@ public class FreeClimb : MonoBehaviour {
 	public bool CheckForClimb(){
         RaycastHit hit;
         Vector3 origin = transform.position;
-        origin.y += 2; 
+        origin.y += 1; 
         if(Physics.Raycast(origin, transform.forward, out hit, 1)){
             if(hit.transform.tag == "Climbable"){
                 InitForClimb(hit);

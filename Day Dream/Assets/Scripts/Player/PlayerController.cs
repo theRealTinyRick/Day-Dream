@@ -258,7 +258,7 @@ public class PlayerController : MonoBehaviour {
             return true;
 
         RaycastHit hit;
-        if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 0.25f)){
+        if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 0.4f)){
             timeSinceGrounded = Time.time;
             anim.SetBool("isGrounded", true);
 
