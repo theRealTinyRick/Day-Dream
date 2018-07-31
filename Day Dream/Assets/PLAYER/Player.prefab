@@ -375,7 +375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1147452934187292
 GameObject:
   m_ObjectHideFlags: 1
@@ -2836,7 +2836,7 @@ Transform:
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 4493026283698616}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4324967885613106
 Transform:
@@ -3107,7 +3107,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1011217705026102}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.57, y: 8.31, z: 74.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4585371970057590}
@@ -3130,10 +3130,10 @@ Transform:
   m_Children:
   - {fileID: 4836826443512226}
   - {fileID: 4365338213203266}
+  - {fileID: 4722205854072722}
   - {fileID: 4324141351901106}
   - {fileID: 4634568807706988}
   - {fileID: 4544773097822758}
-  - {fileID: 4722205854072722}
   m_Father: {fileID: 4585371970057590}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3219,7 +3219,7 @@ Transform:
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 4493026283698616}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4571725793055070
 Transform:
@@ -3277,7 +3277,7 @@ Transform:
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 4493026283698616}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4638366679280592
 Transform:
@@ -3408,7 +3408,7 @@ Transform:
   m_Children:
   - {fileID: 4682797489283310}
   m_Father: {fileID: 4493026283698616}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4771797163906262
 Transform:
@@ -5586,6 +5586,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531e659ddcca4d844a7be9cc9bd28e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isClimbing: 0
+  helper: {fileID: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  positionOffSet: 0.5
+  offsetFromWall: 0.4
+  isLerping: 0
+  inPosition: 0
+  delta: 0
 --- !u!114 &114267571983452422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7634,7 +7643,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e1339749d17e24c8922d9e656bddb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAtkState: 0
+  isAttacking: 0
+  numberOfClicks: 0
   attackRangeMin: 4
   attackRangeMax: 9
 --- !u!114 &114581238990759404

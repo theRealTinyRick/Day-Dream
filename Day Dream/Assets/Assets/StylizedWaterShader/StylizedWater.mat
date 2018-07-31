@@ -79,5 +79,5 @@ Material:
     - _DepthGradient2: {r: 0.004227493, g: 0.13806613, b: 0.8962264, a: 1}
     - _DepthGradient3: {r: 0.017409164, g: 0.04984338, b: 0.16911763, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
-    - _FresnelColor: {r: 0, g: 0.15836976, b: 0.735849, a: 1}
+    - _FresnelColor: {r: 0, g: 0.33471107, b: 1, a: 1}
     - _ShadowColor: {r: 0.009191178, g: 0.033871744, b: 0.125, a: 1}
