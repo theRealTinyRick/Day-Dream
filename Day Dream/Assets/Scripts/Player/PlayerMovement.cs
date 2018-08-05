@@ -77,6 +77,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Jump(float jumpHeight, Vector3 dir = new Vector3()){
+        dir = transform.forward * 10;
         rb.velocity = new Vector3(0, jumpHeight, 0 );
         // rb.AddForce(dir * 100, ForceMode.Impulse);
         anim.SetBool("isGrounded", false);

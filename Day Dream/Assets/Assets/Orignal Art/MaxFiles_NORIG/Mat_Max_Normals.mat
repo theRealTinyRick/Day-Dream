@@ -72,14 +72,14 @@ Material:
     - _ReadMask: 255
     - _ReflSmoothness: 1
     - _ReflType: 0
-    - _RimIntensity: 1.89
+    - _RimIntensity: 0.8
     - _RimWidth: 0.2
     - _RimlightType: 0
-    - _Saturation: 0.95
+    - _Saturation: 1
     - _ShadowIntensity: 0.3
     - _ShadowType: 0
-    - _SpecularArea: 23.1
-    - _SpecularIntensity: 12.96
+    - _SpecularArea: 25
+    - _SpecularIntensity: 5
     - _Stencil: 0
     - _StencilComp: 0
     - _StencilFail: 0

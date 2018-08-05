@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
 	private PlayerManager pManager;
 	private PlayerMovement pMove;
     private FreeClimb freeClimb;
+    private WallJump wallJump;
+    private ClimbLadder climbLadder;
     private PlayerTraversal pTraverse;
 	private PlayerAttack pAttack;
     private PlayerMenu pMenu;
@@ -56,7 +58,9 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		pManager = PlayerManager.instance;
 		pMove = GetComponent<PlayerMovement>();
+        wallJump = GetComponent<WallJump>();
         freeClimb = GetComponent<FreeClimb>();
+        climbLadder = GetComponent<ClimbLadder>();
         pTraverse = GetComponent<PlayerTraversal>();
 		pAttack = GetComponent<PlayerAttack>();
         pMenu = GetComponent<PlayerMenu>();
@@ -98,55 +102,54 @@ public class PlayerController : MonoBehaviour {
             moveDir = new Vector3(0, 0, 0);
             anim.SetFloat("velocityY", Mathf.Max(Mathf.Abs(moveDir.x), Mathf.Abs(moveDir.z)));
             return;
-        }
 
-        if(pAttack.IsAttacking){
+        }else if(pAttack.IsAttacking){
             moveDir = new Vector3(0, 0, 0);
             anim.SetFloat("velocityY", Mathf.Max(Mathf.Abs(moveDir.x), Mathf.Abs(moveDir.z)));
             return;
-        }else if(ladder && pManager.currentState == PlayerManager.PlayerState.Traversing){
-            pTraverse.ClimbLadder(moveDir, ladder);
+
+        }else if(climbLadder.IsClimbing){
+            climbLadder.Tick(moveDir.z);
+            return;
+
         }else if(pManager.currentState == PlayerManager.PlayerState.Traversing && ledge){
             pTraverse.ShimyLedge(moveDir, ledge.transform);
+
         }else if(pManager.currentState == PlayerManager.PlayerState.FreeMovement && moveDir != Vector3.zero && pManager.isVulnerable){
             pMove.FreeMovement(moveDir, speed);
             pMove.AnimatePlayerWalking(moveDir);
+
         }else if(moveDir == Vector3.zero && CheckGrounded()){
             anim.SetFloat("velocityY", Mathf.Lerp(anim.GetFloat("velocityY"), 0, .2f));
             anim.SetFloat("velocityX", Mathf.Lerp(anim.GetFloat("velocityX"), 0, .2f));
-            if(pManager.isVulnerable && pManager.currentState != PlayerManager.PlayerState.Attacking)
+            if(pManager.isVulnerable && pManager.currentState != PlayerManager.PlayerState.Attacking){
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            }
         }
 	}
 
 	private void PlatFormingInput(Vector3 moveDir = new Vector3()){
 		if (Input.GetButtonDown("Jump")){
-            if(pManager.currentState != PlayerManager.PlayerState.Traversing &&
-                pManager.currentState != PlayerManager.PlayerState.Attacking){
-                if (ladder && CheckGrounded()){
-                    pMove.StartCoroutine(pTraverse.LadderStart(ladder));
-                }else if(shimyPipe && CheckGrounded()){
-                    pMove.StartCoroutine(pTraverse.ShimyPipeStart(shimyPipe));
-                }else if(freeClimb.CheckForClimb()){
+            if(!freeClimb.isClimbing){
+                if(freeClimb.CheckForClimb()){
                     return;
-                }else if(CheckGrounded() /*|| Time.time - timeSinceGrounded < .2f*/){
-                    timeSinceGrounded = Time.time;
-                    pMove.Jump(jumpHieght, dir); //maybe remove standard jump mech
-                }else if(!CheckGrounded()){
-                   pTraverse.WallJump(jumpHieght);
+
+                }else if(climbLadder.CheckForClimb(pManager)){
+                    return;
+
+                }else if(CheckGrounded() && pManager.currentState != PlayerManager.PlayerState.Traversing){
+                    pMove.Jump(jumpHieght);
+                    return;
+
+                }else if(!CheckGrounded() && wallJump.CheckWallJump(jumpHieght - 2)){
+                    return;
                 }
             }else{
-                if(shimyPipe){
-                    pTraverse.Drop();
-                }else if(ladder){
-                    pTraverse.LadderEnd();
-                    pMove.Jump(jumpHieght);
-                }else if(ledge && Input.GetAxisRaw("Vertical") > 0){
-                   pMove.StartCoroutine(pTraverse.MoveToNextLedge());
-                }else if(ledge && Input.GetAxisRaw("Vertical") < 0){
-                    pTraverse.Drop();
-                }else if(ledge){
-                   pTraverse.WallJump(jumpHieght);
+                if(dir.z == 0){
+                    freeClimb.Drop();
+                    wallJump.CheckWallJump(jumpHieght);
+                }else if(dir.z < 0){
+                    freeClimb.Drop();
                 }
             }
         }else if(Input.GetButtonDown("BButton") || Input.GetKeyDown(KeyCode.E)){
@@ -258,7 +261,7 @@ public class PlayerController : MonoBehaviour {
             return true;
 
         RaycastHit hit;
-        if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 0.4f)){
+        if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 0.1f)){
             timeSinceGrounded = Time.time;
             anim.SetBool("isGrounded", true);
 
@@ -328,12 +331,6 @@ public class PlayerController : MonoBehaviour {
             item = other.gameObject;
         }else if(other.tag == "WarpPad"){
             pMove.StartCoroutine(pTraverse.Warp(other.gameObject));
-        }else if(other.tag == "Ledge"){
-            pTraverse.StartCoroutine(pTraverse.GrabLedge(other.gameObject));
-        }else if(other.tag == "Ladder"){
-			ladder = other.gameObject;
-		}else if(other.tag == "ShimyPipe"){
-            shimyPipe = other.gameObject;
         }else if(other.tag == "DungeonKey"){
             PickUpKey(other.gameObject);
         }
@@ -344,16 +341,6 @@ public class PlayerController : MonoBehaviour {
             pickUpObject = null;
         }else if(other.tag == "Item"){
             item = null;
-        }else if(other.tag == "Ladder"){
-			ladder = null;
-		}else if(other.tag == "ShimyPipe"){
-            shimyPipe = null;
-        }else if(other.tag == "Ledge"){
-            ledge = null;
-            pTraverse.Drop();
         }
-        else if(other.gameObject.name == "Camera Distance Changer"){
-            Debug.Log("hsfsdf");
-        } 
     }
 }

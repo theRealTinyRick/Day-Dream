@@ -1,0 +1,196 @@
+fileFormatVersion: 2
+guid: 8f9570a5162a7864c99b4b36b1d8232d
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: HairStrandA_1
+    100002: HairStrandA_2
+    100004: HairStrandA_3
+    100006: HairStrandB_1
+    100008: HairStrandB_2
+    100010: HairStrandB_3
+    100012: HairStrandC_1
+    100014: HairStrandC_2
+    100016: HairStrandC_3
+    100018: HairStrandD_1
+    100020: HairStrandD_2
+    100022: HairStrandD_3
+    100024: HairStrandE_1
+    100026: HairStrandE_2
+    100028: HairStrandE_3
+    100030: HairStrandF_1
+    100032: HairStrandF_2
+    100034: HairStrandF_3
+    100036: HairStrandG_1
+    100038: HairStrandG_2
+    100040: HairStrandG_3
+    100042: HairStrandH_1
+    100044: HairStrandH_2
+    100046: HairStrandH_3
+    100048: HairStrandI_1
+    100050: HairStrandI_2
+    100052: HairStrandI_3
+    100054: HairStrandJ_1
+    100056: HairStrandJ_2
+    100058: HairStrandJ_3
+    100060: HairStrandK_1
+    100062: HairStrandK_2
+    100064: HairStrandK_3
+    100066: HairStrandL_1
+    100068: HairStrandL_2
+    100070: HairStrandL_3
+    100072: HairStrandM_1
+    100074: HairStrandM_2
+    100076: HairStrandM_3
+    100078: HairStrandN_1
+    100080: HairStrandN_2
+    100082: HairStrandN_3
+    100084: Head
+    100086: Max_Hair
+    100088: //RootNode
+    100090: Neck_Base
+    100092: Neck_Top
+    100094: Root_Body
+    100096: Root_Hair
+    100098: Spine1
+    100100: Spine2
+    100102: Spine3
+    100104: Spine4
+    400000: HairStrandA_1
+    400002: HairStrandA_2
+    400004: HairStrandA_3
+    400006: HairStrandB_1
+    400008: HairStrandB_2
+    400010: HairStrandB_3
+    400012: HairStrandC_1
+    400014: HairStrandC_2
+    400016: HairStrandC_3
+    400018: HairStrandD_1
+    400020: HairStrandD_2
+    400022: HairStrandD_3
+    400024: HairStrandE_1
+    400026: HairStrandE_2
+    400028: HairStrandE_3
+    400030: HairStrandF_1
+    400032: HairStrandF_2
+    400034: HairStrandF_3
+    400036: HairStrandG_1
+    400038: HairStrandG_2
+    400040: HairStrandG_3
+    400042: HairStrandH_1
+    400044: HairStrandH_2
+    400046: HairStrandH_3
+    400048: HairStrandI_1
+    400050: HairStrandI_2
+    400052: HairStrandI_3
+    400054: HairStrandJ_1
+    400056: HairStrandJ_2
+    400058: HairStrandJ_3
+    400060: HairStrandK_1
+    400062: HairStrandK_2
+    400064: HairStrandK_3
+    400066: HairStrandL_1
+    400068: HairStrandL_2
+    400070: HairStrandL_3
+    400072: HairStrandM_1
+    400074: HairStrandM_2
+    400076: HairStrandM_3
+    400078: HairStrandN_1
+    400080: HairStrandN_2
+    400082: HairStrandN_3
+    400084: Head
+    400086: Max_Hair
+    400088: //RootNode
+    400090: Neck_Base
+    400092: Neck_Top
+    400094: Root_Body
+    400096: Root_Hair
+    400098: Spine1
+    400100: Spine2
+    400102: Spine3
+    400104: Spine4
+    2100000: Max_initialShadingGroup1
+    4300000: Max_Hair
+    9500000: //RootNode
+    13700000: Max_Hair
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 18
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

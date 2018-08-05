@@ -27,79 +27,7 @@ public class PlayerTraversal : MonoBehaviour {
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody>();
 	}
-
-	public void WallJump(float jumpHeight){
-        if(Time.time - timeOfLastClimb > 0.75f){
-             RaycastHit hit;
-
-            if(Physics.Raycast(transform.position, transform.forward, out hit, .75f)){
-                if(hit.normal.y < 0.1f && hit.transform.tag != "Player"){
-                    Vector3 dir = transform.position - hit.point;
-                    Quaternion rot = Quaternion.LookRotation(dir);
-                    transform.rotation = rot;
-                    rb.velocity = new Vector3(dir.x * jumpHeight * 1.5f, jumpHeight, dir.z * jumpHeight * 1.5f);
-                    anim.Play("Jump");
-                    Drop();
-                }
-            }
-        }
-    }
-
-	    public IEnumerator LadderStart(GameObject ladder){
-        Ladder ladderInfo = ladder.GetComponent<Ladder>();
-        Vector3 startSide = new Vector3(0,0,0);
-        if(Vector3.Distance(transform.position, ladderInfo.topPos.position) < Vector3.Distance(transform.position, ladderInfo.bottomPos.position)){
-            startSide = ladderInfo.topPos.position;
-        }else{
-            startSide = ladderInfo.bottomPos.position;
-        }
-        anim.SetBool("isClimbing", true);
-        rb.isKinematic = true;
-        pManager.currentState = PlayerManager.PlayerState.CanNotMove;
-        while(Vector3.Distance(transform.position, startSide)>.1f){
-            transform.position = Vector3.Lerp(transform.position, startSide, .1f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, ladderInfo.topPos.rotation, .5f);
-            yield return new WaitForEndOfFrame();
-        }
-        pManager.currentState = PlayerManager.PlayerState.Traversing;
-        yield return null;
-    }
-
-    public void ClimbLadder(Vector3 move, GameObject ladder){
-        //add ending the ladder climb
-        Ladder ladderInfo = ladder.GetComponent<Ladder>();
-        transform.rotation = Quaternion.Lerp(transform.rotation, ladderInfo.topPos.rotation, .5f);
-        if(move.z > 0){
-            transform.position = Vector3.MoveTowards(transform.position, ladderInfo.topPos.position, 2 * Time.deltaTime);
-            anim.SetBool("isClimbingUp", true);
-            anim.SetBool("isClimbingDown", false);
-            anim.speed = Mathf.Lerp(anim.speed, 1.5f, .3f);
-            if(Vector3.Distance(transform.position, ladderInfo.topPos.position) <= .1){
-                LadderEnd();
-                pMove.Jump(20);
-            }
-        }else if(move.z < 0){
-            transform.position = Vector3.MoveTowards(transform.position, ladderInfo.bottomPos.position, 2 * Time.deltaTime);
-            anim.SetBool("isClimbingUp", false);
-            anim.SetBool("isClimbingDown", true);
-            anim.speed = Mathf.Lerp(anim.speed, 1.5f, .3f);
-            if(Vector3.Distance(transform.position, ladderInfo.bottomPos.position) <= .1){
-                LadderEnd();
-            }
-        }else{
-            anim.speed = Mathf.Lerp(anim.speed, 0, .3f);
-        }
-    }
-
-    public void LadderEnd(){
-        rb.isKinematic = false;
-        pManager.currentState = PlayerManager.PlayerState.FreeMovement;
-        anim.SetBool("isClimbing", false);
-        anim.SetBool("isClimbingUp", false);
-        anim.SetBool("isClimbingDown", false);
-        anim.speed = 1f;
-    }
-
+	
 	public IEnumerator ShimyPipeStart(GameObject pipe){
         rb.isKinematic = true;
 
@@ -142,11 +70,12 @@ public class PlayerTraversal : MonoBehaviour {
             if(Physics.Raycast(origin, transform.forward, out hit, .75F)){
                 pManager.currentState = PlayerManager.PlayerState.Traversing;
                 rb.isKinematic = true;
-                Vector3 tp = (Vector3.Distance(transform.position, hit.point) - 0.5f ) * Vector3.Normalize(hit.point - transform.position) + transform.position;
-                tp.y = ledge.transform.position.y - 1.5f;
+                Vector3 tp = (Vector3.Distance(transform.position, hit.point) - 0.2f ) * Vector3.Normalize(hit.point - transform.position) + transform.position;
+                tp.y = ledge.transform.position.y - 2.1f;
                 transform.position = tp;
 
                 pController.ledge = ledge;
+                anim.Play("Grab Ledge");
             }
         }
         yield return null;
