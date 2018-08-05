@@ -51,10 +51,11 @@ public class LedgeClimb : MonoBehaviour {
 		rb.isKinematic = true;
 		pManager.currentState = PlayerManager.PlayerState.Traversing;
 		anim.Play("GrabLedge");
-
+		anim.SetBool("LedgeClimbing", true);
 		tp.y = ledge.transform.position.y - 2.1f;
 		tp -= transform.forward * 0.2f;
 		transform.position = tp;
+		shimyHelper.position = tp;
 
 		Quaternion rot = Quaternion.LookRotation(-normal);
 		transform.rotation = rot;
@@ -101,7 +102,7 @@ public class LedgeClimb : MonoBehaviour {
 
 	bool CanShimy(Vector3 dir){	
 		RaycastHit hit; 
-		if(Physics.Raycast(transform.position, dir, out hit, 1, layerMask)){
+		if(Physics.Raycast(transform.position, dir, out hit, 2, layerMask)){
 			return false;
 		}
 		return true;
@@ -125,11 +126,12 @@ public class LedgeClimb : MonoBehaviour {
 	void Drop(){
 		isClimbing = false;
 		rb.isKinematic = false;
+		anim.SetBool("LedgeClimbing", false);
+		pManager.currentState = PlayerManager.PlayerState.FreeMovement;
 	}
 
 	private void OnTriggerEnter(Collider other){
 		if(other.tag == "Ledge"){
-			Debug.Log("hey");
 			ledge = other.transform.GetComponent<Ledge>();
 			CheckForClimb();
 		}
