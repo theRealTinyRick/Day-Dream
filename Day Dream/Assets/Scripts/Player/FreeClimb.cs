@@ -8,9 +8,9 @@ public class FreeClimb : MonoBehaviour {
 	FreeClimbAnimationHook animHook;
 	WallJump wallJump;
 	Animator anim;
+	Rigidbody rb;
 
 	public bool isClimbing = false;
-	bool movingToLedge = false;
 
 	public Transform helper;
 
@@ -39,14 +39,16 @@ public class FreeClimb : MonoBehaviour {
 		animHook = GetComponent<FreeClimbAnimationHook>();
 		wallJump = GetComponent<WallJump>();
 		anim = GetComponent<Animator>();
+		rb = GetComponent<Rigidbody>();
 	}
 
 	public bool CheckForClimb(){
         RaycastHit hit;
         Vector3 origin = transform.position;
 		if(pController.CheckGrounded()){
-        	origin.y += 1; 
+        	origin.y += 2; 
 		}
+
         if(Physics.Raycast(origin, transform.forward, out hit, 1)){
             if(hit.transform.tag == "Climbable"){
                 InitForClimb(hit);
@@ -58,7 +60,7 @@ public class FreeClimb : MonoBehaviour {
 
 	public void InitForClimb(RaycastHit hit){
 		isClimbing = true;
-		GetComponent<Rigidbody>().isKinematic = true;
+		rb.isKinematic = true;
 		helper.transform.rotation = Quaternion.LookRotation(-hit.normal);
 		startPos = transform.position;
 		targetPos = hit.point + (hit.normal * offsetFromWall);
@@ -66,21 +68,19 @@ public class FreeClimb : MonoBehaviour {
 		inPosition = false;
 
 		//handle anims
-		if(pController.CheckGrounded()){
-			anim.SetTrigger("GroundedWallMount");
-		}else{
+		// if(pController.CheckGrounded()){
+			// anim.SetTrigger("GroundedWallMount");
+		// }else{
 			anim.Play("AirWallMount");
-		}
+		// }
+
+		anim.SetBool("WallClimbing", true);
 	}
 
 	void Update(){
-		Debug.Log(isClimbing);
 		if(isClimbing){
 			delta = Time.deltaTime;
 			Tick(delta);
-			anim.SetBool("WallClimbing", true);
-		}else{
-			anim.SetBool("WallClimbing", false);
 		}
 	}
 
@@ -92,8 +92,8 @@ public class FreeClimb : MonoBehaviour {
 
 		h = Input.GetAxisRaw("Horizontal");
 		v = Input.GetAxisRaw("Vertical");
-
-		if(!isLerping && anim.GetCurrentAnimatorStateInfo(0).IsName("FreeClimb")){
+	
+		if(!isLerping && anim.GetCurrentAnimatorStateInfo(0).IsName("FreeClimbIdle")){
 			hasPlayedAnim = false;
 
 			Vector3 horizontal = helper.right * h;
@@ -132,9 +132,6 @@ public class FreeClimb : MonoBehaviour {
 		int layermask = 1<<8;
 		layermask = ~layermask;
 
-		if(movingToLedge)
-			return false;
-
 		if(moveDir.y > 0){
 			Vector3 o = transform.position;
 			o.y += 2.5f;
@@ -154,7 +151,18 @@ public class FreeClimb : MonoBehaviour {
 				return false;
 			}
 		}
+		
+		if(moveDir.y < 0){
+			//check to see if player will hit the floor and dismount
+			Vector3 origin1 = transform.position;
+			RaycastHit hitFloor;		
+			if(Physics.Raycast(origin1, -Vector3.up, out hitFloor, positionOffSet, layermask)){
+				Drop();
+				return false;
+			}
+		}
 
+		//check dir of input and determine if the player will hit an obstical
 		Vector3 origin = transform.position;
 		float dis = positionOffSet;
 		Vector3 dir = moveDir;
@@ -162,10 +170,14 @@ public class FreeClimb : MonoBehaviour {
 		RaycastHit hit;
 
 		if(Physics.Raycast(origin, dir, out hit, dis, layermask)){
-			Debug.Log(hit.transform.tag);
-			if(moveDir.y < 0)
-				Drop();
-			return false;
+
+			if(hit.transform.tag != "Climbable"){
+				return false;
+			}
+
+			helper.position = PosWithOffset(origin, hit.point);
+			helper.rotation = Quaternion.LookRotation(-hit.normal);
+			return true;
 		}
 
 		origin += moveDir * dis;
@@ -174,25 +186,14 @@ public class FreeClimb : MonoBehaviour {
 
 		Debug.DrawRay(origin, dir * dis2, Color.blue, 5);
 		if(Physics.Raycast(origin, dir, out hit, dis2)){
+			
+			if(hit.transform.tag != "Climbable"){
+				return false;
+			}
+
 			helper.position = PosWithOffset(origin, hit.point);
 			helper.rotation = Quaternion.LookRotation(-hit.normal);
 			return true;
-		}
-
-		origin += dir * dis2;
-		dir = -Vector3.up;
-
-		if(moveDir.y < 0){
-			Debug.DrawRay(origin, dir,Color.yellow);
-			if(Physics.Raycast(origin, dir, out hit, 1)){
-				float angle = Vector3.Angle(helper.up, hit.normal);
-				if(angle < 40){
-					helper.position = PosWithOffset(origin, hit.point);
-					helper.rotation = Quaternion.LookRotation(-hit.normal);
-					Drop();
-					return false;
-				}
-			}
 		}
 
 		return false;
@@ -205,7 +206,7 @@ public class FreeClimb : MonoBehaviour {
 			inPosition = true;
 		}
 
-		Vector3 tp = Vector3.Lerp(startPos, targetPos, t * 20);
+		Vector3 tp = Vector3.Lerp(startPos, targetPos, t * 9);
 		transform.position = tp;
 
 		tp.y = transform.position.y;
@@ -220,33 +221,17 @@ public class FreeClimb : MonoBehaviour {
 	}
 
 	public void Drop(){
-		GetComponent<Rigidbody>().isKinematic = false;
+		rb.isKinematic = false;
 		PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
 		isClimbing = false;
 		inPosition = false;
 		isLerping = false;
-		movingToLedge = false;
 		anim.SetBool("WallClimbing", false);
 	}
 	
 	IEnumerator JumpOnLedge(Vector3 tp){
-		// isClimbing = false;
-		// movingToLedge = true;
-		// anim.Play("MoveToLedge");
-		// yield return new WaitForSeconds(0.25f);
-		// while(Vector3.Distance(transform.position, tp) > 0.2){
-		// 	anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
-		// 	anim.SetIKPosition(AvatarIKGoal.RightHand, tp);
-
-		// 	Vector3 pos = Vector3.Lerp(transform.position, tp, 0.05f);
-		// 	transform.position = pos;
-
-		// 	yield return new WaitForEndOfFrame();
-		// }
-
 		Drop();
 		GetComponent<PlayerMovement>().Jump(40, transform.forward);
-
 		yield return null;
 	}
 }

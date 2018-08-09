@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour {
 
     
-    public bool isAttacking = false;
+    private bool isAttacking = false;
     public bool IsAttacking{
         get{return isAttacking;}
     }
@@ -38,7 +38,6 @@ public class PlayerAttack : MonoBehaviour {
         pTargeting = pController.PTargeting;
 
         maxNumberOfClicks = attackAnimations.Length;
-
     }
 
     private void Update(){
@@ -89,8 +88,8 @@ public class PlayerAttack : MonoBehaviour {
         if(i > numberOfClicks)
             return;
 
-        _time = Time.time;
         anim.SetBool(attackAnimations[numberOfClicks - 1], true);
+        _time = Time.time;
     }
 
     public void AttackStart(){

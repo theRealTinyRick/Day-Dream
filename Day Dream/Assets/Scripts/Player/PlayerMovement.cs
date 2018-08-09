@@ -36,8 +36,6 @@ public class PlayerMovement : MonoBehaviour {
                 // speed = speed / 1.5f;
             }
 
-            // Vector3 dir = pCamera.transform.position - transform.position;
-            // dir.y = 0;
             movement = pCamera.transform.TransformDirection(movement);
             movement.y = 0;
 

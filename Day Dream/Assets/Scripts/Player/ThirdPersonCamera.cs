@@ -16,6 +16,9 @@ public class ThirdPersonCamera : MonoBehaviour {
     private float Y_ANGLE_MIN = -30;
     private float Y_ANGLE_MAX = 12;
 
+    private float camX;
+    private float camY;
+
     private void Start(){
         camLookAt = new GameObject().transform;
         camLookAt.name = "Cam Look At Point";
@@ -33,29 +36,29 @@ public class ThirdPersonCamera : MonoBehaviour {
         CameraClipping();
     }
 
-    public void MouseOrbit(float currentX, float currentY){
+    public void MouseOrbit(float x, float y){
+        camX += x;
+        camY += y;
+
         Vector3 tp = PlayerManager.instance.transform.position;
         tp.y = PlayerManager.instance.transform.position.y + 1.75f;
 
         camLookAt.position = tp;
 
         // currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);  //set and check variables
-        if(currentY < Y_ANGLE_MIN){
-            currentY = Y_ANGLE_MIN + .01f;
-        }else if(currentY > Y_ANGLE_MAX){
-            currentY = Y_ANGLE_MAX;
+        if(camY < Y_ANGLE_MIN){
+            camY = Y_ANGLE_MIN + .01f;
+        }else if(camY > Y_ANGLE_MAX){
+            camY = Y_ANGLE_MAX;
         }
 
         Vector3 dis = new Vector3(0f, 0f, -currentDistance);   // use variables to get offeset and the rotation
-        Quaternion rotation = Quaternion.Euler(-currentY, currentX, 0);
+        Quaternion rotation = Quaternion.Euler(-camY, camX, 0);
 
         Vector3 pos = camLookAt.position + rotation * dis; //apply rotation and offset to the position of the camera
         transform.position = Vector3.Lerp(transform.position, pos, .5f);
-        //transform.position = pos;
-        // Quaternion rot = Quaternion.LookRotation(camLookAt.position - transform.position);
-        // transform.rotation = Quaternion.Lerp(transform.rotation, rot, .5f);
         transform.LookAt(camLookAt);    
-    }
+    }   
 
     public void LockedOnCam(){
         Vector3 tp = -currentDistance * Vector3.Normalize(pTargeting.currentTarget.transform.position - PlayerManager.instance.transform.position) + PlayerManager.instance.transform.position;

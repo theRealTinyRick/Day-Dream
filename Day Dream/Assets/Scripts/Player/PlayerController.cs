@@ -9,10 +9,12 @@ public class PlayerController : MonoBehaviour {
 	private PlayerManager pManager;
 	private PlayerMovement pMove;
     private FreeClimb freeClimb;
+    private LedgeClimb ledgeClimb;
     private WallJump wallJump;
     private ClimbLadder climbLadder;
     private PlayerTraversal pTraverse;
 	private PlayerAttack pAttack;
+    PlayerBlocking pBlocking; 
     private PlayerMenu pMenu;
 	private PlayerInventory pInv;
 	private ThirdPersonCamera pCamera;
@@ -43,10 +45,6 @@ public class PlayerController : MonoBehaviour {
     public GameObject pushBlock;
     public bool isPushingBlock;
 
-	//Camera
-	private float currentCamX  = 0.0f;
-    private float currentCamY  = 0.0f;
-
     [SerializeField] private Transform putDownPos;
     [SerializeField] private Transform feetLevel;
 
@@ -60,9 +58,11 @@ public class PlayerController : MonoBehaviour {
 		pMove = GetComponent<PlayerMovement>();
         wallJump = GetComponent<WallJump>();
         freeClimb = GetComponent<FreeClimb>();
+        ledgeClimb = GetComponent<LedgeClimb>();
         climbLadder = GetComponent<ClimbLadder>();
         pTraverse = GetComponent<PlayerTraversal>();
 		pAttack = GetComponent<PlayerAttack>();
+        pBlocking = GetComponent<PlayerBlocking>();
         pMenu = GetComponent<PlayerMenu>();
 		pInv = GetComponent<PlayerInventory>();
 		pCamera = Camera.main.GetComponent<ThirdPersonCamera>();
@@ -89,7 +89,6 @@ public class PlayerController : MonoBehaviour {
 
 	private void FixedUpdate(){
         MoveInput();
-		CheckGrounded();
 	}
 
 	private void MoveInput(){
@@ -98,14 +97,15 @@ public class PlayerController : MonoBehaviour {
         Vector3 moveDir = new Vector3(h,0,v);
         dir = moveDir;
 
-        if(freeClimb.isClimbing){
+        if(freeClimb.isClimbing || ledgeClimb.IsClimbing){
             moveDir = new Vector3(0, 0, 0);
-            anim.SetFloat("velocityY", Mathf.Max(Mathf.Abs(moveDir.x), Mathf.Abs(moveDir.z)));
+            anim.SetFloat("velocityY", Mathf.Max(Mathf.Abs(0), Mathf.Abs(0)));
             return;
-
-        }else if(pAttack.IsAttacking){
-            moveDir = new Vector3(0, 0, 0);
-            anim.SetFloat("velocityY", Mathf.Max(Mathf.Abs(moveDir.x), Mathf.Abs(moveDir.z)));
+        }
+        
+        if(pAttack.IsAttacking){
+            // moveDir = new Vector3(0, 0, 0);
+            anim.SetFloat("velocityY", Mathf.Max(Mathf.Abs(0), Mathf.Abs(0)));
             return;
 
         }else if(climbLadder.IsClimbing){
@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour {
         }else if(moveDir == Vector3.zero && CheckGrounded()){
             anim.SetFloat("velocityY", Mathf.Lerp(anim.GetFloat("velocityY"), 0, .2f));
             anim.SetFloat("velocityX", Mathf.Lerp(anim.GetFloat("velocityX"), 0, .2f));
+
             if(pManager.isVulnerable && pManager.currentState != PlayerManager.PlayerState.Attacking){
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
             }
@@ -130,7 +131,7 @@ public class PlayerController : MonoBehaviour {
 
 	private void PlatFormingInput(Vector3 moveDir = new Vector3()){
 		if (Input.GetButtonDown("Jump")){
-            if(!freeClimb.isClimbing){
+            if(!freeClimb.isClimbing && !ledgeClimb.IsClimbing){
                 if(freeClimb.CheckForClimb()){
                     return;
 
@@ -144,14 +145,26 @@ public class PlayerController : MonoBehaviour {
                 }else if(!CheckGrounded() && wallJump.CheckWallJump(jumpHieght - 2)){
                     return;
                 }
-            }else{
+            }else if(freeClimb.isClimbing){
                 if(dir.z == 0){
                     freeClimb.Drop();
                     wallJump.CheckWallJump(jumpHieght);
                 }else if(dir.z < 0){
                     freeClimb.Drop();
                 }
+
+            }else if(ledgeClimb.IsClimbing){
+                if(dir.z == 0){
+                    ledgeClimb.Drop();
+                    wallJump.CheckWallJump(jumpHieght);
+                }else if(dir.z < 0){
+                    ledgeClimb.Drop();
+                }else if(dir.z > 0){
+                    ledgeClimb.Drop();
+                    pMove.Jump(jumpHieght);
+                }
             }
+
         }else if(Input.GetButtonDown("BButton") || Input.GetKeyDown(KeyCode.E)){
             if(CheckGrounded()){
                 pMove.Evade(moveDir);
@@ -160,7 +173,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void AttackInput(){
-		if(pManager.currentState == PlayerManager.PlayerState.FreeMovement || pManager.currentState == PlayerManager.PlayerState.Attacking){
+		if(pManager.currentState == PlayerManager.PlayerState.FreeMovement){
             if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("XButton")){//X button or click
                 if(CheckGrounded() && !pManager.IsPaused){
                     pAttack.Attack();
@@ -168,28 +181,26 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if(pManager.currentState == PlayerManager.PlayerState.Attacking && pManager.isLockedOn){
+        if(pAttack.IsAttacking && pManager.isLockedOn){
             pMove.LookAtTarget(pTargeting.currentTarget.transform);
         }
 	}
 
     private void BlockingInput(){
-        if(Input.GetMouseButton(1) && pManager.currentState == PlayerManager.PlayerState.FreeMovement){
-            anim.SetBool("IsBlocking", true);
-            pManager.isBlocking = true;
+        if(Input.GetMouseButton(1) && pManager.currentState == PlayerManager.PlayerState.FreeMovement &&
+        !pAttack.IsAttacking){
+            pBlocking.SetBlocking(true);
         }else{
-            anim.SetBool("IsBlocking", false);
-            pManager.isBlocking = false;
-            anim.SetFloat("velocityX", 0);
+            pBlocking.SetBlocking(false);
         }
     }
 	
 	private void CamerInput(){
         if(!pManager.IsPaused){
             if(!pManager.isLockedOn){
-                currentCamX += Input.GetAxisRaw("Mouse X") * 2;
-                currentCamY += Input.GetAxisRaw("Mouse Y") * 2; 
-                pCamera.MouseOrbit(currentCamX, currentCamY );
+                float h = Input.GetAxis("Mouse X");
+                float v = Input.GetAxis("Mouse Y"); 
+                pCamera.MouseOrbit(h, v );
             }else{
                 pCamera.LockedOnCam();
             }	

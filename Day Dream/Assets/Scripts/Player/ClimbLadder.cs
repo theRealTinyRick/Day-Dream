@@ -16,7 +16,11 @@ public class ClimbLadder : MonoBehaviour {
 	float speed = 3;
 	float t = 0.0f;
 
+	Animator anim;
+
 	public bool CheckForClimb(PlayerManager pManager){
+		anim = GetComponent<Animator>();
+
 		if(ladderPresent){
 			InitClimb(pManager);
 			return true;
@@ -68,10 +72,13 @@ public class ClimbLadder : MonoBehaviour {
 	void Drop(float v){
 		GetComponent<Rigidbody>().isKinematic = false;
 		PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
+		anim.speed = 1;
 		isClimbing = false;
 
 		if(v > 0){
 			GetComponent<PlayerMovement>().Jump(30);
+		}else{
+			anim.Play("Movement");
 		}
 	}
 
@@ -87,10 +94,23 @@ public class ClimbLadder : MonoBehaviour {
 
 		Quaternion rot = ladder.bottomPos.rotation;
 		transform.rotation = Quaternion.Slerp(transform.rotation, rot, t * 2);
+
+		anim.Play("L_ClimbUp");
 	}
 
 	void HandleAnimation(float v){
-		
+		string upAnimation = "L_ClimbUp";
+		string downAnimation = "L_ClimbDown";
+
+		if(v < 0){
+			anim.Play(downAnimation);
+			anim.speed = 1;
+		}else if(v > 0){
+			anim.Play(upAnimation);
+			anim.speed = 1;
+		}else{
+			anim.speed = 0;
+		}
 	}
 
 	private void OnTriggerStay(Collider other){

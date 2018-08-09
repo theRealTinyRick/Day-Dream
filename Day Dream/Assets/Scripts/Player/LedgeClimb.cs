@@ -35,12 +35,17 @@ public class LedgeClimb : MonoBehaviour {
 	}
 
 	public bool CheckForClimb(){
+		Debug.Log("here");
 		if(!pController.CheckGrounded()){
+			Debug.Log("here2");
 			RaycastHit hit;
 			Vector3 origin = transform.position;
 			origin.y += 1;
-			if(Physics.Raycast(origin, transform.position, out hit, 1, layerMask)){
+			if(Physics.Raycast(origin, transform.forward, out hit, 1, layerMask)){
+				Debug.Log("here 3");
 				InitForClimb(hit.point, hit.normal);
+			}else{
+				Debug.Log("not hit");
 			}
 			return true;
 		}
@@ -48,6 +53,7 @@ public class LedgeClimb : MonoBehaviour {
 	}
 
 	void InitForClimb(Vector3 tp, Vector3 normal){
+		Debug.Log("init");
 		rb.isKinematic = true;
 		pManager.currentState = PlayerManager.PlayerState.Traversing;
 		anim.Play("GrabLedge");
@@ -78,11 +84,10 @@ public class LedgeClimb : MonoBehaviour {
 					return;
 				}
 
-				Vector3 tp = FindPosition(dir);
-				shimyHelper.position = tp;
-				isLerping = true;
 				t = 0;
+				isLerping = true;
 				hasPlayedAnim = false;
+
 			}else{
 				t += Time.deltaTime;
 				if(t > 1){
@@ -94,25 +99,46 @@ public class LedgeClimb : MonoBehaviour {
 					HandleAnim(h);
 					hasPlayedAnim = true;
 				}
-
 				transform.position = Vector3.Lerp(transform.position, shimyHelper.position, t);
+				transform.rotation = shimyHelper.rotation;
 			}
 		}
 	}
 
 	bool CanShimy(Vector3 dir){	
 		RaycastHit hit; 
-		if(Physics.Raycast(transform.position, dir, out hit, 2, layerMask)){
+		Vector3 origin = transform.position;
+
+		if(dir.x < 0){
+			dir = -transform.right;
+		}else if(dir.x > 0){
+			dir = transform.right;
+		}else
+			return false;
+
+		if(Physics.Raycast(transform.position, dir, out hit, 1.5f, layerMask)){
 			return false;
 		}
-		return true;
+
+		origin += dir * 1;
+
+		if(Physics.Raycast(origin, transform.forward, out hit, 1, layerMask)){
+			Quaternion rot = Quaternion.LookRotation(-hit.normal);
+			shimyHelper.position = PositionWithOffset(origin, hit.point);
+			shimyHelper.rotation = rot;
+
+			return true;
+		}
+
+		return false;
 	}
 
-	Vector3 FindPosition(Vector3 dir){
-		Vector3 result = transform.position;
-		result += dir * 1.5f;
+	Vector3 PositionWithOffset(Vector3 origin, Vector3 target){
+		Vector3 direction = origin - target;
+		direction.Normalize();
+		Vector3 offset = direction * 0.2f;
 
-		return result;
+		return target + offset;
 	}
 
 	void HandleAnim(float f){
@@ -123,7 +149,7 @@ public class LedgeClimb : MonoBehaviour {
 		}
 	}
 
-	void Drop(){
+	public void Drop(){
 		isClimbing = false;
 		rb.isKinematic = false;
 		anim.SetBool("LedgeClimbing", false);
