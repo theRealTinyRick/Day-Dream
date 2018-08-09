@@ -319,7 +319,7 @@ public class PlayerInventory : MonoBehaviour {
 	IEnumerator Equip(float equipDelay){
 		yield return new WaitForSeconds(equipDelay);
 		currentWeapon.gameObject.SetActive(!currentWeapon.gameObject.activeInHierarchy);
-		Debug.Log(currentWeapon.name);
+		
 		//if it is a s handed weapon skip the rest
 		currentShield.gameObject.SetActive(!currentShield.gameObject.activeInHierarchy);
 

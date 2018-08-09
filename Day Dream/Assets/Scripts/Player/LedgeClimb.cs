@@ -13,6 +13,8 @@ public class LedgeClimb : MonoBehaviour {
 
 	PlayerController pController;
 	PlayerManager pManager;
+	PlayerMovement pMove;
+	WallJump wallJump;
 	Animator anim;
 	Rigidbody rb;
 	Ledge ledge;
@@ -25,7 +27,10 @@ public class LedgeClimb : MonoBehaviour {
 
 	void Start(){
 		layerMask = ~layerMask;
+
 		pController = GetComponent<PlayerController>();
+		pMove = GetComponent<PlayerMovement>();
+		wallJump = GetComponent<WallJump>();
 		pManager = PlayerManager.instance;
 		rb = GetComponent<Rigidbody>();
 		anim = GetComponent<Animator>();
@@ -35,25 +40,19 @@ public class LedgeClimb : MonoBehaviour {
 	}
 
 	public bool CheckForClimb(){
-		Debug.Log("here");
 		if(!pController.CheckGrounded()){
-			Debug.Log("here2");
 			RaycastHit hit;
 			Vector3 origin = transform.position;
 			origin.y += 1;
 			if(Physics.Raycast(origin, transform.forward, out hit, 1, layerMask)){
-				Debug.Log("here 3");
 				InitForClimb(hit.point, hit.normal);
-			}else{
-				Debug.Log("not hit");
+				return true;
 			}
-			return true;
 		}
 		return false;
 	}
 
 	void InitForClimb(Vector3 tp, Vector3 normal){
-		Debug.Log("init");
 		rb.isKinematic = true;
 		pManager.currentState = PlayerManager.PlayerState.Traversing;
 		anim.Play("GrabLedge");
@@ -76,7 +75,16 @@ public class LedgeClimb : MonoBehaviour {
 	void Tick(){
 		if(isClimbing){
 			float h = Input.GetAxisRaw("Horizontal");
+			float v = Input.GetAxisRaw("Vertical");
 			Vector3 dir = new Vector3(h, 0, 0);
+
+			if(v > 0 && Input.GetButtonDown("Jump")){
+				pMove.Jump(pController.jumpHieght); 
+			}else if(v < 0){
+				Drop();
+			}else if(v == 0 && Input.GetButtonDown("Jump")){
+				wallJump.CheckWallJump(pController.jumpHieght/1.5f);
+			}
 
 			if(!isLerping){
 				bool canMove = CanShimy(dir);

@@ -6,7 +6,6 @@ public class FreeClimb : MonoBehaviour {
 
 	PlayerController pController;
 	FreeClimbAnimationHook animHook;
-	WallJump wallJump;
 	Animator anim;
 	Rigidbody rb;
 
@@ -37,7 +36,6 @@ public class FreeClimb : MonoBehaviour {
 
 		pController = GetComponent<PlayerController>();
 		animHook = GetComponent<FreeClimbAnimationHook>();
-		wallJump = GetComponent<WallJump>();
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody>();
 	}

@@ -14,9 +14,10 @@ public class PlayerController : MonoBehaviour {
     private ClimbLadder climbLadder;
     private PlayerTraversal pTraverse;
 	private PlayerAttack pAttack;
-    PlayerBlocking pBlocking; 
+    private PlayerBlocking pBlocking; 
     private PlayerMenu pMenu;
 	private PlayerInventory pInv;
+    private PlayerInteraction pInteraction;
 	private ThirdPersonCamera pCamera;
     private Rigidbody rb;
 	private Animator anim;
@@ -30,7 +31,7 @@ public class PlayerController : MonoBehaviour {
 	private float speed = 6.5f;
 
 	//JUMP VARS
-	private float jumpHieght = 30;
+	public float jumpHieght = 30;
     private float timeSinceGrounded;
 
 	//PLATFORMS
@@ -65,6 +66,7 @@ public class PlayerController : MonoBehaviour {
         pBlocking = GetComponent<PlayerBlocking>();
         pMenu = GetComponent<PlayerMenu>();
 		pInv = GetComponent<PlayerInventory>();
+        pInteraction = GetComponent<PlayerInteraction>();
 		pCamera = Camera.main.GetComponent<ThirdPersonCamera>();
 		anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -230,22 +232,7 @@ public class PlayerController : MonoBehaviour {
 
 	private void InteractInput(){
 		if(Input.GetKeyDown(KeyCode.F)){
-            if(pickUpObject && isHoldingObject){
-                //drop
-                isHoldingObject = false;
-                StartCoroutine(PutDownObject());
-            }else if(pickUpObject && !isHoldingObject){
-                //pickup
-                isHoldingObject = true;
-                StartCoroutine(PickUpObject());
-            }else if(item){
-                pInv.AddItem(item.GetComponent<Item>());
-                anim.SetTrigger("PickUpItem");
-				item = null; 
-            }else if(pushBlock && isPushingBlock){
-                isPushingBlock = false;
-                pushBlock.transform.SetParent(null);
-            }
+            pInteraction.InitPickUp();
         }
 	}
 
@@ -293,21 +280,6 @@ public class PlayerController : MonoBehaviour {
             anim.applyRootMotion = false;
             return false;
         }
-    }
-
-	private IEnumerator PickUpObject(){
-        while(isHoldingObject){
-            Vector3 tp = transform.position;
-            tp.y = transform.position.y + 2;
-            pickUpObject.transform.position = Vector3.Lerp(pickUpObject.transform.position, tp, .3f);
-            pickUpObject.GetComponent<Rigidbody>().isKinematic = true;
-            pickUpObject.GetComponent<BoxCollider>().enabled = false;
-            speed = 2.5f;
-            yield return new WaitForEndOfFrame();
-        }
-        speed = 5;
-
-        yield return null;
     }
 
     private IEnumerator PutDownObject(){

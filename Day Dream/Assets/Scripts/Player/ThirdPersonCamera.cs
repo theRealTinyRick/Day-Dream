@@ -90,13 +90,13 @@ public class ThirdPersonCamera : MonoBehaviour {
 
         RaycastHit hit;
         if (Physics.Raycast(clippingOrigin.position, dir, out hit, distance, layermask)){
-            // if (hit.collider.tag == "Environment" || hit.collider.tag == "Climbable"){
+            if (hit.collider.tag == "Environment" || hit.collider.tag == "Climbable" || hit.collider.tag == "Untagged"){
                 float newDistance = Vector3.Distance(clippingOrigin.position, hit.point) - .75F;
                 if(newDistance <= 0){
                     newDistance = 0.1f;
                 }
                 currentDistance = Mathf.Lerp(currentDistance, newDistance, .8f);
-            // }
+            }
         }else
             currentDistance = Mathf.Lerp(currentDistance, originalCameraDistance, .1f);
     }

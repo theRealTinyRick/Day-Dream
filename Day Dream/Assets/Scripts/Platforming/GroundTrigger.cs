@@ -20,7 +20,8 @@ public class GroundTrigger : MonoBehaviour {
 
 	private void OnTriggerStay(Collider other){
 		if(other.tag == "PickUp" || other.tag == "Player"){
-			isActivated = true;
+			if(!other.isTrigger)
+				isActivated = true;
 		}
 	}
 
