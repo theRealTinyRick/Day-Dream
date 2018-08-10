@@ -282,15 +282,6 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private IEnumerator PutDownObject(){
-        while(Vector3.Distance(pickUpObject.transform.position, putDownPos.position) > .1){
-            pickUpObject.transform.position = Vector3.Lerp(pickUpObject.transform.position, putDownPos.position, .1f);
-        }
-        pickUpObject.GetComponent<Rigidbody>().isKinematic = false;
-        pickUpObject.GetComponent<BoxCollider>().enabled = true;
-        yield return null;
-    }
-
     private void SetGroundShadow(){
         RaycastHit hit; 
         if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 100)){
@@ -305,25 +296,5 @@ public class PlayerController : MonoBehaviour {
 
     private void PickUpKey(GameObject key){
         GameManager.instance.gameLevels[Array.IndexOf(GameManager.instance.gameLevels, GameManager.instance.CurrentLevel)].PickUpKey(key);
-    }
-    
-	private void OnTriggerEnter(Collider other){
-        if(other.tag == "PickUp"){
-            pickUpObject = other.gameObject;
-        }else if(other.tag == "Item"){
-            item = other.gameObject;
-        }else if(other.tag == "WarpPad"){
-            pMove.StartCoroutine(pTraverse.Warp(other.gameObject));
-        }else if(other.tag == "DungeonKey"){
-            PickUpKey(other.gameObject);
-        }
-    }
-
-    private void OnTriggerExit(Collider other){
-        if(other.tag == "PickUp" && !isHoldingObject){
-            pickUpObject = null;
-        }else if(other.tag == "Item"){
-            item = null;
-        }
     }
 }
