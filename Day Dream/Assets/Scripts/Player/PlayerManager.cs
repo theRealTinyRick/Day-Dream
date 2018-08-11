@@ -73,6 +73,7 @@ public class PlayerManager : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other){
         if(other.tag == "Water"){
+            GetComponent<ParticleEffectManager>().WaterSplash();
             transform.position = startPosition.position;
         }
     }

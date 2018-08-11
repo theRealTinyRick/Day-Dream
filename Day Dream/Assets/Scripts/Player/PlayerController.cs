@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour {
 		LockOnInput();
 		InteractInput();
         EquipmentInput();
-        SetGroundShadow();
+        // SetGroundShadow();
         MenuInput();
         PlatFormingInput(dir);
 	}
@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void PlatFormingInput(Vector3 moveDir = new Vector3()){
-		if (Input.GetButtonDown("Jump")){
+		if (Input.GetButtonDown("Jump") && !pAttack.IsAttacking){
             if(!freeClimb.isClimbing && !ledgeClimb.IsClimbing){
                 if(freeClimb.CheckForClimb()){
                     return;
@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour {
             }
 
         }else if(Input.GetButtonDown("BButton") || Input.GetKeyDown(KeyCode.E)){
-            if(CheckGrounded()){
+            if(CheckGrounded() && !pAttack.IsAttacking){
                 pMove.Evade(moveDir);
             }
         }
@@ -200,8 +200,8 @@ public class PlayerController : MonoBehaviour {
 	private void CamerInput(){
         if(!pManager.IsPaused){
             if(!pManager.isLockedOn){
-                float h = Input.GetAxis("Mouse X");
-                float v = Input.GetAxis("Mouse Y"); 
+                float h = Input.GetAxis("Mouse X") * 2;
+                float v = Input.GetAxis("Mouse Y") * 2; 
                 pCamera.MouseOrbit(h, v );
             }else{
                 pCamera.LockedOnCam();
@@ -225,8 +225,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
     private void EquipmentInput(){
-        if(Input.GetKeyDown(KeyCode.G) && !pManager.isLockedOn && pManager.currentState != PlayerManager.PlayerState.Attacking){
-            pInv.EquipWeapons();
+        if(Input.GetKeyDown(KeyCode.G) || Input.GetButtonDown("YButton")){
+            if(!pManager.isLockedOn && pManager.currentState != PlayerManager.PlayerState.Attacking){
+                pInv.EquipWeapons();
+            }
         }
     }
 
@@ -282,17 +284,17 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void SetGroundShadow(){
-        RaycastHit hit; 
-        if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 100)){
-            shadow.SetActive(true);
-            Vector3 tp = hit.point;
-            tp.y = hit.point.y + 0.05f;
-            shadow.transform.position = Vector3.Lerp(shadow.transform.position, tp, 1f);
-        }else{
-            shadow.SetActive(false);
-        }
-    }
+    // private void SetGroundShadow(){
+    //     RaycastHit hit; 
+    //     if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 100)){
+    //         shadow.SetActive(true);
+    //         Vector3 tp = hit.point;
+    //         tp.y = hit.point.y + 0.05f;
+    //         shadow.transform.position = Vector3.Lerp(shadow.transform.position, tp, 1f);
+    //     }else{
+    //         shadow.SetActive(false);
+    //     }
+    // }
 
     private void PickUpKey(GameObject key){
         GameManager.instance.gameLevels[Array.IndexOf(GameManager.instance.gameLevels, GameManager.instance.CurrentLevel)].PickUpKey(key);

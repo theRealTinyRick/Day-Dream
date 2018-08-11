@@ -99,18 +99,7 @@ public class ClimbLadder : MonoBehaviour {
 	}
 
 	void HandleAnimation(float v){
-		string upAnimation = "L_ClimbUp";
-		string downAnimation = "L_ClimbDown";
-
-		if(v < 0){
-			anim.Play(downAnimation);
-			anim.speed = 1;
-		}else if(v > 0){
-			anim.Play(upAnimation);
-			anim.speed = 1;
-		}else{
-			anim.speed = 0;
-		}
+		
 	}
 
 	private void OnTriggerStay(Collider other){
