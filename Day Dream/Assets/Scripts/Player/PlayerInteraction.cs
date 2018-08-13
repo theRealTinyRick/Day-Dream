@@ -75,6 +75,8 @@ public class PlayerInteraction : MonoBehaviour {
 	void DropPickUp(bool fireCR = false){
 		isCarrying = false;
 
+		ActivateBomb(targetPickUp);
+
 		if(fireCR){
 			StartCoroutine(PutDown());
 			return;
@@ -96,8 +98,15 @@ public class PlayerInteraction : MonoBehaviour {
 		}
 		puttingDown = false;
 		targetObject.GetComponent<Rigidbody>().isKinematic = false;
-		
+
 		yield return null;
+	}
+
+	void ActivateBomb(GameObject item){
+		Bomb bombScript = item.GetComponent<Bomb>();
+		if(bombScript){
+			bombScript.isActivated = true;
+		}	
 	}
 
 	private void OnTriggerStay(Collider other){
@@ -112,7 +121,8 @@ public class PlayerInteraction : MonoBehaviour {
 		if(other.transform.tag == tags[0]){
 			targetItem = null;
 		}else if(other.transform.tag == tags[1]){
-			DropPickUp();
+			// DropPickUp();
+			if(!puttingDown)
 			targetPickUp = null;
 		}
 	}

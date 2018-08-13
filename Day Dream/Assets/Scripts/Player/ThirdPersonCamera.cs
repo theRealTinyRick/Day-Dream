@@ -13,8 +13,8 @@ public class ThirdPersonCamera : MonoBehaviour {
 
     private float currentDistance = 5;
     public float originalCameraDistance = 8;
-    private float Y_ANGLE_MIN = -30;
-    private float Y_ANGLE_MAX = 12;
+    private float Y_ANGLE_MIN = -60;
+    private float Y_ANGLE_MAX = 20;
 
     private float camX;
     private float camY;

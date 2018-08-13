@@ -19,6 +19,7 @@ TagManager:
   - Water
   - DungeonKey
   - Climbable
+  - Explodable
   layers:
   - Default
   - TransparentFX
