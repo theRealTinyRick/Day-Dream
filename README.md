@@ -1,2 +1,3 @@
 # Day-Dream
-A video game about a young boy who day dreams in class about saving his crush from monsters in a fantasy adventure!
+An Adventure RPG that focuses on level design, platforming and puzzles.
+
