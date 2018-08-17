@@ -39,11 +39,11 @@ public class WallJump : MonoBehaviour {
 
     IEnumerator CheckWallJump(){
         while(!pController.CheckGrounded()){
-            pManager.currentState = PlayerManager.PlayerState.Traversing;
+            PlayerManager.currentState = PlayerManager.PlayerState.Traversing;
 			//fire a raycast to make sure player does not jump off a ledge and die
             yield return new WaitForEndOfFrame();
         }
-        pManager.currentState = PlayerManager.PlayerState.FreeMovement;
+        PlayerManager.currentState = PlayerManager.PlayerState.FreeMovement;
         yield return null;
     }
 }

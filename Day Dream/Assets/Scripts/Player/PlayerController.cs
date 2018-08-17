@@ -114,10 +114,10 @@ public class PlayerController : MonoBehaviour {
             climbLadder.Tick(moveDir.z);
             return;
 
-        }else if(pManager.currentState == PlayerManager.PlayerState.Traversing && ledge){
+        }else if(PlayerManager.currentState == PlayerManager.PlayerState.Traversing && ledge){
             pTraverse.ShimyLedge(moveDir, ledge.transform);
 
-        }else if(pManager.currentState == PlayerManager.PlayerState.FreeMovement && moveDir != Vector3.zero && pManager.isVulnerable){
+        }else if(PlayerManager.currentState == PlayerManager.PlayerState.FreeMovement && moveDir != Vector3.zero && pManager.isVulnerable){
             pMove.FreeMovement(moveDir, speed);
             pMove.AnimatePlayerWalking(moveDir);
 
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour {
             anim.SetFloat("velocityY", Mathf.Lerp(anim.GetFloat("velocityY"), 0, .2f));
             anim.SetFloat("velocityX", Mathf.Lerp(anim.GetFloat("velocityX"), 0, .2f));
 
-            if(pManager.isVulnerable && pManager.currentState != PlayerManager.PlayerState.Attacking){
+            if(pManager.isVulnerable && PlayerManager.currentState != PlayerManager.PlayerState.Attacking){
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
             }
         }
@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour {
                 }else if(climbLadder.CheckForClimb(pManager)){
                     return;
 
-                }else if(CheckGrounded() && pManager.currentState != PlayerManager.PlayerState.Traversing){
+                }else if(CheckGrounded() && PlayerManager.currentState != PlayerManager.PlayerState.Traversing){
                     pMove.Jump(jumpHieght);
                     return;
 
@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void AttackInput(){
-		if(pManager.currentState == PlayerManager.PlayerState.FreeMovement){
+		if(PlayerManager.currentState == PlayerManager.PlayerState.FreeMovement){
             if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("XButton")){//X button or click
                 if(CheckGrounded() && !pManager.IsPaused){
                     pAttack.Attack();
@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
     private void BlockingInput(){
-        if(Input.GetMouseButton(1) && pManager.currentState == PlayerManager.PlayerState.FreeMovement &&
+        if(Input.GetMouseButton(1) && PlayerManager.currentState == PlayerManager.PlayerState.FreeMovement &&
         !pAttack.IsAttacking){
             pBlocking.SetBlocking(true);
         }else{
@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour {
 
     private void EquipmentInput(){
         if(Input.GetKeyDown(KeyCode.G) || Input.GetButtonDown("YButton")){
-            if(!pManager.isLockedOn && pManager.currentState != PlayerManager.PlayerState.Attacking){
+            if(!pManager.isLockedOn && PlayerManager.currentState != PlayerManager.PlayerState.Attacking){
                 pInv.EquipWeapons();
             }
         }
@@ -257,44 +257,27 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public bool CheckGrounded(){
-        if(pManager.currentState == PlayerManager.PlayerState.Attacking)
+        if(PlayerManager.currentState == PlayerManager.PlayerState.Attacking)
             return true;
 
         RaycastHit hit;
         if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 0.1f)){
             timeSinceGrounded = Time.time;
             anim.SetBool("isGrounded", true);
-
-            if(hit.transform.tag == "Platform"){
-                transform.SetParent(hit.transform);
-            }else{
-                transform.SetParent(null);
-            }
-
             anim.applyRootMotion = true;
+            PlatformParent.ParentToPlatform(hit.transform, transform);
+
             return true;
 
         }else{
-            if(pManager.currentState != PlayerManager.PlayerState.FreeClimbing)
+            if(PlayerManager.currentState != PlayerManager.PlayerState.FreeClimbing)
                 anim.SetBool("isGrounded", false);
                 
-            transform.SetParent(null);
+           PlatformParent.RemoveParent(transform);
             anim.applyRootMotion = false;
             return false;
         }
     }
-
-    // private void SetGroundShadow(){
-    //     RaycastHit hit; 
-    //     if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 100)){
-    //         shadow.SetActive(true);
-    //         Vector3 tp = hit.point;
-    //         tp.y = hit.point.y + 0.05f;
-    //         shadow.transform.position = Vector3.Lerp(shadow.transform.position, tp, 1f);
-    //     }else{
-    //         shadow.SetActive(false);
-    //     }
-    // }
 
     private void PickUpKey(GameObject key){
         GameManager.instance.gameLevels[Array.IndexOf(GameManager.instance.gameLevels, GameManager.instance.CurrentLevel)].PickUpKey(key);

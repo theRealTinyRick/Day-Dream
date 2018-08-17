@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour {
     public static PlayerManager instance;
     
     public enum PlayerState { FreeMovement, CanNotMove, Traversing, FreeClimbing, Attacking, Dead};
-    public PlayerState currentState = PlayerState.FreeMovement;
+    public static PlayerState currentState = PlayerState.FreeMovement;
 
     public bool isLockedOn = false;
     public bool isVulnerable = true;

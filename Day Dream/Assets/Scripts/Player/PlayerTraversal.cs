@@ -46,7 +46,7 @@ public class PlayerTraversal : MonoBehaviour {
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, .5f);
             yield return new WaitForEndOfFrame();
         }
-        pManager.currentState = PlayerManager.PlayerState.Traversing;
+        PlayerManager.currentState = PlayerManager.PlayerState.Traversing;
         yield return null;
     }
 
@@ -68,7 +68,7 @@ public class PlayerTraversal : MonoBehaviour {
             RaycastHit hit;
             Vector3 origin = transform.position;
             if(Physics.Raycast(origin, transform.forward, out hit, .75F)){
-                pManager.currentState = PlayerManager.PlayerState.Traversing;
+                PlayerManager.currentState = PlayerManager.PlayerState.Traversing;
                 rb.isKinematic = true;
                 Vector3 tp = (Vector3.Distance(transform.position, hit.point) - 0.2f ) * Vector3.Normalize(hit.point - transform.position) + transform.position;
                 tp.y = ledge.transform.position.y - 2.1f;
@@ -127,7 +127,7 @@ public class PlayerTraversal : MonoBehaviour {
         WarpPad pad = warpPad.GetComponent<WarpPad>();
         SkinnedMeshRenderer renderers = GetComponentInChildren<SkinnedMeshRenderer>();
 		MeshRenderer renderer = GetComponentInChildren<MeshRenderer>();
-        pManager.currentState = PlayerManager.PlayerState.Traversing;
+        PlayerManager.currentState = PlayerManager.PlayerState.Traversing;
         rb.isKinematic = true;
         transform.LookAt(pad.pointB.position);
         transform.position = warpPad.transform.position;
@@ -139,7 +139,7 @@ public class PlayerTraversal : MonoBehaviour {
 			transform.position = Vector3.Lerp(transform.position, pad.pointB.position, .05f);
 			yield return new WaitForEndOfFrame();
 		}
-		pManager.currentState = PlayerManager.PlayerState.FreeMovement;
+		PlayerManager.currentState = PlayerManager.PlayerState.FreeMovement;
 		renderers.enabled = true;
 		renderer.enabled = true;
         rb.isKinematic = false;
@@ -150,7 +150,7 @@ public class PlayerTraversal : MonoBehaviour {
 	public void Drop(){
         //stop climbing
         rb.isKinematic = false;
-        pManager.currentState = PlayerManager.PlayerState.FreeMovement;
+        PlayerManager.currentState = PlayerManager.PlayerState.FreeMovement;
         pController.ledge = null;
     }
 }

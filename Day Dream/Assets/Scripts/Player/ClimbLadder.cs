@@ -30,7 +30,7 @@ public class ClimbLadder : MonoBehaviour {
 
 	void InitClimb(PlayerManager pManager){
 		GetComponent<Rigidbody>().isKinematic = true;
-		pManager.currentState = PlayerManager.PlayerState.Traversing;
+		PlayerManager.currentState = PlayerManager.PlayerState.Traversing;
 		isClimbing = true;
 	}
 
@@ -71,7 +71,7 @@ public class ClimbLadder : MonoBehaviour {
 
 	void Drop(float v){
 		GetComponent<Rigidbody>().isKinematic = false;
-		PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
+		PlayerManager.currentState = PlayerManager.PlayerState.FreeMovement;
 		anim.speed = 1;
 		isClimbing = false;
 

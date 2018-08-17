@@ -54,7 +54,7 @@ public class LedgeClimb : MonoBehaviour {
 
 	void InitForClimb(Vector3 tp, Vector3 normal){
 		rb.isKinematic = true;
-		pManager.currentState = PlayerManager.PlayerState.Traversing;
+		PlayerManager.currentState = PlayerManager.PlayerState.Traversing;
 		anim.Play("GrabLedge");
 		anim.SetBool("LedgeClimbing", true);
 		tp.y = ledge.transform.position.y - 2.1f;
@@ -161,7 +161,7 @@ public class LedgeClimb : MonoBehaviour {
 		isClimbing = false;
 		rb.isKinematic = false;
 		anim.SetBool("LedgeClimbing", false);
-		pManager.currentState = PlayerManager.PlayerState.FreeMovement;
+		PlayerManager.currentState = PlayerManager.PlayerState.FreeMovement;
 	}
 
 	private void OnTriggerEnter(Collider other){

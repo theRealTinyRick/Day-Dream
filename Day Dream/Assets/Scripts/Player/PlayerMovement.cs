@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void FreeMovement(Vector3 movement, float speed){
-        if (pManager.currentState != PlayerManager.PlayerState.Attacking){
+        if (PlayerManager.currentState != PlayerManager.PlayerState.Attacking){
             if(pManager.isLockedOn && pManager.isBlocking){
                 speed = speed/2.5f;
             }else if(!pController.CheckGrounded()){

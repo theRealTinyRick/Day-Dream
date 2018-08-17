@@ -220,7 +220,7 @@ public class FreeClimb : MonoBehaviour {
 
 	public void Drop(){
 		rb.isKinematic = false;
-		PlayerManager.instance.currentState = PlayerManager.PlayerState.FreeMovement;
+		PlayerManager.currentState = PlayerManager.PlayerState.FreeMovement;
 		isClimbing = false;
 		inPosition = false;
 		isLerping = false;
