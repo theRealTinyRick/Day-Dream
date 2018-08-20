@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
         get{return pTargeting;}
     }
 
-	private float speed = 6.5f;
+	private float speed = 88f;
 
 	//JUMP VARS
 	public float jumpHieght = 30;

@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour {
 
             movement = pCamera.transform.TransformDirection(movement);
             movement.y = 0;
+            movement = Vector3.Normalize(movement);
 
             rb.velocity = new Vector3(movement.x * speed, rb.velocity.y, movement.z * speed);
 
