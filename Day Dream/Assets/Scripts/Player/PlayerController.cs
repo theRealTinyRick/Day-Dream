@@ -150,20 +150,17 @@ public class PlayerController : MonoBehaviour {
             }else if(freeClimb.isClimbing){
                 if(dir.z == 0){
                     freeClimb.Drop();
-                    wallJump.CheckWallJump(jumpHieght);
+                    // wallJump.CheckWallJump(jumpHieght);
                 }else if(dir.z < 0){
                     freeClimb.Drop();
                 }
-
-            }else if(ledgeClimb.IsClimbing){
+            }
+            else if(ledgeClimb.IsClimbing){
                 if(dir.z == 0){
                     ledgeClimb.Drop();
                     wallJump.CheckWallJump(jumpHieght);
-                }else if(dir.z < 0){
-                    ledgeClimb.Drop();
                 }else if(dir.z > 0){
-                    ledgeClimb.Drop();
-                    pMove.Jump(jumpHieght);
+                    ledgeClimb.StartCoroutine(ledgeClimb.ClimbUpLedge());
                 }
             }
 

@@ -6,6 +6,7 @@ public class ThirdPersonCamera : MonoBehaviour {
 
     public PlayerTargeting pTargeting;
 
+    [SerializeField]
     private Transform camLookAt;
     private Transform clippingOrigin;
 
@@ -54,9 +55,9 @@ public class ThirdPersonCamera : MonoBehaviour {
 
         Vector3 dis = new Vector3(0f, 0f, -currentDistance);   // use variables to get offeset and the rotation
         Quaternion rotation = Quaternion.Euler(-camY, camX, 0);
-
         Vector3 pos = camLookAt.position + rotation * dis; //apply rotation and offset to the position of the camera
-        transform.position = Vector3.Lerp(transform.position, pos, .5f);
+
+        transform.position = Vector3.Lerp(transform.position, pos, 1f);
         transform.LookAt(camLookAt);    
     }   
 

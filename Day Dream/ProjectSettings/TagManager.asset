@@ -32,10 +32,10 @@ TagManager:
   - Player
   - Environment
   - Ledge
-  - 
-  - 
-  - 
-  - 
+  - FogVolumeShadowCaster
+  - FogVolume
+  - FogVolumeSurrogate
+  - FogVolumeUniform
   - 
   - 
   - 

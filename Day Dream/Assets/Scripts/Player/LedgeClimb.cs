@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class LedgeClimb : MonoBehaviour {
 
+	[SerializeField]
 	private bool isClimbing = false;
 	public bool IsClimbing{
 		get{return isClimbing;}
 	}
 
 	bool isLerping = false;
+	// bool isClimbingUp = false;
 
 	PlayerController pController;
 	PlayerManager pManager;
@@ -78,12 +80,8 @@ public class LedgeClimb : MonoBehaviour {
 			float v = Input.GetAxisRaw("Vertical");
 			Vector3 dir = new Vector3(h, 0, 0);
 
-			if(v > 0 && Input.GetButtonDown("Jump")){
-				pMove.Jump(pController.jumpHieght); 
-			}else if(v < 0){
+			if(v < 0){
 				Drop();
-			}else if(v == 0 && Input.GetButtonDown("Jump")){
-				wallJump.CheckWallJump(pController.jumpHieght/1.5f);
 			}
 
 			if(!isLerping){
@@ -157,10 +155,37 @@ public class LedgeClimb : MonoBehaviour {
 		}
 	}
 
+	public IEnumerator ClimbUpLedge(){
+		Vector3 dir = transform.forward;
+		Vector3 o = transform.position;
+		o.y += 3;
+
+		RaycastHit hit;
+		if(Physics.Raycast(o, dir, out hit, 1, layerMask)){
+
+			pMove.Jump(pController.jumpHieght); 
+			Drop();
+			
+			yield break;
+		}
+		
+		o += transform.forward;
+		dir = Vector3.down;
+
+		anim.applyRootMotion = true;
+		anim.Play("ClimbOnLedge");
+
+		yield return new WaitForSeconds(2);
+		Drop();
+
+		yield return null;
+	}
+
 	public void Drop(){
 		isClimbing = false;
 		rb.isKinematic = false;
 		anim.SetBool("LedgeClimbing", false);
+		anim.applyRootMotion = false;
 		PlayerManager.currentState = PlayerManager.PlayerState.FreeMovement;
 	}
 

@@ -5473,8 +5473,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1011217705026102}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.68, y: 1.812, z: 25.4}
+  m_LocalRotation: {x: -0.005488094, y: -0.09594479, z: -0.0005416672, w: 0.9953714}
+  m_LocalPosition: {x: -235.81499, y: 12.85997, z: 69.23474}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4585371970057590}
@@ -5485,7 +5485,7 @@ Transform:
   - {fileID: 4163351767920206}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -86.231, z: 0}
 --- !u!4 &4482494289291768
 Transform:
   m_ObjectHideFlags: 1
@@ -9916,7 +9916,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a80fac141d7ff24db4a5c79644b62db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   isLockedOn: 0
   isVulnerable: 1
   isBlocking: 0
@@ -11819,6 +11818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcdd01b204e8ac445801f437bc18ad05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isClimbing: 0
 --- !u!114 &114892628086542812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12257,7 +12257,7 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 0dc9e8718580df843a967547cb7d1823, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.38
+  m_Radius: 0.5
   m_Height: 1.82
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
