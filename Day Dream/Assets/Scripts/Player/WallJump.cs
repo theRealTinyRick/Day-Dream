@@ -6,15 +6,14 @@ public class WallJump : MonoBehaviour {
 
 	Rigidbody rb;
 	Animator anim;
-	PlayerTraversal pTraverse;
 	PlayerController pController;
 	PlayerManager pManager;
+	
 	LayerMask layerMask = 1<<8;
 
 	void Start(){
 		rb = GetComponent<Rigidbody>();
 		anim = GetComponent<Animator>();
-		pTraverse = GetComponent<PlayerTraversal>();
 		pController = GetComponent<PlayerController>();
 		pManager = PlayerManager.instance;
 		layerMask = ~layerMask;
@@ -29,7 +28,8 @@ public class WallJump : MonoBehaviour {
 				transform.rotation = rot;
 				rb.velocity = new Vector3(dir.x * jumpHeight * 1.5f, jumpHeight, dir.z * jumpHeight * 1.5f);
 				anim.Play("WallJump");
-				pTraverse.Drop();
+				GetComponent<LedgeClimb>().Drop();
+				GetComponent<FreeClimb>().Drop();
 				StartCoroutine(CheckWallJump());
 				return true;
 			}

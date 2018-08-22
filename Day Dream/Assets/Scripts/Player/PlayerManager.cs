@@ -14,6 +14,8 @@ public class PlayerManager : MonoBehaviour {
     public enum PlayerState { FreeMovement, CanNotMove, Traversing, FreeClimbing, Attacking, Dead};
     public static PlayerState currentState = PlayerState.FreeMovement;
 
+    [SerializeField] public PlayerState CurrentState;
+
     public bool isLockedOn = false;
     public bool isVulnerable = true;
     public bool isBlocking = false;
@@ -41,6 +43,8 @@ public class PlayerManager : MonoBehaviour {
 
     private void Update(){
         ResetPlayerPosition();
+
+        CurrentState = currentState;
     }
 
     public void Pause(bool paused){

@@ -16,6 +16,11 @@ public class PlayerMovement : MonoBehaviour {
     private float fallMultiplyer = 10f;
     private float lowJumpMultiplyer = 3f;
 
+    private float timeSinceJump = 0.0f;
+    
+    [SerializeField] float timeTillLand;
+    [SerializeField] float timeTillRoll;
+
     private void Start(){
         pManager = PlayerManager.instance;
         pController = GetComponent<PlayerController>();
@@ -106,5 +111,19 @@ public class PlayerMovement : MonoBehaviour {
             rb.velocity += Vector3.up *  Physics.gravity.y  * (fallMultiplyer - 1) * Time.deltaTime;
         else if (rb.velocity.y  > 0 /*&& !Input.GetButton("Jump")*/)
             rb.velocity += Vector3.up * Physics.gravity.y *2 * Time.deltaTime;
+    }
+
+    public void JumpTime(){
+        timeSinceJump = Time.time;
+    }
+
+    public void Land(){
+        float t = Time.time - timeSinceJump;
+
+        if(t > timeTillRoll){
+            //roll
+        }else if(t > timeTillLand){
+            //land
+        }
     }
 }

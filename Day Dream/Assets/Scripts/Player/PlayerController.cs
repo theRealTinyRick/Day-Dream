@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour {
     private LedgeClimb ledgeClimb;
     private WallJump wallJump;
     private ClimbLadder climbLadder;
-    private PlayerTraversal pTraverse;
 	private PlayerAttack pAttack;
     private PlayerBlocking pBlocking; 
     private PlayerMenu pMenu;
@@ -28,29 +27,14 @@ public class PlayerController : MonoBehaviour {
         get{return pTargeting;}
     }
 
-	private float speed = 88f;
+	private float speed = 8f;
 
 	//JUMP VARS
 	public float jumpHieght = 30;
     private float timeSinceGrounded;
+    public bool grounded = true;
 
-	//PLATFORMS
-	private GameObject ladder = null;
-    private GameObject shimyPipe = null;
-    public GameObject ledge = null;
-
-	// 
-	private bool isHoldingObject;
-    private GameObject pickUpObject = null;
-    public GameObject item;
-    public GameObject pushBlock;
-    public bool isPushingBlock;
-
-    [SerializeField] private Transform putDownPos;
     [SerializeField] private Transform feetLevel;
-
-	[SerializeField] Transform climbingCamPoint;
-    [SerializeField] GameObject shadow;
 
     Vector3 dir = new Vector3();
 
@@ -61,7 +45,6 @@ public class PlayerController : MonoBehaviour {
         freeClimb = GetComponent<FreeClimb>();
         ledgeClimb = GetComponent<LedgeClimb>();
         climbLadder = GetComponent<ClimbLadder>();
-        pTraverse = GetComponent<PlayerTraversal>();
 		pAttack = GetComponent<PlayerAttack>();
         pBlocking = GetComponent<PlayerBlocking>();
         pMenu = GetComponent<PlayerMenu>();
@@ -80,7 +63,6 @@ public class PlayerController : MonoBehaviour {
 		LockOnInput();
 		InteractInput();
         EquipmentInput();
-        // SetGroundShadow();
         MenuInput();
         PlatFormingInput(dir);
 	}
@@ -91,6 +73,8 @@ public class PlayerController : MonoBehaviour {
 
 	private void FixedUpdate(){
         MoveInput();
+        CheckGrounded();
+        RootMotionController();
 	}
 
 	private void MoveInput(){
@@ -114,14 +98,11 @@ public class PlayerController : MonoBehaviour {
             climbLadder.Tick(moveDir.z);
             return;
 
-        }else if(PlayerManager.currentState == PlayerManager.PlayerState.Traversing && ledge){
-            pTraverse.ShimyLedge(moveDir, ledge.transform);
-
         }else if(PlayerManager.currentState == PlayerManager.PlayerState.FreeMovement && moveDir != Vector3.zero && pManager.isVulnerable){
             pMove.FreeMovement(moveDir, speed);
             pMove.AnimatePlayerWalking(moveDir);
 
-        }else if(moveDir == Vector3.zero && CheckGrounded()){
+        }else if(moveDir == Vector3.zero && grounded){
             anim.SetFloat("velocityY", Mathf.Lerp(anim.GetFloat("velocityY"), 0, .2f));
             anim.SetFloat("velocityX", Mathf.Lerp(anim.GetFloat("velocityX"), 0, .2f));
 
@@ -140,11 +121,11 @@ public class PlayerController : MonoBehaviour {
                 }else if(climbLadder.CheckForClimb(pManager)){
                     return;
 
-                }else if(CheckGrounded() && PlayerManager.currentState != PlayerManager.PlayerState.Traversing){
+                }else if(grounded && PlayerManager.currentState != PlayerManager.PlayerState.Traversing){
                     pMove.Jump(jumpHieght);
                     return;
 
-                }else if(!CheckGrounded() && wallJump.CheckWallJump(jumpHieght - 2)){
+                }else if(!grounded && wallJump.CheckWallJump(jumpHieght - 2)){
                     return;
                 }
             }else if(freeClimb.isClimbing){
@@ -165,7 +146,7 @@ public class PlayerController : MonoBehaviour {
             }
 
         }else if(Input.GetButtonDown("BButton") || Input.GetKeyDown(KeyCode.E)){
-            if(CheckGrounded() && !pAttack.IsAttacking){
+            if(grounded && !pAttack.IsAttacking){
                 pMove.Evade(moveDir);
             }
         }
@@ -174,7 +155,7 @@ public class PlayerController : MonoBehaviour {
 	private void AttackInput(){
 		if(PlayerManager.currentState == PlayerManager.PlayerState.FreeMovement){
             if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("XButton")){//X button or click
-                if(CheckGrounded() && !pManager.IsPaused){
+                if(grounded && !pManager.IsPaused){
                     pAttack.Attack();
                 }
             }
@@ -261,8 +242,10 @@ public class PlayerController : MonoBehaviour {
         if(Physics.Raycast(feetLevel.position, -Vector3.up, out hit, 0.1f)){
             timeSinceGrounded = Time.time;
             anim.SetBool("isGrounded", true);
-            anim.applyRootMotion = true;
+            // anim.applyRootMotion = true;
             PlatformParent.ParentToPlatform(hit.transform, transform);
+
+            grounded = true;
 
             return true;
 
@@ -270,13 +253,27 @@ public class PlayerController : MonoBehaviour {
             if(PlayerManager.currentState != PlayerManager.PlayerState.FreeClimbing)
                 anim.SetBool("isGrounded", false);
                 
-           PlatformParent.RemoveParent(transform);
-            anim.applyRootMotion = false;
+            PlatformParent.RemoveParent(transform);
+            
+            // anim.applyRootMotion = false;
+
+            grounded = false;
+
             return false;
         }
     }
 
     private void PickUpKey(GameObject key){
         GameManager.instance.gameLevels[Array.IndexOf(GameManager.instance.gameLevels, GameManager.instance.CurrentLevel)].PickUpKey(key);
+    }
+
+    private void RootMotionController(){
+        if(grounded){
+            anim.applyRootMotion = true;
+        }else if(PlayerManager.currentState == PlayerManager.PlayerState.Traversing){
+            anim.applyRootMotion = true;
+        }else if(!grounded){
+
+        }
     }
 }

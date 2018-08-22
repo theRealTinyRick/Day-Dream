@@ -171,11 +171,21 @@ public class LedgeClimb : MonoBehaviour {
 		
 		o += transform.forward;
 		dir = Vector3.down;
-
 		anim.applyRootMotion = true;
+		CapsuleCollider[] colliders = GetComponents<CapsuleCollider>();
+
+		foreach(CapsuleCollider collider in colliders){
+			collider.enabled = false;
+		}
+
 		anim.Play("ClimbOnLedge");
 
 		yield return new WaitForSeconds(2);
+		// transform.position = o;
+		
+		foreach(CapsuleCollider collider in colliders){
+			collider.enabled = true;
+		}
 		Drop();
 
 		yield return null;
