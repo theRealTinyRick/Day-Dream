@@ -4,6 +4,9 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class PlayerMovement : MonoBehaviour {
+
+    private const string velocityX = "velocityX";
+    private const string velocityY = "velocityY";
     
     [TabGroup("Preferences")]
     [SerializeField] 
@@ -11,7 +14,12 @@ public class PlayerMovement : MonoBehaviour {
     
     [TabGroup("Preferences")]
     [SerializeField] 
-    private float timeTillRoll;
+    private float timeTillRoll;    
+    
+    [TabGroup("Preferences")]
+    [SerializeField] 
+    [Range(0, 1)]
+    private float turnSpeed;
     
     [TabGroup("Set Up")]
     [SerializeField]
@@ -41,11 +49,14 @@ public class PlayerMovement : MonoBehaviour {
 
     public void FreeMovement(Vector3 movement, float speed){
         if (PlayerManager.currentState != PlayerManager.PlayerState.Attacking){
+           
             if(pManager.isLockedOn && pManager.isBlocking){
                 speed = speed/2.5f;
-            }else if(!pController.CheckGrounded()){
-                // speed = speed / 1.5f;
             }
+
+            Vector3 move = movement;
+
+            speed *= move.magnitude;
 
             movement = pCamera.transform.TransformDirection(movement);
             movement.y = 0;
@@ -55,28 +66,33 @@ public class PlayerMovement : MonoBehaviour {
 
             if(pController.CheckGrounded() && movement != Vector3.zero){
                 if(!pManager.isLockedOn || !pManager.isBlocking){
-                    float turnSpeed = Mathf.Max(Mathf.Abs(movement.x), Mathf.Abs(movement.z));
-                    if(turnSpeed > .5f){
-                        turnSpeed = 0.5f;
-                    }
+                    // float turnSpeed = Mathf.Max(Mathf.Abs(movement.x), Mathf.Abs(movement.z));
+                    // if(turnSpeed > .5f){
+                    //     turnSpeed = 0.5f;
+                    // }
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), turnSpeed);
                 }
             }
+
+            AnimatePlayerWalking(movement, move);
         }
     }
 
-    public void AnimatePlayerWalking(Vector3 moveDir){
-        if(pManager.isLockedOn && pManager.isBlocking){
-            if(moveDir.z > 0.5f){
-                moveDir.z = 0.5f;
-            }
-            anim.SetFloat("velocityY", Mathf.Lerp(anim.GetFloat("velocityY"), moveDir.z, .1f));
-            anim.SetFloat("velocityX", Mathf.Lerp(anim.GetFloat("velocityX"), moveDir.x, .1f));
-            LookAtTarget(pTargeting.currentTarget.transform);
-        }else{
-            float val = Mathf.Lerp(anim.GetFloat("velocityY"), Mathf.Max(Mathf.Abs(moveDir.x), Mathf.Abs(moveDir.z)), 0.3f);
-            anim.SetFloat("velocityY", val);
-        }
+    public void AnimatePlayerWalking(Vector3 moveDir, Vector3 move){
+        Vector3 toVector = transform.position + moveDir;
+        toVector -= transform.position;
+
+        Vector3 forward = transform.forward;
+        Vector3 crossProduct = Vector3.Cross(forward, toVector);
+        
+        var origin = transform.position;
+        origin.y += 1;
+
+        anim.SetFloat(velocityY, move.magnitude);
+        anim.SetFloat(velocityX, crossProduct.y);
+
+        Debug.DrawRay(origin, toVector, Color.red);
+        Debug.DrawRay(origin, forward, Color.magenta);
     }
 
     public void LookAtTarget(Transform target){
@@ -87,8 +103,14 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Jump(float jumpHeight, Vector3 dir = new Vector3()){
-        dir = transform.forward * 10;
-        rb.velocity = new Vector3(0, jumpHeight, 0 );
+
+        dir = pCamera.transform.TransformDirection(dir);
+        dir.y = 0;
+        dir.Normalize();
+
+        Vector3 v = new Vector3(0, jumpHeight, 0) + (dir * jumpHeight);
+
+        rb.velocity = v;
         anim.SetBool("isGrounded", false);
         anim.Play("Jump");
     }

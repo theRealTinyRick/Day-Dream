@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 
 public class PlayerTargeting : MonoBehaviour {
 
-	public static PlayerTargeting instance;
+    private const string lockedOn = "LockedOn"; 
    
     [HideInInspector]
     public List<GameObject> enemiesInArea = new List<GameObject>();
@@ -13,12 +13,18 @@ public class PlayerTargeting : MonoBehaviour {
     [HideInInspector]
     public GameObject currentTarget;
 
-    private void Awake()
-    {
+	public static PlayerTargeting instance;
+    private Animator anim;
+
+    private void Awake(){
         if (instance == null)
             instance = this;
         else if (instance != null)
             Destroy(gameObject);
+    }
+
+    private void Start(){
+        anim = PlayerManager.instance.GetComponent<Animator>();
     }
 
     public void ToggleLockedOnEnemies(){
@@ -27,7 +33,7 @@ public class PlayerTargeting : MonoBehaviour {
                 // there is no target so set current target to the first in the list
                 currentTarget = enemiesInArea[0];
                 PlayerManager.instance.isLockedOn = true;
-                // PlayerManager.instance.inventory.EquipWeapon();
+                anim.SetFloat(lockedOn, 1);
             }
             else{
                 //there is a target so find out if its the last in the list then set the current targte to the next enemy
@@ -46,6 +52,7 @@ public class PlayerTargeting : MonoBehaviour {
     public void LockOff(){
         currentTarget = null;
         PlayerManager.instance.isLockedOn = false;
+        anim.SetFloat(lockedOn, 0);
     }
 
     private void OnTriggerEnter(Collider other){

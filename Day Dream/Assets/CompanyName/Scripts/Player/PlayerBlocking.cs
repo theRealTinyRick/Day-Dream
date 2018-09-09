@@ -23,12 +23,12 @@ public class PlayerBlocking : MonoBehaviour {
 		isBlocking = val;	
 	}
 
-	void HandleBlock(){
+	private void HandleBlock(){
 		if(isBlocking){
-            anim.SetBool("IsBlocking", true);
+			anim.SetBool("IsBlocking", true);
 		}else{
-            anim.SetBool("IsBlocking", false);
-            anim.SetFloat("velocityX", 0);
+			anim.SetBool("IsBlocking", false);
+		// anim.SetFloat("velocityX", 0);
 		}
 	}	
 }

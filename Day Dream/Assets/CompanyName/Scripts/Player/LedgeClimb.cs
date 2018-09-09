@@ -20,7 +20,7 @@ public class LedgeClimb : MonoBehaviour {
 	Animator anim;
 	Rigidbody rb;
 	Ledge ledge;
-	LayerMask layerMask = 1<<8;
+	LayerMask layerMask = 1 << 8;
 	Transform shimyHelper;
 
 	float t;

@@ -88,8 +88,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void MoveInput(){
-		float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+		float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
         Vector3 moveDir = new Vector3(h,0,v);
         dir = moveDir;
 
@@ -110,11 +110,9 @@ public class PlayerController : MonoBehaviour {
 
         }else if(PlayerManager.currentState == PlayerManager.PlayerState.FreeMovement && moveDir != Vector3.zero && pManager.isVulnerable){
             pMove.FreeMovement(moveDir, speed);
-            pMove.AnimatePlayerWalking(moveDir);
+            // pMove.AnimatePlayerWalking(moveDir);
 
         }else if(moveDir == Vector3.zero && grounded){
-            anim.SetFloat("velocityY", Mathf.Lerp(anim.GetFloat("velocityY"), 0, .2f));
-            anim.SetFloat("velocityX", Mathf.Lerp(anim.GetFloat("velocityX"), 0, .2f));
 
             if(pManager.isVulnerable && PlayerManager.currentState != PlayerManager.PlayerState.Attacking){
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
@@ -132,11 +130,12 @@ public class PlayerController : MonoBehaviour {
                     return;
 
                 }else if(grounded && PlayerManager.currentState != PlayerManager.PlayerState.Traversing){
-                    pMove.Jump(jumpHieght);
+                    pMove.Jump(jumpHieght, moveDir);
                     return;
 
                 }else if(!grounded && wallJump.CheckWallJump(jumpHieght - 2)){
                     return;
+
                 }
             }else if(freeClimb.isClimbing){
                 if(dir.z == 0){

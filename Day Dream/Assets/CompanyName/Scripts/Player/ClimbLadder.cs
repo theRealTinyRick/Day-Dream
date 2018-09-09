@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class ClimbLadder : MonoBehaviour {
 
-	Ladder ladder;
-	bool ladderPresent = false;
-	bool inPosition = false;
-
 	private bool isClimbing = false;
-	public bool IsClimbing{
-		get{return isClimbing;}
-	}
+	public bool IsClimbing{	get{return isClimbing;} }
 
-	float speed = 3;
-	float t = 0.0f;
+	private bool ladderPresent = false;
+	private bool inPosition = false;
+	private float speed = 3;
+	private float t = 0.0f;
 
-	Animator anim;
+	private Ladder ladder;
+
+	private Animator anim;
 
 	public bool CheckForClimb(PlayerManager pManager){
 		anim = GetComponent<Animator>();
