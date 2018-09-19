@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Rewired;
 
 public class PlayerController : MonoBehaviour {
 
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private Transform feetLevel;
 
+    private Player input;
 	private PlayerManager pManager;
 	private PlayerMovement pMove;
     private FreeClimb freeClimb;
@@ -47,9 +49,35 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
 	private Animator anim;
     private Vector3 dir = new Vector3();
+
+    private const string LeftStickHorizontal = "LeftStickHorizontal";
+    private const string LeftStickVertical = "LeftStickVertical";
     
+    private const string RightStickHorizontal = "RightStickHorizontal";
+    private const string RightStickVertical = "RightStickVetical";
+
+    private const string AButton = "AButton";
+    private const string BButton = "BButton";
+    private const string YButton = "YButton";
+    private const string XButton = "XButton";
+
+    private const string RightBumper = "RightBumper";
+    private const string RightTrigger = "RightTrigger";
+
+    private const string LeftBumper = "LeftBumper";
+    private const string LeftTrigger = "LeftTrigger";
+
+    private const string Horizontal = "Horizontal";
+    private const string Vertical = "Vertical";
+
+    private const string MouseX = "Mouse X";
+    private const string MouseY = "Mouse Y";
+
 	void Start () {
 		pManager = PlayerManager.instance;
+
+        input = ReInput.players.GetPlayer(0);
+        
 		pMove = GetComponent<PlayerMovement>();
         wallJump = GetComponent<WallJump>();
         freeClimb = GetComponent<FreeClimb>();
@@ -88,8 +116,16 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void MoveInput(){
-		float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+		float h = input.GetAxis(LeftStickHorizontal);
+        if(h == 0){
+            h = Input.GetAxis(Horizontal);
+        }
+
+        float v = input.GetAxis(LeftStickVertical);
+        if(v == 0){
+            v = Input.GetAxis(Vertical);
+        }
+
         Vector3 moveDir = new Vector3(h,0,v);
         dir = moveDir;
 

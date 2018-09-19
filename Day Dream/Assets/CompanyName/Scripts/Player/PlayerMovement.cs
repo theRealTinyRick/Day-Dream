@@ -51,7 +51,9 @@ public class PlayerMovement : MonoBehaviour {
         if (PlayerManager.currentState != PlayerManager.PlayerState.Attacking){
            
             if(pManager.isLockedOn && pManager.isBlocking){
-                speed = speed/2.5f;
+                speed = speed / 2.5f;
+            }else if(movement.x != 0 && movement.z != 0){
+                speed = speed / 1.3f;
             }
 
             Vector3 move = movement;
@@ -60,16 +62,13 @@ public class PlayerMovement : MonoBehaviour {
 
             movement = pCamera.transform.TransformDirection(movement);
             movement.y = 0;
-            movement = Vector3.Normalize(movement);
+            movement = Vector3.Normalize(movement); 
 
             rb.velocity = new Vector3(movement.x * speed, rb.velocity.y, movement.z * speed);
 
             if(pController.CheckGrounded() && movement != Vector3.zero){
                 if(!pManager.isLockedOn || !pManager.isBlocking){
-                    // float turnSpeed = Mathf.Max(Mathf.Abs(movement.x), Mathf.Abs(movement.z));
-                    // if(turnSpeed > .5f){
-                    //     turnSpeed = 0.5f;
-                    // }
+  
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), turnSpeed);
                 }
             }
@@ -103,7 +102,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Jump(float jumpHeight, Vector3 dir = new Vector3()){
-
         dir = pCamera.transform.TransformDirection(dir);
         dir.y = 0;
         dir.Normalize();

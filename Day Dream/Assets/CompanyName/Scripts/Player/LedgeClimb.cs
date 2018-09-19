@@ -5,29 +5,32 @@ using UnityEngine;
 public class LedgeClimb : MonoBehaviour {
 
 	[SerializeField]
+	private float yOffset;
+
+	[SerializeField]
+	private float wallOffset;
+
+	[SerializeField]
 	private bool isClimbing = false;
-	public bool IsClimbing{
-		get{return isClimbing;}
-	}
+	public bool IsClimbing{ get{return isClimbing;} }
 
-	bool isLerping = false;
-	// bool isClimbingUp = false;
+	private bool isLerping = false;
 
-	PlayerController pController;
-	PlayerManager pManager;
-	PlayerMovement pMove;
-	WallJump wallJump;
-	Animator anim;
-	Rigidbody rb;
-	Ledge ledge;
-	LayerMask layerMask = 1 << 8;
-	Transform shimyHelper;
+	private PlayerController pController;
+	private PlayerManager pManager;
+	private PlayerMovement pMove;
+	private WallJump wallJump;
+	private Animator anim;
+	private Rigidbody rb;
+	private Ledge ledge;
+	private LayerMask layerMask = 1 << 8;
+	private Transform shimyHelper;
 
-	float t;
-	float speed = 1.5f;
-	bool hasPlayedAnim = false;
+	private float t;
+	private float speed = 1.5f;
+	private bool hasPlayedAnim = false;
 
-	void Start(){
+	private void Start(){
 		layerMask = ~layerMask;
 
 		pController = GetComponent<PlayerController>();
@@ -47,34 +50,39 @@ public class LedgeClimb : MonoBehaviour {
 			Vector3 origin = transform.position;
 			origin.y += 1;
 			if(Physics.Raycast(origin, transform.forward, out hit, 1, layerMask)){
-				InitForClimb(hit.point, hit.normal);
+				shimyHelper.position = hit.point;
+				InitForClimb(hit);
 				return true;
 			}
 		}
 		return false;
 	}
 
-	void InitForClimb(Vector3 tp, Vector3 normal){
+	private void InitForClimb(RaycastHit hit){
 		rb.isKinematic = true;
 		PlayerManager.currentState = PlayerManager.PlayerState.Traversing;
+
 		anim.Play("GrabLedge");
 		anim.SetBool("LedgeClimbing", true);
-		tp.y = ledge.transform.position.y - 2.1f;
-		tp -= transform.forward * 0.2f;
-		transform.position = tp;
-		shimyHelper.position = tp;
 
-		Quaternion rot = Quaternion.LookRotation(-normal);
+		Vector3 tp = hit.point;
+		tp += hit.normal * wallOffset;
+		tp.y = ledge.leftSide.position.y;
+		tp.y -= yOffset;
+
+		Quaternion rot = ledge.leftSide.rotation;
+
+		transform.position = tp;
 		transform.rotation = rot;
 
 		isClimbing = true;
 	}
 	
-	void Update () {
+	private void Update () {
 		Tick();
 	}
 
-	void Tick(){
+	private void Tick(){
 		if(isClimbing){
 			float h = Input.GetAxisRaw("Horizontal");
 			float v = Input.GetAxisRaw("Vertical");
@@ -106,12 +114,12 @@ public class LedgeClimb : MonoBehaviour {
 					hasPlayedAnim = true;
 				}
 				transform.position = Vector3.Lerp(transform.position, shimyHelper.position, t);
-				transform.rotation = shimyHelper.rotation;
+				transform.rotation = ledge.leftSide.rotation;
 			}
 		}
 	}
 
-	bool CanShimy(Vector3 dir){	
+	private bool CanShimy(Vector3 dir){	
 		RaycastHit hit; 
 		Vector3 origin = transform.position;
 
@@ -139,7 +147,7 @@ public class LedgeClimb : MonoBehaviour {
 		return false;
 	}
 
-	Vector3 PositionWithOffset(Vector3 origin, Vector3 target){
+	private Vector3 PositionWithOffset(Vector3 origin, Vector3 target){
 		Vector3 direction = origin - target;
 		direction.Normalize();
 		Vector3 offset = direction * 0.2f;
@@ -147,7 +155,7 @@ public class LedgeClimb : MonoBehaviour {
 		return target + offset;
 	}
 
-	void HandleAnim(float f){
+	private void HandleAnim(float f){
 		if(f < 0){
 			anim.Play("Ledge_Left");
 		}else if(f > 0){

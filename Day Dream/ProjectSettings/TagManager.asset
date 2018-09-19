@@ -20,6 +20,7 @@ TagManager:
   - DungeonKey
   - Climbable
   - Explodable
+  - WallRun
   layers:
   - Default
   - TransparentFX

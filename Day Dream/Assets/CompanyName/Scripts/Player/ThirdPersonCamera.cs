@@ -1,19 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class ThirdPersonCamera : MonoBehaviour {
 
-    public PlayerTargeting pTargeting;
-
+    [TabGroup("Set Up")]
     [SerializeField]
     private Transform camLookAt;
 
+    [TabGroup("Set Up")]
     [SerializeField] 
     private Transform camClimbingPoint;
 
+    [TabGroup("Preferences")]
     [SerializeField]
     private float originalCameraDistance = 8;
+    
+    [TabGroup("Set Up")]
+    [SerializeField]
+    private PlayerTargeting pTargeting;
     
     private float currentDistance = 5;
     private float Y_ANGLE_MIN = -60;
