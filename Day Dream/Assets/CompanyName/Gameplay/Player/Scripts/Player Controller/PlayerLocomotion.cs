@@ -7,15 +7,15 @@ namespace AH.Max.Gameplay
 {
 	public class PlayerLocomotion : MonoBehaviour 
 	{
-		[TabGroup("Preferences")]
+		[TabGroup(Tabs.Preferences)]
 		[SerializeField]
 		private float moveSpeed;		
 
-		[TabGroup("Preferences")]
+		[TabGroup(Tabs.Preferences)]
 		[SerializeField]
 		private float jumpHeight;
 
-		[TabGroup("Preferences")]
+		[TabGroup(Tabs.Preferences)]
 		[SerializeField]
 		[Range(0.0f, 1.0f)]
 		private float turnSpeed;

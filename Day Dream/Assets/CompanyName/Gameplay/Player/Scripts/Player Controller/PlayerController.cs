@@ -40,10 +40,11 @@ namespace AH.Max.Gameplay
 
 		private Player input;
 		public Player _input{get{return input;}}
+		private PlayerAttack playerAttack;
 		private PlayerStateManager playerStateManager;
 		private PlayerCamera playerCameraComponent;
 		private PlayerLocomotion playerLocomotion;
-		public PlayerFreeClimb playerFreeClimb;
+		private PlayerFreeClimb playerFreeClimb;
 
 		private bool isGrounded = true;
 		public bool IsGrounded { get { return isGrounded; } }
@@ -58,6 +59,7 @@ namespace AH.Max.Gameplay
 		{
 			PlatformingInput();
 			CameraInput();
+			CombatInput();
 		}
 
 		private void FixedUpdate ()
@@ -72,6 +74,7 @@ namespace AH.Max.Gameplay
 
 		private void ComponentInitialization()
 		{
+			playerAttack = GetComponent<PlayerAttack>();
 			playerStateManager = GetComponent <PlayerStateManager> ();
 			playerCameraComponent = playerCamera.GetComponent <PlayerCamera> ();
 			playerLocomotion = GetComponent <PlayerLocomotion> ();
@@ -86,7 +89,8 @@ namespace AH.Max.Gameplay
 		private void LocomotionInput()
 		{
 			//Check Player State
-			if(playerStateManager.CurrentState != PlayerState.FreeMove) return;
+			if( playerStateManager.CurrentState != PlayerState.FreeMove) return;
+			if( playerAttack.IsAttacking ) return;
 
 			float h = input.GetAxis(LeftStickHorizontal);
 			float v = input.GetAxis(LeftStickVertical);
@@ -132,6 +136,20 @@ namespace AH.Max.Gameplay
 			}
 
 			playerCameraComponent.MouseOrbit(_x, _y);
+		}
+
+		private void CombatInput()
+		{
+			if(playerStateManager.CurrentState == PlayerState.Traversing) return;
+
+			if(input.GetButtonDown(ActionButtonTopRow_1))
+			{
+				playerAttack.Attack();
+			}
+			else if(Input.GetMouseButtonDown(0))
+			{
+				playerAttack.Attack();
+			}
 		}
 	}
 }
