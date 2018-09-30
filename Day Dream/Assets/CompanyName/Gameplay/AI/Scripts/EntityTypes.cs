@@ -6,6 +6,7 @@ namespace AH.Max.Gameplay.AI
 	{
 		Enemy,
 		NPC,
-		Ally
+		Ally,
+		Player
 	}
 }
