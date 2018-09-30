@@ -7,23 +7,24 @@ namespace AH.Max.Gameplay
 {
 	public class PlayerElevationDetection : MonoBehaviour 
 	{
-		[TabGroup("Preferences")]
+		[TabGroup(Tabs.Preferences)]
 		[SerializeField]
 		private float distanceToCheck;		
 
 		[HideInInspector]
 		public float DistanceToCheck{ get{ return distanceToCheck; } }
 		
-		[TabGroup("Preferences")]
+		[TabGroup(Tabs.Preferences)]
 		[SerializeField]
 		private float maxHeight;
 
-		[TabGroup("Preferences")]
+		[TabGroup(Tabs.Preferences)]
 		[SerializeField]
 		private float minHeight;
 
 		private Animator animator;
 		private PlayerVault playerVault;
+		private PlayerLocomotion playerLocomotion;
 		private PlayerStateManager playerStateManager;
 		private LayerMask layerMask = 1 << 8;
 
@@ -31,6 +32,7 @@ namespace AH.Max.Gameplay
 		{
 			animator = GetComponent<Animator>();
 			playerVault = GetComponent<PlayerVault>();
+			playerLocomotion = GetComponent<PlayerLocomotion>();
 			playerStateManager = GetComponent <PlayerStateManager>();
 		
 			layerMask = ~layerMask;
@@ -43,7 +45,8 @@ namespace AH.Max.Gameplay
 
 		private void DetectElevation()
 		{
-			if(playerStateManager.CurrentState == PlayerState.Traversing) return;
+			if( playerStateManager.CurrentState == PlayerState.Traversing ) return;
+			if( playerLocomotion.MoveDirection.magnitude > 0.5f ) return;
 
 			Vector3 origin = transform.position;
 			origin.y += 0.3f;

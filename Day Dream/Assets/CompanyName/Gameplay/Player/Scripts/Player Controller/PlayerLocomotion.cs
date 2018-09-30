@@ -28,6 +28,8 @@ namespace AH.Max.Gameplay
 		private float lowJumpMultiplyer = 3f;
  
 		private Vector3 moveDirection = new Vector3();
+		public Vector3 MoveDirection { get { return moveDirection; } }
+
 		private Rigidbody _rigidbody;
 		private Animator _animator;
 		private PlayerStateManager playerStateManager;
