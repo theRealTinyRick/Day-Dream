@@ -9,8 +9,7 @@ namespace AH.Max.Gameplay
 	[RequireComponent(typeof(AH.Max.Gameplay.PlayerLocomotion))]
 	[RequireComponent(typeof(Rigidbody))]
 	[RequireComponent(typeof(Animator))]
-
-	public class PlayerController : MonoBehaviour
+	public class PlayerController : AH.Max.Entity
 	{
 		[TabGroup("Set Up")]
 		[SerializeField]

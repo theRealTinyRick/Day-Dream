@@ -5,16 +5,12 @@ using UnityEngine.AI;
 
 namespace AH.Max.Gameplay.AI
 {
-	public abstract class AIEntity
+	public abstract class AIEntity : AH.Max.Entity
 	{
-		public abstract float maxFieldOfViewAngle { get; set; }
-		public abstract float maxHeightDifference { get; set; }
-		
-		//How close the player must before the enemy will take notice
-		public abstract float aggroRange { get; set; }
-
-		///This is an array of ranges that could be used to determine different attacks
-		public abstract float[] attackRange { get; set; }
+		public virtual void Initialize()
+		{
+			//do stuff here to implement any thing in the inheriting class
+		}
 
 		protected void Move(NavMeshAgent _navMeshAgent, Vector3 targetPosition)
 		{
@@ -84,6 +80,12 @@ namespace AH.Max.Gameplay.AI
 			if(_difference <= _range)
 				return true;
 
+			return false;
+		}
+
+		protected virtual bool CheckAggro()
+		{
+			
 			return false;
 		}
 	}

@@ -6,4 +6,5 @@ public class Tabs
 {
 	public const string Preferences = "Preferences";
 	public const string SetUp = "SetUp";
+	public const string EnemyInformation = "Enemy Information";
 }

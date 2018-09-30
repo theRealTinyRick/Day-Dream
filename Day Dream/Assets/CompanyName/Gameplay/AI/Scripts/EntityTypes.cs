@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
 namespace AH.Max.Gameplay.AI
 {
 	public enum EntityType
 	{
-		Simple
+		Enemy,
+		NPC,
+		Ally
 	}
 }
