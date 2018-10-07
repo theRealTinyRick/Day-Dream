@@ -39,3 +39,9 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+#exclude everything
+Sandbox/*
+
+#exeption to the rule
+!Sandbox/.gitkeep

@@ -85,6 +85,8 @@ namespace AH.Max.Gameplay.AI.BruteEnemy
 			private set { attackRange = value; }
 		}
 
+		private float time;
+
 		public override void Initialize()
 		{
 			// do stuff here to initialize the game
@@ -128,6 +130,19 @@ namespace AH.Max.Gameplay.AI.BruteEnemy
 					Debug.Log( "Hey I'm super aggro right now" );
 					break;
 			}
+		}
+
+		private void  Attack()
+		{
+
+		}
+
+		private bool AttackTimer()
+		{
+			
+
+
+			return false;
 		}
 	}
 
