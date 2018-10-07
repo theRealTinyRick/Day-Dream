@@ -46,7 +46,7 @@ namespace AH.Max.Gameplay
 		private void DetectElevation()
 		{
 			if( playerStateManager.CurrentState == PlayerState.Traversing ) return;
-			if( playerLocomotion.MoveDirection.magnitude > 0.5f ) return;
+			if( playerLocomotion.MoveDirection.magnitude < 0.5f ) return;
 
 			Vector3 origin = transform.position;
 			origin.y += 0.3f;

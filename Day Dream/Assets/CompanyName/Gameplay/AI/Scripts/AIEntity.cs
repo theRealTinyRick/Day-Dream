@@ -2,23 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Sirenix.OdinInspector;
 
 namespace AH.Max.Gameplay.AI
 {
-	public abstract class AIEntity : AH.Max.Entity
+	public abstract class AIEntity <T> : AH.Max.Entity where T : AIEntity<T> 
 	{
-		public virtual void Initialize()
-		{
-			//do stuff here to implement any thing in the inheriting class
-		}
 
-		protected void Move(NavMeshAgent _navMeshAgent, Vector3 targetPosition)
+		[SerializeField]
+		[TabGroup(Tabs.EnemyInformation)]
+		protected AIStates _state = AIStates.Stationary;
+		public abstract AIStates State { get; }
+
+		public abstract void Initialize();
+
+		protected void Move(NavMeshAgent _navMeshAgent, Vector3 _targetPosition)
 		{
-			_navMeshAgent.SetDestination(targetPosition);
+			_navMeshAgent.SetDestination(_targetPosition);
 		}
 
 		//Check whether or not ther player is in front of the enemy
-		protected bool CheckFieldOfView(Transform _myTransform, Vector3 _targetPosition, float maxAngle)
+		protected bool CheckFieldOfView(Transform _myTransform, Vector3 _targetPosition, float _maxAngle)
 		{
 			float angle;
 
@@ -27,7 +31,7 @@ namespace AH.Max.Gameplay.AI
 
 			angle = Vector3.Angle(_myTransform.forward, _toVector);
 
-			if(angle <= maxAngle)
+			if(angle <= _maxAngle)
 			{
 				return false;
 			}
@@ -83,11 +87,18 @@ namespace AH.Max.Gameplay.AI
 			return false;
 		}
 
+		protected void SetStateHard (AIStates state, T self) 
+		{
+			_state = state;
+		}
+
 		protected virtual bool CheckAggro()
 		{
 			
 			return false;
 		}
+
+		protected abstract void Tick();
 	}
 }
 

@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 
 namespace AH.Max.Gameplay.AI.BruteEnemy
 {
-	public class BruteEnemy : AIEntity, IEnemy 
+	public class BruteEnemy : AIEntity<BruteEnemy>, IEnemy
 	{	
 		[SerializeField]
 		[TabGroup(Tabs.EnemyInformation)]
@@ -28,7 +28,6 @@ namespace AH.Max.Gameplay.AI.BruteEnemy
 			private set { entityType = value; }
 		}
 
-
 		[SerializeField]
 		[TabGroup(Tabs.EnemyInformation)]
 		private EnemyType enemyType;
@@ -39,14 +38,11 @@ namespace AH.Max.Gameplay.AI.BruteEnemy
 			private set { enemyType = value; }  
 		}
 
-		[SerializeField]
-		[TabGroup(Tabs.EnemyInformation)]
-		private AIStates state;
+		//this is a read only property. Only this class and the base class can change state
 		[HideInInspector]
-		public AIStates State
-		{
-			get { return state; }
-			private set { state = value; } 
+		public override AIStates State
+		{	
+			get { return _state; }
 		}
 
 		[SerializeField]
@@ -91,16 +87,47 @@ namespace AH.Max.Gameplay.AI.BruteEnemy
 
 		public override void Initialize()
 		{
-
-		}
-
-		void Update () {
+			// do stuff here to initialize the game
 			
 		}
 
 		protected override bool CheckAggro()
 		{
+			if( _state != AIStates.Aggro )
+			{
+				//check every way the enemy should look for the player
+				// if(CheckRangeSquared(aggroRange, transform.position, ))
+				return true;
+			}
 			return false;
+		}
+
+		private void Update () 
+		{
+			Tick();
+		}	
+
+		protected override void Tick()
+		{
+			if( !EntityManager.Instance.Player ) return;
+
+			if(CheckAggro())
+			{
+				SetStateHard(AIStates.Aggro, this);
+			}
+
+			switch( State )
+			{
+				case AIStates.Stationary:
+					break;
+			
+				case AIStates.Patrol:
+					break;
+			
+				case AIStates.Aggro:
+					Debug.Log( "Hey I'm super aggro right now" );
+					break;
+			}
 		}
 	}
 

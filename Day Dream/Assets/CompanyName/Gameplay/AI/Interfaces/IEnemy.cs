@@ -11,8 +11,6 @@ namespace AH.Max.Gameplay.AI
 
 		EnemyType EnemyType { get; }
 
-		AIStates State { get;  }
-
 		float MaxFieldOfViewAngle { get; }
 
 		float MaxHeightDifference { get; }

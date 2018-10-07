@@ -17,6 +17,7 @@ namespace AH.Max.Gameplay
 		public const string VaultHigh = "VaultHigh";
 
 		private Animator animator;
+		private PlayerController playerController;
 		private PlayerStateManager playerStateManager;
 
 		private Transform helper;
@@ -24,6 +25,7 @@ namespace AH.Max.Gameplay
 		private void Start()
 		{
 			animator = GetComponent<Animator>();
+			playerController = GetComponent<PlayerController>();
 			playerStateManager = GetComponent<PlayerStateManager>();
 
 			helper = new GameObject().transform;
@@ -82,16 +84,12 @@ namespace AH.Max.Gameplay
 		public void PlayVaultAnimation()
 		{
 			float heightDifference = ( helper.position.y > transform.position.y ? helper.position.y : transform.position.y) - ( helper.position.y > transform.position.y ? transform.position.y : helper.position.y);
-			Debug.Log( heightDifference );
 			if( heightDifference <= 0.7f )
 			{
-				Debug.Log("Low Vault");
 				animator.Play( VaultLow );
-				// animator.Play(VaultMed);
 			}
 			else if( heightDifference <= 2)
 			{
-				Debug.Log("Med vault");
 				animator.Play( VaultMed );
 			}
 			else if( heightDifference <= 3.5 )

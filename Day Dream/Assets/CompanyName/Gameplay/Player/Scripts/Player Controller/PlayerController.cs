@@ -53,6 +53,16 @@ namespace AH.Max.Gameplay
 			InputSetUp();
 			ComponentInitialization();
 		}
+
+		private void OnEnable()
+		{
+			EntityManager.Instance.SetPlayer(this);
+		}
+
+		private void OnDisable()
+		{
+			EntityManager.Instance.SetPlayer(null);
+		}
 		
 		private void Update () 
 		{
