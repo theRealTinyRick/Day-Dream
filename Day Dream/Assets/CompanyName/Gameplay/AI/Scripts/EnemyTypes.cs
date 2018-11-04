@@ -1,11 +1,8 @@
 using System;
 
-namespace AH.Max.Gameplay.AI
+public enum EnemyType
 {
-	public enum EnemyType
-    {
-        Simple, 
-        Intellegent,
-        Brute
-    }
+    Simple, 
+    Intellegent,
+    Brute
 }

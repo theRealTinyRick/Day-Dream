@@ -1,31 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Sirenix.OdinInspector;
 
 namespace AH.Max.Gameplay.AI.BruteEnemy
 {
-	public class BruteEnemy : AIEntity<BruteEnemy>, IEnemy
+	public class BruteEnemy : AIEntity<BruteEnemy>, IEnemy, IDamagable
 	{	
+		///<Summary>
+		///The actual target the entity should follow
+		///</Summary>
 		[SerializeField]
 		[TabGroup(Tabs.EnemyInformation)]
-		private Transform targetPlayer;
+		private Transform target;
 		[HideInInspector]
-		public Transform TargetPlayer 
+		public Transform Target 
 		{
-			get { return targetPlayer; } 
-			private set { targetPlayer = value; }
-		}
-
-		[SerializeField]
-		[TabGroup(Tabs.EnemyInformation)]
-		private EntityType entityType;
-		[SerializeField]
-		[TabGroup(Tabs.EnemyInformation)]
-		public EntityType EntityType
-		{
-			get { return entityType; } 
-			private set { entityType = value; }
+			get { return target; } 
+			private set { target = value; }
 		}
 
 		[SerializeField]
@@ -43,6 +36,12 @@ namespace AH.Max.Gameplay.AI.BruteEnemy
 		public override AIStates State
 		{	
 			get { return _state; }
+		}
+
+		[HideInInspector]
+		public override ActionStates ActionState
+		{
+			get { return actionState; }
 		}
 
 		[SerializeField]
@@ -72,36 +71,41 @@ namespace AH.Max.Gameplay.AI.BruteEnemy
 		public float AggroRange
 		{
 			get { return aggroRange; }
-			private set { aggroRange = value; }
+			protected set { aggroRange = value; }
 		}
 
 		[SerializeField]
 		[TabGroup(Tabs.Preferences)]
-		private float[] attackRange;
+		private float attackRange;
 		[HideInInspector]
-		public float[] AttackRange 
+		public float AttackRange 
 		{
 			get { return attackRange; }  
-			private set { attackRange = value; }
+			protected set { attackRange = value; }
 		}
 
-		private float time;
+		// The current time since last attack
+		private float timeSinceLastAttack;
+
+		private void Start()
+		{
+			Initialize();
+		}
 
 		public override void Initialize()
 		{
 			// do stuff here to initialize the game
-			
-		}
+			FindTargetPlayer(ref target);
 
-		protected override bool CheckAggro()
-		{
-			if( _state != AIStates.Aggro )
-			{
-				//check every way the enemy should look for the player
-				// if(CheckRangeSquared(aggroRange, transform.position, ))
-				return true;
-			}
-			return false;
+			_state = defaultState;
+
+			SetUpComponents();
+
+			aiActions.playerTransform = target;
+			aiActions.enemyInterface = this;
+			enemyInterface = this;
+
+			EntityManager.Instance.AddEnemy(this);
 		}
 
 		private void Update () 
@@ -115,35 +119,45 @@ namespace AH.Max.Gameplay.AI.BruteEnemy
 
 			if(CheckAggro())
 			{
-				SetStateHard(AIStates.Aggro, this);
+				EnterAggroState();
 			}
 
-			switch( State )
+			if(_state == AIStates.Aggro)
 			{
-				case AIStates.Stationary:
-					break;
-			
-				case AIStates.Patrol:
-					break;
-			
-				case AIStates.Aggro:
-					Debug.Log( "Hey I'm super aggro right now" );
-					break;
+				MainMovementLoop(aggroRange, attackRange, target.transform.position);
+				RotateTowardsPlayer(target.position, attackRange);
 			}
-		}
-
-		private void  Attack()
-		{
-
-		}
-
-		private bool AttackTimer()
-		{
 			
+		}
 
-
+		protected override bool CheckAggro()
+		{
+			if( CheckRangeSquared(aggroRange, transform.position, target.position) )
+			{
+				if( CheckFieldOfView(transform, target.position, maxFieldOfViewAngle) )
+				{
+					if( CheckLineOfSight(transform.position, target.position, target.gameObject.layer) )
+					{
+						if( CheckHeightDifference(maxHeightDifference, transform.position, target.position) )
+						{
+							return true;
+						}
+					}
+				}
+			}
+			
 			return false;
 		}
-	}
 
+		protected override IEnumerator CombatPattern()
+		{
+			// aiActions.StartAction(new Action("", ActionType.Approach));
+
+			// yield return new WaitForSeconds(2);
+			
+			// aiActions.StartAction(new Action("", ActionType.Strafe));
+
+			yield break;
+		}
+	}
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
 using Sirenix.OdinInspector;
@@ -36,17 +35,41 @@ namespace AH.Max.Gameplay
 		private const string ActionButtonBottomRow_2 = "BButton";
 		private const string ActionButtonTopRow_1 = "XButton";
 		private const string ActionButtonTopRow_2 = "YButton";
+		
+		///<Summary>
+		/// This is the input values, not the actual direction from the player
+		///</Summary>
+		private Vector3 inputDirection;
+		public Vector3 InputDirection
+		{
+			get { return inputDirection; }
+		}
+
+		///<Summary>
+		/// This is the actual direction the player should be moving. Becuase the player is moving with animation a more 
+		/// accuarate number would be to get the players current velocity from the rigidbody
+		///</Summary>
+		private Vector3 moveDirection;
+		public Vector3 MoveDirection
+		{
+			get { return moveDirection; }
+		}
 
 		private Player input;
 		public Player _input{get{return input;}}
+
 		private PlayerAttack playerAttack;
 		private PlayerStateManager playerStateManager;
 		private PlayerCamera playerCameraComponent;
 		private PlayerLocomotion playerLocomotion;
 		private PlayerFreeClimb playerFreeClimb;
+		private PlayerEvade playerEvade;
 
 		private bool isGrounded = true;
 		public bool IsGrounded { get { return isGrounded; } }
+
+		private bool isSprinting = false;
+		public bool IsSprinting { get {return isSprinting; } }
 
 		private void Awake () 
 		{
@@ -67,18 +90,19 @@ namespace AH.Max.Gameplay
 		private void Update () 
 		{
 			PlatformingInput();
-			CameraInput();
 			CombatInput();
+			LocomotionInput();
+			SprintingInput();
+			EvadingInput();
 		}
 
 		private void FixedUpdate ()
 		{
-			LocomotionInput();
 		}
 
 		private void LateUpdate () 
 		{
-			// CameraInput();
+			CameraInput();
 		}
 
 		private void ComponentInitialization()
@@ -88,6 +112,7 @@ namespace AH.Max.Gameplay
 			playerCameraComponent = playerCamera.GetComponent <PlayerCamera> ();
 			playerLocomotion = GetComponent <PlayerLocomotion> ();
 			playerFreeClimb = GetComponent <PlayerFreeClimb> ();
+			playerEvade = GetComponent<PlayerEvade>();
 		}
 
 		private void InputSetUp()
@@ -112,6 +137,32 @@ namespace AH.Max.Gameplay
 
 			var moveDirection = new Vector3(h, 0, v);
 			playerLocomotion.PlayerMove(playerCamera, moveDirection);
+
+			this.inputDirection = moveDirection;
+			CalculateMoveDirection();
+		}
+
+		///<Summary>
+		/// Simply comes up with the actual direction the player "should be moving".
+		///</Summary>
+		private void CalculateMoveDirection()
+		{
+			Vector3 direction = transform.position + moveDirection;
+			direction = direction - transform.position;
+
+			moveDirection = direction;
+		}
+
+		private void SprintingInput()
+		{
+			if(Input.GetKey(KeyCode.LeftShift))
+			{
+				isSprinting = true;
+			}
+			else
+			{
+				isSprinting = false;
+			}
 		}
 
 		private void PlatformingInput(){
@@ -159,6 +210,34 @@ namespace AH.Max.Gameplay
 			{
 				playerAttack.Attack();
 			}
+		}
+
+		private void EvadingInput()
+		{
+			if( playerStateManager.CurrentState != PlayerState.FreeMove) return;
+			if( playerAttack.IsAttacking ) return;
+			if(!playerStateManager.IsGrounded) return;
+
+			if(input.GetButtonDown(ActionButtonBottomRow_2) || Input.GetKeyDown(KeyCode.E))
+			{
+				playerEvade.CombatRoll(moveDirection);
+			}
+		}
+
+		///<Summary>
+		/// Use this method to set player rotation so it is easy to see where we are doing this downt the line
+		///</Summary>
+		public void SetPlayerRotation(Quaternion rotation)
+		{
+			transform.rotation = rotation;
+		}
+
+		///<Summary>
+		/// Use this method to set player position so it is easy to see where we are doing this downt the line
+		///</Summary>
+		public void SetPlayerPosition(Vector3 position)
+		{
+			transform.position = position;
 		}
 	}
 }

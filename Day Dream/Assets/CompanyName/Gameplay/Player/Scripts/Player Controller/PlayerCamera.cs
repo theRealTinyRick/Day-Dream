@@ -3,26 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+using AH.Max.Gameplay.AI; 
+
 namespace AH.Max.Gameplay
 {
 	public class PlayerCamera : MonoBehaviour 
 	{	
-		[TabGroup("Set Up")]
+		[TabGroup(Tabs.SetUp)]
 		[SerializeField]
 		private Transform camLookAt;
 
-		[TabGroup("Preferences")]
+		[TabGroup(Tabs.SetUp)]
+		[SerializeField]
+		private Transform camOffsetPoint;
+
+		[TabGroup(Tabs.Preferences)]
+		[SerializeField]
+		private float cameraLookAtYOffset;
+
+		[TabGroup(Tabs.Preferences)]
+		[SerializeField]
+		private float cameraLookAtXOffset;
+
+		[TabGroup(Tabs.Preferences)]
+		[SerializeField]
+		private float cameraOffsetX;
+
+		[TabGroup(Tabs.Preferences)]
+		[SerializeField]
+		private float cameraOffsetY;
+
+		[TabGroup(Tabs.Preferences)]
 		[SerializeField]
 		[Range(1, 20)]
-		public float sensitivity;
+		private float sensitivity;
 
-		[TabGroup("Preferences")]
+		[TabGroup(Tabs.Preferences)]
 		[SerializeField]
-		private float originalCameraDistance = 8;
+		private float originalCameraDistance;
+
+		[TabGroup(Tabs.Preferences)]
+		[SerializeField]
+		private float combatCameraDistance;
 
 		private Transform clippingOrigin;
 		
-		private float currentDistance = 10;
+		private float currentDistance;
 		private float Y_ANGLE_MIN = -60;
 		private float Y_ANGLE_MAX = 20;
 		private float camX;
@@ -30,17 +56,52 @@ namespace AH.Max.Gameplay
 		
 		private void Start()
 		{
-			clippingOrigin = new GameObject().transform;
-			clippingOrigin.name = "Cam Clipping Origin";
-			DontDestroyOnLoad(clippingOrigin);
-
-		}
-
-		private void FixedUpdate()
-		{
-			// CameraClipping();
+			ClippingOriginSetUp();
 
 			currentDistance = originalCameraDistance;
+		}
+
+		private void ClippingOriginSetUp()
+		{
+			clippingOrigin = new GameObject().transform;
+			clippingOrigin.name = "Cam Clipping Origin";
+			clippingOrigin.transform.position = camOffsetPoint.position;
+		}
+
+		private void Update()
+		{
+			if(EntityManager.Instance.Player == null) return;
+
+			UpdateCameraDistance();
+			UpdateLootAtPosition();
+		}
+
+		public void UpdateLootAtPosition()
+		{
+			Vector3 tp = new Vector3();
+			tp = EntityManager.Instance.Player.transform.position;
+			tp += transform.right * cameraLookAtXOffset;
+			tp.y = EntityManager.Instance.Player.transform.position.y + cameraLookAtYOffset;
+
+			Vector3 tp2 = new Vector3();
+			tp2 = EntityManager.Instance.Player.transform.position;
+			tp2 += transform.right * cameraOffsetX;
+			tp2.y = EntityManager.Instance.Player.transform.position.y + cameraOffsetY;
+		
+			camLookAt.position = tp;
+			camOffsetPoint.position = tp2;
+		}
+
+		private void UpdateCameraDistance()
+		{
+			if(AIManager.instance == null || AIManager.instance.mobbedEnemies.Count <= 0)
+			{
+				currentDistance = originalCameraDistance;
+			}
+			else
+			{
+				currentDistance = combatCameraDistance;
+			}
 		}
 
 		public void MouseOrbit(float x, float y)
@@ -57,7 +118,7 @@ namespace AH.Max.Gameplay
 
 			Vector3 dis = new Vector3(0f, 0f, -currentDistance);   // use variables to get offeset and the rotation
 			Quaternion rotation = Quaternion.Euler(-camY, camX, 0);
-			Vector3 pos = camLookAt.position + rotation * dis; //apply rotation and offset to the position of the camera
+			Vector3 pos = camOffsetPoint.position + rotation * dis; //apply rotation and offset to the position of the camera
 
 			transform.position = Vector3.Lerp(transform.position, pos, 1f);
 			transform.LookAt(camLookAt);    

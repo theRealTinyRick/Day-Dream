@@ -1,6 +1,5 @@
 fileFormatVersion: 2
 guid: 8247437a6a01b924ab6a1e22dd1b2068
-timeCreated: 18446744011573954816
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -132,7 +131,17 @@ ModelImporter:
     7400000: R_Rolling_Front
     9500000: //RootNode
     13700000: Blueisland
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blueisland_Character_Mat1
+    second: {fileID: 2100000, guid: df4c9b0601e7f4741bd4f9055a835e29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blueisland_Character_Mat2
+    second: {fileID: 2100000, guid: 00497294d2650c84584d2fb027be464c, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -151,6 +160,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -182,7 +192,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.8336313
+        functionName: EvadeExit
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

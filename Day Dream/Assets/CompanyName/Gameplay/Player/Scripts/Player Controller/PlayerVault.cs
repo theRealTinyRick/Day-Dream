@@ -12,9 +12,14 @@ namespace AH.Max.Gameplay
 		[SerializeField]
 		private float wallOffset;
 
+		[TabGroup(Tabs.Preferences)]
+		[SerializeField]
+		private float yOffset;
+
 		public const string VaultLow = "VaultLow";
 		public const string VaultMed = "VaultMed";
 		public const string VaultHigh = "VaultHigh";
+		public const string VaultHighest = "VaultHighest";
 
 		private Animator animator;
 		private PlayerController playerController;
@@ -41,23 +46,27 @@ namespace AH.Max.Gameplay
 		{
 			if( animator.GetCurrentAnimatorStateInfo(0).IsName(VaultLow) )
 			{
-				const float startTime = 012.9f / 100;
+				const float startTime = 08f / 100;
 				const float endTime = 027.0f / 100;
 				animator.MatchTarget( helper.position, helper.rotation, AvatarTarget.RightFoot, new MatchTargetWeightMask( Vector3.one, 0 ), startTime, endTime );
 			}
 			else if( animator.GetCurrentAnimatorStateInfo(0).IsName(VaultMed) )
 			{
-				const float startTimeOne = 1 / 100;
-				const float endTimeOne = 06.4f / 100;
-				animator.MatchTarget( helper.position, helper.rotation, AvatarTarget.RightHand, new MatchTargetWeightMask( Vector3.one, 0 ), startTimeOne, endTimeOne );
+				// const float startTimeOne = 1 / 100;
+				// const float endTimeOne = 06.4f / 100;
+				// animator.MatchTarget( helper.position, helper.rotation, AvatarTarget.RightHand, new MatchTargetWeightMask( Vector3.one, 0 ), startTimeOne, endTimeOne );
 
-				const float startTime = 06.5f / 100;
-				const float endTime = 016.9f / 100;
+				// const float startTime = 06.5f / 100;
+				// const float endTime = 016.9f / 100;
+				// animator.MatchTarget( helper.position, helper.rotation, AvatarTarget.LeftFoot, new MatchTargetWeightMask( Vector3.one, 0 ), startTime, endTime );
+			
+				const float startTime = 01.0f / 100;
+				const float endTime = 024.0f / 100;
 				animator.MatchTarget( helper.position, helper.rotation, AvatarTarget.LeftFoot, new MatchTargetWeightMask( Vector3.one, 0 ), startTime, endTime );
 			}
 			else if( animator.GetCurrentAnimatorStateInfo(0).IsName(VaultHigh) )
 			{
-				const float startTime = 002.6f / 100;
+				const float startTime = 1f / 100;
 				const float endTime = 020.3f / 100;
 				animator.MatchTarget( helper.position, helper.rotation, AvatarTarget.RightHand, new MatchTargetWeightMask( Vector3.one, 0 ), startTime, endTime );
 			}
@@ -92,7 +101,7 @@ namespace AH.Max.Gameplay
 			{
 				animator.Play( VaultMed );
 			}
-			else if( heightDifference <= 3.5 )
+			else if( heightDifference <= 3.5 && playerController.IsGrounded )
 			{
 				animator.Play( VaultHigh );
 			}
@@ -101,6 +110,7 @@ namespace AH.Max.Gameplay
 		private Vector3 PositionWithOffset( Vector3 tp, Vector3 wallNormal )
 		{
 			tp -= wallNormal * wallOffset;
+			tp.y += yOffset;
 
 			return tp;
 		} 

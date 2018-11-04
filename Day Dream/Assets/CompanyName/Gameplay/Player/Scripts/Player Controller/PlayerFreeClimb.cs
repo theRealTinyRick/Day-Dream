@@ -37,6 +37,9 @@ namespace AH.Max.Gameplay
 		public Vector3 startPos;
 		public Vector3 targetPos;
 
+		private Vector3 climbStart = new Vector3();
+		private Vector3 climbEnd = new Vector3();
+
 		private void Start()
 		{
 			helper = new GameObject().transform;
@@ -47,6 +50,21 @@ namespace AH.Max.Gameplay
 			animHook = GetComponent <FreeClimbAnimationHook> ();
 			anim = GetComponent <Animator> ();
 			rb = GetComponent <Rigidbody> ();
+		}
+
+		private void OnDrawGizmos()
+		{
+			if(climbEnd != null)
+			{
+				Gizmos.color = Color.black;
+				Gizmos.DrawCube(climbEnd, Vector3.one * 0.2f);
+			}
+
+			if(climbStart != null)
+			{
+				Gizmos.color = Color.blue;
+				Gizmos.DrawCube(climbStart, Vector3.one * 0.1f);
+			}
 		}
 
 		public bool CheckForClimb()
@@ -93,6 +111,8 @@ namespace AH.Max.Gameplay
 				delta = Time.deltaTime;
 				Tick(delta);
 			}
+
+			WarpAnimation();
 		}
 
 		public void Tick(float delta)
@@ -146,6 +166,8 @@ namespace AH.Max.Gameplay
 				transform.rotation = Quaternion.Slerp(transform.rotation, helper.rotation, delta * 5);
 			}
 		}
+
+
 
 		bool CanMove(Vector3 moveDir)
 		{
@@ -247,8 +269,6 @@ namespace AH.Max.Gameplay
 			Vector3 offset = direction * offsetFromWall;
 			return target + offset;
 		}
-
-
 		
 		IEnumerator JumpOnLedge()
 		{
@@ -283,31 +303,53 @@ namespace AH.Max.Gameplay
 			endPoint += transform.forward * 0.2f;
 
 			tp = LedgeWithOffset(tp);
-			while(Vector3.Distance(transform.position, tp) > 0.05f)
-			{
-				transform.position = Vector3.Lerp(transform.position, tp, 0.2f);
-				yield return new WaitForEndOfFrame();
-			}
+			// while(Vector3.Distance(transform.position, tp) > 0.05f)
+			// {
+			// 	transform.position = Vector3.Lerp(transform.position, tp, 0.2f);
+			// 	yield return new WaitForEndOfFrame();
+			// }
 
-			anim.SetTrigger(ClimbLedge);
+			climbStart = tp;
+			climbEnd = endPoint;
 
-			yield return new WaitForSeconds(2f);
+			anim.SetTrigger("ClimbOnLedge");
 
-			while(Vector3.Distance(transform.position, endPoint) > 0.05f)
-			{
-				transform.position = Vector3.Lerp(transform.position, endPoint, 0.2f);
-				yield return new WaitForEndOfFrame();
-			}
+			// yield return new WaitForSeconds(2f);
 
-			Drop();
+			// while(Vector3.Distance(transform.position, endPoint) > 0.05f)
+			// {
+			// 	transform.position = Vector3.Lerp(transform.position, endPoint, 0.2f);
+			// 	yield return new WaitForEndOfFrame();
+			// }
+
+			// Drop();
 			
-			yield return null;
+			yield break;
+		}
+
+		private void WarpAnimation()
+		{
+			if(anim.GetCurrentAnimatorStateInfo(0).IsName("ClimbOnLedge"))
+			{
+				float startTime1 = 0f;
+				float endTime1 = 30/100;
+				anim.MatchTarget( climbStart, transform.rotation, AvatarTarget.LeftHand, new MatchTargetWeightMask( Vector3.one, 0 ), startTime1, endTime1 );
+
+				float startTime2 = 31/100;
+				float endTime2 = 60/100;
+				anim.MatchTarget( climbEnd, transform.rotation, AvatarTarget.RightFoot, new MatchTargetWeightMask( Vector3.one, 0 ), startTime2, endTime2 );
+			}
+		}
+
+		public void ClimbUpEnd()
+		{
+			Drop();
 		}
 
 		private Vector3 LedgeWithOffset (Vector3 ledge)
 		{
-			ledge += -transform.forward * offsetFromWall;
-			ledge.y -= 2;
+			ledge += -transform.forward * 0.1f;
+			// ledge.y -= 0.2f;
 			return ledge;
 		}
 

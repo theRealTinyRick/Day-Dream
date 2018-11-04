@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+
+using UnityEngine.AI;
 
 namespace AH.Max.Gameplay.AI
 {
 	public interface IEnemy
 	{
-		Transform TargetPlayer { get; }
-
-		EntityType EntityType {get; }
+		Transform Target { get; }
 
 		EnemyType EnemyType { get; }
 
@@ -15,8 +16,8 @@ namespace AH.Max.Gameplay.AI
 
 		float MaxHeightDifference { get; }
 
-		float AggroRange { get;  }
+		float AggroRange { get; }
 
-		float[] AttackRange { get; }
+		float AttackRange { get; }
 	} 
 }

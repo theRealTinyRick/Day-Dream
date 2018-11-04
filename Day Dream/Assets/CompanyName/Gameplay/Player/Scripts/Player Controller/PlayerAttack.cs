@@ -10,10 +10,37 @@ namespace AH.Max.Gameplay
 		private bool isAttacking = false;
 		public bool IsAttacking{ get{ return isAttacking; } }
 
-		string[] attackAnimations = new string[] {"Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6"};
+		[SerializeField]
+		private WeaponType currentWeaponType;
+
+		public static string UsingSword = "UsingSword";
+		public static string UsingAxe = "UsingAxe";
+
+		string[] swordAnimations = new string[] {"Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6"};
+		string[] axeAnimations = new string[] {"Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6"};
+
+		public string[] currentWeaponAnimations
+		{
+			get 
+			{
+				if(currentWeaponType == WeaponType.GreatSword)
+				{
+					anim.SetBool(UsingSword, true);
+					anim.SetBool(UsingAxe, false);
+					return swordAnimations;
+				}
+				else
+				{
+					anim.SetBool(UsingSword, false);
+					anim.SetBool(UsingAxe, true);
+					return axeAnimations;
+				}
+			}
+		}
+
 		public int numberOfClicks = 0;
 		int maxNumberOfClicks = 0;
-		private float timeToAtk = .4f;//the amount of time between clicks the player will stop attacking
+		private float timeToAtk = 0.4f;//the amount of time between clicks the player will stop attacking
 		private float _time = 0;
 
 		[SerializeField]
@@ -24,18 +51,16 @@ namespace AH.Max.Gameplay
 
 		private PlayerManager pManager;
 		private PlayerController pController;
-		// private PlayerInventory pInventory;
 		private Animator anim;
 
 		private void Start() 
 		{
 			pController = GetComponent<PlayerController>();
-			// pInventory = GetComponent<PlayerInventory>();
 			anim = GetComponent<Animator>();
 
 			pManager = PlayerManager.instance;
 
-			maxNumberOfClicks = attackAnimations.Length;
+			maxNumberOfClicks = currentWeaponAnimations.Length;
 		}
 
 		private void Update()
@@ -47,7 +72,7 @@ namespace AH.Max.Gameplay
 		{
 			if((Time.time - _time) > timeToAtk)
 			{
-				foreach(string animation in attackAnimations)
+				foreach(string animation in currentWeaponAnimations)
 				{
 					if(anim.GetCurrentAnimatorStateInfo(0).IsName(animation))
 					{
@@ -56,7 +81,7 @@ namespace AH.Max.Gameplay
 					}
 				}
 
-				foreach(string a in attackAnimations)
+				foreach(string a in currentWeaponAnimations)
 				{
 					anim.SetBool(a, false);
 				}
@@ -73,12 +98,8 @@ namespace AH.Max.Gameplay
 
 		public void Attack()
 		{
-			// if(!pInventory.Equipped)
-			// {
-			// 	pInventory.EquipWeapons();
-			// }
-
 			numberOfClicks++;
+			
 			if(numberOfClicks > maxNumberOfClicks)
 			{
 				numberOfClicks = maxNumberOfClicks;
@@ -86,7 +107,7 @@ namespace AH.Max.Gameplay
 			}
 
 			string a = "";
-			foreach(string animation in attackAnimations)
+			foreach(string animation in currentWeaponAnimations)
 			{
 				if(anim.GetCurrentAnimatorStateInfo(0).IsName(animation))
 				{
@@ -94,12 +115,12 @@ namespace AH.Max.Gameplay
 				}
 			}
 
-			int i = Array.IndexOf(attackAnimations, a);
+			int i = Array.IndexOf(currentWeaponAnimations, a);
 
 			if(i > numberOfClicks)
 				return;
 
-			anim.SetBool(attackAnimations[numberOfClicks - 1], true);
+			anim.SetBool(currentWeaponAnimations[numberOfClicks - 1], true);
 			_time = Time.time;
 		}
 
@@ -114,20 +135,21 @@ namespace AH.Max.Gameplay
 		{
 			BoxCollider collider = GetComponentInChildren<BoxCollider>();
 			if(collider)
+			{
 				collider.enabled = false;
+			}
 
 			isAttacking = false;
 
-			foreach(string animation in attackAnimations)
+			foreach(string animation in currentWeaponAnimations)
 			{
 				if(anim.GetCurrentAnimatorStateInfo(0).IsName(animation))
 				{
-					int animIndex = Array.IndexOf(attackAnimations, animation);
-					anim.SetBool(attackAnimations[animIndex], false);
+					int animIndex = Array.IndexOf(currentWeaponAnimations, animation);
+					anim.SetBool(currentWeaponAnimations[animIndex], false);
 					return;
 				}
 			}
 		}
 	}
 }
-

@@ -1,6 +1,6 @@
 using System;
 
-public enum AIStates
+public enum AIStates : int
 {
     Stationary, 
     Patrol,

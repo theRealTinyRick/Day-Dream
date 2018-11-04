@@ -13,7 +13,7 @@ namespace AH.Max
             get
             { 
                 if(!_player)
-                    Debug.LogError( "The player is not initialized or is not present inthe scene." );
+                    Debug.LogError( "The player has not initialized or is not present in the scene." );
                     
                 return _player; 
             }
@@ -24,7 +24,13 @@ namespace AH.Max
         public List <Entity> AIEntities
         {
             get { return _aiEntities; }
-            private set { _aiEntities= value; }
+            private set { _aiEntities = value; }
+        }
+
+        private List <IEnemy> _enemies = new List <IEnemy> ();
+        public List <IEnemy> Enemies
+        {
+            get { return _enemies; }
         }
 
         public void SetPlayer( Entity player )
@@ -36,6 +42,11 @@ namespace AH.Max
         {
             _aiEntities.Add(_entity);
         }   
+
+        public void AddEnemy ( IEnemy _entity )
+        {
+            _enemies.Add(_entity);
+        }
 
         public void RemoveAIEntity( Entity _entity )
         {
