@@ -10,6 +10,9 @@ namespace AH.Max.Gameplay
 		private const string grounded = "isGrounded";
 		private const string FallStrength = "FallStrength";
 		
+		///<Summary>
+		/// this is the value used to set the animator.
+		///</Summary>
 		[SerializeField]
 		private float fallStrength;
 

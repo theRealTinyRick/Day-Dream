@@ -25,14 +25,6 @@ namespace AH.Max.Gameplay.AI
 		[TabGroup(Tabs.Preferences)]
 		protected AIStates defaultState;
 
-		[SerializeField]
-		[TabGroup(Tabs.Preferences)]
-		protected float speed;
-
-		[SerializeField]
-		[Range(0, 1)]
-		private float turnSpeed;
-
 		protected Coroutine combatPattern;
 
 		protected AIActions aiActions;
@@ -49,11 +41,23 @@ namespace AH.Max.Gameplay.AI
 		public NavMeshAgent navMeshAgent { get; private set;}
 
 		[SerializeField]
-		private  float time = 0.0f;
+		[TabGroup(Tabs.EnemyInformation)]
+		protected float attackDelay;
+
+		[SerializeField]
+		[TabGroup(Tabs.Locomotion)]
+		protected float speed;
 		
 		[SerializeField]
-		[TabGroup(Tabs.Preferences)]
+		[TabGroup(Tabs.Locomotion)]
 		private float followPause;
+
+		[SerializeField]
+		[Range(0, 1)]
+		[TabGroup(Tabs.Locomotion)]
+		private float turnSpeed;
+
+		private  float time = 0.0f;
 
 		///<Summary>
 		///This is the function you can use to set up everything the Entity will need
@@ -102,7 +106,6 @@ namespace AH.Max.Gameplay.AI
 
 		public void Move(Vector3 _targetPosition, float range)
 		{
-			Debug.Log("Moving");
 			if(navMeshAgent)
 			{
 				navMeshAgent.SetDestination(_targetPosition);
@@ -126,19 +129,22 @@ namespace AH.Max.Gameplay.AI
 	
 				if(!navMeshAgent.isStopped)
 				{
-					Debug.Log("Moving");
 					float val = Mathf.Lerp(animator.GetFloat(AIAnimatorController.Speed), 0.5f, 0.1f);
+
 					animator.SetFloat(AIAnimatorController.Speed, val);
+					animator.SetBool(AIAnimatorController.IsMoving, true);
 				}
 				else
 				{
-					Debug.Log("Moving");
 					float val = Mathf.Lerp(animator.GetFloat(AIAnimatorController.Speed), 0, 0.05f);
+
 					if(Mathf.Approximately(val, 0))
 					{
 						val = 0;
 					}
+
 					animator.SetFloat(AIAnimatorController.Speed, 0);
+					animator.SetBool(AIAnimatorController.IsMoving, false);
 				}
 			}
 			else
@@ -152,19 +158,26 @@ namespace AH.Max.Gameplay.AI
 		///</Summary>
 		public void RotateTowardsPlayer(Vector3 target, float range)
 		{
-			if(_state == AIStates.Aggro)
-			{
-				if(CheckRangeSquared(range, transform.position, target))
-				{
-					if(actionState == ActionStates.None)
-					{
-						Vector3 _direction = target - transform.position;
-						Quaternion _rotation = Quaternion.LookRotation(_direction);
+			if(_state != AIStates.Aggro) return;
+			if(!EvaluateCurrentActionType()) return;
 
-						transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, turnSpeed);
-					}
-				}
+			if(CheckRangeSquared(range, transform.position, target))
+			{
+				Vector3 _direction = target - transform.position;
+				Quaternion _rotation = Quaternion.LookRotation(_direction);
+
+				transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, turnSpeed);
 			}
+		}
+
+		private bool EvaluateCurrentActionType()
+		{	
+			if(aiActions.CurrentAction == null) return false;
+			if(aiActions.CurrentAction.Type == ActionType.MeleeAttack) return false;
+			if(aiActions.CurrentAction.Type == ActionType.Buff) return false;
+			if(aiActions.CurrentAction.Type == ActionType.MoveToRandomLocation) return false;
+			
+			return true;
 		}
 
 		//Check whether or not ther player is in front of the enemy
@@ -347,6 +360,13 @@ namespace AH.Max.Gameplay.AI
 		public const string Defend = "Defend";
 		public const string BackUp = "BackUp";
 		public const string Dodge = "Dodge";
+
+		public const string AttackOne = "AttackOne";
+		public const string AttackTwo = "AttackTwo";
+		public const string AttackThree = "AttackThree";
+		public const string AttackFour = "AttackFour";
+		public const string AttackFive = "AttackFive";
+		public const string AttackSix = "AttackSix";
 
 		string[] AttackAnimations = new string[] {""};
 	}

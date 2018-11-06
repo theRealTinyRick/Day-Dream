@@ -151,12 +151,22 @@ namespace AH.Max.Gameplay.AI.BruteEnemy
 
 		protected override IEnumerator CombatPattern()
 		{
-			// aiActions.StartAction(new Action("", ActionType.Approach));
+			while(!CheckRangeSquared(attackRange, transform.position, target.position))
+			{
+				yield return new WaitForEndOfFrame();
+			}
 
-			// yield return new WaitForSeconds(2);
+			aiActions.StartAction(new Action(AIAnimatorController.AttackOne, ActionType.MeleeAttack), animator);
+
+			yield return new WaitForSeconds(attackDelay);
+
+			while(aiActions.RunningAction)
+			{
+				yield return new WaitForEndOfFrame();
+			}
+
+			combatPattern = StartCoroutine(CombatPattern());
 			
-			// aiActions.StartAction(new Action("", ActionType.Strafe));
-
 			yield break;
 		}
 	}

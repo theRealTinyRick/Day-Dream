@@ -9,4 +9,5 @@ public class Tabs
 	public const string EnemyInformation = "Enemy Information";
 	public const string Actions = "Actions";
 	public const string RuntimeInformation = "Runtime Information";
+	public const string Locomotion = "Locomotion";
 }

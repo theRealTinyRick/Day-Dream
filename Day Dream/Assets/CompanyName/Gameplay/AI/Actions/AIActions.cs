@@ -55,13 +55,12 @@ namespace AH.Max.Gameplay.AI
 
         private Coroutine runAction;
 
-        public void StartAction(Action _action)
+        public void StartAction(Action _action, Animator animator)
         {
-            runningAction = true;
-
             CancelAction();
 
-            runAction = StartCoroutine(RunAction(_action));
+            currentAction = _action;
+            runAction = StartCoroutine(RunAction(_action, animator));
 
             if( OnActionStart != null ) 
                 OnActionStart();
@@ -71,8 +70,12 @@ namespace AH.Max.Gameplay.AI
         {
             runningAction = false;
 
-            StopCoroutine(runAction);
+            if(runAction != null)
+            {
+                StopCoroutine(runAction);
+            }
 
+            currentAction = null;
             FireActionStoppedEvent();
 
             if(interruptType == ActionInteruptType.None) return;
@@ -107,19 +110,20 @@ namespace AH.Max.Gameplay.AI
         ///<Summary>
         ///
         ///</Summary>
-        private IEnumerator RunAction(Action _action)
+        private IEnumerator RunAction(Action _action, Animator animator)
         {
-            Debug.Log("Run action " + _action.Type);
-
             string _animation = _action.Animation;
+
+            runningAction = true;
+
+            animator.Play(_animation);
 
             switch(_action.Type)
             {
                 case ActionType.MeleeAttack:
-                    // while( animator.GetCurrentAnimatorStateInfo(0).IsName(_animation) )
+                    while( animator.GetCurrentAnimatorStateInfo(0).IsName(_animation) )
                     {
-                        Debug.Log( "Attack" );
-                        yield return null;
+                        yield return new WaitForEndOfFrame();
                     }
                     break;
 
