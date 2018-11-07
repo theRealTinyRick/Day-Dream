@@ -66,6 +66,15 @@ namespace AH.Max.Gameplay
 				rigidbody.isKinematic = false;
 			}
 
+			if(currentState == PlayerState.Traversing || currentState == PlayerState.Evading)
+			{
+
+			}
+			else
+			{
+				
+			}
+
 			// if(!isGrounded && currentState == PlayerState.FreeMove)
 			// {
 			// 	animator.applyRootMotion = false;

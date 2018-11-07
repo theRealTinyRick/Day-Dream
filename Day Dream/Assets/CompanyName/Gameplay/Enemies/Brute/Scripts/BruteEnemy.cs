@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using Sirenix.OdinInspector;
 
+using AH.Max.System;
+
 namespace AH.Max.Gameplay.AI.BruteEnemy
 {
 	public class BruteEnemy : AIEntity<BruteEnemy>, IEnemy, IDamagable
@@ -104,8 +106,6 @@ namespace AH.Max.Gameplay.AI.BruteEnemy
 			aiActions.playerTransform = target;
 			aiActions.enemyInterface = this;
 			enemyInterface = this;
-
-			EntityManager.Instance.AddEnemy(this);
 		}
 
 		private void Update () 

@@ -10,4 +10,5 @@ public class Tabs
 	public const string Actions = "Actions";
 	public const string RuntimeInformation = "Runtime Information";
 	public const string Locomotion = "Locomotion";
+	public const string Entity = "Entity";
 }

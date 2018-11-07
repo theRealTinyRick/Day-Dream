@@ -5,6 +5,8 @@ using UnityEngine.AI;
 using AH.Max; 
 using Sirenix.OdinInspector;
 
+using AH.Max.System;
+
 namespace AH.Max.Gameplay.AI
 {
     [RequireComponent(typeof(SphereCollider))]
@@ -18,13 +20,13 @@ namespace AH.Max.Gameplay.AI
 
         [ShowInInspector]
         [TabGroup(Tabs.RuntimeInformation)]
-        private List <IEnemy> enemies
-        {
-            get 
-            {
-                return EntityManager.Instance.Enemies;
-            }
-        }
+        private List <IEnemy> enemies;
+        // {
+        //     get 
+        //     {
+        //         return EntityManager.Instance.Enemies;
+        //     }
+        // }
 
         [ShowInInspector]
         [TabGroup(Tabs.RuntimeInformation)]
