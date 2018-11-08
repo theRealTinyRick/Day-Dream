@@ -3,6 +3,8 @@ using UnityEngine;
 using Rewired;
 using Sirenix.OdinInspector;
 
+using AH.Max.System;
+
 namespace AH.Max.Gameplay
 {	
 	[RequireComponent(typeof(AH.Max.Gameplay.PlayerLocomotion))]
@@ -77,16 +79,6 @@ namespace AH.Max.Gameplay
 			ComponentInitialization();
 		}
 
-		private void OnEnable()
-		{
-			EntityManager.Instance.SetPlayer(this);
-		}
-
-		private void OnDisable()
-		{
-			EntityManager.Instance.SetPlayer(null);
-		}
-		
 		private void Update () 
 		{
 			PlatformingInput();

@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Sirenix.OdinInspector;
+
+using AH.Max.System;
 
 namespace AH.Max.Gameplay.AI
 {
@@ -350,7 +353,6 @@ namespace AH.Max.Gameplay.AI
 		}
 	}
 
-	[System.Serializable]
 	public class AIAnimatorController
 	{
 		public const string IsMoving = "IsMoving";
