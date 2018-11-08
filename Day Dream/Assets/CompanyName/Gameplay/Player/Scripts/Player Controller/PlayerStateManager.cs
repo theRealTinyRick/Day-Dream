@@ -10,6 +10,9 @@ namespace AH.Max.Gameplay
 		private const string grounded = "isGrounded";
 		private const string FallStrength = "FallStrength";
 		
+		///<Summary>
+		/// this is the value used to set the animator.
+		///</Summary>
 		[SerializeField]
 		private float fallStrength;
 
@@ -61,6 +64,15 @@ namespace AH.Max.Gameplay
 			else
 			{
 				rigidbody.isKinematic = false;
+			}
+
+			if(currentState == PlayerState.Traversing || currentState == PlayerState.Evading)
+			{
+
+			}
+			else
+			{
+				
 			}
 
 			// if(!isGrounded && currentState == PlayerState.FreeMove)

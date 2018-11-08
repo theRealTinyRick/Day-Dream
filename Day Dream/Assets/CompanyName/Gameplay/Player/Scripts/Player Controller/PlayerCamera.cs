@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+using AH.Max.System;
 using AH.Max.Gameplay.AI; 
 
 namespace AH.Max.Gameplay

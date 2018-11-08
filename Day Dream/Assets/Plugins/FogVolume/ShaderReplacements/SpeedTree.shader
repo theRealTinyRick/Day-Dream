@@ -1,3 +1,5 @@
+// Upgrade NOTE: removed variant '__' where variant LOD_FADE_PERCENTAGE is used.
+
 // Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
 
 Shader "Fog Volume/Nature/SpeedTree"
@@ -30,7 +32,7 @@ Shader "Fog Volume/Nature/SpeedTree"
 		CGPROGRAM
 			#pragma surface surf Lambert vertex:SpeedTreeVert nodirlightmap nodynlightmap
 			#pragma target 3.0
-			#pragma multi_compile __ LOD_FADE_PERCENTAGE LOD_FADE_CROSSFADE
+			#pragma multi_compile  LOD_FADE_PERCENTAGE LOD_FADE_CROSSFADE
 			#pragma instancing_options assumeuniformscaling lodfade maxcount:50
 			#pragma shader_feature GEOM_TYPE_BRANCH GEOM_TYPE_BRANCH_DETAIL GEOM_TYPE_FROND GEOM_TYPE_LEAF GEOM_TYPE_MESH
 			#pragma shader_feature EFFECT_BUMP
@@ -54,7 +56,7 @@ Shader "Fog Volume/Nature/SpeedTree"
 				#pragma vertex vert
 				#pragma fragment frag
 				#pragma target 3.0
-				#pragma multi_compile __ LOD_FADE_PERCENTAGE LOD_FADE_CROSSFADE
+				#pragma multi_compile  LOD_FADE_PERCENTAGE LOD_FADE_CROSSFADE
 				#pragma multi_compile_instancing
 				#pragma instancing_options assumeuniformscaling lodfade maxcount:50
 				#pragma shader_feature GEOM_TYPE_BRANCH GEOM_TYPE_BRANCH_DETAIL GEOM_TYPE_FROND GEOM_TYPE_LEAF GEOM_TYPE_MESH
@@ -110,7 +112,7 @@ Shader "Fog Volume/Nature/SpeedTree"
 				#pragma fragment frag
 				#pragma target 3.0
 				#pragma multi_compile_fog
-				#pragma multi_compile __ LOD_FADE_PERCENTAGE LOD_FADE_CROSSFADE
+				#pragma multi_compile  LOD_FADE_PERCENTAGE LOD_FADE_CROSSFADE
 				#pragma multi_compile_instancing
 				#pragma instancing_options assumeuniformscaling lodfade maxcount:50
 				#pragma shader_feature GEOM_TYPE_BRANCH GEOM_TYPE_BRANCH_DETAIL GEOM_TYPE_FROND GEOM_TYPE_LEAF GEOM_TYPE_MESH
@@ -168,7 +170,7 @@ Shader "Fog Volume/Nature/SpeedTree"
 
 		CGPROGRAM
 			#pragma surface surf Lambert vertex:SpeedTreeVert nodirlightmap nodynlightmap
-			#pragma multi_compile __ LOD_FADE_PERCENTAGE
+			#pragma multi_compile  LOD_FADE_PERCENTAGE
 			#pragma shader_feature GEOM_TYPE_BRANCH GEOM_TYPE_BRANCH_DETAIL GEOM_TYPE_FROND GEOM_TYPE_LEAF GEOM_TYPE_MESH
 			#include "SpeedTreeCommon.cginc"
 
@@ -187,7 +189,7 @@ Shader "Fog Volume/Nature/SpeedTree"
 			CGPROGRAM
 				#pragma vertex vert
 				#pragma fragment frag
-				#pragma multi_compile __ LOD_FADE_PERCENTAGE
+				#pragma multi_compile  LOD_FADE_PERCENTAGE
 				#pragma shader_feature GEOM_TYPE_BRANCH GEOM_TYPE_BRANCH_DETAIL GEOM_TYPE_FROND GEOM_TYPE_LEAF GEOM_TYPE_MESH
 				#pragma multi_compile_shadowcaster
 				#include "SpeedTreeCommon.cginc"
@@ -229,7 +231,7 @@ Shader "Fog Volume/Nature/SpeedTree"
 				#pragma vertex vert
 				#pragma fragment frag
 				#pragma multi_compile_fog
-				#pragma multi_compile __ LOD_FADE_PERCENTAGE
+				#pragma multi_compile  LOD_FADE_PERCENTAGE
 				#pragma shader_feature GEOM_TYPE_BRANCH GEOM_TYPE_BRANCH_DETAIL GEOM_TYPE_FROND GEOM_TYPE_LEAF GEOM_TYPE_MESH
 				#include "SpeedTreeCommon.cginc"
 

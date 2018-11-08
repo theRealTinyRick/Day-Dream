@@ -7,9 +7,13 @@ namespace AH.Max.Gameplay
 {
 	public class PlayerLocomotion : MonoBehaviour 
 	{
-		[TabGroup(Tabs.Preferences)]
+		[TabGroup(Tabs.Locomotion)]
 		[SerializeField]
-		private float moveSpeed;		
+		private float moveSpeed;	
+
+		[TabGroup(Tabs.Locomotion)]
+		[SerializeField]
+		private float sprintSpeed;
 
 		[TabGroup(Tabs.Preferences)]
 		[SerializeField]
@@ -73,16 +77,15 @@ namespace AH.Max.Gameplay
 
 			if(playerStateManager.CurrentState != PlayerState.FreeMove) return;
 
-			if(!playerStateManager.IsGrounded)
-			{
-				var _velocity = new Vector3(move.x * moveSpeed, _rigidbody.velocity.y, move.z  * moveSpeed);
-				_rigidbody.velocity = _velocity;
+			float _speed = playerController.IsSprinting ? sprintSpeed : moveSpeed;
 
-				if(move != Vector3.zero)
-				{
-					var _rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(move, Vector3.up), turnSpeed);
-					transform.rotation = _rotation;
-				}
+			var _velocity = new Vector3(move.x * _speed, _rigidbody.velocity.y, move.z  * _speed);
+			_rigidbody.velocity = _velocity;
+
+			if(move != Vector3.zero)
+			{
+				var _rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(move, Vector3.up), turnSpeed);
+				transform.rotation = _rotation;
 			}
 
 			WarpPivotAnimation();

@@ -30,7 +30,8 @@ public class FreeClimb : MonoBehaviour {
 
 	bool hasPlayedAnim = false;
 
-	void Start(){
+	void Start()
+	{
 		helper = new GameObject().transform;
 		helper.name = "Climb Helper";
 
@@ -40,15 +41,19 @@ public class FreeClimb : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 	}
 
-	public bool CheckForClimb(){
+	public bool CheckForClimb()
+	{
         RaycastHit hit;
         Vector3 origin = transform.position;
-		if(pController.CheckGrounded()){
+		if(pController.CheckGrounded())
+		{
         	origin.y += 2; 
 		}
 
-        if(Physics.Raycast(origin, transform.forward, out hit, 1)){
-            if(hit.transform.tag == "Climbable"){
+        if(Physics.Raycast(origin, transform.forward, out hit, 1))
+		{
+            if(hit.transform.tag == "Climbable")
+			{
                 InitForClimb(hit);
                 return true;
             }
@@ -56,7 +61,8 @@ public class FreeClimb : MonoBehaviour {
         return false;
     }
 
-	public void InitForClimb(RaycastHit hit){
+	public void InitForClimb(RaycastHit hit)
+	{
 		isClimbing = true;
 		rb.isKinematic = true;
 		helper.transform.rotation = Quaternion.LookRotation(-hit.normal);
@@ -64,26 +70,24 @@ public class FreeClimb : MonoBehaviour {
 		targetPos = hit.point + (hit.normal * offsetFromWall);
 		t = 0;
 		inPosition = false;
-
-		//handle anims
-		// if(pController.CheckGrounded()){
-			// anim.SetTrigger("GroundedWallMount");
-		// }else{
-			anim.Play("AirWallMount");
-		// }
-
+		
+		anim.Play("AirWallMount");
 		anim.SetBool("WallClimbing", true);
 	}
 
-	void Update(){
-		if(isClimbing){
+	void Update()
+	{
+		if(isClimbing)
+		{
 			delta = Time.deltaTime;
 			Tick(delta);
 		}
 	}
 
-	public void Tick(float delta){
-		if(!inPosition){
+	public void Tick(float delta)
+	{
+		if(!inPosition)
+		{
 			GetInPosition();
 			return;
 		}
@@ -91,7 +95,8 @@ public class FreeClimb : MonoBehaviour {
 		h = Input.GetAxisRaw("Horizontal");
 		v = Input.GetAxisRaw("Vertical");
 	
-		if(!isLerping && anim.GetCurrentAnimatorStateInfo(0).IsName("FreeClimbIdle")){
+		if(!isLerping && anim.GetCurrentAnimatorStateInfo(0).IsName("FreeClimbIdle"))
+		{
 			hasPlayedAnim = false;
 
 			Vector3 horizontal = helper.right * h;
@@ -99,7 +104,8 @@ public class FreeClimb : MonoBehaviour {
 			Vector3 moveDir = (horizontal + vertical).normalized;
 
 			bool canMove = CanMove(moveDir);
-			if(!canMove || moveDir == Vector3.zero){
+			if(!canMove || moveDir == Vector3.zero)
+			{
 				return;
 			}
 
@@ -108,14 +114,18 @@ public class FreeClimb : MonoBehaviour {
 			startPos = transform.position;
 			targetPos = helper.position;
 			
-		}else{
+		}
+		else
+		{
 			t += delta * climbSpeed;
-			if( t > 1){
+			if( t > 1)
+			{
 				t = 1;
 				isLerping = false;
 			}
 			
-			if(!hasPlayedAnim){
+			if(!hasPlayedAnim)
+			{
 				animHook.HandleAnimation(h, v);
 				hasPlayedAnim = true;
 			}
@@ -126,20 +136,26 @@ public class FreeClimb : MonoBehaviour {
 		}
 	}
 
-	bool CanMove(Vector3 moveDir){
+	bool CanMove(Vector3 moveDir)
+	{
 		int layermask = 1<<8;
 		layermask = ~layermask;
 
-		if(moveDir.y > 0){
+		if(moveDir.y > 0)
+		{
 			Vector3 o = transform.position;
 			o.y += 2.5f;
 			RaycastHit ledgeHit;
 			Debug.DrawRay(o, transform.forward, Color.green, 5);
-			if(Physics.Raycast(o, transform.forward * 5, out ledgeHit, 5, layermask)){
-				if(ledgeHit.transform.tag != "Climbable"){
+			if(Physics.Raycast(o, transform.forward * 5, out ledgeHit, 5, layermask))
+			{
+				if(ledgeHit.transform.tag != "Climbable")
+				{
 					return false;
 				}
-			}else{
+			}
+			else
+			{
 				Vector3 ledgePostion = transform.position;
 				ledgePostion = ledgePostion + transform.forward * 0.5f;
 				ledgePostion.y = o.y;
@@ -150,11 +166,13 @@ public class FreeClimb : MonoBehaviour {
 			}
 		}
 		
-		if(moveDir.y < 0){
-			//check to see if player will hit the floor and dismount
+		//check to see if player will hit the floor and dismount
+		if(moveDir.y < 0)
+		{
 			Vector3 origin1 = transform.position;
 			RaycastHit hitFloor;		
-			if(Physics.Raycast(origin1, -Vector3.up, out hitFloor, positionOffSet, layermask)){
+			if(Physics.Raycast(origin1, -Vector3.up, out hitFloor, positionOffSet, layermask))
+			{
 				Drop();
 				return false;
 			}
@@ -167,9 +185,11 @@ public class FreeClimb : MonoBehaviour {
 		Debug.DrawRay(origin, dir * dis, Color.red, 5);
 		RaycastHit hit;
 
-		if(Physics.Raycast(origin, dir, out hit, dis, layermask)){
+		if(Physics.Raycast(origin, dir, out hit, dis, layermask))
+		{
 
-			if(hit.transform.tag != "Climbable"){
+			if(hit.transform.tag != "Climbable")
+			{
 				return false;
 			}
 
@@ -183,9 +203,11 @@ public class FreeClimb : MonoBehaviour {
 		float dis2 = 1;
 
 		Debug.DrawRay(origin, dir * dis2, Color.blue, 5);
-		if(Physics.Raycast(origin, dir, out hit, dis2)){
+		if(Physics.Raycast(origin, dir, out hit, dis2))
+		{
 			
-			if(hit.transform.tag != "Climbable"){
+			if(hit.transform.tag != "Climbable")
+			{
 				return false;
 			}
 
@@ -197,7 +219,8 @@ public class FreeClimb : MonoBehaviour {
 		return false;
 	} 
 
-	void GetInPosition(){
+	void GetInPosition()
+	{
 		t += delta;
 		if(t > 1){
 			t = 1;
@@ -211,14 +234,16 @@ public class FreeClimb : MonoBehaviour {
 		transform.rotation = Quaternion.Slerp(transform.rotation, helper.rotation, delta * 5);
 	}
 
-	Vector3 PosWithOffset(Vector3 origin, Vector3 target){
+	Vector3 PosWithOffset(Vector3 origin, Vector3 target)
+	{
 		Vector3 direction = origin - target;
 		direction.Normalize();
 		Vector3 offset = direction * offsetFromWall;
 		return target + offset;
 	}
 
-	public void Drop(){
+	public void Drop()
+	{
 		rb.isKinematic = false;
 		PlayerManager.currentState = PlayerManager.PlayerState.FreeMovement;
 		isClimbing = false;
@@ -227,7 +252,8 @@ public class FreeClimb : MonoBehaviour {
 		anim.SetBool("WallClimbing", false);
 	}
 	
-	IEnumerator JumpOnLedge(Vector3 tp){
+	IEnumerator JumpOnLedge(Vector3 tp)
+	{
 		Drop();
 		GetComponent<PlayerMovement>().Jump(40, transform.forward);
 		yield return null;
