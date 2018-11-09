@@ -9,7 +9,14 @@ namespace AH.Max.System
 {
     public class EntityManager : Singleton<EntityManager>
     {
+        ///<Summary>
+        /// A reference to the player entity in the scene.
+        ///</Summary>
         private Entity _player;
+
+        ///<Summary>
+        /// A reference to the player entity in the scene.
+        ///</Summary>
         public Entity Player
         {
             get
@@ -20,7 +27,7 @@ namespace AH.Max.System
 
                     if(_player == null)
                     {
-                        Debug.LogError( "The player has not initialized or is not present in the scene." );
+                        Debug.LogError( "The player has not initialized or is not present in the scene. You may also want to make sure that your player object has the indentity type: Player." );
                         return null;
                     }
                 }
@@ -91,6 +98,39 @@ namespace AH.Max.System
                 }
             }
 
+            return null;
+        }
+
+        ///<Summary>
+        /// Returns a list of entities of a given Identity.
+        ///</Summary>
+        public static List <Entity> GetEntities( IdentityType type )
+        {
+            List <Entity> _entities = new List <Entity>();
+
+            foreach(Entity e in Instance.entities)
+            {
+                if(e.IdentityType.type == type.type)
+                {
+                    _entities.Add(e);
+                }
+            }
+
+            return _entities;
+        }
+
+        ///<Summary>
+        ///Returns an entity of the given type. The first one found will returned.
+        ///</Summary>
+        public static Entity GetEntity( IdentityType type )
+        {
+            foreach(Entity e in Instance.entities)
+            {
+                if(e.IdentityType.type == type.type)
+                {
+                    return e;
+                }
+            }
             return null;
         }
     }
