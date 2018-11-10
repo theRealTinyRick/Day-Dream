@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   name: Player
-  type: 0
+  type: 1
   prefab: {fileID: 1389789116411384, guid: 86581c65eb9bd684c9cdc806b1512867, type: 2}

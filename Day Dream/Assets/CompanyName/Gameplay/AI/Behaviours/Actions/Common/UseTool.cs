@@ -9,5 +9,16 @@ namespace BehaviorDesigner.Runtime.Tasks
     public class UseTool : Action
     {
 
+        public SharedGameObject agent;
+
+        public int tool;
+
+        public override void OnStart()
+        {
+            
+
+        }
+
+        
     }
 }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: BruteCommon
   m_EditorClassIdentifier: 
   name: Brute Enemy
-  type: 1
+  type: 2
   prefab: {fileID: 1617497809565780, guid: 65810bbbec39a354b83e7baf17f2f698, type: 2}

@@ -11,6 +11,22 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1617497809565780}
   m_IsPrefabAsset: 1
+--- !u!1 &1005358953112004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4629711469719290}
+  - component: {fileID: 114319543326780718}
+  m_Layer: 0
+  m_Name: Slam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1012428162024412
 GameObject:
   m_ObjectHideFlags: 1
@@ -354,6 +370,7 @@ GameObject:
   - component: {fileID: 195858654439740764}
   - component: {fileID: 136733894116402438}
   - component: {fileID: 114668171185419864}
+  - component: {fileID: 114503929631062614}
   m_Layer: 0
   m_Name: Brute Enemy
   m_TagString: Untagged
@@ -596,6 +613,22 @@ GameObject:
   - component: {fileID: 4299287471559134}
   m_Layer: 0
   m_Name: IndexFinger_01 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1800272871503818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4909632242904500}
+  - component: {fileID: 114361156945666710}
+  m_Layer: 0
+  m_Name: LargeSwing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1203,6 +1236,19 @@ Transform:
   m_Father: {fileID: 4535883444732062}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4629711469719290
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005358953112004}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4796851125751106}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4633144714719702
 Transform:
   m_ObjectHideFlags: 1
@@ -1325,6 +1371,8 @@ Transform:
   m_Children:
   - {fileID: 4368433665722636}
   - {fileID: 4440849540388332}
+  - {fileID: 4909632242904500}
+  - {fileID: 4629711469719290}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -216.02599, z: 0}
@@ -1439,6 +1487,19 @@ Transform:
   m_Father: {fileID: 4109891746997080}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4909632242904500
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1800272871503818}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4796851125751106}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4937539574155628
 Transform:
   m_ObjectHideFlags: 1
@@ -1513,6 +1574,66 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114319543326780718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005358953112004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60511e653113ab24287734baa3ed926b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identityType: {fileID: 0}
+--- !u!114 &114361156945666710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1800272871503818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60511e653113ab24287734baa3ed926b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identityType: {fileID: 0}
+--- !u!114 &114503929631062614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1617497809565780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWhenEnabled: 1
+  pauseWhenDisabled: 0
+  restartWhenComplete: 1
+  logTaskChanges: 0
+  group: 0
+  resetValuesOnRestart: 1
+  externalBehavior: {fileID: 11400000, guid: 973b3cd498f3dc64db40cdf6b13cf4cd, type: 2}
+  mBehaviorSource:
+    behaviorName: BruteAICommon
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 00000000
+      JSONSerialization: 
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: f9be55564aaa52567707a104
+        startIndex: 000000000100000002000000
+        dataPosition: 00000000290000002e000000
+        unityObjects: []
+        byteData: 4265686176696f7244657369676e65722e52756e74696d652e53686172656447616d654f626a6563744167656e7401
+        byteDataArray: 4265686176696f7244657369676e65722e52756e74696d652e53686172656447616d654f626a6563744167656e7401
+      Version: 1.5.13
 --- !u!114 &114582853287078662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1525,6 +1646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identityType: {fileID: 11400000, guid: dbd116afd2366b3448840c63f5c06030, type: 2}
+  entityBehaviourTree: {fileID: 0}
 --- !u!114 &114668171185419864
 MonoBehaviour:
   m_ObjectHideFlags: 1
