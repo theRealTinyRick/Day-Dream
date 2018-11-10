@@ -14,7 +14,14 @@ namespace AH.Max.System
 			get { return isPaused; }
 		}
 
+		///<Summary>
+		/// Subscribe to this event to respond to pausing
+		///</Summary>
 		public static PausedEvent pausedEvent = new PausedEvent();
+
+		///<Summary>
+		/// Subscribe to this event to respond to unpausing
+		///</Summary>
 		public static UnPausedEvent UnPausedEvent = new UnPausedEvent();
 
 		///<Summary>
