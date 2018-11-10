@@ -5,7 +5,8 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour 
+{
 
 	public static GameManager instance;
 	public static GameObject Player;
