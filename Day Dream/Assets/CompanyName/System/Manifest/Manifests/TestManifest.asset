@@ -11,6 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7eac0d34425ed148b360877cb7da808, type: 3}
   m_Name: TestManifest
   m_EditorClassIdentifier: 
+  manifestType: 0
   levels: []
-  startUpScenes: []
-  systemScenes: []
+  startUpScenes:
+  - {fileID: 11400000, guid: 89c333e45172e3846bd2152a6360ca28, type: 2}
+  - {fileID: 11400000, guid: b6f10c9136d2cf54f9771801f5e57a72, type: 2}
+  - {fileID: 11400000, guid: 512e586f356633644b2f694cec0428da, type: 2}
+  - {fileID: 11400000, guid: 307eb39060a5ae640824fc0914fbbd4a, type: 2}
+  mainMenu: {fileID: 11400000, guid: eed3aff65978bf5478ae7bd49825eaf0, type: 2}
+  resourcesScene: {fileID: 11400000, guid: 20a688541700afc41bef6509025c76c8, type: 2}

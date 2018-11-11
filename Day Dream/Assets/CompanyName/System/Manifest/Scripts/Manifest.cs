@@ -18,8 +18,8 @@ public class Manifest : ScriptableObject
 	///</Summary>
 	[Tooltip("Theses are scenes that are actual playable levels in the game.")]
 	[SerializeField]
-	private List <LevelData> levels = new List<LevelData>();
-	public List <LevelData> Levels
+	private List <AH.Max.LevelData> levels = new List<AH.Max.LevelData>();
+	public List <AH.Max.LevelData> Levels
 	{
 		get { return levels; }
 	}
@@ -29,8 +29,8 @@ public class Manifest : ScriptableObject
 	///</Summary>
 	[Tooltip("These are the scenes that the game uses on startup. ")]
 	[SerializeField]
-	private List <UnityEngine.SceneManagement.Scene> startUpScenes = new List<UnityEngine.SceneManagement.Scene>();
-	public List <UnityEngine.SceneManagement.Scene> StartUpScenes
+	private List <AH.Max.LevelData> startUpScenes = new List<AH.Max.LevelData>();
+	public List <AH.Max.LevelData> StartUpScenes
 	{
 		get { return startUpScenes; }
 	}
@@ -51,16 +51,21 @@ public class Manifest : ScriptableObject
 	///</Summary>
 	[Tooltip("The Main Menu Scene")]
 	[SerializeField]
-	private UnityEngine.SceneManagement.Scene mainMenu;
-	public UnityEngine.SceneManagement.Scene MainMenu
+	private AH.Max.LevelData mainMenu;
+	public AH.Max.LevelData MainMenu
 	{
 		get { return mainMenu; }
 	}
 
-	[ShowInInspector]
-	private Manifest currentlyActivatedManifest
+	///<Summary>
+	/// Theses are scenes that the game needs to run the game logic. UI, Entities, ect...
+	///</Summary>
+	[Tooltip("These are thing like input drivers and what not. They are all singletons")]
+	[SerializeField]
+	private AH.Max.LevelData resourcesScene;
+	public AH.Max.LevelData ResourcesScene
 	{
-		get { return ManifestManager.CurrentManifest; }
+		get { return resourcesScene; }
 	}
 
 	[Button]
