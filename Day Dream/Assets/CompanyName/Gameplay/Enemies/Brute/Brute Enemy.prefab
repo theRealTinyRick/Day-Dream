@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4629711469719290}
   - component: {fileID: 114319543326780718}
+  - component: {fileID: 114971938313072582}
   m_Layer: 0
   m_Name: Slam
   m_TagString: Untagged
@@ -627,6 +628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4909632242904500}
   - component: {fileID: 114361156945666710}
+  - component: {fileID: 114208993429029238}
   m_Layer: 0
   m_Name: LargeSwing
   m_TagString: Untagged
@@ -1574,6 +1576,42 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114208993429029238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1800272871503818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e4a8829f1884f4f8ee32cb841adc11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  stopUseEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: StopUseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  cancelUseEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: CancelUseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  handleEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: HandleEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  stopHandleEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: StopHandleEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  inUse: 0
+  useCooldown: 1
+  coolDown: 2
 --- !u!114 &114319543326780718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1614,7 +1652,7 @@ MonoBehaviour:
   restartWhenComplete: 1
   logTaskChanges: 0
   group: 0
-  resetValuesOnRestart: 1
+  resetValuesOnRestart: 0
   externalBehavior: {fileID: 11400000, guid: 973b3cd498f3dc64db40cdf6b13cf4cd, type: 2}
   mBehaviorSource:
     behaviorName: BruteAICommon
@@ -1623,16 +1661,16 @@ MonoBehaviour:
       types: []
       parentIndex: 
       startIndex: 
-      variableStartIndex: 00000000
+      variableStartIndex: 0000000003000000060000000a0000000e000000
       JSONSerialization: 
       fieldSerializationData:
         typeName: []
-        fieldNameHash: f9be55564aaa52567707a104
-        startIndex: 000000000100000002000000
-        dataPosition: 00000000290000002e000000
+        fieldNameHash: f9be55564aaa52567707a104f9be55564aaa52567707a104f9be55564aaa52567707a1041af3e5d3f9be55564aaa52567707a10414172f4cf9be55564aaa52567707a10467a836db
+        startIndex: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000
+        dataPosition: 00000000290000002e0000002f00000058000000640000006500000089000000940000009500000099000000bf000000d3000000d4000000e0000000090100001a0100001b010000
         unityObjects: []
-        byteData: 4265686176696f7244657369676e65722e52756e74696d652e53686172656447616d654f626a6563744167656e7401
-        byteDataArray: 4265686176696f7244657369676e65722e52756e74696d652e53686172656447616d654f626a6563744167656e7401
+        byteData: 4265686176696f7244657369676e65722e52756e74696d652e53686172656447616d654f626a6563744167656e74014265686176696f7244657369676e65722e52756e74696d652e53686172656447616d654f626a656374536861726564546172676574014265686176696f7244657369676e65722e52756e74696d652e536861726564466c6f617441747461636b52616e6765010000a0404265686176696f7244657369676e65722e52756e74696d652e536861726564566563746f7233536861726564546172676574506f736974696f6e010000000000000000000000004265686176696f7244657369676e65722e52756e74696d652e536861726564416c6c656769616e636543757272656e74416c6c656769616e63650101000000
+        byteDataArray: 
       Version: 1.5.13
 --- !u!114 &114582853287078662
 MonoBehaviour:
@@ -1647,6 +1685,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identityType: {fileID: 11400000, guid: dbd116afd2366b3448840c63f5c06030, type: 2}
   entityBehaviourTree: {fileID: 0}
+  baseTarget: {fileID: 11400000, guid: ffe400bb2f0650448b87f4ad0db10a68, type: 2}
+  currentAllegiance: 0
 --- !u!114 &114668171185419864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1658,6 +1698,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93386faad4119a647b1ed7ddda23fbb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterTools:
+  - {fileID: 114361156945666710}
+  - {fileID: 114319543326780718}
+--- !u!114 &114971938313072582
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005358953112004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e4a8829f1884f4f8ee32cb841adc11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  stopUseEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: StopUseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  cancelUseEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: CancelUseEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  handleEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: HandleEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  stopHandleEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: StopHandleEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  inUse: 0
+  useCooldown: 0
+  coolDown: 0
 --- !u!136 &136733894116402438
 CapsuleCollider:
   m_ObjectHideFlags: 1

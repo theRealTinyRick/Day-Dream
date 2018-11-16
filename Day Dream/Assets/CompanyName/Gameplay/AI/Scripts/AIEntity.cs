@@ -135,7 +135,7 @@ namespace AH.Max.Gameplay.AI
 					float val = Mathf.Lerp(animator.GetFloat(AIAnimatorController.Speed), 0.5f, 0.1f);
 
 					animator.SetFloat(AIAnimatorController.Speed, val);
-					animator.SetBool(AIAnimatorController.IsMoving, true);
+					//animator.SetTrigger(AIAnimatorController.IsMoving);
 				}
 				else
 				{
@@ -147,7 +147,7 @@ namespace AH.Max.Gameplay.AI
 					}
 
 					animator.SetFloat(AIAnimatorController.Speed, 0);
-					animator.SetBool(AIAnimatorController.IsMoving, false);
+					//animator.SetTrigger(AIAnimatorController.IsMoving);
 				}
 			}
 			else
