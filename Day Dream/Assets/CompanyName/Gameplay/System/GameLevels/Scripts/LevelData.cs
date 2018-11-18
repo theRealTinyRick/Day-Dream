@@ -8,5 +8,6 @@ namespace AH.Max
 	public class LevelData : ScriptableObject
 	{
 		public string name;
+		public List <LevelData> dependencies;
 	}
 }

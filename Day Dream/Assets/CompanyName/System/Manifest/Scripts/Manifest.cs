@@ -58,6 +58,16 @@ public class Manifest : ScriptableObject
 	}
 
 	///<Summary>
+	///The level select scenes
+	///</Summary>
+	[SerializeField]
+	private AH.Max.LevelData levelSelect;
+	public AH.Max.LevelData LevelSelect
+	{
+		get { return levelSelect; }
+	}
+
+	///<Summary>
 	/// Theses are scenes that the game needs to run the game logic. UI, Entities, ect...
 	///</Summary>
 	[Tooltip("These are thing like input drivers and what not. They are all singletons")]
