@@ -41,6 +41,16 @@ public class ManifestManager : Singleton_MonoBehavior<ManifestManager>
 		get { return initializationEnded; }
 	}
 
+	///<Summary>
+	///
+	///</Summary>
+	public static ContentLoadedEvent contentLoadedEvent = new ContentLoadedEvent();
+
+	///<Summary>
+	///
+	///</Summary>
+	public static ContentsLoadedEvent contentsLoadedEvent = new ContentsLoadedEvent();
+
 	public static void SetManifestType( Manifest _manifest )
 	{ 
 		if( _manifest == null ) return;
@@ -54,9 +64,9 @@ public class ManifestManager : Singleton_MonoBehavior<ManifestManager>
 		loadGameRoutine = StartCoroutine(LoadGameRoutine(currentManifest));
 	}
 
-	public void LoadLevel(LevelData _levelData)
+	public void LoadLevel(AH.Max.LevelData _level)
 	{
-		
+		loadLevelRoutine = StartCoroutine(LoadLevelRoutine(_level));
 	}	
 
 	private void LoadResources(Manifest _manifest)
@@ -74,8 +84,6 @@ public class ManifestManager : Singleton_MonoBehavior<ManifestManager>
 			yield return null;
 		}
 
-		OnInitializationStarted();
-
 		foreach(AH.Max.LevelData _scene in _manifest.StartUpScenes)
 		{
 			AsyncOperation _asyncLoad = SceneManager.LoadSceneAsync(_scene.name);
@@ -85,9 +93,13 @@ public class ManifestManager : Singleton_MonoBehavior<ManifestManager>
 				yield return null;
 			}
 
+			if(contentLoadedEvent != null)
+			{
+				contentLoadedEvent.Invoke(_scene);
+			}
+
 			yield return new WaitForSecondsRealtime(_screenTime);
 		}
-
 
 		AsyncOperation _asyncLoadMainMenuLoad = SceneManager.LoadSceneAsync(_manifest.MainMenu.name);
 		
@@ -96,14 +108,43 @@ public class ManifestManager : Singleton_MonoBehavior<ManifestManager>
 			yield return null;
 		}
 
-		OnInitializationEnded();
-		
+		if(contentsLoadedEvent != null)
+		{
+			contentsLoadedEvent.Invoke();
+		}
+
 		yield break;
 	}
 
-	private IEnumerator LoadLevelRoutine()
+	private IEnumerator LoadLevelRoutine(AH.Max.LevelData _level)
 	{
+		//load all the dependencies in the level
+		foreach(AH.Max.LevelData _dependency in _level.dependencies)
+		{
+			AsyncOperation _asyncLoad = SceneManager.LoadSceneAsync(_dependency.name);
 
+			while(!_asyncLoad.isDone)
+			{
+				yield return null;
+			}
+
+			if(contentLoadedEvent != null)
+			{
+				contentLoadedEvent.Invoke(_dependency);
+			}
+		}
+
+		AsyncOperation _asyncLoadMainMenuLoad = SceneManager.LoadSceneAsync(_level.name);
+		
+		while(!_asyncLoadMainMenuLoad.isDone)
+		{
+			yield return null;
+		}
+
+		if(contentsLoadedEvent != null)
+		{
+			contentsLoadedEvent.Invoke();
+		}
 		yield break;
 	}
 

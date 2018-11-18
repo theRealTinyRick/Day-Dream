@@ -147,7 +147,7 @@ public class InputDataBase
     public const string LeftStickVertical = "LeftStickVertical"; 
     
     public const string RightStickHorizontal = "RightStickHorizontal";
-    public const string RightStickVertical = "RightStickVetical";
+    public const string RightStickVertical = "RightStickVertical";
 
     public const string AButton = "AButton";
     public const string BButton = "BButton";

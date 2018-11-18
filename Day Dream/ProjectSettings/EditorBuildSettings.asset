@@ -26,4 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/CompanyName/System/GameResources/Scenes/Resources.unity
     guid: 274570662d56811498b1d7988a499bc6
+  - enabled: 1
+    path: Assets/CompanyName/System/LevelSelect/Scene/TestingLevelSelect.unity
+    guid: 6da8db8ac0e462c4a81fb7a3dd851bef
+  - enabled: 1
+    path: Assets/CompanyName/Scenes/Test Arena/Test Arena.unity
+    guid: 1982ec0169804b448a8fb106f2cc1669
   m_configObjects: {}
