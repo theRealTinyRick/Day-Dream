@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour {
     private Vector3 dir = new Vector3();
 
     private const string LeftStickHorizontal = "LeftStickHorizontal";
-    private const string LeftStickVertical = "LeftStickVertical";
+    private const string LeftStickVertical = "LeftStickVertical"; 
     
     private const string RightStickHorizontal = "RightStickHorizontal";
     private const string RightStickVertical = "RightStickVetical";
