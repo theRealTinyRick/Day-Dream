@@ -6,5 +6,6 @@ public enum IdentityTypes : int
 	None,
 	Player, 
 	Enemy,
-	Tool
+	Tool,
+	Camera
 }

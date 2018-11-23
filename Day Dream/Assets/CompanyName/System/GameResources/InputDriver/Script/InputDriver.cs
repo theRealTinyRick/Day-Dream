@@ -21,6 +21,7 @@ public class InputDriver : Singleton_MonoBehavior<InputDriver>
 
     //vectors
     public static Vector3 LocomotionDirection = new Vector3();
+    public static Vector3 LocomotionOrientationDirection = new Vector3();
     public static Vector3 RightInputDirection = new Vector3();
 
     //rewired reciever
@@ -71,7 +72,7 @@ public class InputDriver : Singleton_MonoBehavior<InputDriver>
         }
 
         RightInputDirection.x = _rightInputDirectionX;
-        RightInputDirection.z = _rightInputDirectionY;
+        RightInputDirection.y = _rightInputDirectionY;
 
         //jump button from game pad then keyboard
         if(input.GetButtonDown(InputDataBase.AButton) || UnityEngine.Input.GetKeyDown(KeyCode.Space))
