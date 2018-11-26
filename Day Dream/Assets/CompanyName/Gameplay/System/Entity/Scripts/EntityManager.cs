@@ -36,6 +36,25 @@ namespace AH.Max.System
             private set { _player = value; }
         }
 
+        private Entity gameCamera;
+
+        public Entity GameCamera
+        {
+            get
+            {
+                if(!gameCamera)
+                {
+                    gameCamera = GetEntity(IdentityTypes.Camera);
+                    if(!gameCamera)
+                    {
+                        Debug.LogError( "The game camera is not present in the scene. You may need to initialize the resources scene" );
+                    }
+                }
+                return gameCamera;
+            }
+            private set {gameCamera = value;}
+        }
+
         private List <Entity> _enemies = new List <Entity> ();
         public List <Entity> Enemies
         {
@@ -124,13 +143,29 @@ namespace AH.Max.System
         ///</Summary>
         public static Entity GetEntity( IdentityType type )
         {
-            foreach(Entity e in Instance.entities)
+            foreach(Entity _e in Instance.entities)
             {
-                if(e.IdentityType.type == type.type)
+                if(_e.IdentityType.type == type.type)
                 {
-                    return e;
+                    return _e;
                 }
             }
+            return null;
+        }
+
+        ///<Summary>
+        ///Find the entity in the list with the IdentityTypes
+        ///</Summary>
+        public static Entity GetEntity (IdentityTypes type)
+        {
+            foreach(Entity _e in Instance.entities)
+            {
+                if(_e.IdentityType.type == type)
+                {
+                    return _e;
+                }
+            }
+
             return null;
         }
     }

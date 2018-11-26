@@ -21,6 +21,10 @@ namespace AH.Max
             get { return identityType; }
         }
 
+        [TabGroup(Tabs.Entity)]
+        [SerializeField]
+        private bool doNotDestroyOnLoad;
+
         public void OnEnable()
         {
             if(identityType == null)
@@ -30,6 +34,11 @@ namespace AH.Max
             }
 
             EntityManager.Instance.RegisterEntity(this);
+
+            if(doNotDestroyOnLoad)
+            {
+                DontDestroyOnLoad(gameObject);
+            }
 
             Enable();
         }

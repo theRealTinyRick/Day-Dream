@@ -6,8 +6,9 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 using AH.Max.System;
+using AH.Max;
 
-public class GameCamera : MonoBehaviour 
+public class GameCamera : Entity
 {
 	[TabGroup(Tabs.Preferences)]
 	[SerializeField]
@@ -37,7 +38,10 @@ public class GameCamera : MonoBehaviour
 
 	private float currentX = 0;
 
-	private float currentY = 0; 
+	private float currentY = 0;
+
+	public bool invertXAxis = false;
+	public bool invertYAxis = false;
 
 	private void Update () 
 	{
@@ -64,7 +68,7 @@ public class GameCamera : MonoBehaviour
 	private Vector3 GetTargetPosition()
 	{
 		Vector3 _offset = new Vector3(0, 0, -CameraClippingOffset());
-		Quaternion _rotation = Quaternion.Euler(currentY, currentX, 0);
+		Quaternion _rotation = Quaternion.Euler(currentY * (invertYAxis ? -1 : 1), currentX * (invertXAxis ? -1 : 1), 0);
 		return (playerTransform.position + cameraOffsetPosition) +_rotation * _offset;
 	}
 
@@ -102,9 +106,7 @@ public class GameCamera : MonoBehaviour
 
 		RaycastHit _hit;
 
-		Debug.DrawRay(_origin, _direction * _rayLength, Color.red);
-
-		if(Physics.Raycast(_origin, _direction, out _hit, _rayLength))
+		if(Physics.Raycast(_origin, _direction, out _hit, _rayLength, PhysicsLayers.ingnorePlayerLayer))
 		{
 			return Vector3.Distance(_origin, _hit.point);
 		}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -155,12 +155,12 @@ Prefab:
     - target: {fileID: 114247457594260784, guid: 5714f14b86aa2cb4e9ea54921025dee9,
         type: 2}
       propertyPath: xSensitivity
-      value: 0.485
+      value: 5.03
       objectReference: {fileID: 0}
     - target: {fileID: 114247457594260784, guid: 5714f14b86aa2cb4e9ea54921025dee9,
         type: 2}
       propertyPath: ySensitivity
-      value: 0.49
+      value: 1.77
       objectReference: {fileID: 0}
     - target: {fileID: 114247457594260784, guid: 5714f14b86aa2cb4e9ea54921025dee9,
         type: 2}
@@ -175,9 +175,21 @@ Prefab:
     - target: {fileID: 114247457594260784, guid: 5714f14b86aa2cb4e9ea54921025dee9,
         type: 2}
       propertyPath: offsetDistance
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114247457594260784, guid: 5714f14b86aa2cb4e9ea54921025dee9,
+        type: 2}
+      propertyPath: identityType
+      value: 
+      objectReference: {fileID: 11400000, guid: de21f658ff359b744af90657c6e18ee5,
+        type: 2}
+    - target: {fileID: 114247457594260784, guid: 5714f14b86aa2cb4e9ea54921025dee9,
+        type: 2}
+      propertyPath: doNotDestroyOnLoad
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114128502334475344, guid: 5714f14b86aa2cb4e9ea54921025dee9, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 5714f14b86aa2cb4e9ea54921025dee9, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &341854169
