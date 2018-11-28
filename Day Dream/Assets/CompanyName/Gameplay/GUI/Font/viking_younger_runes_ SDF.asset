@@ -11,19 +11,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: viking_younger_runes_ SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 201703064
   material: {fileID: 21041151748737826}
-  materialHashCode: 0
+  materialHashCode: 75980051
   fontAssetType: 1
   m_fontInfo:
     Name: VIKING, YOUNGER Runes
     PointSize: 84
-    Scale: 0
+    Scale: 1
     CharacterCount: 95
     LineHeight: 73.5
     Baseline: 0
     Ascender: 66.9375
-    CapHeight: 0
+    CapHeight: 65.625
     Descender: -6.5625
     CenterLine: 0
     SuperscriptOffset: 66.9375
@@ -33,7 +33,7 @@ MonoBehaviour:
     UnderlineThickness: 4.1835938
     strikethrough: 21.954546
     strikethroughThickness: 4.1835938
-    TabWidth: 0
+    TabWidth: 275.625
     Padding: 5
     AtlasWidth: 512
     AtlasHeight: 512
@@ -42,10 +42,10 @@ MonoBehaviour:
   - id: 32
     x: 6
     y: 517
-    width: 0
-    height: 0
+    width: 27.5625
+    height: 73.5
     xOffset: 0
-    yOffset: 0
+    yOffset: 66.9375
     xAdvance: 27.5625
     scale: 1
   - id: 33
@@ -1021,9 +1021,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.6770833
+    - _ScaleRatioC: 0.6770833
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0

@@ -6,6 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/UnfinishedScenes/OpenMapOne.unity
-    guid: 5b831938a073ae34f861a876ac428a03
+    path: Assets/CompanyName/System/Manifest/Scene/Startup.unity
+    guid: dd87e2c0009bf4046814c131c77860f7
+  - enabled: 1
+    path: Assets/CompanyName/System/StartUpScenes/SplashScreen/SplashScreen.unity
+    guid: 3957290fd04934241a4f11e5c5a4161d
+  - enabled: 1
+    path: Assets/CompanyName/System/StartUpScenes/Technologies/Technologies.unity
+    guid: aaffe5bc415b040448364ab760cf7f1f
+  - enabled: 1
+    path: Assets/CompanyName/System/StartUpScenes/Publisher/Publisher.unity
+    guid: b3e3f99c4380ad44db99cd85306a6521
+  - enabled: 1
+    path: Assets/CompanyName/System/StartUpScenes/TitleScreen/TitleScreen.unity
+    guid: e96bc860337834c49862f0041b0906c2
+  - enabled: 1
+    path: Assets/CompanyName/System/MainMenu/Scene/MainMenu.unity
+    guid: 7ac4346423ab96a4e82cc37ef28f314a
+  - enabled: 1
+    path: Assets/CompanyName/System/GameResources/Scenes/Resources.unity
+    guid: 274570662d56811498b1d7988a499bc6
+  - enabled: 1
+    path: Assets/CompanyName/System/LevelSelect/Scene/TestingLevelSelect.unity
+    guid: 6da8db8ac0e462c4a81fb7a3dd851bef
+  - enabled: 1
+    path: Assets/CompanyName/Scenes/Test Arena/Test Arena.unity
+    guid: 1982ec0169804b448a8fb106f2cc1669
   m_configObjects: {}

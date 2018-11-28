@@ -13,13 +13,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsMoving
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -41,7 +41,7 @@ BlendTree:
   m_Name: Focus
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400002, guid: 765a54c154fffd44c863f5d78ccc5f43, type: 3}
+    m_Motion: {fileID: 7400000, guid: 776765e4a1d22874ba6b246d7d624c9f, type: 2}
     m_Threshold: 0.5
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -49,7 +49,7 @@ BlendTree:
     m_DirectBlendParameter: Speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 765a54c154fffd44c863f5d78ccc5f43, type: 3}
+    m_Motion: {fileID: 7400000, guid: 10ec9a158f1af55479df3f2d3f05d5d0, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
