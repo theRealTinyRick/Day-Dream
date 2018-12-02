@@ -3,6 +3,9 @@
 [System.Serializable]
 public enum IdentityTypes : int
 {
+	None,
 	Player, 
-	Enemy
+	Enemy,
+	Tool,
+	Camera
 }
