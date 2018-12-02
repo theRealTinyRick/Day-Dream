@@ -53,17 +53,16 @@ public class PlayerLocomotion : MonoBehaviour
 	{
 		Move(LockedOn);
 		
-		if(!LockedOn)
-		{
-			RotatePlayer();
-		}
-		else
+		if(LockedOn)
 		{
 			if(defending || attacking)
 			{
 				FaceTarget();
+				return;
 			}
 		}
+		
+		RotatePlayer();
 	}
 	
 	private void Move(bool lockedOn)
