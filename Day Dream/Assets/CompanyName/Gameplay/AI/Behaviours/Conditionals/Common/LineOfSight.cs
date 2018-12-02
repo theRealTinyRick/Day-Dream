@@ -32,8 +32,6 @@ namespace BehaviorDesigner.Runtime.Tasks
 
             float _angle = Vector3.SignedAngle(agent.Value.transform.forward, _targetDirection, Vector3.up);
 
-            Debug.Log("angle is: " + _angle);
-
             if(Physics.Raycast(agent.Value.transform.position + yOffset, agent.Value.transform.forward, distanceOfSight, blockingLayers, QueryTriggerInteraction.UseGlobal))
             {
                 return TaskStatus.Failure;
