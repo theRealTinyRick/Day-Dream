@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace AH.Max.Gameplay
+namespace AH.Max.Gameplay 
 {
 	public class PlayerAttack : MonoBehaviour 
 	{

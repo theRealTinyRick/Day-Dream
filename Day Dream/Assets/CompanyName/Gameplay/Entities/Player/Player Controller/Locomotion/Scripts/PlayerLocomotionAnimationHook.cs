@@ -56,7 +56,7 @@ public class PlayerLocomotionAnimationHook : MonoBehaviour
 		}
 		else
 		{
-			verticalAnimatorFloat = _moveDirection.magnitude * Vector3.Dot(_forwardVector, _moveDirection) /** (Vector3.Dot(_forwardVector, _moveDirection) < 0 ? -1 : 1)*/;
+			verticalAnimatorFloat = _moveDirection.magnitude * Vector3.Dot(_forwardVector, _moveDirection);
 			horizontalAnimatorFloat = _crossProduct.y;
 		}
 	}
