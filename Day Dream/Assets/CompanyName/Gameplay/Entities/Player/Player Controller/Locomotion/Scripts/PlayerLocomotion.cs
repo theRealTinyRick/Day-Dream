@@ -40,13 +40,17 @@ public class PlayerLocomotion : MonoBehaviour
 	public Vector3 playerOrientationDirection = new Vector3();
 	public Vector3 playerOrientationDirectionNotNormalized = new Vector3();
 
+	private Animator animator;
 	private Rigidbody _rigidbody;
 	private PlayerLocomotionAnimationHook playerLocomotionAnimationHook;
+	private PlayerAttackAnimationController playerAttackAnimationController;
 
 	private void Start () 
 	{
+		animator = GetComponentInChildren<Animator>();
 		_rigidbody = GetComponentInChildren<Rigidbody>();
 		playerLocomotionAnimationHook = GetComponentInChildren<PlayerLocomotionAnimationHook>();
+		playerAttackAnimationController = GetComponent<PlayerAttackAnimationController>();
 	}
 	
 	private void FixedUpdate () 
@@ -68,8 +72,37 @@ public class PlayerLocomotion : MonoBehaviour
 	private void Move(bool lockedOn)
 	{
 		Vector3 _direction = GetOrientationDirection();
-		_rigidbody.velocity 
-		= new Vector3( (_direction.x * baseSpeed) * InputDriver.LocomotionDirection.magnitude, _rigidbody.velocity.y, (_direction.z * baseSpeed) * InputDriver.LocomotionDirection.magnitude ) ;
+
+		if(CanMove())
+		{
+			_rigidbody.velocity =
+				new Vector3( (_direction.x * baseSpeed) * InputDriver.LocomotionDirection.magnitude, 
+				_rigidbody.velocity.y, 
+				(_direction.z * baseSpeed) * InputDriver.LocomotionDirection.magnitude ) ;
+		}
+	}
+
+	///<Summary>
+	/// Is the player currently in a state where movement should be applied
+	///</Summary>
+	private bool CanMove()
+	{
+		if(animator.GetCurrentAnimatorStateInfo(0).IsName("Locomotion"))
+		{
+			return true;
+		}
+
+		if(playerAttackAnimationController.IsAttacking)
+		{
+			return false;
+		}
+
+		if(GetOrientationDirection() == Vector3.zero)
+		{
+			return false;
+		}
+		
+		return true;
 	}
 
 	private void RotatePlayer()

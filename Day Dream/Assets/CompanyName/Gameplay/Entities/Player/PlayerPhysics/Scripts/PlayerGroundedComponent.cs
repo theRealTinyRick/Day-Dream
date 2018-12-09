@@ -22,11 +22,9 @@ public class PlayerGroundedComponent : MonoBehaviour
 	{
 		if(Grounded())
 		{
-			Debug.Log("grounded");
 		}	
 		else
 		{
-			Debug.Log("not grounded");
 		}
 	}
 

@@ -14,4 +14,5 @@ public class Tabs
 	public const string Entity = "Entity";
 	public const string Stats = "Stats";
 	public const string Events = "Events";
+	public const string Debug = "Debug";
 }

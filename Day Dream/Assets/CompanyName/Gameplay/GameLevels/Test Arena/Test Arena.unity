@@ -830,6 +830,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114488635941522016, guid: 6d6233b4d87bd37458f5be7f20b144a7,
+        type: 2}
+      propertyPath: queue.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
       propertyPath: m_LocalPosition.x
       value: 4.191
@@ -876,6 +881,23 @@ Prefab:
     - target: {fileID: 1594068295067430, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
       propertyPath: m_Name
       value: Max
+      objectReference: {fileID: 0}
+    - target: {fileID: 114488635941522016, guid: 6d6233b4d87bd37458f5be7f20b144a7,
+        type: 2}
+      propertyPath: timeToClick
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
@@ -1056,7 +1078,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh43094
+  m_Name: pb_Mesh52572
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
