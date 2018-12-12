@@ -587,6 +587,7 @@ GameObject:
   - component: {fileID: 114703430582259392}
   - component: {fileID: 114585249965170552}
   - component: {fileID: 114488635941522016}
+  - component: {fileID: 114408614192445956}
   m_Layer: 8
   m_Name: PlayerLocomotionDevelopment
   m_TagString: Untagged
@@ -1984,6 +1985,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: HitEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+--- !u!114 &114408614192445956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1594068295067430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a22a59d9569fc4490499e1a4ce0dcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testLockOn: 0
+  isEvading: 0
 --- !u!114 &114420656924525502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2008,7 +2022,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ba5b7fdb3c4fe045b6c098af7013814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Stopped: 0
   queue: []
+  timeToClick: 1
 --- !u!114 &114585249965170552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2043,6 +2059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3864fed86da94e46928e5dedd6fae0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 1
 --- !u!114 &114703430582259392
 MonoBehaviour:
   m_ObjectHideFlags: 1
