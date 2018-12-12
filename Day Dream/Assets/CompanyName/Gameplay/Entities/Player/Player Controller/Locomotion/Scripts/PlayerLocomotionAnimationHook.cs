@@ -13,11 +13,11 @@ public class PlayerLocomotionAnimationHook : MonoBehaviour
 
 	[TabGroup("Animation")]
 	[SerializeField]
-	private float verticalAnimatorFloat = 0;
+	public float verticalAnimatorFloat = 0;
 
 	[TabGroup("Animation")]
 	[SerializeField]
-	private float horizontalAnimatorFloat = 0;
+	public float horizontalAnimatorFloat = 0;
 
 	[TabGroup("Animation")]
 	[SerializeField]
@@ -27,6 +27,8 @@ public class PlayerLocomotionAnimationHook : MonoBehaviour
 	private PlayerLocomotion playerLocomotion;
 	private PlayerStateComponent playerStateComponent;
 	private PlayerAttackAnimationController playerAttackAnimatorController;
+	private PlayerEvade playerEvade;
+
 	private Animator animator;
 
 	private void Start()
@@ -34,6 +36,7 @@ public class PlayerLocomotionAnimationHook : MonoBehaviour
 		playerLocomotion = GetComponent<PlayerLocomotion>();
 		playerStateComponent= GetComponent<PlayerStateComponent>();
 		playerAttackAnimatorController = GetComponent<PlayerAttackAnimationController>();
+		playerEvade = GetComponent<PlayerEvade>();
 		animator = GetComponent<Animator>();
 	}
 
@@ -67,7 +70,7 @@ public class PlayerLocomotionAnimationHook : MonoBehaviour
 
 	private void ApplyAnimationFloats()
 	{
-		if(playerAttackAnimatorController.CurrentlyInAttackState())
+		if(playerAttackAnimatorController.CurrentlyInAttackState() || playerEvade.isEvading)
 		{
 			animator.SetFloat(Horizontal, 0);
 			animator.SetFloat(Vertical, 0);

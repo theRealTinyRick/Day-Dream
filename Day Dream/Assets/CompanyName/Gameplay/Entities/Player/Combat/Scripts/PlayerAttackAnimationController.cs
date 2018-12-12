@@ -39,11 +39,13 @@ public class PlayerAttackAnimationController : MonoBehaviour
 	
 	private Animator animator;
 	private PlayerStateComponent playerStateComponent;
+	private PlayerEvade playerEvade;
 
 	void Start () 
 	{
 		animator = GetComponent<Animator>();
 		playerStateComponent = GetComponent<PlayerStateComponent>();
+		playerEvade = GetComponent<PlayerEvade>();
 	}
 
 	private void OnEnable()
@@ -76,7 +78,7 @@ public class PlayerAttackAnimationController : MonoBehaviour
 		}
 	}
 
-	private void StopAttacking()
+	public void StopAttacking()
 	{
 		// clear out the queue and stop attacking
 		foreach(string _animation in swordAnimations)
@@ -123,7 +125,11 @@ public class PlayerAttackAnimationController : MonoBehaviour
 
 	private bool EvaluateQueueConditions()
 	{
-		// add state checks
+		if(playerEvade.isEvading)
+		{
+			return false;
+		}
+
 		if(currentNumberOfClicks < maxNumberOfClicks)
 		{
 			return true;
@@ -144,8 +150,6 @@ public class PlayerAttackAnimationController : MonoBehaviour
 			{
 				if(_swordAnimation == thing.clip.name)
 				{
-					Debug.Log(_swordAnimation);
-					Debug.Log("Clip name is " + thing.clip.name);
 					return true;
 				}
 			}

@@ -18,7 +18,6 @@ public class PlayerStateComponent : MonoBehaviour
 		}
 		private set
 		{
-			//could ad an event handle here
 			currentState = value;
 		}
 	}

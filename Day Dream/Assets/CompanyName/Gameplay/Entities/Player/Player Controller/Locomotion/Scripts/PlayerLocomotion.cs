@@ -42,15 +42,20 @@ public class PlayerLocomotion : MonoBehaviour
 
 	private Animator animator;
 	private Rigidbody _rigidbody;
+
 	private PlayerLocomotionAnimationHook playerLocomotionAnimationHook;
 	private PlayerAttackAnimationController playerAttackAnimationController;
+	private PlayerEvade playerEvade;
 
 	private void Start () 
 	{
 		animator = GetComponentInChildren<Animator>();
 		_rigidbody = GetComponentInChildren<Rigidbody>();
+
 		playerLocomotionAnimationHook = GetComponentInChildren<PlayerLocomotionAnimationHook>();
 		playerAttackAnimationController = GetComponent<PlayerAttackAnimationController>();
+		playerEvade = GetComponent<PlayerEvade>();
+
 	}
 	
 	private void FixedUpdate () 
@@ -127,6 +132,11 @@ public class PlayerLocomotion : MonoBehaviour
 		}
 		
 		if(playerAttackAnimationController.CurrentlyInAttackState())
+		{
+			return false;
+		}
+
+		if(playerEvade.isEvading)
 		{
 			return false;
 		}
