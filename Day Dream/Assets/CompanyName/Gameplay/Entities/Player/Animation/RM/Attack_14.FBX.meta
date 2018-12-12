@@ -128,7 +128,7 @@ ModelImporter:
     400120: root
     400122: Spine
     4300000: Blueisland
-    7400000: R_Attack_14
+    7400000: Swing6
     9500000: //RootNode
     13700000: Blueisland
   externalObjects:
@@ -170,7 +170,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: R_Attack_14
+      name: Swing6
       takeName: Take 001
       firstFrame: 0
       lastFrame: 73

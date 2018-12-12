@@ -12,6 +12,8 @@ public class PlayerAttackAnimationController : MonoBehaviour
 	private bool isAttacking = false;
 	public bool IsAttacking{ get{ return isAttacking; } }
 
+	public bool Stopped = false;
+
 	[TabGroup(Tabs.Debug)]
 	[Tooltip("This field is only used for debuging and has no barring on the functionality of queuing animations. That is done in the animator controller")]
 	[SerializeField]
@@ -26,20 +28,22 @@ public class PlayerAttackAnimationController : MonoBehaviour
 	private int currentNumberOfClicks = 0;
 
 	[TabGroup(Tabs.Properties)]
-	[ShowInInspector]
-	private float timeToClick = 0.4f;
+	[SerializeField]
+	private float timeToClick;
 
 	[TabGroup(Tabs.Properties)]
 	[ShowInInspector]
 	private float time = 0;
 
 	private static string[] swordAnimations = new string[] {"Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6"};
+	
 	private Animator animator;
+	private PlayerStateComponent playerStateComponent;
 
-	/// TODO
 	void Start () 
 	{
 		animator = GetComponent<Animator>();
+		playerStateComponent = GetComponent<PlayerStateComponent>();
 	}
 
 	private void OnEnable()
@@ -103,8 +107,7 @@ public class PlayerAttackAnimationController : MonoBehaviour
 
 			queue.Add(swordAnimations[_index]);
 
-			// I use Play() with the first animation to start it immeiately 
-			if(_index== 0)
+			if(_index == 0)
 			{
 				animator.Play(swordAnimations[0]);
 			}
@@ -114,11 +117,13 @@ public class PlayerAttackAnimationController : MonoBehaviour
 			}
 
 			isAttacking = true;
+			playerStateComponent.SetStateHard(PlayerState.Attacking);
 		}
 	}
 
 	private bool EvaluateQueueConditions()
 	{
+		// add state checks
 		if(currentNumberOfClicks < maxNumberOfClicks)
 		{
 			return true;
@@ -131,8 +136,26 @@ public class PlayerAttackAnimationController : MonoBehaviour
 		return false;
 	}
 
-	public void ExitAttackQueue()
+	public bool CurrentlyInAttackState()
 	{
-		StopAttacking();
+		foreach(var _swordAnimation in swordAnimations)
+		{
+			foreach(var thing in animator.GetCurrentAnimatorClipInfo(0))
+			{
+				if(_swordAnimation == thing.clip.name)
+				{
+					Debug.Log(_swordAnimation);
+					Debug.Log("Clip name is " + thing.clip.name);
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	public void AttackAnimationEndEvent()
+	{
+		Debug.Log("delete");
 	}
 }

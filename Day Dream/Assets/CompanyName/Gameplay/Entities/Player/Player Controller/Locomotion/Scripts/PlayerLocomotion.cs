@@ -82,32 +82,9 @@ public class PlayerLocomotion : MonoBehaviour
 		}
 	}
 
-	///<Summary>
-	/// Is the player currently in a state where movement should be applied
-	///</Summary>
-	private bool CanMove()
-	{
-		if(animator.GetCurrentAnimatorStateInfo(0).IsName("Locomotion"))
-		{
-			return true;
-		}
-
-		if(playerAttackAnimationController.IsAttacking)
-		{
-			return false;
-		}
-
-		if(GetOrientationDirection() == Vector3.zero)
-		{
-			return false;
-		}
-		
-		return true;
-	}
-
 	private void RotatePlayer()
 	{
-		if(playerOrientationDirection != Vector3.zero)
+		if(CanMove())
 		{
 			transform.rotation = Quaternion.Lerp(transform.rotation, GetOrientationRotation(), turnDamping);
 		}
@@ -137,5 +114,23 @@ public class PlayerLocomotion : MonoBehaviour
 	private Quaternion GetOrientationRotation()
 	{
 		return Quaternion.LookRotation(GetOrientationDirection());
+	}
+
+	///<Summary>
+	/// Is the player currently in a state where movement should be applied
+	///</Summary>
+	private bool CanMove()
+	{
+		if(playerOrientationDirection == Vector3.zero)
+		{
+			return false;
+		}
+		
+		if(playerAttackAnimationController.CurrentlyInAttackState())
+		{
+			return false;
+		}
+
+		return true;
 	}
 }

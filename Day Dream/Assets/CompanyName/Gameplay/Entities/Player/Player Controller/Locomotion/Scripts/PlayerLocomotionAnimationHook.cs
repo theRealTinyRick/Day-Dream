@@ -25,11 +25,15 @@ public class PlayerLocomotionAnimationHook : MonoBehaviour
 	private int lockedOnAnimatorFloat = 0; // for testing purposes
 
 	private PlayerLocomotion playerLocomotion;
+	private PlayerStateComponent playerStateComponent;
+	private PlayerAttackAnimationController playerAttackAnimatorController;
 	private Animator animator;
 
 	private void Start()
 	{
 		playerLocomotion = GetComponent<PlayerLocomotion>();
+		playerStateComponent= GetComponent<PlayerStateComponent>();
+		playerAttackAnimatorController = GetComponent<PlayerAttackAnimationController>();
 		animator = GetComponent<Animator>();
 	}
 
@@ -63,6 +67,13 @@ public class PlayerLocomotionAnimationHook : MonoBehaviour
 
 	private void ApplyAnimationFloats()
 	{
+		if(playerAttackAnimatorController.CurrentlyInAttackState())
+		{
+			animator.SetFloat(Horizontal, 0);
+			animator.SetFloat(Vertical, 0);
+			return;
+		}
+
 		animator.SetFloat(LockedOn, (float)lockedOnAnimatorFloat);
 		animator.SetFloat(Horizontal, horizontalAnimatorFloat);
 		animator.SetFloat(Vertical, verticalAnimatorFloat);
