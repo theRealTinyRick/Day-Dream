@@ -588,8 +588,10 @@ GameObject:
   - component: {fileID: 114585249965170552}
   - component: {fileID: 114488635941522016}
   - component: {fileID: 114408614192445956}
+  - component: {fileID: 114155400278618572}
+  - component: {fileID: 114121304219155566}
   m_Layer: 8
-  m_Name: PlayerLocomotionDevelopment
+  m_Name: Ner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1945,6 +1947,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114121304219155566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1594068295067430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e4c49ae1a566147b2b05ccbdb63b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToCheck: 1
+  validLedge: 0
+  ledge: {x: 0, y: 0, z: 0}
+  wallNormal: {x: 0, y: 0, z: 0}
+  maxHeight: 3
+  minHeight: 0.5
 --- !u!114 &114142311939452706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1965,6 +1984,19 @@ MonoBehaviour:
   turnDamping: 0.2
   playerOrientationDirection: {x: 0, y: 0, z: 0}
   playerOrientationDirectionNotNormalized: {x: 0, y: 0, z: 0}
+--- !u!114 &114155400278618572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1594068295067430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ccda4851d1d2cc418269f13fcc87512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallOffset: 0
+  yOffset: 0
 --- !u!114 &114240128458509280
 MonoBehaviour:
   m_ObjectHideFlags: 1

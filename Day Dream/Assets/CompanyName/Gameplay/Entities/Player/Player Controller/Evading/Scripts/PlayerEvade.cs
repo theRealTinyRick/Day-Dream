@@ -25,7 +25,7 @@ public class PlayerEvade : MonoBehaviour
 
 	private void OnEnable() 
 	{
-		InputDriver.jumpButtonEvent.AddListener(Evade);
+		// InputDriver.jumpButtonEvent.AddListener(Evade);
 	}
 
 	private void OnDisable() 
