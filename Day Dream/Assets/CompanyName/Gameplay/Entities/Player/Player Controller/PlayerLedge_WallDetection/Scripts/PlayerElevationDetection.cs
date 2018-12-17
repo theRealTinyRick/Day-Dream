@@ -27,7 +27,20 @@ namespace AH.Max.Gameplay
 		[SerializeField]
 		[TabGroup(Tabs.Properties)]
 		private bool validLedge = false;
-		public bool ValidLedge{ get { return validLedge; } }		
+		public bool ValidLedge{ get { return validLedge; } }	
+
+		/// <summary>
+		/// The current type of vault that we want to execute
+		/// </summary>
+		[SerializeField]
+		private VaultType vaultType;
+		public VaultType VaultType
+		{
+			get
+			{
+				return vaultType;
+			}
+		}	
 
 		/// <summary>
 		/// The actual position of the ledge
@@ -69,6 +82,8 @@ namespace AH.Max.Gameplay
 		private float minHeight;
 
 		private LayerMask layerMask = 1 << 8;
+
+		private Vector3 test = new Vector3();
 
 		private void Start()
 		{
@@ -117,11 +132,10 @@ namespace AH.Max.Gameplay
 							_ledge.y = _hit.point.y;
 
 							if(CheckFloorAngle(_hit))
-							{
-								// playerVault.FindActualPosition(_hit.point, layerMask, this);
-								SetLedge(_ledge, _normal);
-								return;
+							{	
 								// set a target position and tell the player vault that we have a ledge to get too. We will also be showing UI with this
+								SetLedge(_ledge, _normal, DetermineVaultType(_ledge));
+								return;
 							}
 						}
 					}
@@ -129,6 +143,24 @@ namespace AH.Max.Gameplay
 			}
 
 			DeleteLedge();
+		}
+
+		private VaultType DetermineVaultType(Vector3 _ledgePosition)
+		{
+			Vector3 _origin = _ledgePosition;
+			_origin += transform.forward * distanceToCheck;
+			_origin.y = transform.position.y + maxHeight;
+			
+			RaycastHit _raycastHit;
+
+			if(Physics.Raycast(_origin, Vector3.down, out _raycastHit, maxHeight))
+			{
+				float _heightDifference = _raycastHit.point.y > transform.position.y ? _raycastHit.point.y - transform.position.y : transform.position.y - _raycastHit.point.y;
+				test = _raycastHit.point;
+				return _heightDifference <= minHeight ? VaultType.Over : VaultType.Mount;
+			}
+
+			return VaultType.Over;
 		}
 
 		private bool CheckWallAngle(RaycastHit hit)
@@ -155,10 +187,11 @@ namespace AH.Max.Gameplay
 			return false;
 		} 
 
-		private void SetLedge(Vector3 ledgePoint, Vector3 normal)
+		private void SetLedge(Vector3 ledgePoint, Vector3 normal, VaultType type)
 		{
 			validLedge = true;
 			ledge = ledgePoint;
+			vaultType = type;
 
 			wallNormal = normal;
 
@@ -188,6 +221,9 @@ namespace AH.Max.Gameplay
 			{
 				Gizmos.color = Color.black;
 				Gizmos.DrawCube(ledge, Vector3.one * 0.15f);
+
+				Gizmos.color = Color.red;
+				Gizmos.DrawCube(test, Vector3.one * 0.15f);
 			}
 		}
 	}

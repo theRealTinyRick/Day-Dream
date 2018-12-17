@@ -588,7 +588,7 @@ GameObject:
   - component: {fileID: 114585249965170552}
   - component: {fileID: 114488635941522016}
   - component: {fileID: 114408614192445956}
-  - component: {fileID: 114155400278618572}
+  - component: {fileID: 114187671069784220}
   - component: {fileID: 114121304219155566}
   m_Layer: 8
   m_Name: Ner
@@ -1984,7 +1984,7 @@ MonoBehaviour:
   turnDamping: 0.2
   playerOrientationDirection: {x: 0, y: 0, z: 0}
   playerOrientationDirectionNotNormalized: {x: 0, y: 0, z: 0}
---- !u!114 &114155400278618572
+--- !u!114 &114187671069784220
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1992,11 +1992,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1594068295067430}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ccda4851d1d2cc418269f13fcc87512, type: 3}
+  m_Script: {fileID: 11500000, guid: e2af02bbb0a086e44b3aee1e5a22339a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wallOffset: 0
   yOffset: 0
+  vaultDatas: []
 --- !u!114 &114240128458509280
 MonoBehaviour:
   m_ObjectHideFlags: 1
