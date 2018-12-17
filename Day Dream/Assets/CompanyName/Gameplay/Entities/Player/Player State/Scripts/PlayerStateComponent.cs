@@ -5,11 +5,13 @@ using UnityEngine;
 
 using Sirenix.OdinInspector;
 
+using AH.Max.Gameplay;
+
 public class PlayerStateComponent : MonoBehaviour 
 {
 	[TabGroup(Tabs.Properties)]
 	[SerializeField]
-	private PlayerState currentState = PlayerState.FreeMove;
+	private PlayerState currentState = PlayerState.Normal;
 	public PlayerState CurrentState
 	{
 		get
@@ -24,14 +26,22 @@ public class PlayerStateComponent : MonoBehaviour
 
 	private PlayerAttackAnimationController playerAttackAnimationController;
 	private PlayerGroundedComponent playerGroundedComponent;
+	private PlayerVault playerVault;
 
 	private void Start() 
 	{
 		playerAttackAnimationController = GetComponent<PlayerAttackAnimationController>();
+		playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
+		playerVault = GetComponent<PlayerVault>();
 	}
 
 	public void SetStateHard(PlayerState state)
 	{
 		currentState = state;
+	}
+
+	public void ResetState()
+	{
+		currentState = PlayerState.Normal;
 	}
 }

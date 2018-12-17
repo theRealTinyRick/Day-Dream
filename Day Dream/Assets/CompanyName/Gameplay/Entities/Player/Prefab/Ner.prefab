@@ -1960,6 +1960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceToCheck: 1
   validLedge: 0
+  vaultType: 0
   ledge: {x: 0, y: 0, z: 0}
   wallNormal: {x: 0, y: 0, z: 0}
   maxHeight: 3
@@ -1997,7 +1998,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallOffset: 0
   yOffset: 0
-  vaultDatas: []
+  vaultDatas:
+  - animationName: VaultLow
+    maxHeight: 0.5
+    startTime: 1
+    endTime: 25
+    vaultType: 1
+    avatarTarget: 3
+  - animationName: VaultMed
+    maxHeight: 1.5
+    startTime: 1
+    endTime: 24
+    vaultType: 1
+    avatarTarget: 2
+  - animationName: VaultHigh
+    maxHeight: 3
+    startTime: 1
+    endTime: 20.3
+    vaultType: 1
+    avatarTarget: 5
+  - animationName: Vault_Over_75m
+    maxHeight: 1
+    startTime: 1
+    endTime: 90
+    vaultType: 0
+    avatarTarget: 5
 --- !u!114 &114240128458509280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2201,7 +2226,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.26
+  m_Radius: 0.23
   m_Height: 0.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.26, z: 0}
@@ -2214,7 +2239,7 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 0dc9e8718580df843a967547cb7d1823, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
+  m_Radius: 0.18
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1.03, z: 0}

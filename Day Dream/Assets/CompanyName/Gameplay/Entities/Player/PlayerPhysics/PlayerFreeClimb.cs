@@ -29,7 +29,7 @@ namespace AH.Max.Gameplay
 		private FreeClimbAnimationHook animHook;
 		private Animator anim;
 		private Rigidbody rb;
-		private PlayerStateManager playerStateManager;
+		// private PlayerStateManager playerStateManager;
 		private PlayerController playerController;
 		private Animator _animator;
 
@@ -50,7 +50,7 @@ namespace AH.Max.Gameplay
 			climbStart = new GameObject().transform;
 			climbEnd = new GameObject().transform;
 
-			playerStateManager = GetComponent <PlayerStateManager> ();
+			// playerStateManager = GetComponent <PlayerStateManager> ();
 			playerController = GetComponent<PlayerController>();
 			animHook = GetComponent <FreeClimbAnimationHook> ();
 			anim = GetComponent <Animator> ();
@@ -77,10 +77,10 @@ namespace AH.Max.Gameplay
 			RaycastHit hit;
 			Vector3 origin = transform.position;
 			
-			if(playerStateManager.IsGrounded)
-			{
-				origin.y += 2; 
-			}
+			// if(playerStateManager.IsGrounded)
+			// {
+			// 	origin.y += 2; 
+			// }
 
 			if(Physics.Raycast(origin, transform.forward, out hit, 1))
 			{
@@ -103,7 +103,7 @@ namespace AH.Max.Gameplay
 			t = 0;
 			inPosition = false;
 
-			playerStateManager.SetStateHard(PlayerState.Traversing);
+			// playerStateManager.SetStateHard(PlayerState.Traversing);
 	
 			anim.Play("AirWallMount");
 			anim.SetBool("WallClimbing", true);
@@ -373,7 +373,7 @@ namespace AH.Max.Gameplay
 			isLerping = false;
 			isClimbingOnEdge = false;
 			anim.SetBool("WallClimbing", false);
-			playerStateManager.ResetState();
+			// playerStateManager.ResetState();
 		}
 	}
 }

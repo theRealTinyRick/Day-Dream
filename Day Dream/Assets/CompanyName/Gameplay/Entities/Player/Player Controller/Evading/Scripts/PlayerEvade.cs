@@ -1,67 +1,71 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
-public class PlayerEvade : MonoBehaviour 
+namespace AH.Max.Gameplay
 {
-	public const string EvadeAnimation = "Evade";
-	public const string EvadeHorizontal = "EvadeHorizontal";
-	public const string EvadeVertical = "EvadeVertical";
-
-	private Animator animator;
-	private PlayerLocomotionAnimationHook playerLocomotionAnimationHook;
-	private PlayerAttackAnimationController playerAttackAnimationController;
-
-	public bool testLockOn = false;
-
-	public bool isEvading;
-
-	void Start () 
+	public class PlayerEvade : MonoBehaviour 
 	{
-		animator = GetComponent<Animator>();
-		playerLocomotionAnimationHook = GetComponent<PlayerLocomotionAnimationHook>();
-		playerAttackAnimationController = GetComponent<PlayerAttackAnimationController>();
-	}
+		public const string EvadeAnimation = "Evade";
+		public const string EvadeHorizontal = "EvadeHorizontal";
+		public const string EvadeVertical = "EvadeVertical";
 
-	private void OnEnable() 
-	{
-		// InputDriver.jumpButtonEvent.AddListener(Evade);
-	}
+		private Animator animator;
+		private PlayerLocomotionAnimationHook playerLocomotionAnimationHook;
+		private PlayerAttackAnimationController playerAttackAnimationController;
 
-	private void OnDisable() 
-	{
-		InputDriver.jumpButtonEvent.RemoveListener(Evade);	
-	}
-	
-	private void Evade()
-	{
-		playerAttackAnimationController.StopAttacking();
-		isEvading = true;
+		public bool testLockOn = false;
 
-		if(testLockOn)
+		public bool isEvading;
+
+		void Start () 
 		{
-			if(InputDriver.LocomotionOrientationDirection != Vector3.zero)
-			{
-				animator.SetFloat(EvadeHorizontal, playerLocomotionAnimationHook.horizontalAnimatorFloat);
-				animator.SetFloat(EvadeVertical, playerLocomotionAnimationHook.verticalAnimatorFloat);
-				animator.Play(EvadeAnimation);
-				
-				return;
-			}
+			animator = GetComponent<Animator>();
+			playerLocomotionAnimationHook = GetComponent<PlayerLocomotionAnimationHook>();
+			playerAttackAnimationController = GetComponent<PlayerAttackAnimationController>();
+		}
+
+		private void OnEnable() 
+		{
+			InputDriver.evadeButtonEvent.AddListener(Evade);
+		}
+
+		private void OnDisable() 
+		{
+			InputDriver.evadeButtonEvent.RemoveListener(Evade);	
 		}
 		
-		DefaultDash();
-	}
+		private void Evade()
+		{
+			playerAttackAnimationController.StopAttacking();
+			isEvading = true;
 
-	private void DefaultDash()
-	{
-		animator.SetFloat(EvadeHorizontal, 0);
-		animator.SetFloat(EvadeVertical, 0.5f);
-		animator.Play(EvadeAnimation);
-	}
+			if(testLockOn)
+			{
+				if(InputDriver.LocomotionOrientationDirection != Vector3.zero)
+				{
+					animator.SetFloat(EvadeHorizontal, playerLocomotionAnimationHook.horizontalAnimatorFloat);
+					animator.SetFloat(EvadeVertical, playerLocomotionAnimationHook.verticalAnimatorFloat);
+					animator.Play(EvadeAnimation);
+					
+					return;
+				}
+			}
+			
+			DefaultDash();
+		}
 
-	public void StoppedEvading()
-	{
-		isEvading = false;
+		private void DefaultDash()
+		{
+			animator.SetFloat(EvadeHorizontal, 0);
+			animator.SetFloat(EvadeVertical, 0.5f);
+			animator.Play(EvadeAnimation);
+		}
+
+		public void StoppedEvading()
+		{
+			isEvading = false;
+		}
 	}
 }

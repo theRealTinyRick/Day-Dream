@@ -7,6 +7,18 @@ using Sirenix.OdinInspector;
 
 public class PlayerGroundedComponent : MonoBehaviour 
 {
+	/// <summary>
+	/// Determines if the player is on the ground
+	/// </summary>
+	private bool isGrounded;
+	public bool IsGrounded
+	{
+		get
+		{
+			return isGrounded;
+		}
+	}
+
 	[SerializeField]
 	private Vector3[] raycastOffsets;
 
@@ -20,12 +32,7 @@ public class PlayerGroundedComponent : MonoBehaviour
 
 	private void FixedUpdate() 
 	{
-		if(Grounded())
-		{
-		}	
-		else
-		{
-		}
+		isGrounded = Grounded();
 	}
 
 	///<Summary>
@@ -70,5 +77,12 @@ public class PlayerGroundedComponent : MonoBehaviour
 
 			Gizmos.DrawSphere(_tp, 0.05f);
 		}
-	}
+	}	
+
+	//FOR LATER USE
+
+			// 	if (_rigidbody.velocity.y  < 0) 
+            // 	_rigidbody.velocity += Vector3.up *  Physics.gravity.y  * (fallMultiplyer - 1) * Time.deltaTime;
+			// else if (_rigidbody.velocity.y  > 0 )
+			// 	_rigidbody.velocity += Vector3.up * Physics.gravity.y *2 * Time.deltaTime;
 }

@@ -152,48 +152,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114247457594260784, guid: 5714f14b86aa2cb4e9ea54921025dee9,
-        type: 2}
-      propertyPath: xSensitivity
-      value: 5.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 114247457594260784, guid: 5714f14b86aa2cb4e9ea54921025dee9,
-        type: 2}
-      propertyPath: ySensitivity
-      value: 1.77
-      objectReference: {fileID: 0}
-    - target: {fileID: 114247457594260784, guid: 5714f14b86aa2cb4e9ea54921025dee9,
-        type: 2}
-      propertyPath: cameraLookAtOffset.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114247457594260784, guid: 5714f14b86aa2cb4e9ea54921025dee9,
-        type: 2}
-      propertyPath: cameraOffsetPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114247457594260784, guid: 5714f14b86aa2cb4e9ea54921025dee9,
-        type: 2}
-      propertyPath: offsetDistance
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114247457594260784, guid: 5714f14b86aa2cb4e9ea54921025dee9,
-        type: 2}
-      propertyPath: identityType
-      value: 
-      objectReference: {fileID: 11400000, guid: de21f658ff359b744af90657c6e18ee5,
-        type: 2}
-    - target: {fileID: 114247457594260784, guid: 5714f14b86aa2cb4e9ea54921025dee9,
-        type: 2}
-      propertyPath: doNotDestroyOnLoad
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1985173812418138, guid: 5714f14b86aa2cb4e9ea54921025dee9, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114128502334475344, guid: 5714f14b86aa2cb4e9ea54921025dee9, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5714f14b86aa2cb4e9ea54921025dee9, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &269643125
@@ -280,23 +239,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01058c9322ae49048b526c5c96d34d93, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &450406436 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1985173812418138, guid: 5714f14b86aa2cb4e9ea54921025dee9,
-    type: 2}
-  m_PrefabInternal: {fileID: 231371328}
---- !u!114 &450406441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 450406436}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: 74c535c2b72c7ae45aac3d4aee6977e9, type: 2}
 --- !u!1001 &1059962064
 Prefab:
   m_ObjectHideFlags: 0

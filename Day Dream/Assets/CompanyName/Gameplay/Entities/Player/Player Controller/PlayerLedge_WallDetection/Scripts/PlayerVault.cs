@@ -100,6 +100,16 @@ namespace AH.Max.Gameplay
 		[SerializeField]
 		private List <VaultData> vaultDatas = new List <VaultData>();
 
+		[ShowInInspector]		
+		private bool isVaulting;
+		public bool IsVaulting
+		{
+			get
+			{
+				return isVaulting;
+			}
+		}
+
 		private void Start()
 		{
 			animator = GetComponent<Animator>();
@@ -142,12 +152,12 @@ namespace AH.Max.Gameplay
 			float heightDifference = ( helper.position.y > transform.position.y ? helper.position.y : transform.position.y) - ( helper.position.y > transform.position.y ? transform.position.y : helper.position.y);
 
 			List <VaultData> _vaultDatas = playerElevationDetection.VaultType == VaultType.Mount ? GetVaultDatas(VaultType.Mount) : GetVaultDatas(VaultType.Over);
-			Debug.Log("the count of _vaultDatas on 144: " + _vaultDatas.Count);
+
 			foreach(VaultData _data in _vaultDatas)
 			{
 				if(heightDifference <= _data.maxHeight)
-				{
-					Debug.Log("Play");
+				{	
+					isVaulting = true;
 					animator.Play(_data.animationName);
 					return;
 				}
@@ -220,6 +230,13 @@ namespace AH.Max.Gameplay
 
 			return tp;
 		} 
+
+		#region  Animation Events
+		public void VaultEnd()
+		{
+			isVaulting = false;
+		}
+		#endregion
 	}
 }
 
