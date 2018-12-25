@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using Sirenix.OdinInspector;
+
 namespace AH.Max.Gameplay
 {
 	public class PlayerEvade : MonoBehaviour 
@@ -14,16 +16,24 @@ namespace AH.Max.Gameplay
 		private Animator animator;
 		private PlayerLocomotionAnimationHook playerLocomotionAnimationHook;
 		private PlayerAttackAnimationController playerAttackAnimationController;
+		private PlayerStateComponent playerStateComponent;
 
 		public bool testLockOn = false;
 
 		public bool isEvading;
+
+        /// <summary>
+        /// These are the states where the evade action is available
+        /// </summary>
+        [Tooltip("These are the states where the evade action is available")]
+        public PlayerState[] availableStates;
 
 		void Start () 
 		{
 			animator = GetComponent<Animator>();
 			playerLocomotionAnimationHook = GetComponent<PlayerLocomotionAnimationHook>();
 			playerAttackAnimationController = GetComponent<PlayerAttackAnimationController>();
+            playerStateComponent = GetComponent<PlayerStateComponent>();
 		}
 
 		private void OnEnable() 
@@ -38,8 +48,12 @@ namespace AH.Max.Gameplay
 		
 		private void Evade()
 		{
+            if(!CheckConditions())
+            {
+                return;
+            }
+
 			playerAttackAnimationController.StopAttacking();
-			isEvading = true;
 
 			if(testLockOn)
 			{
@@ -48,13 +62,42 @@ namespace AH.Max.Gameplay
 					animator.SetFloat(EvadeHorizontal, playerLocomotionAnimationHook.horizontalAnimatorFloat);
 					animator.SetFloat(EvadeVertical, playerLocomotionAnimationHook.verticalAnimatorFloat);
 					animator.Play(EvadeAnimation);
-					
-					return;
 				}
 			}
-			
-			DefaultDash();
+            else
+            {
+			    DefaultDash();
+            }
+
+            isEvading = true;
+            playerStateComponent.SetStateHard(PlayerState.Evading);
 		}
+
+		private bool CheckConditions()
+		{
+            if(playerStateComponent)
+            {
+               if(!CheckState())
+               {
+                    return false;
+               }
+            }
+
+            return true;
+		}
+
+        private bool CheckState()
+        {
+            foreach(var _state in availableStates)
+            {
+                if(playerStateComponent.CheckState(_state))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
 		private void DefaultDash()
 		{
@@ -65,7 +108,14 @@ namespace AH.Max.Gameplay
 
 		public void StoppedEvading()
 		{
+            Debug.Log("stop evading");
 			isEvading = false;
+
+            if(playerStateComponent.CurrentState == PlayerState.Evading)
+            {
+                Debug.Log("the state should be reset");
+                playerStateComponent.ResetState();
+            }
 		}
 	}
 }

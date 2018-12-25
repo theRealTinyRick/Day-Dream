@@ -49,6 +49,14 @@ namespace AH.Max.Gameplay
 		private PlayerLocomotionAnimationHook playerLocomotionAnimationHook;
 		private PlayerAttackAnimationController playerAttackAnimationController;
 		private PlayerEvade playerEvade;
+        private PlayerStateComponent playerStateComponent;
+
+        /// <summary>
+        /// 
+        /// </summary>
+       [Tooltip("")]
+       [SerializeField]
+        private PlayerState[] availableStates;
 
 		private void Start () 
 		{
@@ -58,7 +66,7 @@ namespace AH.Max.Gameplay
 			playerLocomotionAnimationHook = GetComponentInChildren<PlayerLocomotionAnimationHook>();
 			playerAttackAnimationController = GetComponent<PlayerAttackAnimationController>();
 			playerEvade = GetComponent<PlayerEvade>();
-
+            playerStateComponent = GetComponent<PlayerStateComponent>();
 		}
 		
 		private void FixedUpdate () 
@@ -129,22 +137,31 @@ namespace AH.Max.Gameplay
 		///</Summary>
 		private bool CanMove()
 		{
-			if(playerOrientationDirection == Vector3.zero)
-			{
-				return false;
-			}
+
+            foreach(var _state in availableStates)
+            {
+                if(playerStateComponent.CheckState(_state))
+                {
+			        //if(playerOrientationDirection == Vector3.zero)
+			        //{
+				       // return false;
+			        //}
+
+                    return true;
+                }
+            }
 			
-			if(playerAttackAnimationController.CurrentlyInAttackState())
-			{
-				return false;
-			}
+			//if(playerAttackAnimationController.CurrentlyInAttackState())
+			//{
+			//	return false;
+			//}
 
-			if(playerEvade.isEvading)
-			{
-				return false;
-			}
+			//if(playerEvade.isEvading)
+			//{
+			//	return false;
+			//}
 
-			return true;
+			return false;
 		}
 		
 	}

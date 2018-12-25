@@ -7,41 +7,55 @@ using Sirenix.OdinInspector;
 
 using AH.Max.Gameplay;
 
-public class PlayerStateComponent : MonoBehaviour 
+namespace AH.Max.Gameplay
 {
-	[TabGroup(Tabs.Properties)]
-	[SerializeField]
-	private PlayerState currentState = PlayerState.Normal;
-	public PlayerState CurrentState
+	public class PlayerStateComponent : MonoBehaviour 
 	{
-		get
+		[TabGroup(Tabs.Properties)]
+		[SerializeField]
+		private PlayerState currentState = PlayerState.Normal;
+		public PlayerState CurrentState
 		{
-			return currentState;
+			get
+			{
+				return currentState;
+			}
+			private set
+			{
+				currentState = value;
+			}
 		}
-		private set
+
+		private PlayerAttackAnimationController playerAttackAnimationController;
+		private PlayerGroundedComponent playerGroundedComponent;
+		private PlayerVault playerVault;
+
+		private void Start() 
 		{
-			currentState = value;
+			playerAttackAnimationController = GetComponent<PlayerAttackAnimationController>();
+			playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
+			playerVault = GetComponent<PlayerVault>();
 		}
-	}
 
-	private PlayerAttackAnimationController playerAttackAnimationController;
-	private PlayerGroundedComponent playerGroundedComponent;
-	private PlayerVault playerVault;
+		public void SetStateHard(PlayerState state)
+		{
+			currentState = state;
+		}
 
-	private void Start() 
-	{
-		playerAttackAnimationController = GetComponent<PlayerAttackAnimationController>();
-		playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
-		playerVault = GetComponent<PlayerVault>();
-	}
+		public void ResetState()
+		{
+			currentState = PlayerState.Normal;
+		}
 
-	public void SetStateHard(PlayerState state)
-	{
-		currentState = state;
-	}
+        public bool CheckState(PlayerState state)
+        {
+            if(currentState == state)
+            {
+                return true;
+            }
 
-	public void ResetState()
-	{
-		currentState = PlayerState.Normal;
+            return false;
+        }
+
 	}
 }

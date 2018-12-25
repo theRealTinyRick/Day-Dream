@@ -93,9 +93,6 @@ namespace AH.Max.Gameplay
 		[SerializeField]
 		private float yOffset;
 
-		private Animator animator;
-		private Transform helper;
-		private PlayerElevationDetection playerElevationDetection;
 
 		[SerializeField]
 		private List <VaultData> vaultDatas = new List <VaultData>();
@@ -110,10 +107,22 @@ namespace AH.Max.Gameplay
 			}
 		}
 
+        /// <summary>
+        /// The states where the vault action can be done
+        /// </summary>
+        [Tooltip("The states where the vault action can be done")]
+        public PlayerState[] availableStates;
+
+        private Animator animator;
+		private Transform helper;
+		private PlayerElevationDetection playerElevationDetection;
+        private PlayerStateComponent playerStateComponent;
+
 		private void Start()
 		{
 			animator = GetComponent<Animator>();
 			playerElevationDetection = GetComponent <PlayerElevationDetection>();
+            playerStateComponent = GetComponent<PlayerStateComponent>();
 
 			helper = new GameObject().transform;
 			helper.name = "Vault Helper";
@@ -138,14 +147,34 @@ namespace AH.Max.Gameplay
 
 		private void Vault()
 		{
+            if(!CheckVaultConditions())
+            {
+                return;
+            }
+
 			if(playerElevationDetection.ValidLedge)
 			{
 				helper.position = playerElevationDetection.Ledge;
 				helper.rotation = Quaternion.LookRotation(-playerElevationDetection.WallNormal);
 
 				PlayVaultAnimation();
+
+                playerStateComponent.SetStateHard(PlayerState.Traversing);
 			}
 		}
+
+        private bool CheckVaultConditions()
+        {
+            foreach(var _state in availableStates)
+            {
+                if (playerStateComponent.CheckState(_state))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
 		public void PlayVaultAnimation()
 		{
@@ -234,7 +263,13 @@ namespace AH.Max.Gameplay
 		#region  Animation Events
 		public void VaultEnd()
 		{
+            Debug.Log(";lakdjsfalk;dsjf");
 			isVaulting = false;
+            
+            if(playerStateComponent.CheckState(PlayerState.Traversing))
+            {
+                playerStateComponent.ResetState();
+            }
 		}
 		#endregion
 	}

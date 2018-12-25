@@ -7,31 +7,34 @@ using Sirenix.OdinInspector;
 
 namespace AH.Max.Gameplay
 {
-	public class PlayerLocomotionAnimationHook : MonoBehaviour 
-	{
-		public const string LockedOn = "LockedOn";
-		public const string Horizontal = "Horizontal";
-		public const string Vertical = "Vertical";
+    public class PlayerLocomotionAnimationHook : MonoBehaviour
+    {
+        public const string LockedOn = "LockedOn";
+        public const string Horizontal = "Horizontal";
+        public const string Vertical = "Vertical";
 
-		[TabGroup("Animation")]
-		[SerializeField]
-		public float verticalAnimatorFloat = 0;
+        [TabGroup("Animation")]
+        [SerializeField]
+        public float verticalAnimatorFloat = 0;
 
-		[TabGroup("Animation")]
-		[SerializeField]
-		public float horizontalAnimatorFloat = 0;
+        [TabGroup("Animation")]
+        [SerializeField]
+        public float horizontalAnimatorFloat = 0;
 
-		[TabGroup("Animation")]
-		[SerializeField]
-		[Range(0, 1)]
-		private int lockedOnAnimatorFloat = 0; // for testing purposes
+        [TabGroup("Animation")]
+        [SerializeField]
+        [Range(0, 1)]
+        private int lockedOnAnimatorFloat = 0; // for testing purposes
 
-		private PlayerLocomotion playerLocomotion;
-		private PlayerStateComponent playerStateComponent;
-		private PlayerAttackAnimationController playerAttackAnimatorController;
-		private PlayerEvade playerEvade;
+        private PlayerLocomotion playerLocomotion;
+        private PlayerStateComponent playerStateComponent;
+        private PlayerAttackAnimationController playerAttackAnimatorController;
+        private PlayerEvade playerEvade;
 
-		private Animator animator;
+        private Animator animator;
+
+        [SerializeField]
+        private PlayerState[] states;
 
 		private void Start()
 		{
@@ -72,7 +75,8 @@ namespace AH.Max.Gameplay
 
 		private void ApplyAnimationFloats()
 		{
-			if(playerAttackAnimatorController.CurrentlyInAttackState() || playerEvade.isEvading)
+			if(/*playerAttackAnimatorController.CurrentlyInAttackState() || playerEvade.isEvading*/
+                CheckState())
 			{
 				animator.SetFloat(Horizontal, 0);
 				animator.SetFloat(Vertical, 0);
@@ -83,5 +87,18 @@ namespace AH.Max.Gameplay
 			animator.SetFloat(Horizontal, horizontalAnimatorFloat);
 			animator.SetFloat(Vertical, verticalAnimatorFloat);
 		}
+
+        private bool CheckState()
+        {
+            foreach(var _state in states)
+            {
+                if(playerStateComponent.CheckState(_state))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 	}
 }
