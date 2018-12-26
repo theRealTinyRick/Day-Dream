@@ -40,6 +40,13 @@ namespace AH.Max.Gameplay
 		[SerializeField]
 		private float turnDamping;
 
+        /// <summary>
+        /// The list of states that the player can move in
+        /// </summary>
+        [Tooltip("The list of states that the player can move in")]
+        [SerializeField]
+        private PlayerState[] availableStates;
+
 		public Vector3 playerOrientationDirection = new Vector3();
 		public Vector3 playerOrientationDirectionNotNormalized = new Vector3();
 
@@ -51,12 +58,6 @@ namespace AH.Max.Gameplay
 		private PlayerEvade playerEvade;
         private PlayerStateComponent playerStateComponent;
 
-        /// <summary>
-        /// 
-        /// </summary>
-       [Tooltip("")]
-       [SerializeField]
-        private PlayerState[] availableStates;
 
 		private void Start () 
 		{
@@ -100,8 +101,7 @@ namespace AH.Max.Gameplay
 
 		private void RotatePlayer()
 		{
-            if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Locomotion"))
-			    transform.rotation = Quaternion.Lerp(transform.rotation, GetOrientationRotation(), turnDamping);
+			transform.rotation = Quaternion.Lerp(transform.rotation, GetOrientationRotation(), turnDamping);
 		}
 
 		private void FaceTarget()

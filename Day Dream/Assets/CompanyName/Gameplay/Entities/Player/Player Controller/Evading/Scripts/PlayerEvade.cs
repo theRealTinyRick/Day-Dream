@@ -77,10 +77,10 @@ namespace AH.Max.Gameplay
 		{
             if(playerStateComponent)
             {
-               if(!CheckState())
-               {
-                    return false;
-               }
+                if(!CheckState())
+                {
+					return false;
+				}
             }
 
             return true;
@@ -108,12 +108,10 @@ namespace AH.Max.Gameplay
 
 		public void StoppedEvading()
 		{
-            Debug.Log("stop evading");
 			isEvading = false;
 
             if(playerStateComponent.CurrentState == PlayerState.Evading)
             {
-                Debug.Log("the state should be reset");
                 playerStateComponent.ResetState();
             }
 		}
