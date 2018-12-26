@@ -42,10 +42,22 @@ namespace AH.Max.Gameplay
 			}
 		}
 
-		/// <summary>
-		/// The end time in the animation that we want to stop warping
-		/// </summary>
-		[SerializeField]
+        /// <summary>
+        /// The start time in the animation that we want to start warping
+        /// </summary>
+        [SerializeField]
+        private float wallOffset;
+        public float WallOffset {
+            get 
+            {
+                return wallOffset;
+            }
+        }
+
+        /// <summary>
+        /// The end time in the animation that we want to stop warping
+        /// </summary>
+        [SerializeField]
 		private float endTime;
 		public float endTimeDelta
 		{
@@ -118,6 +130,9 @@ namespace AH.Max.Gameplay
 		private PlayerElevationDetection playerElevationDetection;
         private PlayerStateComponent playerStateComponent;
 
+        [SerializeField]
+        float delta;
+
 		private void Start()
 		{
 			animator = GetComponent<Animator>();
@@ -140,7 +155,7 @@ namespace AH.Max.Gameplay
 			InputDriver.jumpButtonEvent.RemoveListener(Vault);
 		}
 
-		private void Update()
+		private void FixedUpdate()
 		{
 			VaultAniamtionWarp();
 		} 
@@ -157,9 +172,9 @@ namespace AH.Max.Gameplay
 				helper.position = playerElevationDetection.Ledge;
 				helper.rotation = Quaternion.LookRotation(-playerElevationDetection.WallNormal);
 
-				PlayVaultAnimation();
-
                 playerStateComponent.SetStateHard(PlayerState.Traversing);
+
+				PlayVaultAnimation();
 			}
 		}
 
@@ -188,10 +203,31 @@ namespace AH.Max.Gameplay
 				{	
 					isVaulting = true;
 					animator.Play(_data.animationName);
-					return;
+                    GetComponent<Rigidbody>().isKinematic = true;
+
+                    //StartCoroutine(MoveIntoPosition(helper.position, _data));
+
+                    return;
 				}
 			}
 		}
+
+        private IEnumerator MoveIntoPosition(Vector3 ledgePosition, VaultData data)
+        {
+            ledgePosition = PositionWithOffset(ledgePosition, data.WallOffset);
+
+            GetComponent<Rigidbody>().isKinematic = true;
+
+            while (Vector3.Distance(transform.position, ledgePosition) > 0.01f)
+            {
+                transform.position = Vector3.Slerp(transform.position, ledgePosition, delta);
+                yield return new WaitForEndOfFrame();
+            }
+
+            GetComponent<Rigidbody>().isKinematic = false;
+
+            yield break;
+        }
 
 		private void VaultAniamtionWarp()
 		{
@@ -202,16 +238,27 @@ namespace AH.Max.Gameplay
 
 			foreach (VaultData _data in vaultDatas)
 			{
-				if(animator.GetCurrentAnimatorStateInfo(0).IsName(_data.animationName))
+		    	if(animator.GetCurrentAnimatorStateInfo(0).IsName(_data.animationName))
 				{
-					GetComponent<Rigidbody>().isKinematic = true;
-					animator.MatchTarget(helper.position, helper.rotation, _data.AvatarTarget, new MatchTargetWeightMask( Vector3.one, 0), _data.startTimeDelta, _data.endTimeDelta);
-					break;
-				}
+                    Vector3 _targetPos = helper.position;
+                    _targetPos.y += _data.WallOffset;
 
-				GetComponent<Rigidbody>().isKinematic = false;
+					animator.MatchTarget(_targetPos, helper.rotation, _data.AvatarTarget, new MatchTargetWeightMask( Vector3.one, 0), _data.startTimeDelta, _data.endTimeDelta);
+
+                    break;
+				}
+                //StartCoroutine(SlightDelay());
+                //GetComponent<Rigidbody>().isKinematic = false;
 			}
 		}
+
+        IEnumerator SlightDelay()
+        {
+            yield return new WaitForSeconds(1);
+
+
+            yield break;
+        }
 
 		/// <summary>
 		/// A method that sorts the given list of vault data by their height, lowest to highest
@@ -252,10 +299,10 @@ namespace AH.Max.Gameplay
 			return vaultDatas.FindAll(_vaultData => _vaultData.VaultType == type);
 		}
 
-		private Vector3 PositionWithOffset( Vector3 tp, Vector3 wallNormal )
+		private Vector3 PositionWithOffset( Vector3 tp, float offset/*, Vector3 wallNormal*/ )
 		{
-			tp -= wallNormal * wallOffset;
-			tp.y += yOffset;
+			//tp -= wallNormal * wallOffset;
+			tp.y += offset;
 
 			return tp;
 		} 
@@ -263,15 +310,15 @@ namespace AH.Max.Gameplay
 		#region  Animation Events
 		public void VaultEnd()
 		{
-            Debug.Log(";lakdjsfalk;dsjf");
 			isVaulting = false;
-            
-            if(playerStateComponent.CheckState(PlayerState.Traversing))
+		    GetComponent<Rigidbody>().isKinematic = false;
+
+            if (playerStateComponent.CheckState(PlayerState.Traversing))
             {
                 playerStateComponent.ResetState();
             }
-		}
-		#endregion
-	}
+        }
+        #endregion
+    }
 }
 

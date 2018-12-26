@@ -71,39 +71,37 @@ namespace AH.Max.Gameplay
 		
 		private void FixedUpdate () 
 		{
-			Move(LockedOn);
-			
-			if(LockedOn)
-			{
-				if(defending || attacking)
-				{
-					FaceTarget();
-					return;
-				}
-			}
-			
-			RotatePlayer();
-		}
-		
-		private void Move(bool lockedOn)
-		{
 			Vector3 _direction = GetOrientationDirection();
 
-			if(CanMove())
-			{
-				_rigidbody.velocity =
-					new Vector3( (_direction.x * baseSpeed) * InputDriver.LocomotionDirection.magnitude, 
-					_rigidbody.velocity.y, 
-					(_direction.z * baseSpeed) * InputDriver.LocomotionDirection.magnitude ) ;
-			}
+            if (CanMove())
+            {
+			    Move(LockedOn, _direction);
+			
+			    if(LockedOn)
+			    {
+				    if(defending || attacking)
+				    {
+					    FaceTarget();
+					    return;
+				    }
+			    }
+			
+			    RotatePlayer();
+            }
+		}
+
+        private void Move(bool lockedOn, Vector3 direction)
+		{
+		    _rigidbody.velocity =
+			    new Vector3( (direction.x * baseSpeed) * InputDriver.LocomotionDirection.magnitude, 
+			    _rigidbody.velocity.y, 
+			    (direction.z * baseSpeed) * InputDriver.LocomotionDirection.magnitude ) ;
 		}
 
 		private void RotatePlayer()
 		{
-			if(CanMove())
-			{
-				transform.rotation = Quaternion.Lerp(transform.rotation, GetOrientationRotation(), turnDamping);
-			}
+            if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Locomotion"))
+			    transform.rotation = Quaternion.Lerp(transform.rotation, GetOrientationRotation(), turnDamping);
 		}
 
 		private void FaceTarget()
@@ -137,32 +135,25 @@ namespace AH.Max.Gameplay
 		///</Summary>
 		private bool CanMove()
 		{
+            if (!GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Locomotion"))
+            {
+                return false;
+            }
 
-            foreach(var _state in availableStates)
+            foreach (var _state in availableStates)
             {
                 if(playerStateComponent.CheckState(_state))
                 {
-			        //if(playerOrientationDirection == Vector3.zero)
-			        //{
-				       // return false;
-			        //}
+			        if(playerOrientationDirection == Vector3.zero)
+			        {
+				        return false;
+			        }
 
                     return true;
                 }
             }
 			
-			//if(playerAttackAnimationController.CurrentlyInAttackState())
-			//{
-			//	return false;
-			//}
-
-			//if(playerEvade.isEvading)
-			//{
-			//	return false;
-			//}
-
 			return false;
 		}
-		
 	}
 }
