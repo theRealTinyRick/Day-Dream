@@ -203,6 +203,13 @@ namespace AH.Max.Gameplay
 				{	
 					SetPlayerState();
 
+                    // if the player is climbing up or a simliar action, we shoul face the player to the wall
+                    // if not we should let them keep their direction
+                    if(playerElevationDetection.VaultType == VaultType.Mount)
+                    {
+                        transform.rotation = helper.rotation;
+                    }
+
 					animator.Play(_data.animationName);
 
                     return;
