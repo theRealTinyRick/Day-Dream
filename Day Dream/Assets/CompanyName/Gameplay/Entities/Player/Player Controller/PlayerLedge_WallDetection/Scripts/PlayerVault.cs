@@ -79,6 +79,20 @@ namespace AH.Max.Gameplay
 				return avatarTarget;
 			}
 		}
+
+		/// <summary>
+		/// Determines whether or not this vault should be done. Allows the designer to easily toggle vault types on and off
+		/// </summary>
+		[Tooltip("Determines if this vault would be completed")]
+		[SerializeField]
+		private bool isActive;
+		public bool IsActive
+		{
+			get
+			{
+				return isActive;
+			}
+		}
 	}
 
 	public class PlayerVault : MonoBehaviour 
@@ -90,7 +104,6 @@ namespace AH.Max.Gameplay
 		[TabGroup(Tabs.Properties)]
 		[SerializeField]
 		private float yOffset;
-
 
 		[SerializeField]
 		private List <VaultData> vaultDatas = new List <VaultData>();
@@ -184,7 +197,10 @@ namespace AH.Max.Gameplay
             {
                 if (playerStateComponent.CheckState(_state))
                 {
-                    return true;
+                    if(!playerElevationDetection.ValidLedge)
+                    {
+                        return true;
+                    }
                 }
             }
 
@@ -201,18 +217,21 @@ namespace AH.Max.Gameplay
 			{
 				if(heightDifference <= _data.maxHeight)
 				{	
-					SetPlayerState();
+					if(_data.IsActive)
+					{
+						SetPlayerState();
 
-                    // if the player is climbing up or a simliar action, we shoul face the player to the wall
-                    // if not we should let them keep their direction
-                    if(playerElevationDetection.VaultType == VaultType.Mount)
-                    {
-                        transform.rotation = helper.rotation;
-                    }
+						// if the player is climbing up or a simliar action, we shoul face the player to the wall
+						// if not we should let them keep their direction
+						if(playerElevationDetection.VaultType == VaultType.Mount)
+						{
+							transform.rotation = helper.rotation;
+						}
 
-					animator.Play(_data.animationName);
+						animator.Play(_data.animationName);
+					}
 
-                    return;
+					return;
 				}
 			}
 		}

@@ -54,7 +54,7 @@ namespace AH.Max.Gameplay
                 return true;
             }
 
-            return false;
+		    return false;
         }
 
 	}

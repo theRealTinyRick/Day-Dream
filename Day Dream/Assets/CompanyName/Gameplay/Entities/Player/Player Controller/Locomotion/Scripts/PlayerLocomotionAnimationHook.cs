@@ -26,6 +26,10 @@ namespace AH.Max.Gameplay
         [Range(0, 1)]
         private int lockedOnAnimatorFloat = 0; // for testing purposes
 
+		[TabGroup("Animation")]
+		[SerializeField]
+		private bool ShouldLean; // determines if the player should lean while running.
+
         private PlayerLocomotion playerLocomotion;
         private PlayerStateComponent playerStateComponent;
         private PlayerAttackAnimationController playerAttackAnimatorController;
@@ -63,8 +67,9 @@ namespace AH.Max.Gameplay
 
 			if(lockedOnAnimatorFloat == 0)
 			{
-				verticalAnimatorFloat = _moveDirection.magnitude;
-				horizontalAnimatorFloat = _crossProduct.y;
+                verticalAnimatorFloat = _moveDirection.magnitude;
+
+				horizontalAnimatorFloat = ShouldLean ? _crossProduct.y : 0;
 			}
 			else
 			{

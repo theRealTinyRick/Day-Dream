@@ -10,6 +10,7 @@ public class PlayerGroundedComponent : MonoBehaviour
 	/// <summary>
 	/// Determines if the player is on the ground
 	/// </summary>
+    [SerializeField]
 	private bool isGrounded;
 	public bool IsGrounded
 	{
@@ -28,7 +29,25 @@ public class PlayerGroundedComponent : MonoBehaviour
 
 	[SerializeField]
 	[Range(0, 1)]
-	private float yOffset;	
+	private float yOffset;
+
+    [SerializeField]
+    [Range(0, 2)]
+    private float checkDistance;
+
+    public const string GroundedBool = "IsGrounded";
+
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = transform.root.GetComponentInChildren<Animator>();
+    }
+
+    private void Update()
+    {
+        UpdateAnimator();
+    }
 
 	private void FixedUpdate() 
 	{
@@ -52,7 +71,7 @@ public class PlayerGroundedComponent : MonoBehaviour
 			_tp.y  = transform.position.y + yOffset;
 
 			RaycastHit _hit;
-			if(Physics.Raycast(_tp, Vector3.down, out _hit, 1, PhysicsLayers.ingnorePlayerLayer))
+			if(Physics.Raycast(_tp, Vector3.down, out _hit, checkDistance, PhysicsLayers.ingnorePlayerLayer))
 			{
 				return true;
 			}
@@ -60,6 +79,11 @@ public class PlayerGroundedComponent : MonoBehaviour
 
 		return false;
 	}
+
+    public void UpdateAnimator()
+    {
+        animator.SetBool(GroundedBool, isGrounded);
+    }
 
 	///<Summary>
 	/// Draw the positions generating the raycasts
@@ -78,11 +102,4 @@ public class PlayerGroundedComponent : MonoBehaviour
 			Gizmos.DrawSphere(_tp, 0.05f);
 		}
 	}	
-
-	//FOR LATER USE
-
-			// 	if (_rigidbody.velocity.y  < 0) 
-            // 	_rigidbody.velocity += Vector3.up *  Physics.gravity.y  * (fallMultiplyer - 1) * Time.deltaTime;
-			// else if (_rigidbody.velocity.y  > 0 )
-			// 	_rigidbody.velocity += Vector3.up * Physics.gravity.y *2 * Time.deltaTime;
 }

@@ -9,7 +9,6 @@ using AH.Max.System;
 
 namespace AH.Max.Gameplay
 {
-	
 	public class PlayerLocomotion : MonoBehaviour 
 	{
 		[TabGroup("TestIng")]
@@ -36,9 +35,17 @@ namespace AH.Max.Gameplay
 		[SerializeField]
 		private float sprintSpeed;
 
+        [TabGroup(Tabs.Locomotion)]
+        [SerializeField]
+        private float airSpeed;
+
 		[TabGroup(Tabs.Locomotion)]
 		[SerializeField]
 		private float turnDamping;
+
+        [TabGroup(Tabs.Locomotion)]
+        [SerializeField]
+        private bool isSprinting;
 
         /// <summary>
         /// The list of states that the player can move in
@@ -50,14 +57,19 @@ namespace AH.Max.Gameplay
 		public Vector3 playerOrientationDirection = new Vector3();
 		public Vector3 playerOrientationDirectionNotNormalized = new Vector3();
 
+        [TabGroup(Tabs.Locomotion)]
+        [SerializeField]
+        private Transform LocomotionOrientationController;
+
 		private Animator animator;
 		private Rigidbody _rigidbody;
 
 		private PlayerLocomotionAnimationHook playerLocomotionAnimationHook;
 		private PlayerAttackAnimationController playerAttackAnimationController;
+        private PlayerGroundedComponent playerGroundedComponent;
 		private PlayerEvade playerEvade;
         private PlayerStateComponent playerStateComponent;
-
+        private PlayerJump playerJump;
 
 		private void Start () 
 		{
@@ -66,8 +78,16 @@ namespace AH.Max.Gameplay
 
 			playerLocomotionAnimationHook = GetComponentInChildren<PlayerLocomotionAnimationHook>();
 			playerAttackAnimationController = GetComponent<PlayerAttackAnimationController>();
+            playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
 			playerEvade = GetComponent<PlayerEvade>();
             playerStateComponent = GetComponent<PlayerStateComponent>();
+            playerJump = GetComponent<PlayerJump>();
+
+            if(LocomotionOrientationController == null)
+            {
+                LocomotionOrientationController = new GameObject().transform;
+                LocomotionOrientationController.name = "Locomotion Orientation Controller";
+            }
 		}
 		
 		private void FixedUpdate () 
@@ -76,7 +96,7 @@ namespace AH.Max.Gameplay
 
             if (CanMove())
             {
-			    Move(LockedOn, _direction);
+			    Move(_direction);
 			
 			    if(LockedOn)
 			    {
@@ -91,17 +111,65 @@ namespace AH.Max.Gameplay
             }
 		}
 
-        private void Move(bool lockedOn, Vector3 direction)
+        private void Move(Vector3 direction)
 		{
-		    _rigidbody.velocity =
-			    new Vector3( (direction.x * baseSpeed) * InputDriver.LocomotionDirection.magnitude, 
-			    _rigidbody.velocity.y, 
-			    (direction.z * baseSpeed) * InputDriver.LocomotionDirection.magnitude ) ;
+            float _speed = baseSpeed;
+
+            if(playerJump.playerJumped && !playerJump.shouldUseLocomotionControlInTheAir)
+            {
+                 return;
+            }
+
+            if(!playerGroundedComponent.IsGrounded)
+            {
+                _speed = airSpeed;
+            }
+            else if(isSprinting)
+            {
+                _speed = sprintSpeed;
+            }
+
+            if(InputDriver.LocomotionDirection != Vector3.zero)
+            {
+
+		        _rigidbody.velocity =
+			        new Vector3( (direction.x * _speed) * InputDriver.LocomotionDirection.magnitude, 
+			        _rigidbody.velocity.y, 
+			        (direction.z * _speed) * InputDriver.LocomotionDirection.magnitude );
+            }
+            else
+            {
+               // _rigidbody.velocity = Vector3.zero;
+            }
 		}
+
+        // we do this  to move the player faster forward as long as they were moving forward in the air
+        private float FindAirSpeed()
+        {
+            Vector3 _forward = transform.forward;
+            Vector3 _moveDirection = InputDriver.LocomotionOrientationDirection;
+
+            if(_moveDirection != Vector3.zero)
+            {
+                float _dot = Vector3.Dot(_forward, _moveDirection);
+
+                if(_dot <= 0.1f)
+                {
+                    _dot = 0.1f;
+                }
+
+                return airSpeed * _dot;
+            }
+
+            return 0.0f;
+        }
 
 		private void RotatePlayer()
 		{
-			transform.rotation = Quaternion.Lerp(transform.rotation, GetOrientationRotation(), turnDamping);
+            if(playerGroundedComponent.IsGrounded)
+            {
+			    transform.rotation = Quaternion.Lerp(transform.rotation, GetOrientationRotation(), turnDamping);
+            }
 		}
 
 		private void FaceTarget()
@@ -115,8 +183,10 @@ namespace AH.Max.Gameplay
 		
 		private Vector3 GetOrientationDirection()
 		{
+            SetLocomotionOrientationControllerRotation();
+
 			Vector3 _direction = InputDriver.LocomotionDirection;
-			_direction = EntityManager.Instance.GameCamera.transform.TransformDirection(_direction).normalized;
+			_direction = LocomotionOrientationController.TransformDirection(_direction).normalized;
 			_direction.y = 0;
 
 			InputDriver.LocomotionOrientationDirection = _direction;
@@ -124,6 +194,14 @@ namespace AH.Max.Gameplay
 
 			return _direction;
 		}
+
+        private void SetLocomotionOrientationControllerRotation()
+        {
+            Quaternion _targetRotation = EntityManager.Instance.GameCamera.transform.rotation;
+            _targetRotation.x = 0;
+            _targetRotation.z = 0;
+            LocomotionOrientationController.rotation = _targetRotation;
+        }
 
 		private Quaternion GetOrientationRotation()
 		{
@@ -135,10 +213,10 @@ namespace AH.Max.Gameplay
 		///</Summary>
 		private bool CanMove()
 		{
-            if (!GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Locomotion"))
-            {
-                return false;
-            }
+            //if (!GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Locomotion"))
+            //{
+            //    return false;
+           // }
 
             foreach (var _state in availableStates)
             {

@@ -72,11 +72,11 @@ namespace AH.Max.Gameplay
 
 		[TabGroup(Tabs.Properties)]
 		[SerializeField]
-		private float maxHeight;
+		public float maxHeight;
 
 		[TabGroup(Tabs.Properties)]
 		[SerializeField]
-		private float minHeight;
+		public float minHeight;
 
         /// <summary>
         /// This is the minimum angle to the wall - how much does the player need to be facing the wall to climb/vault

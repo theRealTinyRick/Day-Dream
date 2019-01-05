@@ -1,0 +1,196 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+
+using UnityEngine;
+
+using Sirenix.OdinInspector;
+
+namespace AH.Max.Gameplay
+{
+	public class PlayerJump : MonoBehaviour 
+	{
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        private float verticalJumpStrength;
+
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        private float horizontalJumpStrength;
+
+        [TabGroup(Tabs.Events)]
+        [SerializeField]
+        private JumpStartedEvent jumpStartedEvent;
+
+        [TabGroup(Tabs.Events)]
+        [SerializeField]
+        private JumpForwardStartedEvent jumpForwardStartedEvent;
+
+        private Vector3 jumpDirection = new Vector3();
+
+        private float jumpDelta;
+
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        private float jumpDeltaMultiplier;
+
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        private float maximumAirMovementDotProduct;
+
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        public bool playerJumped = false;
+
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        public bool playerLeftTheGround = false;
+
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        public bool shouldUseLocomotionControlInTheAir;
+
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        private PlayerState[] availableStates;
+
+        private new Rigidbody rigidbody;
+        private PlayerGroundedComponent playerGroundedComponent;
+        private PlayerStateComponent playerStateComponent;
+        private PlayerElevationDetection playerElevationDetection;
+
+        private void Awake() 
+		{
+            if(jumpStartedEvent == null)
+            {
+                jumpStartedEvent = new JumpStartedEvent();
+            }
+
+            if(jumpForwardStartedEvent == null)
+            {
+                jumpForwardStartedEvent = new JumpForwardStartedEvent();
+            }
+
+            playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
+            rigidbody = transform.root.GetComponentInChildren<Rigidbody>();
+            playerStateComponent = GetComponent<PlayerStateComponent>();
+            playerElevationDetection = GetComponent<PlayerElevationDetection>();
+
+            InputDriver.jumpButtonEvent.AddListener(Jump);
+		} 
+
+        private void OnDisable()
+        {
+            InputDriver.jumpButtonEvent.RemoveListener(Jump);
+        }
+
+        private void FixedUpdate()
+        {
+            if(!playerGroundedComponent.IsGrounded)
+            {
+                if(playerJumped)
+                {
+                    playerLeftTheGround = true;
+
+                    if (!shouldUseLocomotionControlInTheAir)
+                    {
+
+                        jumpDelta -= (Time.deltaTime * jumpDeltaMultiplier);
+
+                        if(jumpDelta < 0)
+                        {
+                            jumpDelta = 0;
+                        }
+
+                        Vector3 _direction = new Vector3(jumpDirection.x * jumpDelta, rigidbody.velocity.y, jumpDirection.z * jumpDelta);
+                        rigidbody.velocity = _direction;
+
+                        // evalutate the dot product ---- if it hits zero then you should break out of the motion
+                        Vector3 _forward = transform.forward;
+
+                        if(InputDriver.LocomotionOrientationDirection != Vector3.zero)
+                        {
+                            float _dot = Vector3.Dot(_forward, InputDriver.LocomotionOrientationDirection);
+
+                            if (_dot <= maximumAirMovementDotProduct)
+                            {
+                                shouldUseLocomotionControlInTheAir = true;
+                            }
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                if(playerLeftTheGround)
+                {
+                    playerJumped = false;
+                    playerLeftTheGround = false;
+                }
+            }
+        }
+
+        private void Jump()
+        {
+            if(ShouldJump())
+            {
+                bool jumpingForward = false;
+
+                jumpDirection = InputDriver.LocomotionOrientationDirection;
+
+                if (InputDriver.LocomotionOrientationDirection != Vector3.zero)
+                {
+                    Quaternion _rotation = Quaternion.LookRotation(jumpDirection);
+                    transform.rotation = _rotation;
+                    shouldUseLocomotionControlInTheAir = false;
+                    jumpingForward = true;
+                }
+                else
+                {
+                    shouldUseLocomotionControlInTheAir = true;
+                }
+
+                playerJumped = true;
+                jumpDelta = horizontalJumpStrength;
+
+                Vector3 direction = new Vector3(0, 1, 0) * verticalJumpStrength;
+
+                rigidbody.velocity = direction;
+
+                if(jumpingForward)
+                {
+                    if(jumpForwardStartedEvent != null)
+                    {
+                        jumpForwardStartedEvent.Invoke();
+                    }
+                }
+                else
+                {
+                    if(jumpStartedEvent != null)
+                    {
+                        jumpStartedEvent.Invoke();
+                    }
+                }
+            }
+        }
+
+        private bool ShouldJump()
+        {
+            foreach(PlayerState _state in availableStates)
+            {
+                if(playerStateComponent.CurrentState == _state)
+                {
+                    if(playerGroundedComponent.IsGrounded)
+                    {
+                        if(!playerElevationDetection.ValidLedge)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+	}
+}

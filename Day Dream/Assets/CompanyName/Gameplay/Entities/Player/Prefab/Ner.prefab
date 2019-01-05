@@ -607,6 +607,10 @@ GameObject:
   - component: {fileID: 114408614192445956}
   - component: {fileID: 114187671069784220}
   - component: {fileID: 114121304219155566}
+  - component: {fileID: 114474534521675928}
+  - component: {fileID: 114127141531480584}
+  - component: {fileID: 114393689927888626}
+  - component: {fileID: 114426740227942980}
   m_Layer: 8
   m_Name: Ner
   m_TagString: Untagged
@@ -1093,15 +1097,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1594068295067430}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.191, y: 0.036076546, z: -6.26}
+  m_LocalRotation: {x: -0, y: 0.70639724, z: -0, w: 0.7078156}
+  m_LocalPosition: {x: 0.5, y: 0.076, z: 0.43}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 4734923523932648}
   - {fileID: 4711854105892060}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 89.885, z: 0}
 --- !u!4 &4164867696960182
 Transform:
   m_ObjectHideFlags: 1
@@ -1999,6 +2003,17 @@ MonoBehaviour:
   minimumAngleToWall: 40
   minimumWallSlope: 85
   minimumFloorSlope: 5
+--- !u!114 &114127141531480584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1594068295067430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e6e76f0d6756204bb81b6d16ec40e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114142311939452706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2016,10 +2031,13 @@ MonoBehaviour:
   target: {fileID: 0}
   baseSpeed: 3.5
   sprintSpeed: 0
+  airSpeed: 3
   turnDamping: 0.2
+  isSprinting: 0
   availableStates: 00000000
   playerOrientationDirection: {x: 0, y: 0, z: 0}
   playerOrientationDirectionNotNormalized: {x: 0, y: 0, z: 0}
+  LocomotionOrientationController: {fileID: 0}
 --- !u!114 &114187671069784220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2040,24 +2058,28 @@ MonoBehaviour:
     endTime: 25
     vaultType: 1
     avatarTarget: 0
+    isActive: 0
   - animationName: VaultMed
     maxHeight: 1.5
     startTime: 1
     endTime: 24
     vaultType: 1
     avatarTarget: 0
+    isActive: 0
   - animationName: VaultHigh
     maxHeight: 3
     startTime: 1
     endTime: 20.3
     vaultType: 1
     avatarTarget: 5
+    isActive: 1
   - animationName: Vault_Over_75m
     maxHeight: 1
     startTime: 1
     endTime: 90
     vaultType: 0
     avatarTarget: 5
+    isActive: 1
   availableStates: 00000000
 --- !u!114 &114240128458509280
 MonoBehaviour:
@@ -2079,6 +2101,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: HitEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+--- !u!114 &114393689927888626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1594068295067430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612521c64ceeb2d4583c7e59157a8193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallMultiplier: 3
 --- !u!114 &114408614192445956
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2106,6 +2140,81 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identityType: {fileID: 11400000, guid: ffe400bb2f0650448b87f4ad0db10a68, type: 2}
   doNotDestroyOnLoad: 0
+--- !u!114 &114426740227942980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1594068295067430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130882fd1703bb94e9ecf10ac22a9b1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToCheck: 1
+  validLedge: 0
+  ledge: {x: 0, y: 0, z: 0}
+  wallNormal: {x: 1, y: 0, z: 0}
+  playerOffset: {x: 0.3, y: -1.5}
+  maxLedgeShimyHeight: 2.5
+  minLedgeShimyHeight: 0
+  maxMountHeight: 2.5
+  minMountHeight: 1.75
+  minimumWallSlope: 85
+  minimumFloorSlope: 40
+  ledgeClimbDistance: 0.6
+  climbSpeed: 0.026
+--- !u!114 &114474534521675928
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1594068295067430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6eab32efac61645b84a5d5372a8921, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verticalJumpStrength: 10
+  horizontalJumpStrength: 6
+  jumpStartedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114127141531480584}
+        m_MethodName: JumpStand
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: JumpStartedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  jumpForwardStartedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114127141531480584}
+        m_MethodName: JumpForward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: JumpForwardStartedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  jumpDeltaMultiplier: 1.5
+  maximumAirMovementDotProduct: 0.75
+  playerJumped: 0
+  playerLeftTheGround: 0
+  shouldUseLocomotionControlInTheAir: 0
+  availableStates: 00000000
 --- !u!114 &114488635941522016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2130,6 +2239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5c00786e919ef49bc361f08559faa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGrounded: 1
   raycastOffsets:
   - {x: 1, y: 0.05, z: 0}
   - {x: 1, y: 0.05, z: 1}
@@ -2141,7 +2251,8 @@ MonoBehaviour:
   - {x: 0, y: 0.05, z: -1}
   - {x: 1, y: 0.05, z: -1}
   offsetDistance: 0.249
-  yOffset: 0.046
+  yOffset: 0.048
+  checkDistance: 0.13
 --- !u!114 &114663564118900318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2168,6 +2279,7 @@ MonoBehaviour:
   verticalAnimatorFloat: 0
   horizontalAnimatorFloat: 0
   lockedOnAnimatorFloat: 0
+  ShouldLean: 0
   states: 
 --- !u!114 &114778009364619440
 MonoBehaviour:
@@ -2306,7 +2418,7 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 0dc9e8718580df843a967547cb7d1823, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.18
+  m_Radius: 0.4
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1.03, z: 0}
