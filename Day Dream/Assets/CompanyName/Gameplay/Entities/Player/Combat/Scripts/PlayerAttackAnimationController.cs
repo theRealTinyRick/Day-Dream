@@ -224,7 +224,6 @@ namespace AH.Max.Gameplay
 				playerStateComponent.ResetState();
 			}			
 
-            Debug.Log("return false");
 			return false;
 		}
 

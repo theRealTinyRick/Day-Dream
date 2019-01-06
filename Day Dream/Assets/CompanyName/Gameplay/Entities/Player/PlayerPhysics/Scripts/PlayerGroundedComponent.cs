@@ -35,6 +35,9 @@ public class PlayerGroundedComponent : MonoBehaviour
     [Range(0, 2)]
     private float checkDistance;
 
+    [SerializeField]
+    private float maxFloorSlope;
+
     public const string GroundedBool = "IsGrounded";
 
     private Animator animator;
@@ -73,7 +76,12 @@ public class PlayerGroundedComponent : MonoBehaviour
 			RaycastHit _hit;
 			if(Physics.Raycast(_tp, Vector3.down, out _hit, checkDistance, PhysicsLayers.ingnorePlayerLayer))
 			{
-				return true;
+                float _floorSlope = Vector3.Angle(_hit.normal, Vector3.up);
+                if(_floorSlope < maxFloorSlope)
+                {
+				    return true;
+                }
+
 			}
 		}
 
