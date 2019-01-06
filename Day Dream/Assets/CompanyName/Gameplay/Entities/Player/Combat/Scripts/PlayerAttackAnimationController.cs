@@ -18,10 +18,10 @@ namespace AH.Max.Gameplay
 		[Tooltip("This field is only used for debuging and has no barring on the functionality of queuing animations. That is done in the animator controller")]
 		[SerializeField]
 		private List <string> queue = new List<string>();
-		
-		[TabGroup(Tabs.Properties)]
-		[ShowInInspector]
-		private int maxNumberOfClicks = swordAnimations.Length;
+
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        private int maxNumberOfClicks;
 		
 		[TabGroup(Tabs.Properties)]
 		[ShowInInspector]
@@ -35,30 +35,31 @@ namespace AH.Max.Gameplay
 		[ShowInInspector]
 		private float time = 0;
 
-		[TabGroup(Tabs.Properties)]
-		[ShowInInspector]
-		private bool isVaulting;
-		public bool IsVaulting
-		{
-			get
-			{
-				return isVaulting;
-			}
-		}
+        [SerializeField]
+		private string[] swordAnimations;
 
-		private static string[] swordAnimations = new string[] {"Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6"};
+        [SerializeField]
+        private string[] twinSwordAnimations;
+
+        private string[] currentAnimSet;
+
+        [HideInInspector]
+        public string[] swingBooleans = new string[] {"Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6"};
+
+        [SerializeField]
+        private PlayerState[] availableStates;
 		
 		private Animator animator;
 		private PlayerStateComponent playerStateComponent;
-		private PlayerEvade playerEvade;
-		private PlayerVault playerVault;
+        private PlayerGroundedComponent playerGroundedComponent;
 
 		void Start () 
 		{
 			animator = GetComponent<Animator>();
 			playerStateComponent = GetComponent<PlayerStateComponent>();
-			playerEvade = GetComponent<PlayerEvade>();
-			playerVault = GetComponent<PlayerVault>();
+            playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
+
+            currentAnimSet = swordAnimations;
 		}
 
 		private void OnEnable()
@@ -76,6 +77,24 @@ namespace AH.Max.Gameplay
 			AttackTimer();
 			CurrentlyInAttackState();
 		}
+
+        [Button]
+        public void UseTwinSwords()
+        {
+            if(!IsAttacking)
+            {
+                currentAnimSet = twinSwordAnimations;
+            }
+        }
+
+        [Button]
+        public void UseSwordAndShield()
+        {
+            if (!IsAttacking)
+            {
+                currentAnimSet = swordAnimations;
+            }
+        }
 
 		// this method simply determines if the player is still clicking. 
 		// if the player keeps clicking then stops then the attacks should stop as well. 
@@ -95,9 +114,9 @@ namespace AH.Max.Gameplay
 		public void StopAttacking()
 		{
 			// clear out the queue and stop attacking
-			foreach(string _animation in swordAnimations)
+			foreach(string _animation in swingBooleans)
 			{
-				if(_animation != swordAnimations[0])
+				if(_animation != swingBooleans[0])
 				{
 					animator.SetBool(_animation, false);
 				}
@@ -124,15 +143,15 @@ namespace AH.Max.Gameplay
 
 				int _index = currentNumberOfClicks - 1;	
 
-				queue.Add(swordAnimations[_index]);
+				queue.Add(currentAnimSet[_index]);
 
 				if(_index == 0)
 				{
-					animator.Play(swordAnimations[0]);
+					animator.Play(currentAnimSet[0]);
 				}
 				else
 				{
-					animator.SetBool(swordAnimations[_index], true);
+					animator.SetBool(swingBooleans[_index], true);
 				}
 
 				isAttacking = true;
@@ -142,17 +161,38 @@ namespace AH.Max.Gameplay
 
 		private bool EvaluateQueueConditions()
 		{
-			if(playerEvade.isEvading)
-			{
-				return false;
-			}
+            bool _inProperState = false;
 
-			if(playerVault.IsVaulting)
-			{
-				return false;
-			}
+            foreach (PlayerState _state in availableStates)
+            {
+                if (playerStateComponent.CheckState(_state))
+                {
+                    _inProperState = true;
+                }
+            }
 
-			if(currentNumberOfClicks < maxNumberOfClicks)
+            if(!playerGroundedComponent.IsGrounded)
+            {
+                return false;
+            }
+
+            if(!_inProperState)
+            {
+                return false;
+            }
+
+           // if (playerEvade.isEvading)
+			//{
+			//	return false;
+			//}
+
+			//if(playerVault.IsVaulting)
+			//{
+			//	return false;
+			//}
+
+
+            if (currentNumberOfClicks < maxNumberOfClicks)
 			{
 				return true;
 			}
@@ -161,7 +201,7 @@ namespace AH.Max.Gameplay
 				time = 0;
 			}
 
-			return false;
+            return false;
 		}
 
 		public bool CurrentlyInAttackState()
@@ -172,6 +212,7 @@ namespace AH.Max.Gameplay
 				{
 					if(_swordAnimation == thing.clip.name)
 					{
+                        Debug.Log("return true");
 						return true;
 					}
 				}
@@ -179,18 +220,17 @@ namespace AH.Max.Gameplay
 
 			if(playerStateComponent.CurrentState == PlayerState.Attacking)
 			{
+                Debug.Log("reset");
 				playerStateComponent.ResetState();
 			}			
 
+            Debug.Log("return false");
 			return false;
 		}
 
 		public void AttackEndEvent()
 		{
-			// if(playerStateComponent.CurrentState == PlayerState.Attacking && IsAttacking)
-			// {
-			// 	playerStateComponent.ResetState();
-			// }
+
 		}
 	}
 }

@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+Author: Aaron Hines
+Description: A simple script to provide a more realistic fall by effecting the players y velocity and multiplying gravity. 
+The Unity default physics dont look that good so I added this. Plus it keeps weird bouncing from happening.
+This should provide the effect that the player is accelerating as they fall
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -24,7 +31,7 @@ public class PlayerGravityComponent : MonoBehaviour
         }
         else if (_rigidbody.velocity.y  > 0 )
         {
-         	_rigidbody.velocity += Vector3.up * Physics.gravity.y *2 * Time.deltaTime;
+         	_rigidbody.velocity += Vector3.up * Physics.gravity.y * 2 * Time.deltaTime;
         }
     }
 }

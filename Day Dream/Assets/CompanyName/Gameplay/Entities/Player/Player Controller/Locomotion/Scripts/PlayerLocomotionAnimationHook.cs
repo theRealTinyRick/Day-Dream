@@ -68,7 +68,6 @@ namespace AH.Max.Gameplay
 			if(lockedOnAnimatorFloat == 0)
 			{
                 verticalAnimatorFloat = _moveDirection.magnitude;
-
 				horizontalAnimatorFloat = ShouldLean ? _crossProduct.y : 0;
 			}
 			else
@@ -80,8 +79,7 @@ namespace AH.Max.Gameplay
 
 		private void ApplyAnimationFloats()
 		{
-			if(/*playerAttackAnimatorController.CurrentlyInAttackState() || playerEvade.isEvading*/
-                CheckState())
+			if(CheckState())
 			{
 				animator.SetFloat(Horizontal, 0);
 				animator.SetFloat(Vertical, 0);
@@ -89,8 +87,8 @@ namespace AH.Max.Gameplay
 			}
 
 			animator.SetFloat(LockedOn, (float)lockedOnAnimatorFloat);
-			animator.SetFloat(Horizontal, horizontalAnimatorFloat);
-			animator.SetFloat(Vertical, verticalAnimatorFloat);
+			animator.SetFloat(Horizontal, Mathf.Lerp(animator.GetFloat(Horizontal), horizontalAnimatorFloat, 0.2f));
+			animator.SetFloat(Vertical, Mathf.Lerp(animator.GetFloat(Vertical), verticalAnimatorFloat, 0.2f));
 		}
 
         private bool CheckState()

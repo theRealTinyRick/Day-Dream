@@ -67,6 +67,10 @@ namespace AH.Max.Gameplay
 
         [TabGroup(Tabs.Properties)]
         [SerializeField]
+        private float maxAirMountHeight;
+
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
         private float minMountHeight;
 
         [TabGroup(Tabs.Properties)]
@@ -86,22 +90,32 @@ namespace AH.Max.Gameplay
         [Range(0, 1)]
         private float climbSpeed;
 
+        [TabGroup(Tabs.Properties)]
         [ShowInInspector]
         private bool isClimbing = false;
 
+        [TabGroup(Tabs.Properties)]
         [ShowInInspector]
         private bool isInPosition = false;
 
         private LayerMask layerMask = 1 << 8;
+        Vector3 floorPoint = new Vector3();
 
+        private Rigidbody _rigidbody;
         private PlayerElevationDetection playerElevationDetection;
+        private PlayerGroundedComponent playerGroundedComponent;
+        private PlayerStateComponent playerStateComponent;
 
         private void Start()
         {
             ledge = Vector3.zero;
 
-            playerElevationDetection = GetComponent<PlayerElevationDetection>();
             layerMask = ~layerMask;
+
+            _rigidbody = GetComponent<Rigidbody>();
+            playerElevationDetection = GetComponent<PlayerElevationDetection>();
+            playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
+            playerStateComponent = GetComponent<PlayerStateComponent>();
 
             InputDriver.jumpButtonEvent.AddListener(InputResponse);
         }
@@ -140,42 +154,59 @@ namespace AH.Max.Gameplay
 
         private void InitClimb()
         {
-            if(!CheckHeight())
-            {
-                return;
-            }
-            if(playerElevationDetection.ValidLedge)
+            if(CheckValidLedge())
             {
                 isClimbing = true;
                 wallNormal = playerElevationDetection.WallNormal;
                 StartCoroutine(GetInPosition(LedgeWithPlayerOffset(playerElevationDetection.Ledge), wallNormal));
-                GetComponent<Rigidbody>().isKinematic = true;
+                _rigidbody.isKinematic = true;
+                playerStateComponent.SetStateHard(PlayerState.Traversing);
             }
         }
-
 
         private void Dismount()
         {
             isClimbing = false;
             isInPosition = false;
-            GetComponent<Rigidbody>().isKinematic = false;
+            _rigidbody.isKinematic = false;
             ledge = Vector3.zero;
-            if(GetComponent<PlayerStateComponent>().CurrentState == PlayerState.Traversing)
+            if(playerStateComponent.CurrentState == PlayerState.Traversing)
             {
-                GetComponent<PlayerStateComponent>().SetStateHard(PlayerState.Normal);
+                playerStateComponent.SetStateHard(PlayerState.Normal);
             }
         }
 
-        private bool CheckHeight()
+        public bool CheckValidLedge()
         {
-            if(transform.position.y < playerElevationDetection.Ledge.y)
+            //check the elevation detector
+            if(playerElevationDetection.ValidLedge)
             {
-                float heightDifference = playerElevationDetection.Ledge.y - transform.position.y;
-                if(heightDifference < maxMountHeight && heightDifference > minMountHeight)
+                Vector3 _rayCastOrigin = transform.position;
+                _rayCastOrigin.y += 0.5f;
+                RaycastHit _hitResult;
+                if(Physics.Raycast(_rayCastOrigin, Vector3.down, out _hitResult, 100))
                 {
-                    return true;
+                    floorPoint = _hitResult.point;
+
+                    float _floorHit = _hitResult.point.y;
+                    float _ledgeHeight = playerElevationDetection.Ledge.y;
+
+                    if(_floorHit < _ledgeHeight)
+                    {
+                        float _heightDifference = _ledgeHeight - _floorHit;
+
+                        float _maxHeight = playerGroundedComponent.IsGrounded ? maxMountHeight : maxAirMountHeight;
+                        float _minHeight = playerGroundedComponent.IsGrounded ? minMountHeight : 0;
+
+                        if(_heightDifference > _minHeight && _heightDifference < _maxHeight)
+                        {
+                            return true;
+                        }
+                    }
                 }
             }
+
+            // return true if the player is so high in the air that the ray doesn't hit anymore
             return false;
         }
 
@@ -185,7 +216,7 @@ namespace AH.Max.Gameplay
             while(Vector3.Distance(transform.position, position) > 0.1f)
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, 0.5f);
-                transform.position = Vector3.MoveTowards(transform.position, position, 0.3f);
+                transform.position = Vector3.MoveTowards(transform.position, position, 0.1f);
                 yield return new WaitForEndOfFrame();
             }
 
@@ -245,12 +276,10 @@ namespace AH.Max.Gameplay
 
                         if (Physics.Raycast(_origin, Vector3.down, out _hit, maxLedgeShimyHeight, layerMask))
                         {
-                           Debug.Log("adsdsfadsfasd");
                            _ledge.y = _hit.point.y;
 
                            if (CheckFloorSlope(_hit))
                            {
-                                Debug.Log("asd");
                                 SetLedge(_ledge, _normal);
                                 return;
                            }
@@ -333,10 +362,12 @@ namespace AH.Max.Gameplay
             maxHeightPos.y += maxMountHeight;
             Gizmos.DrawSphere(maxHeightPos, 0.1f);
 
-
-            Vector3 minHieghtPos = transform.position;
+            Vector3 minHieghtPos = floorPoint;
             minHieghtPos.y += minMountHeight;
             Gizmos.DrawSphere(minHieghtPos, 0.1f);
+
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawSphere(floorPoint, 0.1f);
         }
     }
 }
