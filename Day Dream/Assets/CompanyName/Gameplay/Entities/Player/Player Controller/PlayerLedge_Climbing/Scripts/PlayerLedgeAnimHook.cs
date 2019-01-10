@@ -11,6 +11,7 @@ public class PlayerLedgeAnimHook : MonoBehaviour
     public const string LedgeMoveAnim = "LedgeMove"; /*The actual climb animation for moving on the wall*/
     public const string StandingMountAnim = "StandingLedgeMount";
     public const string AirMountAnim = "AirLedgeMount";
+    public const string ClimbUpAnimation = "Ledge_Hang_ToStand_Up";
 
     private Animator animator;
     private PlayerGroundedComponent playerGroundedComponent;
@@ -30,11 +31,21 @@ public class PlayerLedgeAnimHook : MonoBehaviour
 
     public void PlayClimbAnimation(Vector3 ledgePoint, float inputXValue)
     {
+        Vector3 _up = transform.up;
+        Vector3 _toPosition = ledgePoint - transform.position;
+
         float xValue = inputXValue;
-        //float yValue;
+        float yValue = Vector3.Dot(_up, _toPosition);
 
         animator.SetFloat(LedgeXAnimationFloat, xValue);
+        animator.SetFloat(LedgeYAnimationFloat, yValue);
+
         animator.Play(LedgeMoveAnim);
+    }
+
+    public void PlayClimbUpAnimation()
+    {
+        animator.Play(ClimbUpAnimation);
     }
 
     public void Dismount()

@@ -141,7 +141,13 @@ namespace AH.Max.Gameplay
 
         private void Update()
         {
-            if(!isClimbingUp)
+        }
+
+        private void FixedUpdate()
+        {
+            DetectLedgePoint();
+
+            if (!isClimbingUp)
             {
                 MoveToPosition();
             }
@@ -150,11 +156,6 @@ namespace AH.Max.Gameplay
             {
                 Dismount();
             }
-        }
-
-        private void FixedUpdate()
-        {
-            DetectLedgePoint();
         }
 
         private void InputResponse()
@@ -209,6 +210,8 @@ namespace AH.Max.Gameplay
             _rigidbody.isKinematic = false;
             ledge = Vector3.zero;
             playerLedgeAnimHook.Dismount();
+
+            Debug.Log("REMEMEMBER TO RESET THE PLAYERS ROTATION SO THEY DONT LEAN - YOU HAVENT YET");
 
             if (playerStateComponent.CurrentState == PlayerState.Traversing)
             {
@@ -280,6 +283,9 @@ namespace AH.Max.Gameplay
                     yield return new WaitForEndOfFrame();
                 }
 
+                //ROOT MOTION
+                //playerLedgeAnimHook.PlayClimbUpAnimation();
+
                 Dismount();
 
                 yield break;
@@ -317,7 +323,7 @@ namespace AH.Max.Gameplay
 
                 RaycastHit _hit;
 
-                Debug.DrawRay(_origin, transform.forward * distanceToCheck, Color.red, 5);
+                //Debug.DrawRay(_origin, transform.forward * distanceToCheck, Color.red, 5);
                 if (Physics.Raycast(_origin, transform.forward, out _hit, distanceToCheck, layerMask))
                 {
                     //get the reverse of the angle we shot the ray from to get an accurate angle calculation
@@ -328,32 +334,42 @@ namespace AH.Max.Gameplay
 
                     if (CheckWallSlope(_hit))
                     {
-                        ///TODO : Add a chaeck to make sure there is no wall blocking the path
-                        ///
-                        ///
-                        ///
-
-                        //fire the ray cast in the input direction
-                        //if it hits the next forward ray cast will be from that hit and not the player
-                        //else we will shoot it from the player
+                        ///TODO: add a check on if we find a spot to climb to - MAYBE ADD 90 DEGREE TURNS IN TOWARDS THE WALL
 
                         float horizontalInput = InputDriver.LocomotionDirection.normalized.x < 0 ? -1 : 1;
 
                         Vector3 _obsticalDirection = transform.right * horizontalInput;
-
-                        Debug.DrawRay(_origin, _obsticalDirection * ledgeClimbDistance, Color.green, 3);
-
                         Vector3 _targetOrigin = transform.position;
 
-                        _targetOrigin += transform.right * (horizontalInput * ledgeClimbDistance);
-                        _targetOrigin += -transform.forward * 0.3f;
+                        bool _useObstical = false;
+
+                        if (Physics.Raycast(_origin, _obsticalDirection, out _hit, ledgeClimbDistance + 0.5f, layerMask))
+                        {
+                            if(CheckWallSlope(_hit))
+                            {
+                                _useObstical = true;
+                            }
+                        }
+
+                        if(_useObstical)
+                        {
+                            _targetOrigin = _hit.point + _hit.normal;
+                            _obsticalDirection = -_hit.normal;
+                         //   Debug.DrawRay(_origin, _obsticalDirection * ledgeClimbDistance, Color.green, 3);
+                        }
+                        else
+                        {
+                            _targetOrigin += transform.right * (horizontalInput * ledgeClimbDistance);
+                            _obsticalDirection = transform.forward;
+                        }
+
+                        //_targetOrigin += _hit.normal * 0.3f;
 
                         _origin = _targetOrigin;
                         WallCheckPoint = _targetOrigin;
 
-
-                        Debug.DrawRay(_origin, transform.forward * (distanceToCheck + 1), Color.red, 5);
-                        if (Physics.Raycast(_origin, transform.forward, out _hit, distanceToCheck + 1, layerMask))
+                   //     Debug.DrawRay(_origin, _obsticalDirection * (distanceToCheck + 1), Color.red, 5);
+                        if (Physics.Raycast(_origin, _obsticalDirection, out _hit, distanceToCheck + 1, layerMask))
                         {
                             Vector3 _ledge = _hit.point;
                             Vector3 _normal = _hit.normal;
@@ -362,7 +378,7 @@ namespace AH.Max.Gameplay
                             _origin.y += maxLedgeShimyHeight;
                             _origin += -_normal * _distanceToCheckDown;
 
-                            Debug.DrawRay(_origin, Vector3.down * maxLedgeShimyHeight, Color.red, 5);
+                         //   Debug.DrawRay(_origin, Vector3.down * maxLedgeShimyHeight, Color.red, 5);
 
                             if (Physics.Raycast(_origin, Vector3.down, out _hit, maxLedgeShimyHeight, layerMask))
                             {
@@ -372,16 +388,13 @@ namespace AH.Max.Gameplay
                                {
                                     SetLedge(_ledge, _normal);
 
-                                    playerLedgeAnimHook.PlayClimbAnimation(LedgeWithPlayerOffset(_ledge), horizontalInput);
+                                    playerLedgeAnimHook.PlayClimbAnimation(LedgeWithPlayerOffset(ledge), horizontalInput);
 
                                     return;
                                }
                             }
                         }
                     }
-
-                    //ledge = Vector3.zero;
-                    //climbUpPosition = Vector3.zero;
                 }
             }
         }
@@ -419,7 +432,7 @@ namespace AH.Max.Gameplay
         {
             float _angle = Vector3.Angle(hit.normal, Vector3.up);
 
-            if (_angle > minimumWallSlope)
+            if (_angle >= minimumWallSlope)
             {
                 return true;
             }
@@ -444,6 +457,11 @@ namespace AH.Max.Gameplay
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ledge"></param>
+        /// <returns></returns>
         private Vector3 LedgeWithPlayerOffset(Vector3 ledge)
         {
             ledge += WallNormal * playerOffset.x;
