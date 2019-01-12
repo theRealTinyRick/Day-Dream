@@ -2193,9 +2193,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToCheck: 1
-  ledge: {x: -6.0745506, y: 4.51545, z: -13.298154}
-  wallNormal: {x: 1, y: 0, z: 0}
-  playerOffset: {x: 0.18, y: -0.89}
+  ledge: {x: 0, y: 0, z: 0}
+  wallNormal: {x: 0, y: 0, z: 1}
+  playerOffset: {x: 0.17, y: -0.89}
   maxLedgeShimyHeight: 2.5
   minLedgeShimyHeight: 0
   maxMountHeight: 2.5
@@ -2204,7 +2204,7 @@ MonoBehaviour:
   minimumWallSlope: 85
   minimumFloorSlope: 60
   ledgeClimbDistance: 1
-  climbSpeed: 0.026
+  climbSpeed: 0.04
   mountSpeed: 0.1
   climbUpPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114474534521675928
