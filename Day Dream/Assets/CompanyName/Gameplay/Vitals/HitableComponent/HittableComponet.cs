@@ -20,10 +20,6 @@ public class HittableComponet : MonoBehaviour
 
 	[SerializeField]
 	[TabGroup(Tabs.Properties)]
-	public List <IdentityType> entitiesThatCanDamage;
-
-	[SerializeField]
-	[TabGroup(Tabs.Properties)]
 	public List <DamageType> vulnerableToTypes;
 
 	[SerializeField]
@@ -38,38 +34,13 @@ public class HittableComponet : MonoBehaviour
 	
 	public void Hit(DamageData data, IdentityType identityType)
 	{
-		if(CanDamage(identityType))
-		{
-			// apply resistance
-
-			vitalsComponent.RemoveHealth(data.amount);
-			hitEvent.Invoke();
-		}
+		vitalsComponent.RemoveHealth(data.amount);
+		hitEvent.Invoke();
 	}
 
-	public void Hit(float damageAmount, IdentityType identityType)
+	public void Hit(float damageAmount)
 	{
-		if(CanDamage(identityType))
-		{
-			vitalsComponent.RemoveHealth(damageAmount);
-			hitEvent.Invoke();
-		}
+		vitalsComponent.RemoveHealth(damageAmount);
+		hitEvent.Invoke();
 	}
-
-	///<Summary>
-	///
-	///</Summary>
-	private bool CanDamage(IdentityType identityType)
-	{
-		foreach(IdentityType _identityTypes in entitiesThatCanDamage)
-		{
-			if(_identityTypes == identityType)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
-	// public void Hit(float damageAmount, )
 }

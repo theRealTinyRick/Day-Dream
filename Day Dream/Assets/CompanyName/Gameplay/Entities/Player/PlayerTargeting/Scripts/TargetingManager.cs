@@ -31,18 +31,21 @@ namespace AH.Max.Gameplay
 		/// <summary>
 		/// the currently targeted entity
 		/// </summary>
+		[TabGroup(Tabs.Properties)]
 		[SerializeField]
 		private Entity currentTarget;
 		
 		/// <summary>
 		/// the previously targeted entity
 		/// </summary>
+		[TabGroup(Tabs.Properties)]
 		[SerializeField]
 		private Entity previousTarget;
 
 		/// <summary>
 		/// Is the current manager currently locked on
 		/// </summary>
+		[TabGroup(Tabs.Properties)]
 		[ShowInInspector]
 		private bool lockedOn;
 		public bool LockedOn
@@ -53,10 +56,12 @@ namespace AH.Max.Gameplay
 			}
 		}
 
+		[TabGroup(Tabs.Properties)]
         [TabGroup(Tabs.Properties)]
         [SerializeField]
 		private Transform referenceTransform;
 
+		[TabGroup(Tabs.Properties)]
         [TabGroup(Tabs.Properties)]
         [SerializeField]
         private float eyeHeightOffset;
