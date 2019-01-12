@@ -16,6 +16,8 @@ public class Interaction
     [TabGroup(Tabs.Events)]
     public InteractionCompletedEvent interactionCompletedEvent = new InteractionCompletedEvent();
 
+    public KeyCode[] keyCodes;
+
     public bool EvaluateFilters()
     {
         foreach(IInteractionFilter _filter in filters)
@@ -27,5 +29,29 @@ public class Interaction
         }
 
         return true;
+    }
+
+    public void ExecuteInteraction()
+    {
+        if(interactionStartedEvent != null)
+        {
+            interactionStartedEvent.Invoke();
+        }
+    }
+
+    public bool EvaluateInput()
+    {
+        if(keyCodes != null)
+        {
+            foreach(KeyCode _code in keyCodes)
+            {
+                if(Input.GetKeyDown(_code))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

@@ -4,7 +4,7 @@ public class TestInteractionFilter : IInteractionFilter
 {
     public bool Filter()
     {
-        Debug.Log("This is the test one");
+        Debug.Log("This is the test interaction filter");
         return true;
     }
 

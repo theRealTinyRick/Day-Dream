@@ -26,12 +26,24 @@ public class InteractableComponent : SerializedMonoBehaviour
     [SerializeField]
     private List<Interaction> validInteractions = new List<Interaction>();
 
+    private bool hasBeenInteractedWith = false;
+    public bool HasBeenInteractedWith
+    {
+        get
+        {
+            return hasBeenInteractedWith;
+        }
+    }
+
+
     public void OnTriggerStay(Collider other)
     {
         if(ValidateCollider(other))
         {
             Evaluate();
+            EvaluateValidInteractionInput();
         }
+
     }
 
     public void OnTriggerExit(Collider other)
@@ -61,6 +73,23 @@ public class InteractableComponent : SerializedMonoBehaviour
                 if (validInteractions.Contains(_interaction))
                 {
                     validInteractions.Remove(_interaction);        
+                }
+            }
+        }
+    }
+
+    public void EvaluateValidInteractionInput()
+    {
+        if (validInteractions.Count > 0)
+        {
+            foreach(Interaction _interaction in validInteractions)
+            {
+                if(_interaction.EvaluateInput())
+                {
+                    _interaction.ExecuteInteraction();
+                    hasBeenInteractedWith = true;
+
+                    return;
                 }
             }
         }

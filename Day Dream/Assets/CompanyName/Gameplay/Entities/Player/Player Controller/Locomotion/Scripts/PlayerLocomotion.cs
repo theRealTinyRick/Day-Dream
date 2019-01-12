@@ -106,7 +106,7 @@ namespace AH.Max.Gameplay
 					    return;
 				    }
 			    }
-			
+
 			    RotatePlayer();
             }
 		}
