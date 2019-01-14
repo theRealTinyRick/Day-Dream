@@ -35,7 +35,7 @@ namespace BehaviorDesigner.Runtime.Tasks
                 return TaskStatus.Success;
             }
 
-            Quaternion _rotation = Quaternion.LookRotation(_targetDirection.normalized * (rotateSpeed * Time.deltaTime));
+            Quaternion _rotation = Quaternion.LookRotation(_targetDirection);
 
             transform.rotation = Quaternion.Lerp(agent.Value.transform.rotation, _rotation, rotateSpeed);
 
