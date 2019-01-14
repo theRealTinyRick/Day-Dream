@@ -12,6 +12,10 @@ public class GameCamera : Entity
 {
 	[TabGroup(Tabs.Preferences)]
 	[SerializeField]
+	private bool useCameraController;
+
+	[TabGroup(Tabs.Preferences)]
+	[SerializeField]
 	private Vector3 cameraOffsetPosition;
 
 	[TabGroup(Tabs.Preferences)]
@@ -45,18 +49,24 @@ public class GameCamera : Entity
 
 	private void Update () 
 	{
-		playerTransform = EntityManager.Instance.Player.transform;
-		if(playerTransform == null) return;
+		if(useCameraController)
+		{
+			playerTransform = EntityManager.Instance.Player.transform;
+			if(playerTransform == null) return;
 
-		GetInput();
+			GetInput();
+		}
 	}
 
 	private void LateUpdate()
 	{
-		if(playerTransform == null) return;
+		if(useCameraController)
+		{
+			if(playerTransform == null) return;
 
-		ApplyMovement();
-		ApplyRotation();
+			ApplyMovement();
+			ApplyRotation();
+		}
 	}
 	
 	private void GetInput()

@@ -212,7 +212,6 @@ namespace AH.Max.Gameplay
 				{
 					if(_swordAnimation == thing.clip.name)
 					{
-                        Debug.Log("return true");
 						return true;
 					}
 				}
@@ -220,7 +219,6 @@ namespace AH.Max.Gameplay
 
 			if(playerStateComponent.CurrentState == PlayerState.Attacking)
 			{
-                Debug.Log("reset");
 				playerStateComponent.ResetState();
 			}			
 
