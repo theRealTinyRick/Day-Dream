@@ -129,13 +129,43 @@ namespace AH.Max.System
 
             foreach(Entity e in Instance.entities)
             {
-                if(e.IdentityType.type == type.type)
+                if(e.IdentityType == type)
                 {
                     _entities.Add(e);
                 }
             }
 
             return _entities;
+        }
+
+        /// <summary>
+        /// Get a list of entities in thhe game with the given list of identities
+        /// </summary>
+        /// <param name="types"></param>
+        /// <returns></returns>
+        public static List <Entity> GetEntities ( List <IdentityType> types )
+        {
+            List<Entity> _entities = new List<Entity>();
+
+            foreach(IdentityType _type in types)
+            {
+                foreach (Entity e in Instance.entities)
+                {
+                    if (e.IdentityType == _type)
+                    {
+                        _entities.Add(e);
+                    }
+                }
+            }
+
+            //clean up the list just in case someone fucked it up
+
+            return _entities;
+        }
+
+        public static void CleanUpTheEntityList(List<Entity> list)
+        {
+
         }
 
         ///<Summary>

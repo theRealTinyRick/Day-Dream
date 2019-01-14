@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4334338296358250}
   - component: {fileID: 20813025861228238}
   - component: {fileID: 81453076489171804}
-  - component: {fileID: 114128502334475344}
   - component: {fileID: 114247457594260784}
+  - component: {fileID: 114439577553827056}
   m_Layer: 0
   m_Name: Game Camera
   m_TagString: Untagged
@@ -90,18 +90,6 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1985173812418138}
   m_Enabled: 1
---- !u!114 &114128502334475344
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1985173812418138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a97371ab9ee7e7428377bc48e9c0a94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  identityType: {fileID: 11400000, guid: de21f658ff359b744af90657c6e18ee5, type: 2}
 --- !u!114 &114247457594260784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,3 +101,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07ff22d023c5b240912fafd590c90c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  identityType: {fileID: 11400000, guid: de21f658ff359b744af90657c6e18ee5, type: 2}
+  doNotDestroyOnLoad: 1
+  cameraOffsetPosition: {x: 0, y: 2.43, z: 0}
+  cameraLookAtOffset: {x: 0, y: 1.58}
+  offsetDistance: 2.27
+  xSensitivity: 5.03
+  ySensitivity: 1.77
+  invertXAxis: 0
+  invertYAxis: 0
+--- !u!114 &114439577553827056
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1985173812418138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 74c535c2b72c7ae45aac3d4aee6977e9, type: 2}

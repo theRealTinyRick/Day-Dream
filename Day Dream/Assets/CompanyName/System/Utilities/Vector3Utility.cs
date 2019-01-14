@@ -8,4 +8,9 @@ public class Vector3Utility
         Vector3 _ref = to - from;
         return (_ref.x * _ref.x) + (_ref.y * _ref.y) + (_ref.z + _ref.z);
     }
+
+    public static bool Approximately()
+    {
+        return false;
+    }
 }

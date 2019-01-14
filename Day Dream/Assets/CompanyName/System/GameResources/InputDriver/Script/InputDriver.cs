@@ -91,7 +91,7 @@ public class InputDriver : Singleton_MonoBehavior<InputDriver>
             }
         }
 
-        if(input.GetButtonDown(InputDataBase.BButton) || UnityEngine.Input.GetKeyDown(KeyCode.E))
+        if(input.GetButtonDown(InputDataBase.BButton) || UnityEngine.Input.GetKeyDown(KeyCode.LeftShift))
         {
             if(evadeButtonEvent != null)
             {
@@ -138,7 +138,7 @@ public class InputDriver : Singleton_MonoBehavior<InputDriver>
 [System.Serializable]
 public class InputEventHandler
 {
-    
+  
 }
 
 [System.Serializable]
