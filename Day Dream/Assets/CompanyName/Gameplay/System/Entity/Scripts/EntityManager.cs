@@ -7,11 +7,12 @@ using AH.Max.System;
 
 namespace AH.Max.System
 {
-    public class EntityManager : Singleton<EntityManager>
+    public class EntityManager :  Singleton_MonoBehavior <EntityManager>
     {
         ///<Summary>
         /// A reference to the player entity in the scene.
         ///</Summary>
+        [SerializeField]
         private Entity _player;
 
         ///<Summary>
@@ -36,6 +37,7 @@ namespace AH.Max.System
             private set { _player = value; }
         }
 
+        [SerializeField]
         private Entity gameCamera;
 
         public Entity GameCamera
@@ -55,12 +57,14 @@ namespace AH.Max.System
             private set {gameCamera = value;}
         }
 
+        [SerializeField]
         private List <Entity> _enemies = new List <Entity> ();
         public List <Entity> Enemies
         {
             get { return _enemies; }
         }
 
+        [SerializeField]
         private List <Entity> entities = new List <Entity>();
         public List <Entity> Entities
         {

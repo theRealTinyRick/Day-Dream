@@ -29,7 +29,7 @@ namespace AH.Max
         {
             if(identityType == null)
             {
-                Debug.LogError("All Entities must have a valid identity type");
+                Debug.LogError("All Entities must have a valid identity type" + gameObject);
                 return;
             }
 

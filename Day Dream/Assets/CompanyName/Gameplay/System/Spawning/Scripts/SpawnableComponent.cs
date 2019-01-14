@@ -13,10 +13,10 @@ namespace AH.Max.System
 		public Entity entity;
 
 		[SerializeField]
-		SpawnedEvent spawnedEvent = new SpawnedEvent();
+		public SpawnedEvent spawnedEvent = new SpawnedEvent();
 
 		[SerializeField]
-		DespawnedEvent despawnedEvent = new DespawnedEvent();
+		public DespawnedEvent despawnedEvent = new DespawnedEvent();
 
 		private void Start()
 		{
