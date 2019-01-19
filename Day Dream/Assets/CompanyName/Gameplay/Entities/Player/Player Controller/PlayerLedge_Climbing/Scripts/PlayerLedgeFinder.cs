@@ -89,6 +89,13 @@ namespace AH.Max.Gameplay
         [TabGroup(Tabs.Properties)]
         [ShowInInspector]
         private bool isClimbing = false;
+        public bool IsClimbing 
+        {
+            get 
+            {
+                return isClimbing;
+            }
+        }
 
         [TabGroup(Tabs.Properties)]
         [ShowInInspector]
@@ -109,6 +116,14 @@ namespace AH.Max.Gameplay
         [TabGroup(Tabs.Properties)]
         [SerializeField]
         private Vector3 climbUpPosition = new Vector3();
+
+        [TabGroup(Tabs.Events)]
+        [SerializeField]
+        LedgeClimbStartEvent ledgeClimbStarted = new LedgeClimbStartEvent();
+
+        [TabGroup(Tabs.Events)]
+        [SerializeField]
+        LedgeClimbStoppedEvent ledgeClimbStopped = new LedgeClimbStoppedEvent();
 
         private LayerMask layerMask = 1 << 8;
         Vector3 floorPoint = new Vector3();
@@ -188,8 +203,6 @@ namespace AH.Max.Gameplay
                 isClimbing = true;
                 _rigidbody.isKinematic = true;
 
-                //SetLedge(/*LedgeWithPlayerOffset(playerElevationDetection.Ledge)*/playerElevationDetection.Ledge, playerElevationDetection.WallNormal);
-
                 SetLedge(playerElevationDetection.Ledge, playerElevationDetection.WallNormal);
 
                 playerLedgeAnimHook.PlayMountAnim();
@@ -199,6 +212,11 @@ namespace AH.Max.Gameplay
                 StartCoroutine(GetInPosition(LedgeWithPlayerOffset(playerElevationDetection.Ledge), playerElevationDetection.WallNormal));
 
                 playerStateComponent.SetStateHard(PlayerState.Traversing);
+
+                if(ledgeClimbStarted != null)
+                {
+                    ledgeClimbStarted.Invoke();
+                }
             }
         }
 
@@ -211,12 +229,22 @@ namespace AH.Max.Gameplay
             ledge = Vector3.zero;
             playerLedgeAnimHook.Dismount();
 
-            Debug.Log("REMEMEMBER TO RESET THE PLAYERS ROTATION SO THEY DONT LEAN - YOU HAVENT YET");
-
+            ResetRotation();
+            
             if (playerStateComponent.CurrentState == PlayerState.Traversing)
             {
                 playerStateComponent.SetStateHard(PlayerState.Normal);
             }
+
+            if(ledgeClimbStopped != null)
+            {
+                ledgeClimbStopped.Invoke();
+            }
+        }
+
+        private void ResetRotation()
+        {
+            Quaternion _rotation = Quaternion.Euler(0, transform.root.rotation.y, 0);
         }
 
         public bool CheckValidLedge()

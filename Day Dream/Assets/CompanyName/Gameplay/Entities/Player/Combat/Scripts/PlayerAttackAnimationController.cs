@@ -181,17 +181,6 @@ namespace AH.Max.Gameplay
                 return false;
             }
 
-           // if (playerEvade.isEvading)
-			//{
-			//	return false;
-			//}
-
-			//if(playerVault.IsVaulting)
-			//{
-			//	return false;
-			//}
-
-
             if (currentNumberOfClicks < maxNumberOfClicks)
 			{
 				return true;

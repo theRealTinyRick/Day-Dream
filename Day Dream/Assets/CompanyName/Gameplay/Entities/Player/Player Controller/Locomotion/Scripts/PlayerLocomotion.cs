@@ -11,22 +11,6 @@ namespace AH.Max.Gameplay
 {
 	public class PlayerLocomotion : MonoBehaviour 
 	{
-		[TabGroup("TestIng")]
-		[SerializeField]
-		private bool LockedOn; // Remove
-
-		[TabGroup("TestIng")]
-		[SerializeField]
-		private bool defending; // Remove
-
-		[TabGroup("TestIng")]
-		[SerializeField]
-		private bool attacking;	// Remove
-		
-		[TabGroup("TestIng")]
-		[SerializeField]
-		private Transform target; // Remove
-
 		[TabGroup(Tabs.Locomotion)]
 		[SerializeField]
 		private float baseSpeed;
@@ -39,13 +23,23 @@ namespace AH.Max.Gameplay
         [SerializeField]
         private float airSpeed;
 
+        [TabGroup(Tabs.Locomotion)]
+        [SerializeField]
+        private float preparedSpeed;
+
 		[TabGroup(Tabs.Locomotion)]
 		[SerializeField]
 		private float turnDamping;
 
         [TabGroup(Tabs.Locomotion)]
+		[SerializeField]
+		private float faceDamping;
+
+        [TabGroup(Tabs.Locomotion)]
         [SerializeField]
         private bool isSprinting;
+
+        private bool isPreparing;
 
         /// <summary>
         /// The list of states that the player can move in
@@ -70,6 +64,7 @@ namespace AH.Max.Gameplay
 		private PlayerEvade playerEvade;
         private PlayerStateComponent playerStateComponent;
         private PlayerJump playerJump;
+        private TargetingManager targetingManager;
 
 		private void Start () 
 		{
@@ -82,6 +77,7 @@ namespace AH.Max.Gameplay
 			playerEvade = GetComponent<PlayerEvade>();
             playerStateComponent = GetComponent<PlayerStateComponent>();
             playerJump = GetComponent<PlayerJump>();
+            targetingManager = GetComponentInChildren<TargetingManager>();
 
             if(LocomotionOrientationController == null)
             {
@@ -94,22 +90,26 @@ namespace AH.Max.Gameplay
 		{
 			Vector3 _direction = GetOrientationDirection();
 
+            if (isPreparing || playerAttackAnimationController.IsAttacking)
+            {
+                FaceTarget();
+            }
+
             if (CanMove())
             {
 			    Move(_direction);
 			
-			    if(LockedOn)
-			    {
-				    if(defending || attacking)
-				    {
-					    FaceTarget();
-					    return;
-				    }
-			    }
-
-			    RotatePlayer();
+                if(!isPreparing)
+                {
+			        RotatePlayer();
+                }
             }
 		}
+
+        public void SetIsPreparing(bool state)
+        {
+            isPreparing = state;
+        }
 
         private void Move(Vector3 direction)
 		{
@@ -128,6 +128,10 @@ namespace AH.Max.Gameplay
             {
                 _speed = sprintSpeed;
             }
+            else if(isPreparing)
+            {
+                _speed = preparedSpeed;
+            }
 
             if(InputDriver.LocomotionDirection != Vector3.zero)
             {
@@ -136,10 +140,6 @@ namespace AH.Max.Gameplay
 			        new Vector3( (direction.x * _speed) * InputDriver.LocomotionDirection.magnitude, 
 			        _rigidbody.velocity.y, 
 			        (direction.z * _speed) * InputDriver.LocomotionDirection.magnitude );
-            }
-            else
-            {
-               // _rigidbody.velocity = Vector3.zero;
             }
 		}
 
@@ -174,11 +174,18 @@ namespace AH.Max.Gameplay
 
 		private void FaceTarget()
 		{
-			Vector3 _direction = target.position - transform.position;
-			_direction.y = 0;
-			Quaternion _rotation = Quaternion.LookRotation(_direction);
+            if (targetingManager.LockedOn && targetingManager.CurrentTarget != null)
+            {
+			    Vector3 _direction = targetingManager.CurrentTarget.transform.position - transform.position;
+			    _direction.y = 0;
+			    Quaternion _rotation = Quaternion.LookRotation(_direction);
 
-			transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, turnDamping);
+			    transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, turnDamping);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Lerp(transform.rotation, LocomotionOrientationController.rotation, faceDamping);
+            }
 		}
 		
 		private Vector3 GetOrientationDirection()
@@ -213,11 +220,6 @@ namespace AH.Max.Gameplay
 		///</Summary>
 		private bool CanMove()
 		{
-            //if (!GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Locomotion"))
-            //{
-            //    return false;
-           // }
-
             foreach (var _state in availableStates)
             {
                 if(playerStateComponent.CheckState(_state))

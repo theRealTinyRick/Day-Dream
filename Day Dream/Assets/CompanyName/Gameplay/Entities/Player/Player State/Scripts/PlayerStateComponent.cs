@@ -35,6 +35,9 @@ namespace AH.Max.Gameplay
 			playerAttackAnimationController = GetComponent<PlayerAttackAnimationController>();
 			playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
 			playerVault = GetComponent<PlayerVault>();
+
+            Debug.Log("Player State Component: lock the cursor");
+            Cursor.lockState = CursorLockMode.Locked;
 		}
 
 		public void SetStateHard(PlayerState state)

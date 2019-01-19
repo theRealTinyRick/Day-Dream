@@ -30,10 +30,13 @@ namespace AH.Max.Gameplay
 		[SerializeField]
 		private bool ShouldLean; // determines if the player should lean while running.
 
+        private bool isPreparing;
+
         private PlayerLocomotion playerLocomotion;
         private PlayerStateComponent playerStateComponent;
         private PlayerAttackAnimationController playerAttackAnimatorController;
         private PlayerEvade playerEvade;
+        private TargetingManager targetingManager;
 
         private Animator animator;
 
@@ -47,6 +50,7 @@ namespace AH.Max.Gameplay
 			playerAttackAnimatorController = GetComponent<PlayerAttackAnimationController>();
 			playerEvade = GetComponent<PlayerEvade>();
 			animator = GetComponent<Animator>();
+            targetingManager = GetComponentInChildren<TargetingManager>();
 		}
 
 		private void Update () 
@@ -65,16 +69,18 @@ namespace AH.Max.Gameplay
 			Debug.DrawRay(transform.position, _forwardVector, Color.blue);
 			Debug.DrawRay(transform.position, _crossProduct, Color.green);
 
-			if(lockedOnAnimatorFloat == 0)
+			if(!isPreparing)
 			{
                 verticalAnimatorFloat = _moveDirection.magnitude;
 				horizontalAnimatorFloat = ShouldLean ? _crossProduct.y : 0;
-			}
-			else
+                lockedOnAnimatorFloat = 0;
+            }
+            else
 			{
 				verticalAnimatorFloat = _moveDirection.magnitude * Vector3.Dot(_forwardVector, _moveDirection);
 				horizontalAnimatorFloat = _crossProduct.y;
-			}
+                lockedOnAnimatorFloat = 1;
+            }
 		}
 
 		private void ApplyAnimationFloats()
@@ -103,5 +109,10 @@ namespace AH.Max.Gameplay
 
             return false;
         }
-	}
+
+        public void SetIsPreparing(bool state)
+        {
+            isPreparing = state;
+        }
+    }
 }

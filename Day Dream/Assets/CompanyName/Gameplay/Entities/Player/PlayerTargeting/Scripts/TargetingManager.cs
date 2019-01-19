@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,7 +11,17 @@ using AH.Max.System;
 
 namespace AH.Max.Gameplay
 {
-	public class TargetingManager : MonoBehaviour 
+    [Serializable]
+    public class LockedOnEvent : UnityEngine.Events.UnityEvent
+    {
+    }
+
+    [Serializable]
+    public class LockedOffEvent : UnityEngine.Events.UnityEvent
+    {
+    }
+
+    public class TargetingManager : MonoBehaviour 
 	{
 		/// <summary>
 		/// entities that can be targeted
@@ -34,6 +45,13 @@ namespace AH.Max.Gameplay
 		[TabGroup(Tabs.Properties)]
 		[SerializeField]
 		private Entity currentTarget;
+        public Entity CurrentTarget 
+        {
+            get 
+            {
+                return currentTarget;
+            }
+        }
 		
 		/// <summary>
 		/// the previously targeted entity
@@ -57,14 +75,20 @@ namespace AH.Max.Gameplay
 		}
 
 		[TabGroup(Tabs.Properties)]
-        [TabGroup(Tabs.Properties)]
         [SerializeField]
 		private Transform referenceTransform;
 
 		[TabGroup(Tabs.Properties)]
-        [TabGroup(Tabs.Properties)]
         [SerializeField]
         private float eyeHeightOffset;
+
+        [TabGroup(Tabs.Events)]
+        [SerializeField]
+        private LockedOnEvent lockedOnEvent;
+
+        [TabGroup(Tabs.Events)]
+        [SerializeField]
+        private LockedOffEvent lockedOffEvent;
 
 		private void Start()
 		{
@@ -73,6 +97,37 @@ namespace AH.Max.Gameplay
 				referenceTransform = transform.root;
 			}
 		}
+
+        private void OnEnable()
+        {
+            InputDriver.lockOnButtonEvent.AddListener(RecieveInput);
+        }
+
+        private void OnDisable()
+        {
+            InputDriver.lockOnButtonEvent.RemoveListener(RecieveInput);
+        }
+
+        private void RecieveInput()
+        {
+            if(lockedOn)
+            {
+                LockOff();
+            }
+            else
+            {
+                LockOn();
+            }
+        }
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Tab))
+            {
+                Debug.Log("using test input update this lol");
+                NextTargetToTheLeft();
+            }
+        }
 
 		/// <summary>
 		/// OnTriggerEnter is called when the Collider other enters the trigger.
@@ -226,6 +281,11 @@ namespace AH.Max.Gameplay
             {
                 SetCurrent(_firstTarget);
             }
+
+            if(lockedOnEvent != null)
+            {
+                lockedOnEvent.Invoke();
+            }
         }
 
         private Entity FindClosestEntity()
@@ -360,6 +420,11 @@ namespace AH.Max.Gameplay
                         RemoveEntity(entitiesToTarget[_index]);
                     }
                 }
+            }
+
+            if(lockedOffEvent != null)
+            {
+                lockedOffEvent.Invoke();
             }
 		}
 
