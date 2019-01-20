@@ -92,7 +92,10 @@ namespace AH.Max.Gameplay
 
             if (isPreparing || playerAttackAnimationController.IsAttacking)
             {
-                FaceTarget();
+                if(!playerEvade.isEvading)
+                {
+                    FaceTarget();
+                }
             }
 
             if (CanMove())
@@ -174,17 +177,20 @@ namespace AH.Max.Gameplay
 
 		private void FaceTarget()
 		{
-            if (targetingManager.LockedOn && targetingManager.CurrentTarget != null)
+            if(playerGroundedComponent.IsGrounded)
             {
-			    Vector3 _direction = targetingManager.CurrentTarget.transform.position - transform.position;
-			    _direction.y = 0;
-			    Quaternion _rotation = Quaternion.LookRotation(_direction);
+                if (targetingManager.LockedOn && targetingManager.CurrentTarget != null)
+                {
+			        Vector3 _direction = targetingManager.CurrentTarget.transform.position - transform.position;
+			        _direction.y = 0;
+			        Quaternion _rotation = Quaternion.LookRotation(_direction);
 
-			    transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, turnDamping);
-            }
-            else
-            {
-                transform.rotation = Quaternion.Lerp(transform.rotation, LocomotionOrientationController.rotation, faceDamping);
+			        transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, turnDamping);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Lerp(transform.rotation, LocomotionOrientationController.rotation, faceDamping);
+                }
             }
 		}
 		

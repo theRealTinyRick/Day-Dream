@@ -99,6 +99,9 @@ namespace AH.Max.Gameplay.Camera
                         cm_cameraController.m_XAxis.m_InputAxisName = "";
                         cm_cameraController.m_YAxis.m_InputAxisName = "";
 
+                        cm_cameraController.m_XAxis.m_InputAxisValue = 0;
+                        cm_cameraController.m_YAxis.m_MaxValue = 0;
+
                         cm_cameraController.m_RecenterToTargetHeading.m_WaitTime = lockedOnStateData.recenterDelay;
                         cm_cameraController.m_YAxisRecentering.m_WaitTime = lockedOnStateData.recenterDelay;
 

@@ -290,7 +290,8 @@ namespace AH.Max.Gameplay
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, 0.5f);
                 transform.position = Vector3.MoveTowards(transform.position, position, mountSpeed);
-                yield return new WaitForEndOfFrame();
+
+                yield return new WaitForFixedUpdate();
             }
 
             isInPosition = true;
@@ -308,7 +309,7 @@ namespace AH.Max.Gameplay
                 while (Vector3.Distance(transform.position, position) > 0.1f)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, position, mountSpeed);
-                    yield return new WaitForEndOfFrame();
+                    yield return new WaitForFixedUpdate();
                 }
 
                 //ROOT MOTION
