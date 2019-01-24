@@ -76,16 +76,29 @@ namespace AH.Max.System.DamageMap
         /// </summary>
         /// <param name="_damager"></param>
         /// <returns></returns>
-        public static List<Entity> GetWhatICanDamage(Entity _damager, bool getOnlyAlive = false)
+        public static List<Entity> GetWhatICanDamage(Entity damager, bool getOnlyAlive = false)
         {
             DamageAmountAndDamageableEntities _object;
 
-            if (Instance.damageMap.TryGetValue(_damager.IdentityType, out _object))
+            if (Instance.damageMap.TryGetValue(damager.IdentityType, out _object))
             {
                 return EntityManager.GetEntities(_object.damageableEntities);
             }
 
             return null;
+        }
+
+        public static float GetDamageAmount(Entity damager)
+        {
+            DamageAmountAndDamageableEntities _object;
+
+            if (Instance.damageMap.TryGetValue(damager.IdentityType, out _object))
+            {
+                return _object.damageAmount;
+            }
+
+            Debug.LogWarning("The given damage dealer has not been added to the damage mapper");
+            return 0;
         }
 
         //TODO: add an option to get only the ones that are alive
