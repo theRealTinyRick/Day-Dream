@@ -25,12 +25,12 @@ namespace AH.Max.Gameplay
 		private bool isClimbingOnEdge = false;
 		public bool isClimbing = false;
 
-		private PlayerController pController;
-		private FreeClimbAnimationHook animHook;
+	//	private PlayerController pController;
+		//private FreeClimbAnimationHook animHook;
 		private Animator anim;
 		private Rigidbody rb;
 		// private PlayerStateManager playerStateManager;
-		private PlayerController playerController;
+	//	private PlayerController playerController;
 		private Animator _animator;
 
 		public Transform helper;
@@ -51,8 +51,8 @@ namespace AH.Max.Gameplay
 			climbEnd = new GameObject().transform;
 
 			// playerStateManager = GetComponent <PlayerStateManager> ();
-			playerController = GetComponent<PlayerController>();
-			animHook = GetComponent <FreeClimbAnimationHook> ();
+		//	playerController = GetComponent<PlayerController>();
+		//	animHook = GetComponent <FreeClimbAnimationHook> ();
 			anim = GetComponent <Animator> ();
 			rb = GetComponent <Rigidbody> ();
 		}
@@ -161,7 +161,7 @@ namespace AH.Max.Gameplay
 				
 				if(!hasPlayedAnim)
 				{
-					animHook.HandleAnimation(h, v);
+				//	animHook.HandleAnimation(h, v);
 					hasPlayedAnim = true;
 				}
 				

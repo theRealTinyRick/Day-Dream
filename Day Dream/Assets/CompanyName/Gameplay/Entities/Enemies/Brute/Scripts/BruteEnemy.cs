@@ -8,7 +8,7 @@ using AH.Max.System;
 
 namespace AH.Max.Gameplay.AI.BruteEnemy
 {
-	public class BruteEnemy : AIEntity<BruteEnemy>, IEnemy, IDamagable
+	public class BruteEnemy : AIEntity<BruteEnemy>, IEnemy
 	{	
 		///<Summary>
 		///The actual target the entity should follow
