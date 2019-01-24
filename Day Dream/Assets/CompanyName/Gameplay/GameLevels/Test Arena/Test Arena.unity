@@ -7514,6 +7514,42 @@ Prefab:
       value: 
       objectReference: {fileID: 114783546469759672, guid: 6d6233b4d87bd37458f5be7f20b144a7,
         type: 2}
+    - target: {fileID: 4100272627735598, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.00000035858366
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100272627735598, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.00000047611894
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446229158337076, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.17082557
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446229158337076, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.000000044703487
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967717236333768, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.12067075
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446229158337076, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.0000002384186
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967717236333768, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.120912895
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967717236333768, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.6960142
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967717236333768, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.6974116
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
   m_IsPrefabAsset: 0
@@ -7927,6 +7963,32 @@ Mesh:
   m_MeshMetrics[0]: 1
   m_MeshMetrics[1]: 1
   m_MeshOptimized: 0
+--- !u!1 &1309915999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1594068295067430, guid: 6d6233b4d87bd37458f5be7f20b144a7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1024462080}
+--- !u!114 &1309916000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1309915999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9017deb81c4874346b222d4b7656f3a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 0}
+  spawnedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: SpawnedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  despawnedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: DespawnedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1343707609
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,16 +26,16 @@ public class InputDriver : Singleton_MonoBehavior<InputDriver>
 
     //rewired reciever
     private Player input;
-    public Player Input { get { return input; } }
-
-    private void Awake() 
+    public Player Input 
     {
-        Initialize();
-    }
-
-    private void Initialize()
-    {
-        input = ReInput.players.GetPlayer(0);
+        get
+        {
+            if(input == null)
+            {
+                input = ReInput.players.GetPlayer(0);
+            }
+            return input;
+        }
     }
 
 	private void Update () 
@@ -48,8 +48,8 @@ public class InputDriver : Singleton_MonoBehavior<InputDriver>
     private void PlayerInputListener() 
     {
         //receive locomotion input
-        float _locomotionX = input.GetAxis(InputDataBase.LeftStickHorizontal);
-        float _locomotionY = input.GetAxis(InputDataBase.LeftStickVertical);
+        float _locomotionX = Input.GetAxis(InputDataBase.LeftStickHorizontal);
+        float _locomotionY = Input.GetAxis(InputDataBase.LeftStickVertical);
 
         // if no input could not be found check for input from the keyboard
         if(_locomotionX == 0 && _locomotionY == 0)
@@ -62,8 +62,8 @@ public class InputDriver : Singleton_MonoBehavior<InputDriver>
         LocomotionDirection.x = _locomotionX;
         LocomotionDirection.z = _locomotionY;
 
-        float _rightInputDirectionX = input.GetAxis(InputDataBase.RightStickHorizontal);
-        float _rightInputDirectionY = input.GetAxis(InputDataBase.RightStickVertical);
+        float _rightInputDirectionX = Input.GetAxis(InputDataBase.RightStickHorizontal);
+        float _rightInputDirectionY = Input.GetAxis(InputDataBase.RightStickVertical);
 
         if(_rightInputDirectionX == 0 && _rightInputDirectionY == 0)
         {
@@ -75,7 +75,7 @@ public class InputDriver : Singleton_MonoBehavior<InputDriver>
         RightInputDirection.y = _rightInputDirectionY;
 
         //jump button from game pad then keyboard
-        if(input.GetButtonDown(InputDataBase.AButton) || UnityEngine.Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetButtonDown(InputDataBase.AButton) || UnityEngine.Input.GetKeyDown(KeyCode.Space))
         {
             if(jumpButtonEvent != null)
             {
@@ -83,7 +83,7 @@ public class InputDriver : Singleton_MonoBehavior<InputDriver>
             }
         }
 
-        if(input.GetButtonDown(InputDataBase.XButton) || UnityEngine.Input.GetMouseButtonDown(0))
+        if(Input.GetButtonDown(InputDataBase.XButton) || UnityEngine.Input.GetMouseButtonDown(0))
         {
             if(lightAttackButtonEvent != null)
             {
@@ -91,7 +91,7 @@ public class InputDriver : Singleton_MonoBehavior<InputDriver>
             }
         }
 
-        if(input.GetButtonDown(InputDataBase.BButton) || UnityEngine.Input.GetKeyDown(KeyCode.LeftShift))
+        if(Input.GetButtonDown(InputDataBase.BButton) || UnityEngine.Input.GetKeyDown(KeyCode.LeftShift))
         {
             if(evadeButtonEvent != null)
             {
@@ -105,7 +105,7 @@ public class InputDriver : Singleton_MonoBehavior<InputDriver>
     private void MenuInputListener()
     {
         // Back
-        if(input.GetButtonDown(InputDataBase.BButton) || UnityEngine.Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetButtonDown(InputDataBase.BButton) || UnityEngine.Input.GetKeyDown(KeyCode.Escape))
         {
             if(backButtonEvent != null)
             {
@@ -114,7 +114,7 @@ public class InputDriver : Singleton_MonoBehavior<InputDriver>
         }
 
         // Select
-        if(input.GetButtonDown(InputDataBase.AButton) || UnityEngine.Input.GetKeyDown(KeyCode.Return))
+        if(Input.GetButtonDown(InputDataBase.AButton) || UnityEngine.Input.GetKeyDown(KeyCode.Return))
         {
             if(selectButtonEvent != null)
             {
@@ -125,7 +125,7 @@ public class InputDriver : Singleton_MonoBehavior<InputDriver>
 
     private void AnyButtonPressed()
     {
-        if(input.GetAnyButtonDown() || UnityEngine.Input.anyKeyDown)
+        if(Input.GetAnyButtonDown() || UnityEngine.Input.anyKeyDown)
         {
             if(anyButtonWasPressedEvent != null)
             {
