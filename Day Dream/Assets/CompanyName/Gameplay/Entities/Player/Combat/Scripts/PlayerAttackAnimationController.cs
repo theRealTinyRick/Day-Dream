@@ -19,9 +19,13 @@ namespace AH.Max.Gameplay
 		[SerializeField]
 		private List <string> queue = new List<string>();
 
-        [TabGroup(Tabs.Properties)]
-        [SerializeField]
-        private int maxNumberOfClicks;
+        private int maxNumberOfClicks 
+        {
+            get 
+            {
+                return currentAnimSet.Length;
+            }
+        }
 		
 		[TabGroup(Tabs.Properties)]
 		[ShowInInspector]
@@ -40,6 +44,9 @@ namespace AH.Max.Gameplay
 
         [SerializeField]
         private string[] twinSwordAnimations;
+
+        [SerializeField]
+        private string[] heavySwordAnimations;
 
         private string[] currentAnimSet;
 
@@ -96,9 +103,18 @@ namespace AH.Max.Gameplay
             }
         }
 
-		// this method simply determines if the player is still clicking. 
-		// if the player keeps clicking then stops then the attacks should stop as well. 
-		private void AttackTimer()
+        [Button]
+        public void UseHeavySword()
+        {
+            if (!IsAttacking)
+            {
+                currentAnimSet = heavySwordAnimations;
+            }
+        }
+
+        // this method simply determines if the player is still clicking. 
+        // if the player keeps clicking then stops then the attacks should stop as well. 
+        private void AttackTimer()
 		{
 			if(queue.Count > 0)
 			{
@@ -195,7 +211,7 @@ namespace AH.Max.Gameplay
 
 		public bool CurrentlyInAttackState()
 		{
-			foreach(var _swordAnimation in swordAnimations)
+			foreach(var _swordAnimation in currentAnimSet)
 			{
 				foreach(var thing in animator.GetCurrentAnimatorClipInfo(0))
 				{

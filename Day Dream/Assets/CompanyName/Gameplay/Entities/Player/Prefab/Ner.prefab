@@ -1330,7 +1330,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1629621372993000}
-  m_LocalRotation: {x: 0.072816335, y: 0.70264935, z: -0.07267038, w: 0.7040602}
+  m_LocalRotation: {x: 0.07281634, y: 0.70264935, z: -0.07267037, w: 0.7040602}
   m_LocalPosition: {x: -0.00000035858366, y: 0, z: 0.00000047611894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1579,8 +1579,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1190766840344596}
-  m_LocalRotation: {x: 0.084764704, y: -0.000000029802322, z: -0.0000000037252903,
-    w: 0.996401}
+  m_LocalRotation: {x: 0.08476471, y: 0.00000005960465, z: -0.0000000037252907, w: 0.996401}
   m_LocalPosition: {x: -0.00000081087154, y: 2.5733333, z: -4.0000005}
   m_LocalScale: {x: 1.333333, y: 1.3333336, z: 1.3333333}
   m_Children: []
@@ -2080,7 +2079,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1329133580362586}
-  m_LocalRotation: {x: 0.047193293, y: 0.70482546, z: -0.047098823, w: 0.7062404}
+  m_LocalRotation: {x: 0.047193117, y: 0.7048255, z: -0.047098998, w: 0.70624036}
   m_LocalPosition: {x: -0.0000003581054, y: 0, z: 0.00000023770076}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2286,7 +2285,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1799780207485104}
-  m_LocalRotation: {x: 0.05999742, y: 0.703855, z: -0.059877902, w: 0.7052682}
+  m_LocalRotation: {x: 0.05999741, y: 0.70385504, z: -0.0598779, w: 0.70526814}
   m_LocalPosition: {x: -0.0000003581054, y: 0, z: 0.00000023770076}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2825,7 +2824,7 @@ MonoBehaviour:
     m_InputAxisValue: 0
     m_InvertInput: 0
     m_MinValue: 0
-    m_MaxValue: 1
+    m_MaxValue: 0
     m_Wrap: 0
     m_Recentering:
       m_enabled: 0
@@ -2998,9 +2997,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a22a59d9569fc4490499e1a4ce0dcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testLockOn: 0
   isEvading: 0
   availableStates: 0000000002000000
+  evadeStartedEvents:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114488635941522016}
+        m_MethodName: StopAttacking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: EvadeStartedEvents, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  evadeStoppedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: EvadeStoppedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114420656924525502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3124,7 +3143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   queue: []
-  maxNumberOfClicks: 6
   timeToClick: 1
   swordAnimations:
   - SS_Swing1
@@ -3140,6 +3158,11 @@ MonoBehaviour:
   - TS_Swing4
   - TS_Swing5
   - TS_Swing6
+  heavySwordAnimations:
+  - HS_Swing1
+  - HS_Swing2
+  - HS_Swing3
+  - HS_Swing4
   swingBooleans:
   - Swing1
   - Swing2
@@ -3624,19 +3647,19 @@ MonoBehaviour:
   normalStateData:
     positionOffset: {x: 0, y: -0.34, z: 0}
     lookAtOffset: {x: 0, y: 1.5, z: 0}
-    positionDamping: 0.5
+    positionDamping: 1
     recenterDelay: 3
     recenterTime: 2
   lockedOnStateData:
     positionOffset: {x: 0, y: 0.5, z: 0}
     lookAtOffset: {x: 0, y: 1.5, z: 0}
-    positionDamping: 0.5
+    positionDamping: 1
     recenterDelay: 0
     recenterTime: 0.2
   climbingStateData:
     positionOffset: {x: 0, y: -0.5, z: 0}
-    lookAtOffset: {x: 0, y: 0.5, z: 0}
-    positionDamping: 0.5
+    lookAtOffset: {x: 0, y: 1.5, z: 0}
+    positionDamping: 1
     recenterDelay: 0.25
     recenterTime: 1
 --- !u!135 &135572682186139314

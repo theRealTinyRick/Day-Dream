@@ -90,9 +90,17 @@ namespace AH.Max.Gameplay
 		{
 			Vector3 _direction = GetOrientationDirection();
 
-            if (isPreparing || playerAttackAnimationController.IsAttacking)
+            if (isPreparing)
             {
                 if(!playerEvade.isEvading)
+                {
+                    FaceTarget();
+                }
+            }
+            
+            if(targetingManager.LockedOn && playerAttackAnimationController.IsAttacking)
+            {
+                if (!playerEvade.isEvading)
                 {
                     FaceTarget();
                 }
