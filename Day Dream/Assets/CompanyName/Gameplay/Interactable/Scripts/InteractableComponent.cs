@@ -37,7 +37,6 @@ public class InteractableComponent : SerializedMonoBehaviour
 
     public void Start()
     {
-        Debug.Log("hey");
         Initialize();
     }
 
