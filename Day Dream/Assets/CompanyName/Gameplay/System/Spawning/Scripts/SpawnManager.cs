@@ -24,7 +24,7 @@ namespace AH.Max.System
 		///<Summary>
 		/// Call this method to spawn an identityType
 		///</Summary>
-		public void Spawn(IdentityType identityType)
+		public GameObject Spawn(IdentityType identityType)
 		{
 			SpawnPool _spawnPool = FindSpawnPool(identityType);
 
@@ -34,25 +34,57 @@ namespace AH.Max.System
 				{
 					if(_spawnPool.pool[0] != null)
 					{
-						Spawn(_spawnPool);
-						return;
+                        return Spawn(_spawnPool);
 					}
 				}
 			}
 
-			Spawn(identityType.prefab);
+			return Spawn(identityType.prefab);
 		}
 
-		///<Summary>
-		/// This method is used to spawn prefab from an identity type.
-		///</Summary>
-		private void Spawn(GameObject prefab)
+        ///<Summary>
+        /// Call this method to spawn an identityType
+        ///</Summary>
+        public GameObject Spawn(IdentityType identityType, Transform parent)
+        {
+            SpawnPool _spawnPool = FindSpawnPool(identityType);
+
+            if (_spawnPool != null)
+            {
+                if (_spawnPool.pool.Count > 0)
+                {
+                    if (_spawnPool.pool[0] != null)
+                    {
+                        GameObject _result = Spawn(_spawnPool);
+
+                        _result.transform.SetParent(parent);
+                        _result.transform.localPosition = Vector3.zero;
+                        _result.transform.localRotation = Quaternion.identity;
+
+                        return _result;
+                    }
+                }
+            }
+
+            GameObject _instantiatedResult = Spawn(identityType.prefab);
+
+            _instantiatedResult.transform.SetParent(parent);
+            _instantiatedResult.transform.localPosition = Vector3.zero;
+            _instantiatedResult.transform.localRotation = Quaternion.identity;
+
+            return _instantiatedResult;
+        }
+
+        ///<Summary>
+        /// This method is used to spawn prefab from an identity type.
+        ///</Summary>
+        private GameObject Spawn(GameObject prefab)
 		{
 			// check for spawnable component
 			if(prefab == null)
 			{
 				Debug.LogError("The entity passed into the spawn method is null. You should check on that Boss.");
-				return;
+				return null;
 			}
 
 			GameObject _entity = Instantiate(prefab, Vector3.zero, Quaternion.identity);
@@ -62,17 +94,19 @@ namespace AH.Max.System
 			{
 				_spawnableComponent.Spawned();
 			}
+
+            return _entity;
 		}
 
 		///<Summary>
 		/// This will spawn a spawnable from a spawn pool
 		///</Summary>
-		private void Spawn(SpawnPool spawnPool)
+		private GameObject Spawn(SpawnPool spawnPool)
 		{
 			if(spawnPool == null)
 			{
 				Debug.LogError("The spawnPool passed into the spawn method is null. You should check on that Boss.");
-				return;
+				return null;
 			}
 
 			GameObject _entity = spawnPool.pool[0];
@@ -89,8 +123,12 @@ namespace AH.Max.System
 					spawnPool.Remove(_entity);
 					
 					_spawnableComponent.Spawned();
+
+                    return _entity;
 				}
 			}
+
+            return null;
 		}
 
 		///<Summary>

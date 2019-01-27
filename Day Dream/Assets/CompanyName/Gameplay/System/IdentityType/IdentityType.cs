@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Sirenix.OdinInspector;
+﻿using UnityEngine;
 
 namespace AH.Max.System
 {
@@ -16,11 +13,21 @@ namespace AH.Max.System
 		///<Summary>
 		///The type of entity it is
 		///</Summary>
-		public IdentityTypes type;
+		public UsageType type;
+
+        /// <summary>
+        /// the handedness of the possible tool
+        /// </summary>
+        public Handedness handedness;
 
 		///<Summary>
 		///The prefab associated with the Identity
 		///</Summary>
 		public GameObject prefab;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IdentityType parent;
 	}
 }

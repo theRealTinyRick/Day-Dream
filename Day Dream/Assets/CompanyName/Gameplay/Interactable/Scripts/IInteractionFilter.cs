@@ -7,5 +7,11 @@ using Sirenix.OdinInspector;
 
 public interface IInteractionFilter
 {
+    InteractableComponent interactable 
+    {
+        get;
+        set;
+    }
+
     bool Filter();
 }

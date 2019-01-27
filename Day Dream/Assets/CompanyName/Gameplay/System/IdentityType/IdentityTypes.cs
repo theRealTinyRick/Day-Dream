@@ -1,7 +1,7 @@
 ﻿using System;
 
 [System.Serializable]
-public enum IdentityTypes : int
+public enum UsageType : int
 {
 	None,
 	Player, 

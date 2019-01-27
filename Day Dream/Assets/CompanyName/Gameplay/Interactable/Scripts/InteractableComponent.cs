@@ -35,6 +35,22 @@ public class InteractableComponent : SerializedMonoBehaviour
         }
     }
 
+    public void Start()
+    {
+        Debug.Log("hey");
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        foreach(Interaction _interaction in interactions)
+        {
+            foreach(IInteractionFilter _filter in _interaction.filters)
+            {
+                _filter.interactable = this;
+            }
+        }
+    }
 
     public void OnTriggerStay(Collider other)
     {
