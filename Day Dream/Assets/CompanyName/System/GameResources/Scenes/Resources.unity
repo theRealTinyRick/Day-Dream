@@ -329,6 +329,65 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6ac800f9dfef1a489bfbd8bcd3c6d86, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1001 &1761049887
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 114852453334652668, guid: 6526c8dbb20f0d446889621bfc4b3ee6,
+        type: 2}
+      propertyPath: database.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153318483489632, guid: 6526c8dbb20f0d446889621bfc4b3ee6, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153318483489632, guid: 6526c8dbb20f0d446889621bfc4b3ee6, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153318483489632, guid: 6526c8dbb20f0d446889621bfc4b3ee6, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153318483489632, guid: 6526c8dbb20f0d446889621bfc4b3ee6, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153318483489632, guid: 6526c8dbb20f0d446889621bfc4b3ee6, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153318483489632, guid: 6526c8dbb20f0d446889621bfc4b3ee6, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153318483489632, guid: 6526c8dbb20f0d446889621bfc4b3ee6, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153318483489632, guid: 6526c8dbb20f0d446889621bfc4b3ee6, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114852453334652668, guid: 6526c8dbb20f0d446889621bfc4b3ee6,
+        type: 2}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 114852453334652668, guid: 6526c8dbb20f0d446889621bfc4b3ee6,
+        type: 2}
+    - target: {fileID: 114852453334652668, guid: 6526c8dbb20f0d446889621bfc4b3ee6,
+        type: 2}
+      propertyPath: database.Array.data[0].tool
+      value: 
+      objectReference: {fileID: 11400000, guid: 9673ad07682967240ae57bf36b83495b,
+        type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6526c8dbb20f0d446889621bfc4b3ee6, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &1969761959
 Prefab:
   m_ObjectHideFlags: 0
