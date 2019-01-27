@@ -1,14 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AH.Max.System;
+using Sirenix.OdinInspector;
 
 public class test : MonoBehaviour
 {
-    public Transform thisThing;
-    public Transform target;
+    public IdentityType decendant;
+    public IdentityType ancestor;
 
-	void Update ()
+    [Button]
+	public void Check ()
     {
-        thisThing.LookAt(target.position);
+        if (decendant.IsDesendantOf(decendant, ancestor))
+        {
+            Debug.Log("it is in fact a decendant");
+        }
+        else
+        {
+            Debug.Log("that aint my kin");
+        }
 	}
 }

@@ -15,4 +15,4 @@ MonoBehaviour:
   type: 3
   handedness: 0
   prefab: {fileID: 1827103835812230, guid: 2293d28524d67b5478ff456b16512e44, type: 2}
-  parent: {fileID: 0}
+  parent: {fileID: 11400000, guid: b14944b654d55d14a9de864bb57ed684, type: 2}
