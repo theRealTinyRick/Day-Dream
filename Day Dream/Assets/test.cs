@@ -12,13 +12,6 @@ public class test : MonoBehaviour
     [Button]
 	public void Check ()
     {
-        if (decendant.IsDesendantOf(decendant, ancestor))
-        {
-            Debug.Log("it is in fact a decendant");
-        }
-        else
-        {
-            Debug.Log("that aint my kin");
-        }
+       
 	}
 }
