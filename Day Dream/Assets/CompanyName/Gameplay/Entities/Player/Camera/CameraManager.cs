@@ -20,6 +20,7 @@ namespace AH.Max.Gameplay.Camera
 
     public class CameraManager : MonoBehaviour
     {
+        
         [TabGroup(Tabs.Properties)]
         [SerializeField]
         private CinemachineFreeLook cm_cameraController;
@@ -38,7 +39,7 @@ namespace AH.Max.Gameplay.Camera
 
         [TabGroup(Tabs.Properties)]
         [SerializeField]
-        private PlayerLedgeFinder playerLedgeFinder;
+        private PlayerClimbComponent playerLedgeFinder;
 
         [TabGroup(Tabs.Properties)]
         [SerializeField]
@@ -73,7 +74,7 @@ namespace AH.Max.Gameplay.Camera
 
             if(playerLedgeFinder == null)
             {
-                playerLedgeFinder = transform.root.GetComponentInChildren<PlayerLedgeFinder>();
+                playerLedgeFinder = transform.root.GetComponentInChildren<PlayerClimbComponent>();
             }
         }
 

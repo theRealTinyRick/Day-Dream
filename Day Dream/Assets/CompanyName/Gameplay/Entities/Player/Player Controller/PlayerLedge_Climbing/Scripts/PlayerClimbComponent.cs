@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -7,7 +8,7 @@ using Sirenix.OdinInspector;
 
 namespace AH.Max.Gameplay
 {
-    public class PlayerLedgeFinder : MonoBehaviour
+    public class PlayerClimbComponent : MonoBehaviour
     {
         [TabGroup(Tabs.Properties)]
         [SerializeField]
@@ -24,7 +25,6 @@ namespace AH.Max.Gameplay
         [TabGroup(Tabs.Properties)]
         private Vector3 ledge = new Vector3();
         public Vector3 Ledge { get { return ledge; } }
-
         private Quaternion ledgeRotation;
 
         /// <summary>
@@ -89,9 +89,9 @@ namespace AH.Max.Gameplay
         [TabGroup(Tabs.Properties)]
         [ShowInInspector]
         private bool isClimbing = false;
-        public bool IsClimbing 
+        public bool IsClimbing
         {
-            get 
+            get
             {
                 return isClimbing;
             }
@@ -103,15 +103,15 @@ namespace AH.Max.Gameplay
 
         [TabGroup(Tabs.Properties)]
         [SerializeField]
-        private bool canClimbUp 
+        private bool canClimbUp
         {
-            get 
+            get
             {
                 return IsAtNextClimbPoint();
             }
         }
 
-        private bool isClimbingUp = false;  
+        private bool isClimbingUp = false;
 
         [TabGroup(Tabs.Properties)]
         [SerializeField]
@@ -125,8 +125,18 @@ namespace AH.Max.Gameplay
         [SerializeField]
         LedgeClimbStoppedEvent ledgeClimbStopped = new LedgeClimbStoppedEvent();
 
-        private LayerMask layerMask = 1 << 8;
+        private LayerMask layerMask = 1 << 15;
         Vector3 floorPoint = new Vector3();
+
+        public LayerMask wallLayerMask;
+
+        public List<WallPoint> wallPoints = new List<WallPoint>();
+
+        public List<WallPoint> _wallPointsCloseEnough = new List<WallPoint>();
+
+        public float maxClimbDistance;
+        public float maxAngel;
+        public WallPoint current;
 
         private Rigidbody _rigidbody;
         private PlayerElevationDetection playerElevationDetection;
@@ -151,16 +161,14 @@ namespace AH.Max.Gameplay
 
         private void OnDisable()
         {
-            InputDriver.jumpButtonEvent.RemoveListener(InputResponse);
-        }
 
-        private void Update()
-        {
+            InputDriver.jumpButtonEvent.RemoveListener(InputResponse);
         }
 
         private void FixedUpdate()
         {
-            DetectLedgePoint();
+            //FindLedge();
+            Tick();
 
             if (!isClimbingUp)
             {
@@ -177,7 +185,7 @@ namespace AH.Max.Gameplay
         {
             if(isInPosition && isClimbing)
             {
-                if(InputDriver.LocomotionDirection.normalized.z > 0)
+                if(InputDriver.LocomotionDirection.normalized.z > 0 && currentClimbType == ClimbType.Ledge)
                 {
                     StartCoroutine(ClimbupLedge());
                 }
@@ -222,7 +230,7 @@ namespace AH.Max.Gameplay
 
         private void Dismount()
         {
-            isClimbingUp = false;
+            /*isClimbingUp = false;
             isClimbing = false;
             isInPosition = false;
             _rigidbody.isKinematic = false;
@@ -230,7 +238,7 @@ namespace AH.Max.Gameplay
             playerLedgeAnimHook.Dismount();
 
             ResetRotation();
-            
+
             if (playerStateComponent.CurrentState == PlayerState.Traversing)
             {
                 playerStateComponent.SetStateHard(PlayerState.Normal);
@@ -239,7 +247,7 @@ namespace AH.Max.Gameplay
             if(ledgeClimbStopped != null)
             {
                 ledgeClimbStopped.Invoke();
-            }
+            } */
         }
 
         private void ResetRotation()
@@ -343,84 +351,206 @@ namespace AH.Max.Gameplay
             return GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("LedgeIdle");
         }
 
-        private void DetectLedgePoint()
+        private void OnTriggerStay(Collider other)
         {
-            if(isInPosition && isClimbing && InputDriver.LocomotionDirection.x != 0 && IsAtNextClimbPoint() && !isClimbingUp && IsPlayerInTheIdleState())
+            if(LayerMaskUtility.Contains(wallLayerMask, other.gameObject.layer))
             {
-                Vector3 _origin = transform.position;
-                _origin.y += 0.3f;
+                WallPoint _wallPoint = other.GetComponentInChildren<WallPoint>();
 
-                RaycastHit _hit;
-
-                //Debug.DrawRay(_origin, transform.forward * distanceToCheck, Color.red, 5);
-                if (Physics.Raycast(_origin, transform.forward, out _hit, distanceToCheck, layerMask))
+                if(_wallPoint != null)
                 {
-                    //get the reverse of the angle we shot the ray from to get an accurate angle calculation
-                    Vector3 _hitAngle = -transform.forward;
-
-                    //we store this distance so we can offset our downward ray cast and not over shoot it
-                    float _distanceToCheckDown = Vector3.Distance(_origin, _hit.point) + 0.1f;
-
-                    if (CheckWallSlope(_hit))
+                    if(!wallPoints.Contains(_wallPoint))
                     {
-                        ///TODO: add a check on if we find a spot to climb to - MAYBE ADD 90 DEGREE TURNS IN TOWARDS THE WALL
+                        wallPoints.Add(_wallPoint);
+                    }
+                }
+            }
+        }
 
-                        float horizontalInput = InputDriver.LocomotionDirection.normalized.x < 0 ? -1 : 1;
+        private void OnTriggerExit(Collider other)
+        {
+            if (LayerMaskUtility.Contains(wallLayerMask, other.gameObject.layer))
+            {
+                WallPoint _wallPoint = other.GetComponentInChildren<WallPoint>();
 
-                        Vector3 _obsticalDirection = transform.right * horizontalInput;
-                        Vector3 _targetOrigin = transform.position;
+                if (_wallPoint != null)
+                {
+                    if (wallPoints.Contains(_wallPoint))
+                    {
+                        wallPoints.Remove(_wallPoint);
+                    }
+                }
+            }
+        }
 
-                        bool _useObstical = false;
+        private Vector3 wallPointReference = new Vector3();
 
-                        if (Physics.Raycast(_origin, _obsticalDirection, out _hit, ledgeClimbDistance + 0.5f, layerMask))
+        private bool CloseEnough(WallPoint point)
+        {
+            float _distance = Vector3.Distance(transform.position, point.transform.position);
+            if(_distance < maxClimbDistance)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool WithInReasonableInputDirection(Vector3 inputDirection, WallPoint point)
+        {
+            float _angle = Vector3.Angle(inputDirection, point.transform.position - transform.position);
+
+            return _angle < maxAngel;
+        }
+
+        private void Tick()
+        {
+            Vector3 _inputDirection = InputDriver.LocomotionDirection.normalized;
+            Vector3 _checkDirection = ((transform.right * _inputDirection.x) + (transform.up * _inputDirection.z)).normalized;
+
+            Debug.DrawRay(transform.position, _checkDirection, Color.green, 1);
+
+            if (isInPosition && isClimbing && InputDriver.LocomotionDirection != Vector3.zero && IsAtNextClimbPoint() && !isClimbingUp && IsPlayerInTheIdleState())
+            {
+                FindClimbPoint(_checkDirection);
+            }
+        }
+
+        private enum ClimbType
+        {
+            Ledge,
+            WallPoint
+        }
+
+        private ClimbType currentClimbType;
+
+        private void FindClimbPoint(Vector3 inputDirection)
+        {
+            if(inputDirection == Vector3.zero)
+            {
+                return;
+            }
+
+            Vector3 _origin = Vector3.zero;
+
+            if(ledge != Vector3.zero)
+            {
+                _origin = ledge;
+            }
+
+            // find the closest points and the ones most similar to inpoujt direciton
+            List<WallPoint> _elegibleWallPoints = wallPoints.FindAll(_point => CloseEnough(_point) && WithInReasonableInputDirection(inputDirection, _point));
+            if(current != null)
+            {
+                // get rid of the current wall point because it will always be the most appropiate to climb to
+                _elegibleWallPoints.Remove(current);
+            }
+
+            if(_elegibleWallPoints.Count > 0)
+            {
+                // get the closest one
+                WallPoint _newWallPoint = _elegibleWallPoints[0];
+                float _newDistance = Vector3.Distance(ledge, _elegibleWallPoints[0].transform.position);
+
+                foreach(WallPoint _point in _elegibleWallPoints)
+                {
+                    if(_point != _newWallPoint)
+                    {
+                        float _distance = Vector3.Distance(ledge, _point.transform.position);
+                        if (_distance < _newDistance)
                         {
-                            if(CheckWallSlope(_hit))
+                            _newWallPoint = _point;
+                            _newDistance = _distance;
+                        }
+                    }
+                }
+
+                current = _newWallPoint;
+                SetLedge(current.transform.position, wallNormal);
+                currentClimbType = ClimbType.WallPoint;
+                return;
+            }
+
+            FindLedge(inputDirection);
+            currentClimbType = ClimbType.Ledge;
+        }
+
+        private void FindLedge(Vector3 inputDirection)
+        {
+            Vector3 _origin = transform.position;
+            _origin.y += 0.3f;
+
+            RaycastHit _hit;
+
+            //Debug.DrawRay(_origin, transform.forward * distanceToCheck, Color.red, 5);
+            if (Physics.Raycast(_origin, transform.forward, out _hit, distanceToCheck, layerMask))
+            {
+                //get the reverse of the angle we shot the ray from to get an accurate angle calculation
+                Vector3 _hitAngle = -transform.forward;
+
+                //we store this distance so we can offset our downward ray cast and not over shoot it
+                float _distanceToCheckDown = Vector3.Distance(_origin, _hit.point) + 0.1f;
+
+                if (CheckWallSlope(_hit))
+                {
+                    ///TODO: add a check on if we find a spot to climb to - MAYBE ADD 90 DEGREE TURNS IN TOWARDS THE WALL
+
+                    float horizontalInput = InputDriver.LocomotionDirection.normalized.x < 0 ? -1 : 1;
+
+                    Vector3 _obsticalDirection = inputDirection;
+                        //transform.right * horizontalInput;
+                    Vector3 _targetOrigin = transform.position;
+
+                    bool _useObstical = false;
+
+                    if (Physics.Raycast(_origin, _obsticalDirection, out _hit, ledgeClimbDistance + 0.5f, layerMask))
+                    {
+                        if(CheckWallSlope(_hit))
+                        {
+                            _useObstical = true;
+                        }
+                    }
+
+                    if(_useObstical)
+                    {
+                        _targetOrigin = _hit.point + _hit.normal;
+                        _obsticalDirection = -_hit.normal;
+                        //   Debug.DrawRay(_origin, _obsticalDirection * ledgeClimbDistance, Color.green, 3);
+                    }
+                    else
+                    {
+                        _targetOrigin += transform.right * (horizontalInput * ledgeClimbDistance);
+                        _obsticalDirection = transform.forward;
+                    }
+
+                    //_targetOrigin += _hit.normal * 0.3f;
+
+                    _origin = _targetOrigin;
+                    WallCheckPoint = _targetOrigin;
+
+                //     Debug.DrawRay(_origin, _obsticalDirection * (distanceToCheck + 1), Color.red, 5);
+                    if (Physics.Raycast(_origin, _obsticalDirection, out _hit, distanceToCheck + 1, layerMask))
+                    {
+                        Vector3 _ledge = _hit.point;
+                        Vector3 _normal = _hit.normal;
+
+                        _origin = _hit.point;
+                        _origin.y += ledgeClimbDistance;
+                        _origin += -_normal * _distanceToCheckDown;
+
+                        //   Debug.DrawRay(_origin, Vector3.down * maxLedgeShimyHeight, Color.red, 5);
+
+                        if (Physics.Raycast(_origin, Vector3.down, out _hit, ledgeClimbDistance, layerMask))
+                        {
+                            _ledge.y = _hit.point.y;
+
+                            if (CheckFloorSlope(_hit))
                             {
-                                _useObstical = true;
-                            }
-                        }
+                                SetLedge(_ledge, _normal);
 
-                        if(_useObstical)
-                        {
-                            _targetOrigin = _hit.point + _hit.normal;
-                            _obsticalDirection = -_hit.normal;
-                         //   Debug.DrawRay(_origin, _obsticalDirection * ledgeClimbDistance, Color.green, 3);
-                        }
-                        else
-                        {
-                            _targetOrigin += transform.right * (horizontalInput * ledgeClimbDistance);
-                            _obsticalDirection = transform.forward;
-                        }
+                                playerLedgeAnimHook.PlayClimbAnimation(LedgeWithPlayerOffset(ledge), horizontalInput);
 
-                        //_targetOrigin += _hit.normal * 0.3f;
-
-                        _origin = _targetOrigin;
-                        WallCheckPoint = _targetOrigin;
-
-                   //     Debug.DrawRay(_origin, _obsticalDirection * (distanceToCheck + 1), Color.red, 5);
-                        if (Physics.Raycast(_origin, _obsticalDirection, out _hit, distanceToCheck + 1, layerMask))
-                        {
-                            Vector3 _ledge = _hit.point;
-                            Vector3 _normal = _hit.normal;
-
-                            _origin = _hit.point;
-                            _origin.y += maxLedgeShimyHeight;
-                            _origin += -_normal * _distanceToCheckDown;
-
-                         //   Debug.DrawRay(_origin, Vector3.down * maxLedgeShimyHeight, Color.red, 5);
-
-                            if (Physics.Raycast(_origin, Vector3.down, out _hit, maxLedgeShimyHeight, layerMask))
-                            {
-                               _ledge.y = _hit.point.y;
-
-                               if (CheckFloorSlope(_hit))
-                               {
-                                    SetLedge(_ledge, _normal);
-
-                                    playerLedgeAnimHook.PlayClimbAnimation(LedgeWithPlayerOffset(ledge), horizontalInput);
-
-                                    return;
-                               }
+                                return;
                             }
                         }
                     }
@@ -487,7 +617,7 @@ namespace AH.Max.Gameplay
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="ledge"></param>
         /// <returns></returns>
@@ -524,6 +654,8 @@ namespace AH.Max.Gameplay
 
             Gizmos.color = Color.green;
             Gizmos.DrawSphere(climbUpPosition, 0.1f);
+
+            Gizmos.DrawSphere(wallPointReference, 0.1f);
         }
     }
 }

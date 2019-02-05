@@ -14,7 +14,7 @@ namespace AH.Max.System.Inventory
                 if(amount > 0)
                 {
                     InventoryManager.Instance.Remove(item, amount);
-                } 
+                }
                 else
                 {
                     InventoryManager.Instance.Remove(item);

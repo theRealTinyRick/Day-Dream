@@ -1371,15 +1371,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1594068295067430}
-  m_LocalRotation: {x: -0, y: 0.70639724, z: -0, w: 0.7078156}
-  m_LocalPosition: {x: 3.46, y: 0.1, z: 1.32}
+  m_LocalRotation: {x: -0, y: 0.9916017, z: -0, w: 0.12932938}
+  m_LocalPosition: {x: -0.69, y: 0.1, z: -16.15}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 4734923523932648}
   - {fileID: 4711854105892060}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 89.885, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 165.138, z: 0}
 --- !u!4 &4164867696960182
 Transform:
   m_ObjectHideFlags: 1
@@ -1521,7 +1521,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1262071686666756}
   m_LocalRotation: {x: -0, y: -0.70639724, z: -0, w: 0.7078156}
-  m_LocalPosition: {x: -0.0000008121133, y: 3.3333335, z: -4.3333335}
+  m_LocalPosition: {x: -0.00000023841858, y: 3.3333335, z: -4.333333}
   m_LocalScale: {x: 1.3333333, y: 1.3333334, z: 1.3333333}
   m_Children:
   - {fileID: 4562329656559158}
@@ -1564,8 +1564,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1840773477816844}
-  m_LocalRotation: {x: 0.1115712, y: 0.6975664, z: -0.11134902, w: 0.6989667}
-  m_LocalPosition: {x: 0.0000007147761, y: 0, z: 0.00000023985282}
+  m_LocalRotation: {x: 0.11157106, y: 0.69756633, z: -0.111349195, w: 0.69896674}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4843112732758548}
@@ -1663,8 +1663,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1190766840344596}
-  m_LocalRotation: {x: 0.15762849, y: 0.00000017881396, z: -0.000000014901163, w: 0.9874985}
-  m_LocalPosition: {x: -0.0000008121133, y: 3.3333335, z: -4.3333335}
+  m_LocalRotation: {x: 0.15762852, y: -0, z: 0.0000000018626451, w: 0.9874985}
+  m_LocalPosition: {x: -0.00000023841858, y: 3.3333335, z: -4.333333}
   m_LocalScale: {x: 1.333333, y: 1.3333336, z: 1.3333333}
   m_Children: []
   m_Father: {fileID: 4238534791626756}
@@ -1870,8 +1870,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1356110961047170}
-  m_LocalRotation: {x: 0.12426713, y: 0.6954255, z: -0.12401842, w: 0.69682175}
-  m_LocalPosition: {x: 0.000001071925, y: 0, z: 0.00000047898834}
+  m_LocalRotation: {x: 0.12426703, y: 0.6954255, z: -0.12401855, w: 0.69682175}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4030947969253156}
@@ -1967,8 +1967,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1019467382752108}
-  m_LocalRotation: {x: 0.0988732, y: 0.6994716, z: -0.098675266, w: 0.7008757}
-  m_LocalPosition: {x: 0.0000007147761, y: 0, z: 0.00000023985282}
+  m_LocalRotation: {x: 0.09887263, y: 0.6994716, z: -0.09867576, w: 0.70087576}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4097259725496750}
@@ -2557,12 +2557,12 @@ MonoBehaviour:
     m_Bias: 0
   m_RecenterToTargetHeading:
     m_enabled: 1
-    m_WaitTime: 3
-    m_RecenteringTime: 2
+    m_WaitTime: 0.25
+    m_RecenteringTime: 1
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 89.88507
+    Value: 165.13832
     m_MaxSpeed: 300
     m_AccelTime: 0.1
     m_DecelTime: 0.1
@@ -2768,12 +2768,12 @@ MonoBehaviour:
     m_Bias: 0
   m_RecenterToTargetHeading:
     m_enabled: 0
-    m_WaitTime: 3
-    m_RecenteringTime: 2
+    m_WaitTime: 0.25
+    m_RecenteringTime: 1
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 89.88507
+    Value: 165.13832
     m_MaxSpeed: 300
     m_AccelTime: 0.1
     m_DecelTime: 0.1
@@ -2924,7 +2924,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1422276161374932}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d26c326f53486742b2f93b19178d296, type: 3}
   m_Name: 
@@ -3097,6 +3097,14 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: AH.Max.Gameplay.LedgeClimbStoppedEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  wallLayerMask:
+    serializedVersion: 2
+    m_Bits: 65536
+  wallPoints: []
+  _wallPointsCloseEnough: []
+  _maxClimbDistance: 1
+  maxAngel: 20
+  current: {fileID: 0}
 --- !u!114 &114474534521675928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3451,12 +3459,12 @@ MonoBehaviour:
     m_Bias: 0
   m_RecenterToTargetHeading:
     m_enabled: 0
-    m_WaitTime: 3
-    m_RecenteringTime: 2
+    m_WaitTime: 0.25
+    m_RecenteringTime: 1
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 89.88507
+    Value: 165.13832
     m_MaxSpeed: 300
     m_AccelTime: 0.1
     m_DecelTime: 0.1
@@ -3644,12 +3652,12 @@ MonoBehaviour:
       m_LegacyVelocityFilterStrength: -1
   m_YAxisRecentering:
     m_enabled: 1
-    m_WaitTime: 3
-    m_RecenteringTime: 2
+    m_WaitTime: 0.25
+    m_RecenteringTime: 1
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 89.88507
+    Value: 165.13832
     m_MaxSpeed: 300
     m_AccelTime: 0.1
     m_DecelTime: 0.1
@@ -3671,8 +3679,8 @@ MonoBehaviour:
     m_Bias: 0
   m_RecenterToTargetHeading:
     m_enabled: 1
-    m_WaitTime: 3
-    m_RecenteringTime: 2
+    m_WaitTime: 0.25
+    m_RecenteringTime: 1
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_BindingMode: 4
