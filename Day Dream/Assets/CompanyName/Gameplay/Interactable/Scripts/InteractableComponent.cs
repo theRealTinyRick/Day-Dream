@@ -103,7 +103,7 @@ public class InteractableComponent : SerializedMonoBehaviour
                 {
                     _interaction.ExecuteInteraction();
                     hasBeenInteractedWith = true;
-
+                    Debug.Log("Interact");
                     return;
                 }
             }
@@ -120,7 +120,7 @@ public class InteractableComponent : SerializedMonoBehaviour
 
     private bool ValidateCollider(Collider other)
     {
-        if (LayerMaskUtility.Contains(layers, other.gameObject.layer))
+        if (LayerMaskUtility.IsWithinLayerMask(layers, other.gameObject.layer))
         {
             Entity _entity = other.transform.root.GetComponentInChildren<Entity>();
             if (_entity != null)

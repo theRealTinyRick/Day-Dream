@@ -62,6 +62,7 @@ public class PlayerToolComponent : SerializedMonoBehaviour
         }
 
         currentTool = tool;
+
         currentToolObject = SpawnManager.Instance.Spawn(currentTool, GetIKPoint(currentTool.handedness));
 
         if(previousToolObject != null)

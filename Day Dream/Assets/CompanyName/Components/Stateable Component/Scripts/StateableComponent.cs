@@ -22,7 +22,7 @@ public class StateableComponent : MonoBehaviour
 
     [TabGroup(Tabs.Properties)]
     [SerializeField]
-    private float currentValue;
+    private bool evaluateOnEnable;
 
     [TabGroup(Tabs.Properties)]
     [SerializeField]
@@ -32,13 +32,20 @@ public class StateableComponent : MonoBehaviour
     [SerializeField]
     private float maximumValue;
 
+    [TabGroup(Tabs.Properties)]
+    [SerializeField]
+    private float currentValue;
+
     [TabGroup(Tabs.Events)]
     [SerializeField]
     StateChangedEvent stateChangedEvent = new StateChangedEvent();
 
-    private void Start ()
+    private void OnEnable ()
     {
-        Evaluate();
+        if(evaluateOnEnable)
+        {
+            Evaluate();
+        }
 	}
 
     public void Evaluate()

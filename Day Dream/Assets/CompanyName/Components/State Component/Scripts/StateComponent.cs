@@ -104,6 +104,19 @@ namespace AH.Max.Gameplay.System.Components
 
             return false;
         }
+
+        public void ReverseState(string stateName)
+        {
+            if (states.ContainsKey(stateName))
+            {
+                states[stateName] = !states[stateName];
+
+                if (stateChangedEvent != null)
+                {
+                    stateChangedEvent.Invoke(stateChangedEvent, stateName);
+                }
+            }
+        }
     }
 }
 

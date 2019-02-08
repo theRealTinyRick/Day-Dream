@@ -10,6 +10,7 @@ public class PlayerGroundedComponent : MonoBehaviour
 	/// <summary>
 	/// Determines if the player is on the ground
 	/// </summary>
+    [TabGroup(Tabs.Properties)]
     [SerializeField]
 	private bool isGrounded;
 	public bool IsGrounded
@@ -20,23 +21,36 @@ public class PlayerGroundedComponent : MonoBehaviour
 		}
 	}
 
+    [TabGroup(Tabs.Properties)]
 	[SerializeField]
 	private Vector3[] raycastOffsets;
 
+    [TabGroup(Tabs.Properties)]
 	[SerializeField]
 	[Range(0, 1)]
 	private float offsetDistance;
 
+    [TabGroup(Tabs.Properties)]
 	[SerializeField]
 	[Range(0, 1)]
 	private float yOffset;
 
+    [TabGroup(Tabs.Properties)]
     [SerializeField]
     [Range(0, 2)]
     private float checkDistance;
 
+    [TabGroup(Tabs.Properties)]
     [SerializeField]
     private float maxFloorSlope;
+
+    [TabGroup(Tabs.Events)]
+    [SerializeField]
+    public IsOnGroundEvent isOnGroundEvent = new IsOnGroundEvent();
+
+    [TabGroup(Tabs.Events)]
+    [SerializeField]
+    public IsNotOnGroundEvent isNotOnGroundEvent = new IsNotOnGroundEvent();
 
     public const string GroundedBool = "IsGrounded";
 
@@ -65,6 +79,12 @@ public class PlayerGroundedComponent : MonoBehaviour
 		if(raycastOffsets == null)
 		{
 			Debug.LogError("You probably have not set up the raycast offsets on the PlayerGroundedComponent");
+            
+            if(isNotOnGroundEvent != null)
+            {
+                isNotOnGroundEvent.Invoke();
+            }
+
 			return false;
 		} 
 
@@ -79,13 +99,23 @@ public class PlayerGroundedComponent : MonoBehaviour
                 float _floorSlope = Vector3.Angle(_hit.normal, Vector3.up);
                 if(_floorSlope < maxFloorSlope)
                 {
+                    if(isOnGroundEvent != null)
+                    {
+                        isOnGroundEvent.Invoke(_hit.transform.gameObject);
+                    }
+
 				    return true;
                 }
 
 			}
 		}
 
-		return false;
+        if (isNotOnGroundEvent != null)
+        {
+            isNotOnGroundEvent.Invoke();
+        }
+
+        return false;
 	}
 
     public void UpdateAnimator()

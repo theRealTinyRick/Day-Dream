@@ -91,10 +91,10 @@ namespace AH.Max.Gameplay.Camera
                         _targetRotation.x = 0;
                         _targetRotation.z = 0;
 
-                        cameraFollow.position = Vector3.Lerp(cameraFollow.position, entity.transform.position + lockedOnStateData.positionOffset, lockedOnStateData.positionDamping);
+                        //cameraFollow.position = Vector3.Lerp(cameraFollow.position, entity.transform.position + lockedOnStateData.positionOffset, lockedOnStateData.positionDamping);
                         cameraFollow.rotation = _targetRotation;
 
-                        cameraLookAt.position = Vector3.Lerp(cameraLookAt.position, transform.position + lockedOnStateData.lookAtOffset, lockedOnStateData.positionDamping);
+                        //cameraLookAt.position = Vector3.Lerp(cameraLookAt.position, transform.position + lockedOnStateData.lookAtOffset, lockedOnStateData.positionDamping);
 
                         cm_cameraController.m_XAxis.m_InputAxisName = "";
                         cm_cameraController.m_YAxis.m_InputAxisName = "";
@@ -116,10 +116,10 @@ namespace AH.Max.Gameplay.Camera
                     cm_cameraController.m_XAxis.m_InputAxisName = MouseX;
                     cm_cameraController.m_YAxis.m_InputAxisName = MouseY;
 
-                    cameraFollow.position = Vector3.Lerp(cameraFollow.position, transform.position + climbingStateData.positionOffset, climbingStateData.positionDamping);
-                    cameraFollow.rotation = transform.rotation;
+                    //cameraFollow.position = Vector3.Lerp(cameraFollow.position, transform.position + climbingStateData.positionOffset, climbingStateData.positionDamping);
+                   // cameraFollow.rotation = transform.rotation;
 
-                    cameraLookAt.position = Vector3.Lerp(cameraLookAt.position, transform.position + climbingStateData.lookAtOffset, climbingStateData.positionDamping);
+                   // cameraLookAt.position = Vector3.Lerp(cameraLookAt.position, transform.position + climbingStateData.lookAtOffset, climbingStateData.positionDamping);
 
                     cm_cameraController.m_RecenterToTargetHeading.m_WaitTime = climbingStateData.recenterDelay;
                     cm_cameraController.m_YAxisRecentering.m_WaitTime = climbingStateData.recenterDelay;
@@ -140,10 +140,10 @@ namespace AH.Max.Gameplay.Camera
                 cm_cameraController.m_RecenterToTargetHeading.m_RecenteringTime = 2f;
                 cm_cameraController.m_YAxisRecentering.m_RecenteringTime = 2f;
 
-                cameraFollow.position = Vector3.Lerp(cameraFollow.position, transform.root.position, normalStateData.positionDamping);
-                cameraFollow.rotation = transform.rotation;
+                //cameraFollow.position = Vector3.Lerp(cameraFollow.position, transform.root.position, normalStateData.positionDamping);
+                //cameraFollow.rotation = transform.rotation;
 
-                cameraLookAt.position = Vector3.Lerp(cameraLookAt.position, transform.position + normalStateData.lookAtOffset, normalStateData.positionDamping);
+              //  cameraLookAt.position = Vector3.Lerp(cameraLookAt.position, transform.position + normalStateData.lookAtOffset, normalStateData.positionDamping);
             }
 	    }
 
