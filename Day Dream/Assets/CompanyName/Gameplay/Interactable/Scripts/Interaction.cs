@@ -5,6 +5,12 @@ using UnityEngine;
 
 using Sirenix.OdinInspector;
 
+public enum InputType
+{
+    Tap,
+    Hold
+}
+
 public class Interaction
 {
     [TabGroup(Tabs.Properties)]
@@ -16,7 +22,18 @@ public class Interaction
     [TabGroup(Tabs.Events)]
     public InteractionCompletedEvent interactionCompletedEvent = new InteractionCompletedEvent();
 
+    public bool hasBeenUsed = false;
+
     public KeyCode[] keyCodes;
+    public InputType inputType;
+
+    public void Initialize()
+    {
+        foreach (IInteractionFilter _filter in filters)
+        {
+            _filter.interaction = this;
+        }
+    }
 
     public bool EvaluateFilters()
     {

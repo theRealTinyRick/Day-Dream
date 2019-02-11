@@ -102,6 +102,9 @@ namespace AH.Max.Gameplay.Camera
                         cm_cameraController.m_XAxis.m_InputAxisValue = 0;
                         cm_cameraController.m_YAxis.m_InputAxisValue = 0;
 
+                        cm_cameraController.m_RecenterToTargetHeading.m_enabled = true;
+                        cm_cameraController.m_YAxisRecentering.m_enabled = true;
+
                         cm_cameraController.m_RecenterToTargetHeading.m_WaitTime = lockedOnStateData.recenterDelay;
                         cm_cameraController.m_YAxisRecentering.m_WaitTime = lockedOnStateData.recenterDelay;
 
@@ -117,9 +120,12 @@ namespace AH.Max.Gameplay.Camera
                     cm_cameraController.m_YAxis.m_InputAxisName = MouseY;
 
                     //cameraFollow.position = Vector3.Lerp(cameraFollow.position, transform.position + climbingStateData.positionOffset, climbingStateData.positionDamping);
-                   // cameraFollow.rotation = transform.rotation;
+                    // cameraFollow.rotation = transform.rotation;
 
-                   // cameraLookAt.position = Vector3.Lerp(cameraLookAt.position, transform.position + climbingStateData.lookAtOffset, climbingStateData.positionDamping);
+                    // cameraLookAt.position = Vector3.Lerp(cameraLookAt.position, transform.position + climbingStateData.lookAtOffset, climbingStateData.positionDamping);
+
+                    cm_cameraController.m_RecenterToTargetHeading.m_enabled = true;
+                    cm_cameraController.m_YAxisRecentering.m_enabled = true;
 
                     cm_cameraController.m_RecenterToTargetHeading.m_WaitTime = climbingStateData.recenterDelay;
                     cm_cameraController.m_YAxisRecentering.m_WaitTime = climbingStateData.recenterDelay;
@@ -140,10 +146,13 @@ namespace AH.Max.Gameplay.Camera
                 cm_cameraController.m_RecenterToTargetHeading.m_RecenteringTime = 2f;
                 cm_cameraController.m_YAxisRecentering.m_RecenteringTime = 2f;
 
+                cm_cameraController.m_RecenterToTargetHeading.m_enabled = false;
+                cm_cameraController.m_YAxisRecentering.m_enabled = false;
+
                 //cameraFollow.position = Vector3.Lerp(cameraFollow.position, transform.root.position, normalStateData.positionDamping);
                 //cameraFollow.rotation = transform.rotation;
 
-              //  cameraLookAt.position = Vector3.Lerp(cameraLookAt.position, transform.position + normalStateData.lookAtOffset, normalStateData.positionDamping);
+                //  cameraLookAt.position = Vector3.Lerp(cameraLookAt.position, transform.position + normalStateData.lookAtOffset, normalStateData.positionDamping);
             }
 	    }
 

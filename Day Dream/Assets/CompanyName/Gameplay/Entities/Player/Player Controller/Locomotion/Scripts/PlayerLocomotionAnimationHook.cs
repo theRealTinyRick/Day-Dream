@@ -37,6 +37,7 @@ namespace AH.Max.Gameplay
         private PlayerAttackAnimationController playerAttackAnimatorController;
         private PlayerEvade playerEvade;
         private TargetingManager targetingManager;
+        private Rigidbody rigidbody;
 
         private Animator animator;
 
@@ -51,6 +52,7 @@ namespace AH.Max.Gameplay
 			playerEvade = GetComponent<PlayerEvade>();
 			animator = GetComponent<Animator>();
             targetingManager = GetComponentInChildren<TargetingManager>();
+            rigidbody = GetComponent<Rigidbody>();
 		}
 
 		private void Update () 
@@ -71,14 +73,18 @@ namespace AH.Max.Gameplay
 
 			if(!isPreparing)
 			{
-                verticalAnimatorFloat = _moveDirection.magnitude;
-				horizontalAnimatorFloat = ShouldLean ? _crossProduct.y : 0;
+                Vector3 _velocoty = rigidbody.velocity;
+                _velocoty.y = 0;
+
+                verticalAnimatorFloat = (_velocoty.magnitude * Vector3.Dot(_forwardVector, _moveDirection)) / 2;
+
+                horizontalAnimatorFloat = ShouldLean ? _crossProduct.y : 0;
                 lockedOnAnimatorFloat = 0;
             }
             else
 			{
-				verticalAnimatorFloat = _moveDirection.magnitude * Vector3.Dot(_forwardVector, _moveDirection);
-				horizontalAnimatorFloat = _crossProduct.y;
+                verticalAnimatorFloat = _moveDirection.magnitude * Vector3.Dot(_forwardVector, _moveDirection);
+                horizontalAnimatorFloat = _crossProduct.y;
                 lockedOnAnimatorFloat = 1;
             }
 		}

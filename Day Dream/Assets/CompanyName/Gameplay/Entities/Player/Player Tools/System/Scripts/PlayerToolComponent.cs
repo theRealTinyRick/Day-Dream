@@ -12,11 +12,30 @@ using Sirenix.OdinInspector;
 using AH.Max.System;
 using AH.Max;
 
+/// <summary>
+/// Event fired off when a 
+/// </summary>
+[System.Serializable]
+public class ToolWasEquipped : UnityEngine.Events.UnityEvent<WeaponType>
+{
+}
+
 public class PlayerToolComponent : SerializedMonoBehaviour
 {
+    /// <summary>
+    /// this is likely to be the empty hands tool
+    /// </summary>
+    [TabGroup(Tabs.Properties)]
+    [SerializeField]
+    public IdentityType defaultTool;
+
     [TabGroup(Tabs.Properties)]
     [SerializeField]
     public IdentityType currentTool;
+
+    [TabGroup(Tabs.Properties)]
+    [SerializeField]
+    public WeaponType currentToolType;
 
     private GameObject currentToolObject;
 
@@ -32,11 +51,15 @@ public class PlayerToolComponent : SerializedMonoBehaviour
 
     [TabGroup(Tabs.Properties)]
     [SerializeField]
+    public int maxToolsInBelt;
+
+    [TabGroup(Tabs.Properties)]
+    [SerializeField]
     private Dictionary<Handedness, Transform> IKMap = new Dictionary<Handedness, Transform>();
 
     [TabGroup(Tabs.Events)]
     [SerializeField]
-    private ToolChangedEvent toolChangedEvent = new ToolChangedEvent();
+    private ToolWasEquipped toolWasEquipped = new ToolWasEquipped();
 
     public void Start()
     {
@@ -45,8 +68,22 @@ public class PlayerToolComponent : SerializedMonoBehaviour
 
     public void Initialize()
     {
-        currentTool = tools[0];
-        SetCurrent(currentTool);
+        if(defaultTool != null)
+        {
+            SetCurrent(defaultTool);
+        }
+        else
+        {
+            Debug.LogError("The default tool has not been set up. The Tool Component will not function properly");
+            if(tools.Count > 0)
+            {
+                SetCurrent(tools[0]);
+            }
+            else
+            {
+                Debug.LogError("There are no tools in the player tool component");
+            }
+        }
     }
 
     public void SetCurrent(IdentityType tool)
@@ -63,16 +100,38 @@ public class PlayerToolComponent : SerializedMonoBehaviour
 
         currentTool = tool;
 
-        currentToolObject = SpawnManager.Instance.Spawn(currentTool, GetIKPoint(currentTool.handedness));
+        currentToolObject = SpawnManager.Instance.Spawn(currentTool);
 
         if(previousToolObject != null)
         {
             SpawnManager.Instance.Despawn(previousToolObject.GetComponentInChildren<Entity>());
         }
 
-        if(toolChangedEvent != null)
+        PlayerTool _playerTool = currentToolObject.GetComponentInChildren<PlayerTool>();
+
+        if(_playerTool != null)
         {
-            toolChangedEvent.Invoke(currentTool);
+            if (_playerTool.weaponType != null)
+            {
+                currentToolType = _playerTool.weaponType;
+
+                _playerTool.transform.SetParent(GetIKPoint(_playerTool.weaponType.handedness));
+                _playerTool.transform.localPosition = Vector3.zero;
+                _playerTool.transform.localRotation = Quaternion.identity;
+
+                if (toolWasEquipped != null)
+                {
+                    toolWasEquipped.Invoke(currentToolType);
+                }
+            }
+        }
+    }
+
+    public void SetCurrent(int index)
+    {
+        if(index < tools.Count)
+        {
+            SetCurrent(tools[index]);
         }
     }
 
@@ -83,8 +142,6 @@ public class PlayerToolComponent : SerializedMonoBehaviour
             SetCurrent(previousTool);
             return;
         }
-
-        Debug.Log("There is no previous tool");
     }
 
     private Transform GetIKPoint(Handedness handedness)
@@ -96,7 +153,29 @@ public class PlayerToolComponent : SerializedMonoBehaviour
             return _ikPoint;
         }
 
-        Debug.LogWarning("");
         return null;
+    }
+
+    public void AddToolToBelt(IdentityType tool)
+    {
+        /// are we at the max amount of tools the player can hold
+        /// find out which one to remove if any need to
+        /// 
+
+        if(!tools.Contains(tool))
+        {
+            tools.Add(tool);
+        }
+    }
+
+    /// <summary>
+    /// switches the player to 
+    /// </summary>
+    public void SwitchToEmptyHands()
+    {
+        if (defaultTool != null)
+        {
+            SetCurrent(defaultTool);
+        }
     }
 }

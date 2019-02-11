@@ -91,4 +91,60 @@ public class StateableComponent : MonoBehaviour
         currentValue = value;
         Evaluate();
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void IncrementState()
+    {
+        if(states.Count <= 1)
+        {
+            return;
+        }
+
+        float _currentValue = currentValue;
+
+        if(states.IndexOf(currentState) >= states.Count - 1)
+        {
+            _currentValue = maximumValue;
+
+            SetValue(_currentValue);
+
+            return;
+        }
+        else
+        {
+            _currentValue = states[states.IndexOf(currentState) + 1].value;
+
+            SetValue(_currentValue);
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void DecrementState()
+    {
+        if (states.Count <= 1)
+        {
+            return;
+        }
+
+        float _currentValue = currentValue;
+
+        if (states.IndexOf(currentState) <= 1)
+        {
+            _currentValue = minimumValue;
+
+            SetValue(_currentValue);
+
+            return;
+        }
+        else
+        {
+            _currentValue = states[states.IndexOf(currentState) - 1].value;
+
+            SetValue(_currentValue);
+        }
+    }
 }

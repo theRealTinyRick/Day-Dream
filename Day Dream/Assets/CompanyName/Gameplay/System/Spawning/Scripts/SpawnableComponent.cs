@@ -10,13 +10,20 @@ namespace AH.Max.System
 	public class SpawnableComponent : MonoBehaviour 
 	{	
 		[SerializeField]
-		public Entity entity;
+        [TabGroup(Tabs.Properties)]
+        public Entity entity;
 
 		[SerializeField]
+        [TabGroup(Tabs.Properties)]
 		public SpawnedEvent spawnedEvent = new SpawnedEvent();
 
 		[SerializeField]
+        [TabGroup(Tabs.Properties)]
 		public DespawnedEvent despawnedEvent = new DespawnedEvent();
+
+        [SerializeField]
+        [TabGroup(Tabs.Properties)]
+        public bool spawned;
 
 		private void Start()
 		{
@@ -29,6 +36,8 @@ namespace AH.Max.System
 			{
 				spawnedEvent.Invoke();
 			}
+
+            spawned = true;
 		}
 
 		public void Despawned()
@@ -37,6 +46,8 @@ namespace AH.Max.System
 			{
 				despawnedEvent.Invoke();
 			}
+
+            spawned = false;
 		}
 	}
 }

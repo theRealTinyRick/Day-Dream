@@ -5,6 +5,8 @@ using UnityEngine;
 
 using Sirenix.OdinInspector;
 
+using AH.Max.System;
+
 namespace AH.Max.Gameplay
 {
 	public class PlayerAttackAnimationController : MonoBehaviour 
@@ -23,12 +25,15 @@ namespace AH.Max.Gameplay
         {
             get 
             {
+                if(currentAnimSet == null)
+                {
+                    return 0;
+                }
+
                 return currentAnimSet.Length;
             }
         }
 		
-		[TabGroup(Tabs.Properties)]
-		[ShowInInspector]
 		private int currentNumberOfClicks = 0;
 
 		[TabGroup(Tabs.Properties)]
@@ -39,15 +44,6 @@ namespace AH.Max.Gameplay
 		[ShowInInspector]
 		private float time = 0;
 
-        [SerializeField]
-		private string[] swordAnimations;
-
-        [SerializeField]
-        private string[] twinSwordAnimations;
-
-        [SerializeField]
-        private string[] heavySwordAnimations;
-
         private string[] currentAnimSet;
 
         [HideInInspector]
@@ -55,7 +51,12 @@ namespace AH.Max.Gameplay
 
         [SerializeField]
         private PlayerState[] availableStates;
-		
+
+        private bool hasAttacked;
+
+
+        private WeaponType currentWeaponType;
+
 		private Animator animator;
 		private PlayerStateComponent playerStateComponent;
         private PlayerGroundedComponent playerGroundedComponent;
@@ -65,8 +66,6 @@ namespace AH.Max.Gameplay
 			animator = GetComponent<Animator>();
 			playerStateComponent = GetComponent<PlayerStateComponent>();
             playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
-
-            currentAnimSet = swordAnimations;
 		}
 
 		private void OnEnable()
@@ -85,46 +84,22 @@ namespace AH.Max.Gameplay
 			CurrentlyInAttackState();
 		}
 
-        [Button]
-        public void UseTwinSwords()
-        {
-            if(!IsAttacking)
-            {
-                currentAnimSet = twinSwordAnimations;
-            }
-        }
-
-        [Button]
-        public void UseSwordAndShield()
-        {
-            if (!IsAttacking)
-            {
-                currentAnimSet = swordAnimations;
-            }
-        }
-
-        [Button]
-        public void UseHeavySword()
-        {
-            if (!IsAttacking)
-            {
-                currentAnimSet = heavySwordAnimations;
-            }
-        }
-
         // this method simply determines if the player is still clicking. 
         // if the player keeps clicking then stops then the attacks should stop as well. 
         private void AttackTimer()
 		{
-			if(queue.Count > 0)
-			{
-				time += Time.deltaTime;
+            if(IsAttacking)
+            {
+			    if(queue.Count > 0)
+			    {
+				    time += Time.deltaTime;
 
-				if(time > timeToClick)
-				{
-					StopAttacking();
-				}
-			}
+				    if(time > timeToClick)
+				    {
+					    StopAttacking();
+				    }
+			    }
+            }
 		}
 
 		public void StopAttacking()
@@ -142,6 +117,7 @@ namespace AH.Max.Gameplay
 			currentNumberOfClicks = 0;
 			time = 0;
 			isAttacking = false;
+            hasAttacked = false;
 		}
 		
 		///<Summary>
@@ -149,9 +125,25 @@ namespace AH.Max.Gameplay
 		///</Summary>
 		private void QuereyAttack()
 		{
+            if(currentWeaponType == null)
+            {
+                return;
+            }
+
+            if(currentWeaponType.handedness == Handedness.EmptyHands)
+            {
+                return;
+            }
+
+            if(currentAnimSet == null)
+            {
+                currentAnimSet = currentWeaponType.animations;
+            }
+
 			if(EvaluateQueueConditions())
 			{
-				// SET THE PLAYER STATE
+                hasAttacked = true;
+
 				playerStateComponent.SetStateHard(PlayerState.Attacking);
 
 				currentNumberOfClicks ++;
@@ -171,7 +163,6 @@ namespace AH.Max.Gameplay
 				}
 
 				isAttacking = true;
-				playerStateComponent.SetStateHard(PlayerState.Attacking);
 			}
 		}
 
@@ -211,24 +202,38 @@ namespace AH.Max.Gameplay
 
 		public bool CurrentlyInAttackState()
 		{
-			foreach(var _swordAnimation in currentAnimSet)
-			{
-				foreach(var thing in animator.GetCurrentAnimatorClipInfo(0))
-				{
-					if(_swordAnimation == thing.clip.name)
-					{
-						return true;
-					}
-				}
-			}
+            if(currentAnimSet != null)
+            {
+			    foreach(var _animation in currentAnimSet)
+			    {
+				    foreach(var thing in animator.GetCurrentAnimatorClipInfo(0))
+				    {
+					    if(_animation == thing.clip.name)
+					    {
+						    return true;
+					    }
+				    }
+			    }
 
-			if(playerStateComponent.CurrentState == PlayerState.Attacking)
-			{
-				playerStateComponent.ResetState();
-			}			
+			    if(playerStateComponent.CurrentState == PlayerState.Attacking)
+			    {
+				    playerStateComponent.ResetState();
+			    }			
 
-			return false;
+            }
+
+            return false;
 		}
+
+        /// <summary>
+        /// A response to the tool component getting a weapon
+        /// </summary>
+        /// <param name="weaponType"></param>
+        public void OnToolEquipped(WeaponType weaponType)
+        {
+            currentWeaponType = weaponType;
+            currentAnimSet = currentWeaponType.animations;
+        }
 
 		public void AttackEndEvent()
 		{

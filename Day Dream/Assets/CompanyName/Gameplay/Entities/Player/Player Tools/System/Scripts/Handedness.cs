@@ -3,5 +3,8 @@
     RightHandedWeapon,
     LeftHandedWeapon,
     LeftHandedShield,
-    TwoHandedSword
+    TwoHandedSword,
+    TwinSwords,
+
+    EmptyHands
 }

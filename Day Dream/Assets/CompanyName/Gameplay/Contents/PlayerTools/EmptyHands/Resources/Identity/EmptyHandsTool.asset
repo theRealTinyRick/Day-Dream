@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Empty Hands
   type: 0
-  handedness: 0
+  handedness: 5
   prefab: {fileID: 1088716166622068, guid: adbcdcd533dc625409ecd515a4ea178a, type: 2}
   parent: {fileID: 0}

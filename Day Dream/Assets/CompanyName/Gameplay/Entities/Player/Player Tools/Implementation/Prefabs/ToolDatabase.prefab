@@ -60,4 +60,10 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  database: []
+  database:
+  - tool: {fileID: 11400000, guid: 9673ad07682967240ae57bf36b83495b, type: 2}
+    locked: 0
+  - tool: {fileID: 11400000, guid: d06e588eb6eee3b4793585cf42e25838, type: 2}
+    locked: 0
+  - tool: {fileID: 11400000, guid: adba052238b4eb244829659f3cceeee5, type: 2}
+    locked: 0

@@ -13,5 +13,11 @@ public interface IInteractionFilter
         set;
     }
 
+    Interaction interaction 
+    {
+        get;
+        set;
+    }
+
     bool Filter();
 }

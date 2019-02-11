@@ -53,7 +53,7 @@ namespace AH.Max.Gameplay
 		{
 			InputDriver.evadeButtonEvent.RemoveListener(Evade);	
 		}
-		
+
 		private void Evade()
 		{
             if(!CheckConditions())

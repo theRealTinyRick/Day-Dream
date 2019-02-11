@@ -15,11 +15,6 @@ namespace AH.Max.System
 		///</Summary>
 		public UsageType type;
 
-        /// <summary>
-        /// the handedness of the possible tool
-        /// </summary>
-        public Handedness handedness;
-
 		///<Summary>
 		///The prefab associated with the Identity
 		///</Summary>

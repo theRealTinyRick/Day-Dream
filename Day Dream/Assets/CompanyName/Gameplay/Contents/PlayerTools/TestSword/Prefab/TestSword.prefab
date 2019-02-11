@@ -11,18 +11,18 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1827103835812230}
   m_IsPrefabAsset: 1
---- !u!1 &1494885076876226
+--- !u!1 &1443905732796850
 GameObject:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4603438298101274}
-  - component: {fileID: 33064569135227644}
-  - component: {fileID: 23139828142565996}
+  - component: {fileID: 4634315835036194}
+  - component: {fileID: 33915315648792016}
+  - component: {fileID: 23811859298030746}
   m_Layer: 0
-  m_Name: SM_Wep_DarkElf_01
+  m_Name: SM_Wep_BarbarianGiant_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,23 +65,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1827103835812230}
-  m_LocalRotation: {x: -0.25910553, y: 0.4882122, z: -0.19963466, w: 0.80911005}
-  m_LocalPosition: {x: 3.4583428, y: 0.9375975, z: 0.89515007}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.00000008940697, y: 0.000000103376806, z: 0.000000026077032,
+    w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.3333331, y: 1.3333331, z: 1.3333335}
   m_Children:
   - {fileID: 4949433529887160}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4603438298101274
+--- !u!4 &4634315835036194
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1494885076876226}
+  m_GameObject: {fileID: 1443905732796850}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5582732, y: 0.5582732, z: 0.5582732}
   m_Children: []
   m_Father: {fileID: 4949433529887160}
   m_RootOrder: 0
@@ -93,19 +94,19 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1829341115658024}
   m_LocalRotation: {x: -0.45595118, y: -0.55456114, z: -0.4240467, w: -0.55204606}
-  m_LocalPosition: {x: 0.088, y: -0.04, z: -0.033}
+  m_LocalPosition: {x: 0.064, y: -0.029, z: 0.062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4603438298101274}
+  - {fileID: 4634315835036194}
   m_Father: {fileID: 4348245552117784}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 1.8960001, y: 811.769, z: -282.986}
---- !u!23 &23139828142565996
+--- !u!23 &23811859298030746
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1494885076876226}
+  m_GameObject: {fileID: 1443905732796850}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -135,13 +136,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33064569135227644
+--- !u!33 &33915315648792016
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1494885076876226}
-  m_Mesh: {fileID: 4300000, guid: 575c79ff119c2384281a69576dc4e5aa, type: 3}
+  m_GameObject: {fileID: 1443905732796850}
+  m_Mesh: {fileID: 4300000, guid: f4b94f0c6eec6c444b275399c9e54825, type: 3}
 --- !u!114 &114222336348909512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,3 +156,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identityType: {fileID: 11400000, guid: 9673ad07682967240ae57bf36b83495b, type: 2}
   doNotDestroyOnLoad: 0
+  weaponType: {fileID: 11400000, guid: 31c99df7d70566f4da2f72ae22092865, type: 2}

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using UnityEngine;
+﻿using UnityEngine;
 
 using AH.Max.System;
 using AH.Max;
@@ -9,6 +6,7 @@ using AH.Max;
 class AngleLookAtInteractionFilter : IInteractionFilter
 {
     public InteractableComponent interactable { get; set; }
+    public Interaction interaction { get; set; }
 
     public IdentityType identityType;
     public Entity entity;

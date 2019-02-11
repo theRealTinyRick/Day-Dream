@@ -11,6 +11,7 @@ using AH.Max.Gameplay.System.Components;
 public class EvaluateStateComponentFilter : IInteractionFilter
 {
     public InteractableComponent interactable { get; set; }
+    public Interaction interaction { get; set; }
 
     public string state;
 
