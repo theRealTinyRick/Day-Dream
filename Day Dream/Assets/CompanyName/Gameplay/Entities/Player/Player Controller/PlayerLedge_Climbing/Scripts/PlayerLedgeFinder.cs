@@ -111,7 +111,9 @@ namespace AH.Max.Gameplay
             }
         }
 
-        private bool isClimbingUp = false;  
+        private bool isClimbingUp = false;
+
+        private bool isDismounting;
 
         [TabGroup(Tabs.Properties)]
         [SerializeField]
@@ -147,15 +149,13 @@ namespace AH.Max.Gameplay
             playerLedgeAnimHook = GetComponent<PlayerLedgeAnimHook>();
 
             InputDriver.jumpButtonEvent.AddListener(InputResponse);
+            InputDriver.jumpButtonHeldEvent.AddListener(InputResponse);
         }
 
         private void OnDisable()
         {
             InputDriver.jumpButtonEvent.RemoveListener(InputResponse);
-        }
-
-        private void Update()
-        {
+            InputDriver.jumpButtonHeldEvent.RemoveListener(InputResponse);
         }
 
         private void FixedUpdate()
@@ -171,6 +171,11 @@ namespace AH.Max.Gameplay
             {
                 Dismount();
             }
+
+            if(!InputDriver.jumpButtonIsBeingHeld)
+            {
+                isDismounting = false;
+            }
         }
 
         private void InputResponse()
@@ -179,6 +184,7 @@ namespace AH.Max.Gameplay
             {
                 if(InputDriver.LocomotionDirection.normalized.z > 0)
                 {
+                    Debug.Log("Climb up ledge");
                     StartCoroutine(ClimbupLedge());
                 }
                 else
@@ -186,13 +192,17 @@ namespace AH.Max.Gameplay
                     // added this to make sure the player has finished an animation before an manual dismount
                     if(IsAtNextClimbPoint())
                     {
+                        Debug.Log("Dismount");    
                         Dismount();
                     }
                 }
             }
             else
             {
-                InitClimb();
+                if(!isClimbing && !isDismounting)
+                {
+                    InitClimb();
+                }
             }
         }
 
@@ -222,6 +232,7 @@ namespace AH.Max.Gameplay
 
         private void Dismount()
         {
+            isDismounting = true;
             isClimbingUp = false;
             isClimbing = false;
             isInPosition = false;
@@ -286,7 +297,7 @@ namespace AH.Max.Gameplay
             // I need to add something here to check if the mount failed for some reason then call the dismount method
 
             Quaternion _rotation = Quaternion.LookRotation(-wallNormal);
-            while(Vector3.Distance(transform.position, position) > 0.1f)
+            while(Vector3.Distance(transform.position, position) > 0.1f || InputDriver.jumpButtonIsBeingHeld)
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, 0.5f);
                 transform.position = Vector3.MoveTowards(transform.position, position, mountSpeed);
@@ -442,7 +453,7 @@ namespace AH.Max.Gameplay
         {
             ledgePoint -= normal;
 
-            Debug.Log("DO SOMETHING HERE TO MAKE SURE WE HAVE A CLEAR POSITION");
+            //Debug.Log("DO SOMETHING HERE TO MAKE SURE WE HAVE A CLEAR POSITION");
 
             return ledgePoint;
         }

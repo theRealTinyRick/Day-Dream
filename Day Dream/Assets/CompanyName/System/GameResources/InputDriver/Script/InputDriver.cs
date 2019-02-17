@@ -9,11 +9,16 @@ public class InputDriver : Singleton_MonoBehavior<InputDriver>
 {
     //events
     public static JumpButtonEvent jumpButtonEvent = new JumpButtonEvent();
+    public static JumpButtonEvent jumpButtonHeldEvent = new JumpButtonEvent();
+    public static JumpButtonEvent jumpButtonReleasedEvent = new JumpButtonEvent();
+
     public static LightAttackButtonEvent lightAttackButtonEvent = new LightAttackButtonEvent();
     public static PreparedInputPressedEvent preparedInputPressedEvent = new PreparedInputPressedEvent();
     public static PreparedInputReleasedEvent preparedInputReleasedEvent = new PreparedInputReleasedEvent(); 
     public static EvadeButtonEvent evadeButtonEvent = new EvadeButtonEvent();
     public static LockOnButtonPressedEvent lockOnButtonEvent = new LockOnButtonPressedEvent();
+
+    public static bool jumpButtonIsBeingHeld;
 
     //menu specific
     public static SelectButtonEvent selectButtonEvent = new SelectButtonEvent();
@@ -86,7 +91,28 @@ public class InputDriver : Singleton_MonoBehavior<InputDriver>
             }
         }
 
-        if(Input.GetButtonDown(InputDataBase.XButton) || UnityEngine.Input.GetMouseButtonDown(0))
+        if(Input.GetButton(InputDataBase.AButton) || UnityEngine.Input.GetKey(KeyCode.Space))
+        {
+            jumpButtonIsBeingHeld = true;
+            if(jumpButtonHeldEvent != null)
+            {
+                jumpButtonHeldEvent.Invoke();
+            }
+        }
+        else
+        {
+            jumpButtonIsBeingHeld = false;
+        }
+
+        if (Input.GetButtonUp(InputDataBase.AButton) || UnityEngine.Input.GetKeyUp(KeyCode.Space))
+        {
+            if (jumpButtonReleasedEvent != null)
+            {
+                jumpButtonReleasedEvent.Invoke();
+            }
+        }
+
+        if (Input.GetButtonDown(InputDataBase.XButton) || UnityEngine.Input.GetMouseButtonDown(0))
         {
             if(lightAttackButtonEvent != null)
             {
