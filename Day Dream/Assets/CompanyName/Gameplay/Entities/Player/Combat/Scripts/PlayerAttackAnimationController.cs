@@ -1,11 +1,11 @@
-﻿using System.Collections;
+﻿using System.Linq;
 using System.Collections.Generic;
 
 using UnityEngine;
 
 using Sirenix.OdinInspector;
 
-using AH.Max.System;
+using AH.Max.Gameplay.System.Components;
 
 namespace AH.Max.Gameplay
 {
@@ -44,27 +44,37 @@ namespace AH.Max.Gameplay
 		[ShowInInspector]
 		private float time = 0;
 
-        private string[] currentAnimSet;
+        [TabGroup(Tabs.Properties)]
+        [ShowInInspector]
+        private List<string> nonAttackableStates = new List<string>();
+
+        [TabGroup(Tabs.Properties)]
+        [ShowInInspector]
+        private string groundedState = "IsGrounded";
 
         [HideInInspector]
         public string[] swingBooleans = new string[] {"Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6"};
 
-        [SerializeField]
-        private PlayerState[] availableStates;
-
+        private string[] currentAnimSet;
+        private WeaponType currentWeaponType;
         private bool hasAttacked;
 
-
-        private WeaponType currentWeaponType;
-
-		private Animator animator;
-		private PlayerStateComponent playerStateComponent;
+        private Animator animator;
+        private StateComponent stateComponent;
         private PlayerGroundedComponent playerGroundedComponent;
 
-		void Start () 
+        //events
+        [TabGroup(Tabs.Events)]
+        [SerializeField]
+        public AttackStartedEvent attackStartedEvent = new AttackStartedEvent();
+
+        [TabGroup(Tabs.Events)]
+        [SerializeField]
+        public AttackEndedEvent attackEndedEvent = new AttackEndedEvent();
+
+        void Start () 
 		{
 			animator = GetComponent<Animator>();
-			playerStateComponent = GetComponent<PlayerStateComponent>();
             playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
 		}
 
@@ -104,7 +114,6 @@ namespace AH.Max.Gameplay
 
 		public void StopAttacking()
 		{
-			// clear out the queue and stop attacking
 			foreach(string _animation in swingBooleans)
 			{
 				if(_animation != swingBooleans[0])
@@ -144,8 +153,6 @@ namespace AH.Max.Gameplay
 			{
                 hasAttacked = true;
 
-				playerStateComponent.SetStateHard(PlayerState.Attacking);
-
 				currentNumberOfClicks ++;
 				time = 0;
 
@@ -162,21 +169,14 @@ namespace AH.Max.Gameplay
 					animator.SetBool(swingBooleans[_index], true);
 				}
 
+                attackStartedEvent.Invoke();
 				isAttacking = true;
 			}
 		}
 
 		private bool EvaluateQueueConditions()
 		{
-            bool _inProperState = false;
-
-            foreach (PlayerState _state in availableStates)
-            {
-                if (playerStateComponent.CheckState(_state))
-                {
-                    _inProperState = true;
-                }
-            }
+            bool _inProperState = !stateComponent.AnyStateTrue(nonAttackableStates) && stateComponent.GetState(groundedState);
 
             if(!playerGroundedComponent.IsGrounded)
             {
@@ -215,11 +215,7 @@ namespace AH.Max.Gameplay
 				    }
 			    }
 
-			    if(playerStateComponent.CurrentState == PlayerState.Attacking)
-			    {
-				    playerStateComponent.ResetState();
-			    }			
-
+                attackEndedEvent.Invoke();
             }
 
             return false;

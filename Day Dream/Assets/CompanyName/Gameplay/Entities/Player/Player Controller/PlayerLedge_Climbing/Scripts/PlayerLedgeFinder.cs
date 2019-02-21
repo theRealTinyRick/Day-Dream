@@ -131,7 +131,8 @@ namespace AH.Max.Gameplay
         Vector3 floorPoint = new Vector3();
 
         private Rigidbody _rigidbody;
-        private PlayerElevationDetection playerElevationDetection;
+       // private PlayerElevationDetection playerElevationDetection;
+        private WallFinder wallFinder;
         private PlayerGroundedComponent playerGroundedComponent;
         private PlayerStateComponent playerStateComponent;
         private PlayerLedgeAnimHook playerLedgeAnimHook;
@@ -143,7 +144,8 @@ namespace AH.Max.Gameplay
             layerMask = ~layerMask;
 
             _rigidbody = GetComponent<Rigidbody>();
-            playerElevationDetection = GetComponent<PlayerElevationDetection>();
+            // playerElevationDetection = GetComponent<PlayerElevationDetection>();
+            wallFinder = GetComponent<WallFinder>();
             playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
             playerStateComponent = GetComponent<PlayerStateComponent>();
             playerLedgeAnimHook = GetComponent<PlayerLedgeAnimHook>();
@@ -184,7 +186,6 @@ namespace AH.Max.Gameplay
             {
                 if(InputDriver.LocomotionDirection.normalized.z > 0)
                 {
-                    Debug.Log("Climb up ledge");
                     StartCoroutine(ClimbupLedge());
                 }
                 else
@@ -192,7 +193,6 @@ namespace AH.Max.Gameplay
                     // added this to make sure the player has finished an animation before an manual dismount
                     if(IsAtNextClimbPoint())
                     {
-                        Debug.Log("Dismount");    
                         Dismount();
                     }
                 }
@@ -213,15 +213,17 @@ namespace AH.Max.Gameplay
                 isClimbing = true;
                 _rigidbody.isKinematic = true;
 
-                SetLedge(playerElevationDetection.Ledge, playerElevationDetection.WallNormal);
+                SetLedge(wallFinder.Ledge, wallFinder.WallNormal);
+
+                //SetLedge(playerElevationDetection.Ledge, playerElevationDetection.WallNormal);
+                //wallNormal = playerElevationDetection.WallNormal;
+                //StartCoroutine(GetInPosition(LedgeWithPlayerOffset(playerElevationDetection.Ledge), playerElevationDetection.WallNormal));
+
+                StartCoroutine(GetInPosition(LedgeWithPlayerOffset(ledge), wallNormal));
 
                 playerLedgeAnimHook.PlayMountAnim();
 
-                wallNormal = playerElevationDetection.WallNormal;
-
-                StartCoroutine(GetInPosition(LedgeWithPlayerOffset(playerElevationDetection.Ledge), playerElevationDetection.WallNormal));
-
-                playerStateComponent.SetStateHard(PlayerState.Traversing);
+                //playerStateComponent.SetStateHard(PlayerState.Traversing);
 
                 if(ledgeClimbStarted != null)
                 {
@@ -242,10 +244,10 @@ namespace AH.Max.Gameplay
 
             ResetRotation();
             
-            if (playerStateComponent.CurrentState == PlayerState.Traversing)
-            {
-                playerStateComponent.SetStateHard(PlayerState.Normal);
-            }
+            //if (playerStateComponent.CurrentState == PlayerState.Traversing)
+            //{
+                //playerStateComponent.SetStateHard(PlayerState.Normal);
+            //}
 
             if(ledgeClimbStopped != null)
             {
@@ -261,7 +263,7 @@ namespace AH.Max.Gameplay
         public bool CheckValidLedge()
         {
             //check the elevation detector
-            if(playerElevationDetection.ValidLedge)
+          //  if(playerElevationDetection.ValidLedge)
             {
                 Vector3 _rayCastOrigin = transform.position;
                 _rayCastOrigin.y += 0.5f;
@@ -271,7 +273,8 @@ namespace AH.Max.Gameplay
                     floorPoint = _hitResult.point;
 
                     float _floorHit = _hitResult.point.y;
-                    float _ledgeHeight = playerElevationDetection.Ledge.y;
+                    float _ledgeHeight = wallFinder.Ledge.y;
+                    //float _ledgeHeight = playerElevationDetection.Ledge.y;
 
                     if(_floorHit < _ledgeHeight)
                     {

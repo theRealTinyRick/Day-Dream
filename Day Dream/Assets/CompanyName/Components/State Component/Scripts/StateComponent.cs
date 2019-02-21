@@ -71,7 +71,7 @@ namespace AH.Max.Gameplay.System.Components
             return false;
         }
 
-        public bool SetStateFalse(string stateName)
+        public void SetStateFalse(string stateName)
         {
             if (states.ContainsKey(stateName))
             {
@@ -81,14 +81,10 @@ namespace AH.Max.Gameplay.System.Components
                 {
                     stateChangedEvent.Invoke(stateChangedEvent, stateName);
                 }
-
-                return true;
             }
-
-            return false;
         }
 
-        public bool SetStateTrue(string stateName)
+        public void SetStateTrue(string stateName)
         {
             if (states.ContainsKey(stateName))
             {
@@ -98,11 +94,7 @@ namespace AH.Max.Gameplay.System.Components
                 {
                     stateChangedEvent.Invoke(stateChangedEvent, stateName);
                 }
-
-                return true;
             }
-
-            return false;
         }
 
         public void ReverseState(string stateName)
@@ -116,6 +108,61 @@ namespace AH.Max.Gameplay.System.Components
                     stateChangedEvent.Invoke(stateChangedEvent, stateName);
                 }
             }
+        }
+
+        public bool AnyStateTrue()
+        {
+            foreach (string _state in states.Keys)
+            {
+                if (states[_state])
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool AnyStateTrue(List<string> states)
+        {
+            foreach(string _state in states)
+            {
+                if(this.states[_state])
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool AnyStateFalse()
+        {
+            foreach (string _state in states.Keys)
+            {
+                if (!states[_state])
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool AnyStateFalse(List<string> states)
+        {
+            foreach (string _state in states)
+            {
+                if (this.states.ContainsKey(_state))
+                {
+                    if (!this.states[_state])
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

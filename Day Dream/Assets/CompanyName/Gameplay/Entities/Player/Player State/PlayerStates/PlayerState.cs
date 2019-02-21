@@ -1,6 +1,7 @@
 ﻿using System;
 
-public enum PlayerState
+[System.Serializable]
+public enum PlayerState : int
 {
 	Normal, /*This is the normal state of the player where any basic action can be acrries out */
 	Traversing, /*This is the state where the player is climbing or another simlar action. Only those actions can be acrries out */

@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
 
 using Sirenix.OdinInspector;
+
+using AH.Max.Gameplay.System.Components;
 
 namespace AH.Max.Gameplay
 {
@@ -16,7 +19,7 @@ namespace AH.Max.Gameplay
 
 		private Animator animator;
 		private PlayerLocomotionAnimationHook playerLocomotionAnimationHook;
-		private PlayerStateComponent playerStateComponent;
+		private StateComponent stateComponent;
 
         /// <summary>
         /// TODO ADD SUMMARY
@@ -29,7 +32,7 @@ namespace AH.Max.Gameplay
         /// </summary>
         [Tooltip("These are the states where the evade action is available")]
         [TabGroup(Tabs.Properties)]
-        public PlayerState[] availableStates;
+        public string[] unavailableStates;
 
         [TabGroup(Tabs.Events)]
         public EvadeStartedEvents evadeStartedEvents = new EvadeStartedEvents();
@@ -41,7 +44,7 @@ namespace AH.Max.Gameplay
 		{
 			animator = GetComponent<Animator>();
 			playerLocomotionAnimationHook = GetComponent<PlayerLocomotionAnimationHook>();
-            playerStateComponent = GetComponent<PlayerStateComponent>();
+            stateComponent = GetComponent<StateComponent>();
 		}
 
 		private void OnEnable() 
@@ -69,7 +72,6 @@ namespace AH.Max.Gameplay
 			animator.Play(EvadeAnimation);
 
             isEvading = true;
-            playerStateComponent.SetStateHard(PlayerState.Evading);
             
             if(evadeStartedEvents != null)
             {
@@ -90,28 +92,17 @@ namespace AH.Max.Gameplay
 
 		private bool CheckConditions()
 		{
-            if(playerStateComponent)
+            if(!CheckState())
             {
-                if(!CheckState())
-                {
-					return false;
-				}
-            }
+				return false;
+			}
 
             return true;
 		}
 
         private bool CheckState()
         {
-            foreach(var _state in availableStates)
-            {
-                if(playerStateComponent.CheckState(_state))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return !stateComponent.AnyStateTrue(unavailableStates.ToList());
         }
 
 		private void DefaultDash()
@@ -124,11 +115,6 @@ namespace AH.Max.Gameplay
 		public void StoppedEvading()
 		{
 			isEvading = false;
-
-            if(playerStateComponent.CurrentState == PlayerState.Evading)
-            {
-                playerStateComponent.ResetState();
-            }
 
             if(evadeStoppedEvent != null)
             {

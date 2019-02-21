@@ -42,7 +42,7 @@ public class PlayerLedgeAnimHook : MonoBehaviour
 
         animator.Play(LedgeMoveAnim);
     }
-
+     
     public void PlayClimbUpAnimation()
     {
         animator.Play(ClimbUpAnimation);

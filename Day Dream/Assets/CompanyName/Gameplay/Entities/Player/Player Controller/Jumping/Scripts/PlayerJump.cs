@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
+﻿using System.Linq;
 using UnityEngine;
 
 using Sirenix.OdinInspector;
+
+using AH.Max.Gameplay.System.Components;
 
 namespace AH.Max.Gameplay
 {
@@ -51,12 +51,15 @@ namespace AH.Max.Gameplay
 
         [TabGroup(Tabs.Properties)]
         [SerializeField]
-        private PlayerState[] availableStates;
+        private string[] unavailableStates;
+
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        private string isGroundedState;
 
         private new Rigidbody rigidbody;
-        private PlayerGroundedComponent playerGroundedComponent;
         private PlayerStateComponent playerStateComponent;
-       // private PlayerElevationDetection playerElevationDetection;
+        private StateComponent stateComponent;
         private PlayerLedgeFinder playerLedgeFinder;
 
         private void Awake() 
@@ -71,10 +74,9 @@ namespace AH.Max.Gameplay
                 jumpForwardStartedEvent = new JumpForwardStartedEvent();
             }
 
-            playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
+            stateComponent = GetComponent<StateComponent>();
             rigidbody = transform.root.GetComponentInChildren<Rigidbody>();
             playerStateComponent = GetComponent<PlayerStateComponent>();
-          //  playerElevationDetection = GetComponent<PlayerElevationDetection>();
             playerLedgeFinder = GetComponent<PlayerLedgeFinder>();
 
             InputDriver.jumpButtonEvent.AddListener(Jump);
@@ -87,7 +89,7 @@ namespace AH.Max.Gameplay
 
         private void FixedUpdate()
         {
-            if(!playerGroundedComponent.IsGrounded)
+            if(!IsGrounded())
             {
                 if(playerJumped)
                 {
@@ -178,21 +180,12 @@ namespace AH.Max.Gameplay
 
         private bool ShouldJump()
         {
-            foreach(PlayerState _state in availableStates)
-            {
-                if(playerStateComponent.CurrentState == _state)
-                {
-                    if(playerGroundedComponent.IsGrounded)
-                    {
-                        if(!playerLedgeFinder.CheckValidLedge())
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
+            return !stateComponent.AnyStateTrue(unavailableStates.ToList()) && IsGrounded();
+        }
 
-            return false;
+        private bool IsGrounded()
+        {
+            return stateComponent.GetState(isGroundedState);
         }
 	}
 }

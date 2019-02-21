@@ -174,7 +174,7 @@ namespace AH.Max.Gameplay
 
 		private void SetPlayerState()
 		{
-			playerStateComponent.SetStateHard(PlayerState.Traversing);
+			//playerStateComponent.SetStateHard(PlayerState.Traversing);
 
 			isVaulting = true;
 			GetComponent<Rigidbody>().isKinematic = true;

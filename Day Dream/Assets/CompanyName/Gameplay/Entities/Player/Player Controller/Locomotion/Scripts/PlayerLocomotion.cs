@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
+﻿using System.Linq;
 using UnityEngine;
 
 using Sirenix.OdinInspector;
 
 using AH.Max.System;
+using AH.Max.Gameplay.System.Components;
 
 namespace AH.Max.Gameplay
 {
@@ -41,29 +40,26 @@ namespace AH.Max.Gameplay
 
         private bool isPreparing;
 
-        /// <summary>
-        /// The list of states that the player can move in
-        /// </summary>
-        [Tooltip("The list of states that the player can move in")]
+        [TabGroup(Tabs.Locomotion)]
         [SerializeField]
-        private PlayerState[] availableStates;
+        private string[] immobileStates;
+
+        [TabGroup(Tabs.Locomotion)]
+        [SerializeField]
+        private string isGroundedState;
 
 		public Vector3 playerOrientationDirection = new Vector3();
 		public Vector3 playerOrientationDirectionNotNormalized = new Vector3();
 
-        [TabGroup(Tabs.Locomotion)]
-        [SerializeField]
         private Transform LocomotionOrientationController;
 
 		private Animator animator;
 		private Rigidbody _rigidbody;
-
 		private PlayerLocomotionAnimationHook playerLocomotionAnimationHook;
 		private PlayerAttackAnimationController playerAttackAnimationController;
-        private PlayerGroundedComponent playerGroundedComponent;
 		private PlayerEvade playerEvade;
-        private PlayerStateComponent playerStateComponent;
         private PlayerJump playerJump;
+        private StateComponent stateComponent;
         private TargetingManager targetingManager;
 
 		private void Start () 
@@ -73,11 +69,10 @@ namespace AH.Max.Gameplay
 
 			playerLocomotionAnimationHook = GetComponentInChildren<PlayerLocomotionAnimationHook>();
 			playerAttackAnimationController = GetComponent<PlayerAttackAnimationController>();
-            playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
 			playerEvade = GetComponent<PlayerEvade>();
-            playerStateComponent = GetComponent<PlayerStateComponent>();
             playerJump = GetComponent<PlayerJump>();
             targetingManager = GetComponentInChildren<TargetingManager>();
+            stateComponent = GetComponent<StateComponent>();
 
             if(LocomotionOrientationController == null)
             {
@@ -131,7 +126,7 @@ namespace AH.Max.Gameplay
                  return;
             }
 
-            if(!playerGroundedComponent.IsGrounded)
+            if(!IsGrounded())
             {
                 _speed = airSpeed;
             }
@@ -177,7 +172,7 @@ namespace AH.Max.Gameplay
 
 		private void RotatePlayer()
 		{
-            if(playerGroundedComponent.IsGrounded)
+            if(IsGrounded())
             {
 			    transform.rotation = Quaternion.Lerp(transform.rotation, GetOrientationRotation(), turnDamping);
             }
@@ -185,7 +180,7 @@ namespace AH.Max.Gameplay
 
 		private void FaceTarget()
 		{
-            if(playerGroundedComponent.IsGrounded)
+            if(IsGrounded())
             {
                 if (targetingManager.LockedOn && targetingManager.CurrentTarget != null)
                 {
@@ -234,20 +229,12 @@ namespace AH.Max.Gameplay
 		///</Summary>
 		private bool CanMove()
 		{
-            foreach (var _state in availableStates)
-            {
-                if(playerStateComponent.CheckState(_state))
-                {
-			        if(playerOrientationDirection == Vector3.zero)
-			        {
-				        return false;
-			        }
-
-                    return true;
-                }
-            }
-			
-			return false;
+            return !stateComponent.AnyStateTrue(immobileStates.ToList()) && playerOrientationDirection != Vector3.zero;
 		}
+
+        private bool IsGrounded()
+        {
+            return stateComponent.GetState(isGroundedState); 
+        }
 	}
 }

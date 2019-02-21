@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
 
 using Sirenix.OdinInspector;
+
+using AH.Max.Gameplay.System.Components;
 
 namespace AH.Max.Gameplay
 {
@@ -33,7 +36,7 @@ namespace AH.Max.Gameplay
         private bool isPreparing;
 
         private PlayerLocomotion playerLocomotion;
-        private PlayerStateComponent playerStateComponent;
+        private StateComponent stateComponent;
         private PlayerAttackAnimationController playerAttackAnimatorController;
         private PlayerEvade playerEvade;
         private TargetingManager targetingManager;
@@ -42,12 +45,12 @@ namespace AH.Max.Gameplay
         private Animator animator;
 
         [SerializeField]
-        private PlayerState[] states;
+        private string[] unusableStates;
 
 		private void Start()
 		{
 			playerLocomotion = GetComponent<PlayerLocomotion>();
-			playerStateComponent= GetComponent<PlayerStateComponent>();
+            stateComponent = GetComponent<StateComponent>();
 			playerAttackAnimatorController = GetComponent<PlayerAttackAnimationController>();
 			playerEvade = GetComponent<PlayerEvade>();
 			animator = GetComponent<Animator>();
@@ -93,27 +96,20 @@ namespace AH.Max.Gameplay
 		{
 			if(CheckState())
 			{
-				animator.SetFloat(Horizontal, 0);
-				animator.SetFloat(Vertical, 0);
-				return;
+			    animator.SetFloat(LockedOn, (float)lockedOnAnimatorFloat);
+		    	animator.SetFloat(Horizontal, Mathf.Lerp(animator.GetFloat(Horizontal), horizontalAnimatorFloat, 0.2f));
+	    		animator.SetFloat(Vertical, Mathf.Lerp(animator.GetFloat(Vertical), verticalAnimatorFloat, 0.2f));
+
+                return;
 			}
 
-			animator.SetFloat(LockedOn, (float)lockedOnAnimatorFloat);
-			animator.SetFloat(Horizontal, Mathf.Lerp(animator.GetFloat(Horizontal), horizontalAnimatorFloat, 0.2f));
-			animator.SetFloat(Vertical, Mathf.Lerp(animator.GetFloat(Vertical), verticalAnimatorFloat, 0.2f));
+			animator.SetFloat(Horizontal, 0);
+			animator.SetFloat(Vertical, 0);
 		}
 
         private bool CheckState()
         {
-            foreach(var _state in states)
-            {
-                if(playerStateComponent.CheckState(_state))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return !stateComponent.AnyStateTrue(unusableStates.ToList());
         }
 
         public void SetIsPreparing(bool state)
