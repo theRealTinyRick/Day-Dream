@@ -1613,7 +1613,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1840773477816844}
-  m_LocalRotation: {x: 0.0920522, y: 0.7003982, z: -0.091869235, w: 0.70180404}
+  m_LocalRotation: {x: 0.09205219, y: 0.7003981, z: -0.09186922, w: 0.70180404}
   m_LocalPosition: {x: -0.0000010728814, y: 0, z: -0.000000002152092}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1713,7 +1713,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1190766840344596}
-  m_LocalRotation: {x: 0.13005213, y: 0.0000001192093, z: -0.0000000074505815, w: 0.9915072}
+  m_LocalRotation: {x: 0.13005215, y: 0.0000001192093, z: -0.0000000074505815, w: 0.9915072}
   m_LocalPosition: {x: -0.0000013001263, y: 3.8933334, z: -7.040001}
   m_LocalScale: {x: 1.333333, y: 1.3333336, z: 1.3333333}
   m_Children: []
@@ -2868,7 +2868,7 @@ MonoBehaviour:
   - IsClimbing
   - IsAttacking
   - IsEvading
-  isGroundedState: 
+  isGroundedState: IsGrounded
   playerOrientationDirection: {x: 0, y: 0, z: 0}
   playerOrientationDirectionNotNormalized: {x: 0, y: 0, z: 0}
 --- !u!114 &114154854425537744
@@ -3261,7 +3261,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToCheck: 1
-  ledge: {x: 0, y: 0, z: 0}
   wallNormal: {x: 0, y: 0, z: 1}
   playerOffset: {x: 0.17, y: -0.89}
   maxLedgeShimyHeight: 2.5
@@ -3274,7 +3273,9 @@ MonoBehaviour:
   ledgeClimbDistance: 1
   climbSpeed: 0.04
   mountSpeed: 0.1
-  climbUpPosition: {x: 0, y: 0, z: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1024
   ledgeClimbStarted:
     m_PersistentCalls:
       m_Calls:
@@ -3372,7 +3373,7 @@ MonoBehaviour:
   - IsAttacking
   - IsClimbing
   - IsEvading
-  isGroundedState: 
+  isGroundedState: IsGrounded
 --- !u!114 &114488635941522016
 MonoBehaviour:
   m_ObjectHideFlags: 1
