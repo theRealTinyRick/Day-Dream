@@ -5,11 +5,9 @@ using UnityEngine;
 
 using Sirenix.OdinInspector;
 
-using AH.Max.Gameplay;
-
 namespace AH.Max.Gameplay
 {
-	public class PlayerStateComponent : MonoBehaviour 
+	public class PlayerStateComponent : SerializedMonoBehaviour
 	{
 		[TabGroup(Tabs.Properties)]
 		[SerializeField]
@@ -26,21 +24,31 @@ namespace AH.Max.Gameplay
 			}
 		}
 
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        public Dictionary<PlayerState, bool> states = new Dictionary<PlayerState, bool>();
+
 		private PlayerAttackAnimationController playerAttackAnimationController;
 		private PlayerGroundedComponent playerGroundedComponent;
-		private PlayerVault playerVault;
 
 		private void Start() 
 		{
 			playerAttackAnimationController = GetComponent<PlayerAttackAnimationController>();
 			playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
-			playerVault = GetComponent<PlayerVault>();
+
+            Debug.Log("Player State Component: lock the cursor");
+            Cursor.lockState = CursorLockMode.Locked;
 		}
 
-		public void SetStateHard(PlayerState state)
+		public void SetStateTrue(PlayerState state)
 		{
 			currentState = state;
 		}
+
+        public void SetState()
+        {
+
+        }
 
 		public void ResetState()
 		{
@@ -49,13 +57,33 @@ namespace AH.Max.Gameplay
 
         public bool CheckState(PlayerState state)
         {
-            if(currentState == state)
+            if(states.ContainsKey(state))
             {
-                return true;
+                return states[state];
             }
 
 		    return false;
         }
 
-	}
+        /// <summary>
+        /// If any of the states in the list are true then return true
+        /// </summary>
+        /// <param name="stateList"></param>
+        /// <returns></returns>
+        public bool IsInUnavailableState(List <PlayerState> stateList)
+        {
+            foreach(PlayerState _state in stateList)
+            {
+                if(states.ContainsKey(_state))
+                {
+                    if(states[_state])
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AH.Max.System.Inventory
 {
-    [CreateAssetMenu(fileName = "New Identity Type", menuName = "CompanyName/IdentityType", order = 1)]
+    [CreateAssetMenu(fileName = "New Item", menuName = "CompanyName/Item", order = 1)]
     public class ItemType : ScriptableObject
     {
         public ItemTypes itemType;

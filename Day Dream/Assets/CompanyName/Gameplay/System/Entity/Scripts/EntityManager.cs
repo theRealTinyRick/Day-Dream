@@ -46,7 +46,7 @@ namespace AH.Max.System
             {
                 if(!gameCamera)
                 {
-                    gameCamera = GetEntity(IdentityTypes.Camera);
+                    gameCamera = GetEntity(UsageType.Camera);
                     if(!gameCamera)
                     {
                         Debug.LogError( "The game camera is not present in the scene. You may need to initialize the resources scene" );
@@ -80,11 +80,11 @@ namespace AH.Max.System
 
             switch (entity.IdentityType.type)
             {
-                case IdentityTypes.Player:
+                case UsageType.Player:
                     _player = entity;
                     break;
 
-                case IdentityTypes.Enemy:
+                case UsageType.Enemy:
                     if(!_enemies.Contains(entity))
                     {
                         _enemies.Add(entity);
@@ -115,7 +115,7 @@ namespace AH.Max.System
         {
             foreach(Entity e in entities)
             {
-                if(e.IdentityType.type == IdentityTypes.Player)
+                if(e.IdentityType.type == UsageType.Player)
                 {
                     return e;
                 }
@@ -179,7 +179,7 @@ namespace AH.Max.System
         {
             foreach(Entity _e in Instance.entities)
             {
-                if(_e.IdentityType.type == type.type)
+                if(_e.IdentityType == type)
                 {
                     return _e;
                 }
@@ -190,7 +190,7 @@ namespace AH.Max.System
         ///<Summary>
         ///Find the entity in the list with the IdentityTypes
         ///</Summary>
-        public static Entity GetEntity (IdentityTypes type)
+        public static Entity GetEntity (UsageType type)
         {
             foreach(Entity _e in Instance.entities)
             {

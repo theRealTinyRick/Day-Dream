@@ -12,26 +12,8 @@ namespace AH.Max.Gameplay
         [TabGroup(Tabs.Properties)]
         [SerializeField]
         private float distanceToCheck;
-
-        [HideInInspector]
         public float DistanceToCheck { get { return distanceToCheck; } }
 
-        /// <summary>
-        /// The actual position of the ledge
-        /// </summary>
-        /// <returns></returns>
-        [SerializeField]
-        [TabGroup(Tabs.Properties)]
-        private Vector3 ledge = new Vector3();
-        public Vector3 Ledge { get { return ledge; } }
-
-        private Quaternion ledgeRotation;
-
-        /// <summary>
-        /// The normal of the wall that we are detecting against.
-        /// It should be kept in mind that if you use this yo should assume to only use this if there is a validLedge
-        /// </summary>
-        /// <returns></returns>
         [SerializeField]
         [TabGroup(Tabs.Properties)]
         private Vector3 wallNormal = new Vector3();
@@ -41,8 +23,6 @@ namespace AH.Max.Gameplay
         [TabGroup(Tabs.Properties)]
         private Vector2 playerOffset = new Vector3();
         public Vector2 PlayerOffset { get { return wallNormal; } }
-
-        private Vector3 WallCheckPoint;
 
         [TabGroup(Tabs.Properties)]
         [SerializeField]
@@ -87,34 +67,35 @@ namespace AH.Max.Gameplay
         private float mountSpeed;
 
         [TabGroup(Tabs.Properties)]
-        [ShowInInspector]
-        private bool isClimbing = false;
-
-        [TabGroup(Tabs.Properties)]
-        [ShowInInspector]
-        private bool isInPosition = false;
-
-        [TabGroup(Tabs.Properties)]
         [SerializeField]
-        private bool canClimbUp 
-        {
-            get 
-            {
-                return IsAtNextClimbPoint();
-            }
-        }
+        private LayerMask layerMask;
 
-        private bool isClimbingUp = false;  
-
-        [TabGroup(Tabs.Properties)]
+        [TabGroup(Tabs.Events)]
         [SerializeField]
+        LedgeClimbStartEvent ledgeClimbStarted = new LedgeClimbStartEvent();
+
+        [TabGroup(Tabs.Events)]
+        [SerializeField]
+        LedgeClimbStoppedEvent ledgeClimbStopped = new LedgeClimbStoppedEvent();
+
+        private Vector3 ledge = new Vector3();
+        public Vector3 Ledge { get { return ledge; } }
+
         private Vector3 climbUpPosition = new Vector3();
 
-        private LayerMask layerMask = 1 << 8;
-        Vector3 floorPoint = new Vector3();
+        private Quaternion ledgeRotation;
+
+        private bool isClimbingUp = false;
+        private bool isDismounting;
+        private bool isInPosition = false;
+
+        private bool isClimbing = false;
+        public bool IsClimbing {get {return isClimbing;}}
+
+        private bool canClimbUp {get {return IsAtNextClimbPoint();}}
 
         private Rigidbody _rigidbody;
-        private PlayerElevationDetection playerElevationDetection;
+        private WallFinder wallFinder;
         private PlayerGroundedComponent playerGroundedComponent;
         private PlayerStateComponent playerStateComponent;
         private PlayerLedgeAnimHook playerLedgeAnimHook;
@@ -123,24 +104,20 @@ namespace AH.Max.Gameplay
         {
             ledge = Vector3.zero;
 
-            layerMask = ~layerMask;
-
             _rigidbody = GetComponent<Rigidbody>();
-            playerElevationDetection = GetComponent<PlayerElevationDetection>();
+            wallFinder = GetComponent<WallFinder>();
             playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
             playerStateComponent = GetComponent<PlayerStateComponent>();
             playerLedgeAnimHook = GetComponent<PlayerLedgeAnimHook>();
 
             InputDriver.jumpButtonEvent.AddListener(InputResponse);
+            InputDriver.jumpButtonHeldEvent.AddListener(InputResponse);
         }
 
         private void OnDisable()
         {
             InputDriver.jumpButtonEvent.RemoveListener(InputResponse);
-        }
-
-        private void Update()
-        {
+            InputDriver.jumpButtonHeldEvent.RemoveListener(InputResponse);
         }
 
         private void FixedUpdate()
@@ -156,6 +133,11 @@ namespace AH.Max.Gameplay
             {
                 Dismount();
             }
+
+            if(!InputDriver.jumpButtonIsBeingHeld)
+            {
+                isDismounting = false;
+            }
         }
 
         private void InputResponse()
@@ -168,7 +150,6 @@ namespace AH.Max.Gameplay
                 }
                 else
                 {
-                    // added this to make sure the player has finished an animation before an manual dismount
                     if(IsAtNextClimbPoint())
                     {
                         Dismount();
@@ -177,7 +158,10 @@ namespace AH.Max.Gameplay
             }
             else
             {
-                InitClimb();
+                if(!isClimbing && !isDismounting)
+                {
+                    InitClimb();
+                }
             }
         }
 
@@ -188,22 +172,22 @@ namespace AH.Max.Gameplay
                 isClimbing = true;
                 _rigidbody.isKinematic = true;
 
-                //SetLedge(/*LedgeWithPlayerOffset(playerElevationDetection.Ledge)*/playerElevationDetection.Ledge, playerElevationDetection.WallNormal);
+                SetLedge(wallFinder.Ledge, wallFinder.WallNormal);
 
-                SetLedge(playerElevationDetection.Ledge, playerElevationDetection.WallNormal);
+                StartCoroutine(GetInPosition(LedgeWithPlayerOffset(ledge), wallNormal));
 
                 playerLedgeAnimHook.PlayMountAnim();
 
-                wallNormal = playerElevationDetection.WallNormal;
-
-                StartCoroutine(GetInPosition(LedgeWithPlayerOffset(playerElevationDetection.Ledge), playerElevationDetection.WallNormal));
-
-                playerStateComponent.SetStateHard(PlayerState.Traversing);
+                if(ledgeClimbStarted != null)
+                {
+                    ledgeClimbStarted.Invoke();
+                }
             }
         }
 
         private void Dismount()
         {
+            isDismounting = true;
             isClimbingUp = false;
             isClimbing = false;
             isInPosition = false;
@@ -211,58 +195,55 @@ namespace AH.Max.Gameplay
             ledge = Vector3.zero;
             playerLedgeAnimHook.Dismount();
 
-            Debug.Log("REMEMEMBER TO RESET THE PLAYERS ROTATION SO THEY DONT LEAN - YOU HAVENT YET");
-
-            if (playerStateComponent.CurrentState == PlayerState.Traversing)
+            ResetRotation();
+            
+            if(ledgeClimbStopped != null)
             {
-                playerStateComponent.SetStateHard(PlayerState.Normal);
+                ledgeClimbStopped.Invoke();
             }
+        }
+
+        private void ResetRotation()
+        {
+            Quaternion _rotation = Quaternion.Euler(0, transform.root.rotation.y, 0);
         }
 
         public bool CheckValidLedge()
         {
-            //check the elevation detector
-            if(playerElevationDetection.ValidLedge)
+            Vector3 _rayCastOrigin = transform.position;
+            _rayCastOrigin.y += 0.5f;
+            RaycastHit _hitResult;
+            if(Physics.Raycast(_rayCastOrigin, Vector3.down, out _hitResult, 100))
             {
-                Vector3 _rayCastOrigin = transform.position;
-                _rayCastOrigin.y += 0.5f;
-                RaycastHit _hitResult;
-                if(Physics.Raycast(_rayCastOrigin, Vector3.down, out _hitResult, 100))
+                float _floorHit = _hitResult.point.y;
+                float _ledgeHeight = wallFinder.Ledge.y;
+
+                if(_floorHit < _ledgeHeight)
                 {
-                    floorPoint = _hitResult.point;
+                    float _heightDifference = _ledgeHeight - _floorHit;
 
-                    float _floorHit = _hitResult.point.y;
-                    float _ledgeHeight = playerElevationDetection.Ledge.y;
+                    float _maxHeight = playerGroundedComponent.IsGrounded ? maxMountHeight : maxAirMountHeight;
+                    float _minHeight = playerGroundedComponent.IsGrounded ? minMountHeight : 0;
 
-                    if(_floorHit < _ledgeHeight)
+                    if(_heightDifference > _minHeight && _heightDifference < _maxHeight)
                     {
-                        float _heightDifference = _ledgeHeight - _floorHit;
-
-                        float _maxHeight = playerGroundedComponent.IsGrounded ? maxMountHeight : maxAirMountHeight;
-                        float _minHeight = playerGroundedComponent.IsGrounded ? minMountHeight : 0;
-
-                        if(_heightDifference > _minHeight && _heightDifference < _maxHeight)
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                 }
             }
 
-            // return true if the player is so high in the air that the ray doesn't hit anymore
             return false;
         }
 
         private IEnumerator GetInPosition(Vector3 position, Vector3 wallNormal)
         {
-            // I need to add something here to check if the mount failed for some reason then call the dismount method
-
             Quaternion _rotation = Quaternion.LookRotation(-wallNormal);
-            while(Vector3.Distance(transform.position, position) > 0.1f)
+            while(Vector3.Distance(transform.position, position) > 0.1f || InputDriver.jumpButtonIsBeingHeld)
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, _rotation, 0.5f);
                 transform.position = Vector3.MoveTowards(transform.position, position, mountSpeed);
-                yield return new WaitForEndOfFrame();
+
+                yield return new WaitForFixedUpdate();
             }
 
             isInPosition = true;
@@ -280,11 +261,8 @@ namespace AH.Max.Gameplay
                 while (Vector3.Distance(transform.position, position) > 0.1f)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, position, mountSpeed);
-                    yield return new WaitForEndOfFrame();
+                    yield return new WaitForFixedUpdate();
                 }
-
-                //ROOT MOTION
-                //playerLedgeAnimHook.PlayClimbUpAnimation();
 
                 Dismount();
 
@@ -323,19 +301,14 @@ namespace AH.Max.Gameplay
 
                 RaycastHit _hit;
 
-                //Debug.DrawRay(_origin, transform.forward * distanceToCheck, Color.red, 5);
                 if (Physics.Raycast(_origin, transform.forward, out _hit, distanceToCheck, layerMask))
                 {
-                    //get the reverse of the angle we shot the ray from to get an accurate angle calculation
                     Vector3 _hitAngle = -transform.forward;
 
-                    //we store this distance so we can offset our downward ray cast and not over shoot it
                     float _distanceToCheckDown = Vector3.Distance(_origin, _hit.point) + 0.1f;
 
                     if (CheckWallSlope(_hit))
                     {
-                        ///TODO: add a check on if we find a spot to climb to - MAYBE ADD 90 DEGREE TURNS IN TOWARDS THE WALL
-
                         float horizontalInput = InputDriver.LocomotionDirection.normalized.x < 0 ? -1 : 1;
 
                         Vector3 _obsticalDirection = transform.right * horizontalInput;
@@ -355,7 +328,6 @@ namespace AH.Max.Gameplay
                         {
                             _targetOrigin = _hit.point + _hit.normal;
                             _obsticalDirection = -_hit.normal;
-                         //   Debug.DrawRay(_origin, _obsticalDirection * ledgeClimbDistance, Color.green, 3);
                         }
                         else
                         {
@@ -363,12 +335,8 @@ namespace AH.Max.Gameplay
                             _obsticalDirection = transform.forward;
                         }
 
-                        //_targetOrigin += _hit.normal * 0.3f;
-
                         _origin = _targetOrigin;
-                        WallCheckPoint = _targetOrigin;
 
-                   //     Debug.DrawRay(_origin, _obsticalDirection * (distanceToCheck + 1), Color.red, 5);
                         if (Physics.Raycast(_origin, _obsticalDirection, out _hit, distanceToCheck + 1, layerMask))
                         {
                             Vector3 _ledge = _hit.point;
@@ -377,8 +345,6 @@ namespace AH.Max.Gameplay
                             _origin = _hit.point;
                             _origin.y += maxLedgeShimyHeight;
                             _origin += -_normal * _distanceToCheckDown;
-
-                         //   Debug.DrawRay(_origin, Vector3.down * maxLedgeShimyHeight, Color.red, 5);
 
                             if (Physics.Raycast(_origin, Vector3.down, out _hit, maxLedgeShimyHeight, layerMask))
                             {
@@ -412,8 +378,6 @@ namespace AH.Max.Gameplay
         private Vector3 CalculateClimbUpPosition(Vector3 ledgePoint, Vector3 normal)
         {
             ledgePoint -= normal;
-
-            Debug.Log("DO SOMETHING HERE TO MAKE SURE WE HAVE A CLEAR POSITION");
 
             return ledgePoint;
         }
@@ -467,34 +431,6 @@ namespace AH.Max.Gameplay
             ledge += WallNormal * playerOffset.x;
             ledge += Vector3.up * playerOffset.y;
             return ledge;
-        }
-
-        /// <summary>
-        /// Draw the ledge positno if its good
-        /// </summary>
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.black;
-            Gizmos.DrawCube(WallCheckPoint, Vector3.one * 0.15f);
-
-            Gizmos.color = Color.red;
-            Gizmos.DrawCube(ledge, Vector3.one * 0.2f);
-
-            Gizmos.color = Color.blue;
-
-            Vector3 maxHeightPos = transform.position;
-            maxHeightPos.y += maxMountHeight;
-            Gizmos.DrawSphere(maxHeightPos, 0.1f);
-
-            Vector3 minHieghtPos = floorPoint;
-            minHieghtPos.y += minMountHeight;
-            Gizmos.DrawSphere(minHieghtPos, 0.1f);
-
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawSphere(floorPoint, 0.1f);
-
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(climbUpPosition, 0.1f);
         }
     }
 }

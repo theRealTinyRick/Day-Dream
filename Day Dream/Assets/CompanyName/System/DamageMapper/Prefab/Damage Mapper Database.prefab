@@ -65,8 +65,8 @@ MonoBehaviour:
     - Name: damageMap
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[AH.Max.System.IdentityType,
-        Assembly-CSharp],[System.Collections.Generic.List`1[[AH.Max.System.IdentityType,
-        Assembly-CSharp]], mscorlib]], mscorlib
+        Assembly-CSharp],[AH.Max.System.DamageMap.DamageAmountAndDamageableEntities,
+        Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 1|System.Collections.Generic.EqualityComparer`1+DefaultComparer[[AH.Max.System.IdentityType,

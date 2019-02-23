@@ -26,6 +26,12 @@ public class InteractableComponent : SerializedMonoBehaviour
     [SerializeField]
     private List<Interaction> validInteractions = new List<Interaction>();
 
+    [TabGroup(Tabs.Properties)]
+    [SerializeField]
+    private Outline outlineComponent;
+
+    public GameObject objectActingUpon;
+
     private bool hasBeenInteractedWith = false;
     public bool HasBeenInteractedWith
     {
@@ -35,21 +41,54 @@ public class InteractableComponent : SerializedMonoBehaviour
         }
     }
 
+    public void Start()
+    {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        foreach(Interaction _interaction in interactions)
+        {
+            _interaction.Initialize();
+
+            foreach(IInteractionFilter _filter in _interaction.filters)
+            {
+                _filter.interactable = this;
+            }
+        }
+
+        if(outlineComponent != null)
+        {
+            outlineComponent.enabled = false;
+        }
+    }
 
     public void OnTriggerStay(Collider other)
     {
         if(ValidateCollider(other))
         {
+            if(outlineComponent != null)
+            {
+                outlineComponent.enabled = true;
+            }
+
+            objectActingUpon = other.gameObject;
+
             Evaluate();
             EvaluateValidInteractionInput();
         }
-
     }
 
     public void OnTriggerExit(Collider other)
     {
         if (ValidateCollider(other))
         {
+            if (outlineComponent != null)
+            {
+                outlineComponent.enabled = false;
+            }
+
             Clear();
         }
     }
@@ -88,7 +127,6 @@ public class InteractableComponent : SerializedMonoBehaviour
                 {
                     _interaction.ExecuteInteraction();
                     hasBeenInteractedWith = true;
-
                     return;
                 }
             }
@@ -100,12 +138,14 @@ public class InteractableComponent : SerializedMonoBehaviour
     /// </summary>
     public void Clear()
     {
+        objectActingUpon = null;
+
         validInteractions.Clear();
     }
 
     private bool ValidateCollider(Collider other)
     {
-        if (LayerMaskUtility.Contains(layers, other.gameObject.layer))
+        if (LayerMaskUtility.IsWithinLayerMask(layers, other.gameObject.layer))
         {
             Entity _entity = other.transform.root.GetComponentInChildren<Entity>();
             if (_entity != null)
@@ -116,6 +156,7 @@ public class InteractableComponent : SerializedMonoBehaviour
                 }
             }
         }
+
         return false;
     }
 }

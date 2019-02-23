@@ -32,14 +32,14 @@ TagManager:
   - 
   - Player
   - Environment
-  - Ledge
-  - FogVolumeShadowCaster
-  - FogVolume
-  - FogVolumeSurrogate
-  - FogVolumeUniform
+  - Climbable
   - 
   - 
   - 
+  - 
+  - Enemy
+  - Platform
+  - Loot
   - 
   - 
   - 

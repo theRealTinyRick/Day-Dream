@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -7,10 +8,17 @@ using Sirenix.OdinInspector;
 
 namespace AH.Max.System.DamageMap
 {
+    [Serializable]
+    public class DamageAmountAndDamageableEntities
+    {
+        public float damageAmount;
+        public List<IdentityType> damageableEntities;
+    }
+
     public class DamageMapDataBase : Singleton_SerializedMonobehaviour<DamageMapDataBase>
     {
         [TabGroup(Tabs.Properties)]
-        public Dictionary<IdentityType, List<IdentityType>> damageMap;
+        public Dictionary<IdentityType, DamageAmountAndDamageableEntities> damageMap;
 
         /// <summary>
         /// Determine wheter or not you can damage the entity being targeted by passing in the identity typesz
@@ -20,11 +28,11 @@ namespace AH.Max.System.DamageMap
         /// <returns></returns>
         public static bool CanDamage(IdentityType damager, IdentityType beingDamaged)
         {
-            List<IdentityType> _listOfDamageableEntities;
+            DamageAmountAndDamageableEntities _object;
 
-            if(Instance.damageMap.TryGetValue(damager, out _listOfDamageableEntities))
+            if (Instance.damageMap.TryGetValue(damager, out _object))
             {
-                return _listOfDamageableEntities.Contains(beingDamaged);
+                return _object.damageableEntities.Contains(beingDamaged);
             }
 
             return false;
@@ -44,11 +52,11 @@ namespace AH.Max.System.DamageMap
 
             if(_damager != null && _beingDamage != null)
             {
-                List<IdentityType> _listOfDamageableEntities;
-             
-                if (Instance.damageMap.TryGetValue(_damager.IdentityType, out _listOfDamageableEntities))
+                DamageAmountAndDamageableEntities _object;
+
+                if (Instance.damageMap.TryGetValue(_damager.IdentityType, out _object))
                 {
-                   return _listOfDamageableEntities.Contains(_beingDamage.IdentityType);
+                   return _object.damageableEntities.Contains(_beingDamage.IdentityType);
                 }
             }
 
@@ -59,7 +67,7 @@ namespace AH.Max.System.DamageMap
 
         public static List<IdentityType> GetWhatICanDamage(IdentityType damager)
         {
-            return Instance.damageMap[damager];
+            return Instance.damageMap[damager].damageableEntities;
         }
 
         /// <summary>
@@ -68,16 +76,29 @@ namespace AH.Max.System.DamageMap
         /// </summary>
         /// <param name="_damager"></param>
         /// <returns></returns>
-        public static List<Entity> GetWhatICanDamage(Entity _damager, bool getOnlyAlive = false)
+        public static List<Entity> GetWhatICanDamage(Entity damager, bool getOnlyAlive = false)
         {
-            List<IdentityType> _damageableIdentities;
+            DamageAmountAndDamageableEntities _object;
 
-            if(Instance.damageMap.TryGetValue(_damager.IdentityType, out _damageableIdentities))
+            if (Instance.damageMap.TryGetValue(damager.IdentityType, out _object))
             {
-                return EntityManager.GetEntities(_damageableIdentities);
+                return EntityManager.GetEntities(_object.damageableEntities);
             }
 
             return null;
+        }
+
+        public static float GetDamageAmount(Entity damager)
+        {
+            DamageAmountAndDamageableEntities _object;
+
+            if (Instance.damageMap.TryGetValue(damager.IdentityType, out _object))
+            {
+                return _object.damageAmount;
+            }
+
+            Debug.LogWarning("The given damage dealer has not been added to the damage mapper");
+            return 0;
         }
 
         //TODO: add an option to get only the ones that are alive

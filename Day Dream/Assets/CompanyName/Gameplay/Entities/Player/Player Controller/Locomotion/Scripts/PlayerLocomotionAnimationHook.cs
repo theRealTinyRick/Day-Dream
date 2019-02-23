@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
 
 using Sirenix.OdinInspector;
+
+using AH.Max.Gameplay.System.Components;
 
 namespace AH.Max.Gameplay
 {
@@ -30,23 +33,29 @@ namespace AH.Max.Gameplay
 		[SerializeField]
 		private bool ShouldLean; // determines if the player should lean while running.
 
+        private bool isPreparing;
+
         private PlayerLocomotion playerLocomotion;
-        private PlayerStateComponent playerStateComponent;
+        private StateComponent stateComponent;
         private PlayerAttackAnimationController playerAttackAnimatorController;
         private PlayerEvade playerEvade;
+        private TargetingManager targetingManager;
+        private Rigidbody rigidbody;
 
         private Animator animator;
 
         [SerializeField]
-        private PlayerState[] states;
+        private string[] unusableStates;
 
 		private void Start()
 		{
 			playerLocomotion = GetComponent<PlayerLocomotion>();
-			playerStateComponent= GetComponent<PlayerStateComponent>();
+            stateComponent = GetComponent<StateComponent>();
 			playerAttackAnimatorController = GetComponent<PlayerAttackAnimationController>();
 			playerEvade = GetComponent<PlayerEvade>();
 			animator = GetComponent<Animator>();
+            targetingManager = GetComponentInChildren<TargetingManager>();
+            rigidbody = GetComponent<Rigidbody>();
 		}
 
 		private void Update () 
@@ -65,43 +74,47 @@ namespace AH.Max.Gameplay
 			Debug.DrawRay(transform.position, _forwardVector, Color.blue);
 			Debug.DrawRay(transform.position, _crossProduct, Color.green);
 
-			if(lockedOnAnimatorFloat == 0)
+			if(!isPreparing)
 			{
-                verticalAnimatorFloat = _moveDirection.magnitude;
-				horizontalAnimatorFloat = ShouldLean ? _crossProduct.y : 0;
-			}
-			else
+                Vector3 _velocoty = rigidbody.velocity;
+                _velocoty.y = 0;
+
+                verticalAnimatorFloat = (_velocoty.magnitude * Vector3.Dot(_forwardVector, _moveDirection)) / 2;
+
+                horizontalAnimatorFloat = ShouldLean ? _crossProduct.y : 0;
+                lockedOnAnimatorFloat = 0;
+            }
+            else
 			{
-				verticalAnimatorFloat = _moveDirection.magnitude * Vector3.Dot(_forwardVector, _moveDirection);
-				horizontalAnimatorFloat = _crossProduct.y;
-			}
+                verticalAnimatorFloat = _moveDirection.magnitude * Vector3.Dot(_forwardVector, _moveDirection);
+                horizontalAnimatorFloat = _crossProduct.y;
+                lockedOnAnimatorFloat = 1;
+            }
 		}
 
 		private void ApplyAnimationFloats()
 		{
 			if(CheckState())
 			{
-				animator.SetFloat(Horizontal, 0);
-				animator.SetFloat(Vertical, 0);
-				return;
+			    animator.SetFloat(LockedOn, (float)lockedOnAnimatorFloat);
+		    	animator.SetFloat(Horizontal, Mathf.Lerp(animator.GetFloat(Horizontal), horizontalAnimatorFloat, 0.2f));
+	    		animator.SetFloat(Vertical, Mathf.Lerp(animator.GetFloat(Vertical), verticalAnimatorFloat, 0.2f));
+
+                return;
 			}
 
-			animator.SetFloat(LockedOn, (float)lockedOnAnimatorFloat);
-			animator.SetFloat(Horizontal, Mathf.Lerp(animator.GetFloat(Horizontal), horizontalAnimatorFloat, 0.2f));
-			animator.SetFloat(Vertical, Mathf.Lerp(animator.GetFloat(Vertical), verticalAnimatorFloat, 0.2f));
+			animator.SetFloat(Horizontal, 0);
+			animator.SetFloat(Vertical, 0);
 		}
 
         private bool CheckState()
         {
-            foreach(var _state in states)
-            {
-                if(playerStateComponent.CheckState(_state))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return !stateComponent.AnyStateTrue(unusableStates.ToList());
         }
-	}
+
+        public void SetIsPreparing(bool state)
+        {
+            isPreparing = state;
+        }
+    }
 }
