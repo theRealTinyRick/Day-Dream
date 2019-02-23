@@ -63,7 +63,6 @@ public class GameCamera : Entity
 		if(useCameraController)
 		{
 			if(playerTransform == null) return;
-
 			ApplyMovement();
 			ApplyRotation();
 		}
