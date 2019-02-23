@@ -23,7 +23,7 @@ namespace BehaviorDesigner.Runtime.Tasks
 
         public override TaskStatus OnUpdate()
         {
-            if(agent == null || sharedTarget == null)
+            if(agent == null || sharedTarget.Value == null)
             {
                 return TaskStatus.Failure;
             }
