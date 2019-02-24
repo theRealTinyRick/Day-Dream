@@ -38,7 +38,7 @@ namespace AH.Max.Gameplay.Camera
 
         [TabGroup(Tabs.Properties)]
         [SerializeField]
-        private PlayerLedgeFinder playerLedgeFinder;
+        private PlayerLedgeClimber playerLedgeFinder;
 
         [TabGroup(Tabs.Properties)]
         [SerializeField]
@@ -73,7 +73,7 @@ namespace AH.Max.Gameplay.Camera
 
             if(playerLedgeFinder == null)
             {
-                playerLedgeFinder = transform.root.GetComponentInChildren<PlayerLedgeFinder>();
+                playerLedgeFinder = transform.root.GetComponentInChildren<PlayerLedgeClimber>();
             }
         }
 

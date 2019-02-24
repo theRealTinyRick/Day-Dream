@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 
 namespace AH.Max.Gameplay
 {
-    public class PlayerLedgeFinder : MonoBehaviour
+    public class PlayerLedgeClimber : MonoBehaviour
     {
         [TabGroup(Tabs.Properties)]
         [SerializeField]
