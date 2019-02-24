@@ -1935,7 +1935,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1356110961047170}
-  m_LocalRotation: {x: 0.10480307, y: 0.6986111, z: -0.1045933, w: 0.70001376}
+  m_LocalRotation: {x: 0.10480305, y: 0.6986111, z: -0.10459328, w: 0.70001376}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2714,8 +2714,8 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_MaxSpeed: 300
-    m_AccelTime: 0
-    m_DecelTime: 0
+    m_AccelTime: 0.1
+    m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
     m_InvertInput: 0
@@ -2907,8 +2907,8 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_MaxSpeed: 300
-    m_AccelTime: 0
-    m_DecelTime: 0
+    m_AccelTime: 0.1
+    m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
     m_InvertInput: 0
@@ -3868,8 +3868,8 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_MaxSpeed: 300
-    m_AccelTime: 0
-    m_DecelTime: 0
+    m_AccelTime: 0.1
+    m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
     m_InvertInput: 0
@@ -4038,8 +4038,8 @@ MonoBehaviour:
   m_YAxis:
     Value: 0.5
     m_MaxSpeed: 2
-    m_AccelTime: 0
-    m_DecelTime: 0
+    m_AccelTime: 0.1
+    m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
     m_InvertInput: 0
@@ -4061,8 +4061,8 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_MaxSpeed: 300
-    m_AccelTime: 0
-    m_DecelTime: 0
+    m_AccelTime: 0.1
+    m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
     m_InvertInput: 0
