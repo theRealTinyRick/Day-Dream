@@ -76,6 +76,7 @@ namespace AH.Max.Gameplay
 		{
 			animator = GetComponent<Animator>();
             playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
+            stateComponent = GetComponent<StateComponent>();
 		}
 
 		private void OnEnable()

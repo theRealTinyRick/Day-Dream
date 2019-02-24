@@ -6,12 +6,12 @@ using Sirenix.OdinInspector;
 
 public class test : MonoBehaviour
 {
-    public IdentityType decendant;
-    public IdentityType ancestor;
+    [SerializeField]
+    public UnityEngine.Events.UnityEvent testFire = new UnityEngine.Events.UnityEvent();
 
     [Button]
 	public void Check ()
     {
-       
+        testFire.Invoke();
 	}
 }
