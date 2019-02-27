@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -113,13 +113,13 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: ff91f6ba81b20ed48970435de131111a, type: 2}
 --- !u!43 &63750196
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh43662
+  m_Name: pb_Mesh89866
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -326,14 +326,14 @@ Transform:
   - {fileID: 1608325683}
   - {fileID: 484757492}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &98542899
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh43764
+  m_Name: pb_Mesh89976
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -499,7 +499,7 @@ GameObject:
   m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &188683090
 Transform:
@@ -582,7 +582,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!108 &205163234
 Light:
@@ -652,7 +652,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 127
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &261241236
 MeshCollider:
@@ -1037,7 +1037,7 @@ GameObject:
   m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &337755564
 Transform:
@@ -1106,6 +1106,168 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 337755563}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &384559294
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 4.2245126
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 1.3312485
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.70639724
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7078156
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114783546469759672, guid: 6d6233b4d87bd37458f5be7f20b144a7,
+        type: 2}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 114783546469759672, guid: 6d6233b4d87bd37458f5be7f20b144a7,
+        type: 2}
+    - target: {fileID: 114290426086692548, guid: 6d6233b4d87bd37458f5be7f20b144a7,
+        type: 2}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 114290426086692548, guid: 6d6233b4d87bd37458f5be7f20b144a7,
+        type: 2}
+    - target: {fileID: 114313534190973474, guid: 6d6233b4d87bd37458f5be7f20b144a7,
+        type: 2}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 114313534190973474, guid: 6d6233b4d87bd37458f5be7f20b144a7,
+        type: 2}
+    - target: {fileID: 114693575239540444, guid: 6d6233b4d87bd37458f5be7f20b144a7,
+        type: 2}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 114693575239540444, guid: 6d6233b4d87bd37458f5be7f20b144a7,
+        type: 2}
+    - target: {fileID: 4673179325276018, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.07930595
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673179325276018, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.70194936
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673179325276018, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.07914719
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673179325276018, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7033587
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673179325276018, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.0000010728814
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673179325276018, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.000000002152092
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329181891031456, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.0000013001263
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329181891031456, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -7.040001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562329656559158, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.10480296
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562329656559158, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.10459338
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562329656559158, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.000002145763
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562329656559158, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.000000004304184
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446229158337076, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.13005215
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446229158337076, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.0000000074505815
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446229158337076, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.0000013001263
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446229158337076, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -7.040001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355187306402794, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.7003981
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355187306402794, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.09186922
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355187306402794, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.70180404
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355187306402794, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.0000010728814
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355187306402794, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.000000002152092
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562329656559158, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.6986112
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562329656559158, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7000135
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355187306402794, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.09205219
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &396856737
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,7 +1313,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &430072589
 Transform:
@@ -1227,7 +1389,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh43804
+  m_Name: pb_Mesh90048
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -1443,10 +1605,7 @@ MonoBehaviour:
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 7
-      Data: 3|TestInteractionFilter, Assembly-CSharp
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: 
       Entry: 13
@@ -1456,13 +1615,13 @@ MonoBehaviour:
       Data: 
     - Name: interactionStartedEvent
       Entry: 7
-      Data: 4|InteractionStartedEvent, Assembly-CSharp
+      Data: 3|InteractionStartedEvent, Assembly-CSharp
     - Name: m_PersistentCalls
       Entry: 7
-      Data: 5|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+      Data: 4|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
     - Name: m_Calls
       Entry: 7
-      Data: 6|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+      Data: 5|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
         UnityEngine.CoreModule]], mscorlib
     - Name: 
       Entry: 12
@@ -1485,13 +1644,13 @@ MonoBehaviour:
       Data: 
     - Name: interactionCompletedEvent
       Entry: 7
-      Data: 7|InteractionCompletedEvent, Assembly-CSharp
+      Data: 6|InteractionCompletedEvent, Assembly-CSharp
     - Name: m_PersistentCalls
       Entry: 7
-      Data: 8|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+      Data: 7|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
     - Name: m_Calls
       Entry: 7
-      Data: 9|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+      Data: 8|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
         UnityEngine.CoreModule]], mscorlib
     - Name: 
       Entry: 12
@@ -1512,9 +1671,12 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: hasBeenUsed
+      Entry: 5
+      Data: false
     - Name: keyCodes
       Entry: 7
-      Data: 10|UnityEngine.KeyCode[], UnityEngine.CoreModule
+      Data: 9|UnityEngine.KeyCode[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
       Data: 1
@@ -1527,29 +1689,26 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: inputType
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 11|Interaction, Assembly-CSharp
+      Data: 10|Interaction, Assembly-CSharp
     - Name: filters
       Entry: 7
-      Data: 12|IInteractionFilter[], Assembly-CSharp
+      Data: 11|IInteractionFilter[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
-      Entry: 7
-      Data: 13|TestInteractionFilter, Assembly-CSharp
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: 
-      Entry: 7
-      Data: 14|TestInteractionFilter, Assembly-CSharp
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: 
       Entry: 13
@@ -1559,7 +1718,36 @@ MonoBehaviour:
       Data: 
     - Name: interactionStartedEvent
       Entry: 7
-      Data: 15|InteractionStartedEvent, Assembly-CSharp
+      Data: 12|InteractionStartedEvent, Assembly-CSharp
+    - Name: m_PersistentCalls
+      Entry: 7
+      Data: 13|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+    - Name: m_Calls
+      Entry: 7
+      Data: 14|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_TypeName
+      Entry: 1
+      Data: InteractionStartedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: interactionCompletedEvent
+      Entry: 7
+      Data: 15|InteractionCompletedEvent, Assembly-CSharp
     - Name: m_PersistentCalls
       Entry: 7
       Data: 16|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
@@ -1581,43 +1769,20 @@ MonoBehaviour:
       Data: 
     - Name: m_TypeName
       Entry: 1
-      Data: InteractionStartedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: interactionCompletedEvent
-      Entry: 7
-      Data: 18|InteractionCompletedEvent, Assembly-CSharp
-    - Name: m_PersistentCalls
-      Entry: 7
-      Data: 19|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
-    - Name: m_Calls
-      Entry: 7
-      Data: 20|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
-        UnityEngine.CoreModule]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: m_TypeName
-      Entry: 1
       Data: InteractionCompletedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
     - Name: 
       Entry: 8
       Data: 
+    - Name: hasBeenUsed
+      Entry: 5
+      Data: false
     - Name: keyCodes
       Entry: 6
       Data: 
+    - Name: inputType
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -1629,7 +1794,7 @@ MonoBehaviour:
       Data: 
     - Name: validInteractions
       Entry: 7
-      Data: 21|System.Collections.Generic.List`1[[Interaction, Assembly-CSharp]],
+      Data: 18|System.Collections.Generic.List`1[[Interaction, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
@@ -1645,6 +1810,8 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 256
+  outlineComponent: {fileID: 0}
+  objectActingUpon: {fileID: 0}
 --- !u!65 &449741157
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1702,7 +1869,7 @@ GameObject:
   m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &583426242
 Transform:
@@ -1771,6 +1938,48 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 583426241}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &584775252
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4796851125751106, guid: 65810bbbec39a354b83e7baf17f2f698, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 10.10159
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796851125751106, guid: 65810bbbec39a354b83e7baf17f2f698, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796851125751106, guid: 65810bbbec39a354b83e7baf17f2f698, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 2.1757386
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796851125751106, guid: 65810bbbec39a354b83e7baf17f2f698, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796851125751106, guid: 65810bbbec39a354b83e7baf17f2f698, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.95098644
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796851125751106, guid: 65810bbbec39a354b83e7baf17f2f698, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796851125751106, guid: 65810bbbec39a354b83e7baf17f2f698, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -0.3092327
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796851125751106, guid: 65810bbbec39a354b83e7baf17f2f698, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 65810bbbec39a354b83e7baf17f2f698, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &600096977
 GameObject:
   m_ObjectHideFlags: 0
@@ -1872,7 +2081,7 @@ GameObject:
   m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &698796709
 Transform:
@@ -2001,7 +2210,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 127
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &755377202
 MeshCollider:
@@ -5913,7 +6122,7 @@ GameObject:
   m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &787740791
 Transform:
@@ -5998,7 +6207,7 @@ GameObject:
   m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!65 &828552559
 BoxCollider:
@@ -6133,10 +6342,7 @@ MonoBehaviour:
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 7
-      Data: 3|TestInteractionFilter, Assembly-CSharp
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: 
       Entry: 13
@@ -6146,13 +6352,13 @@ MonoBehaviour:
       Data: 
     - Name: interactionStartedEvent
       Entry: 7
-      Data: 4|InteractionStartedEvent, Assembly-CSharp
+      Data: 3|InteractionStartedEvent, Assembly-CSharp
     - Name: m_PersistentCalls
       Entry: 7
-      Data: 5|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+      Data: 4|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
     - Name: m_Calls
       Entry: 7
-      Data: 6|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+      Data: 5|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
         UnityEngine.CoreModule]], mscorlib
     - Name: 
       Entry: 12
@@ -6175,13 +6381,13 @@ MonoBehaviour:
       Data: 
     - Name: interactionCompletedEvent
       Entry: 7
-      Data: 7|InteractionCompletedEvent, Assembly-CSharp
+      Data: 6|InteractionCompletedEvent, Assembly-CSharp
     - Name: m_PersistentCalls
       Entry: 7
-      Data: 8|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+      Data: 7|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
     - Name: m_Calls
       Entry: 7
-      Data: 9|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+      Data: 8|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
         UnityEngine.CoreModule]], mscorlib
     - Name: 
       Entry: 12
@@ -6202,9 +6408,12 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: hasBeenUsed
+      Entry: 5
+      Data: false
     - Name: keyCodes
       Entry: 7
-      Data: 10|UnityEngine.KeyCode[], UnityEngine.CoreModule
+      Data: 9|UnityEngine.KeyCode[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
       Data: 1
@@ -6217,29 +6426,26 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: inputType
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 11|Interaction, Assembly-CSharp
+      Data: 10|Interaction, Assembly-CSharp
     - Name: filters
       Entry: 7
-      Data: 12|IInteractionFilter[], Assembly-CSharp
+      Data: 11|IInteractionFilter[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
-      Entry: 7
-      Data: 13|TestInteractionFilter, Assembly-CSharp
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: 
-      Entry: 7
-      Data: 14|TestInteractionFilter, Assembly-CSharp
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: 
       Entry: 13
@@ -6249,7 +6455,36 @@ MonoBehaviour:
       Data: 
     - Name: interactionStartedEvent
       Entry: 7
-      Data: 15|InteractionStartedEvent, Assembly-CSharp
+      Data: 12|InteractionStartedEvent, Assembly-CSharp
+    - Name: m_PersistentCalls
+      Entry: 7
+      Data: 13|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+    - Name: m_Calls
+      Entry: 7
+      Data: 14|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_TypeName
+      Entry: 1
+      Data: InteractionStartedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: interactionCompletedEvent
+      Entry: 7
+      Data: 15|InteractionCompletedEvent, Assembly-CSharp
     - Name: m_PersistentCalls
       Entry: 7
       Data: 16|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
@@ -6271,43 +6506,20 @@ MonoBehaviour:
       Data: 
     - Name: m_TypeName
       Entry: 1
-      Data: InteractionStartedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: interactionCompletedEvent
-      Entry: 7
-      Data: 18|InteractionCompletedEvent, Assembly-CSharp
-    - Name: m_PersistentCalls
-      Entry: 7
-      Data: 19|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
-    - Name: m_Calls
-      Entry: 7
-      Data: 20|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
-        UnityEngine.CoreModule]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: m_TypeName
-      Entry: 1
       Data: InteractionCompletedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
     - Name: 
       Entry: 8
       Data: 
+    - Name: hasBeenUsed
+      Entry: 5
+      Data: false
     - Name: keyCodes
       Entry: 6
       Data: 
+    - Name: inputType
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -6319,7 +6531,7 @@ MonoBehaviour:
       Data: 
     - Name: validInteractions
       Entry: 7
-      Data: 21|System.Collections.Generic.List`1[[Interaction, Assembly-CSharp]],
+      Data: 18|System.Collections.Generic.List`1[[Interaction, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
@@ -6335,6 +6547,8 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 256
+  outlineComponent: {fileID: 0}
+  objectActingUpon: {fileID: 0}
 --- !u!65 &837529294
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6363,7 +6577,7 @@ GameObject:
   m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &919969322
 Transform:
@@ -6450,7 +6664,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 127
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1019134974
 Transform:
@@ -7469,54 +7683,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityType: 0
---- !u!1001 &1024462080
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 3.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 1.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0.70639724
-      objectReference: {fileID: 0}
-    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.7078156
-      objectReference: {fileID: 0}
-    - target: {fileID: 4154701215832208, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114783546469759672, guid: 6d6233b4d87bd37458f5be7f20b144a7,
-        type: 2}
-      propertyPath: serializationData.Prefab
-      value: 
-      objectReference: {fileID: 114783546469759672, guid: 6d6233b4d87bd37458f5be7f20b144a7,
-        type: 2}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6d6233b4d87bd37458f5be7f20b144a7, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &1099781233
 GameObject:
   m_ObjectHideFlags: 0
@@ -7533,7 +7699,7 @@ GameObject:
   m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1099781234
 Transform:
@@ -7618,7 +7784,7 @@ GameObject:
   m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1182876326
 Transform:
@@ -7703,7 +7869,7 @@ GameObject:
   m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1194900095
 Transform:
@@ -7777,7 +7943,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh43606
+  m_Name: pb_Mesh89782
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -7943,7 +8109,7 @@ GameObject:
   m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1343707610
 Transform:
@@ -8030,7 +8196,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 127
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &1376372103
 MeshCollider:
@@ -9868,7 +10034,7 @@ Transform:
   - {fileID: 600096978}
   - {fileID: 73272136}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1408057579
 GameObject:
@@ -9886,7 +10052,7 @@ GameObject:
   m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1408057580
 Transform:
@@ -9971,7 +10137,7 @@ GameObject:
   m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1593459609
 Transform:
@@ -10138,7 +10304,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1682888556
 Transform:
@@ -10171,14 +10337,14 @@ Transform:
   - {fileID: 755377207}
   - {fileID: 188683090}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1726315894
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh43706
+  m_Name: pb_Mesh89918
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -10394,10 +10560,7 @@ MonoBehaviour:
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 7
-      Data: 3|TestInteractionFilter, Assembly-CSharp
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: 
       Entry: 13
@@ -10407,13 +10570,13 @@ MonoBehaviour:
       Data: 
     - Name: interactionStartedEvent
       Entry: 7
-      Data: 4|InteractionStartedEvent, Assembly-CSharp
+      Data: 3|InteractionStartedEvent, Assembly-CSharp
     - Name: m_PersistentCalls
       Entry: 7
-      Data: 5|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+      Data: 4|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
     - Name: m_Calls
       Entry: 7
-      Data: 6|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+      Data: 5|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
         UnityEngine.CoreModule]], mscorlib
     - Name: 
       Entry: 12
@@ -10436,13 +10599,13 @@ MonoBehaviour:
       Data: 
     - Name: interactionCompletedEvent
       Entry: 7
-      Data: 7|InteractionCompletedEvent, Assembly-CSharp
+      Data: 6|InteractionCompletedEvent, Assembly-CSharp
     - Name: m_PersistentCalls
       Entry: 7
-      Data: 8|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+      Data: 7|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
     - Name: m_Calls
       Entry: 7
-      Data: 9|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+      Data: 8|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
         UnityEngine.CoreModule]], mscorlib
     - Name: 
       Entry: 12
@@ -10463,9 +10626,12 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: hasBeenUsed
+      Entry: 5
+      Data: false
     - Name: keyCodes
       Entry: 7
-      Data: 10|UnityEngine.KeyCode[], UnityEngine.CoreModule
+      Data: 9|UnityEngine.KeyCode[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
       Data: 1
@@ -10478,29 +10644,26 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: inputType
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 11|Interaction, Assembly-CSharp
+      Data: 10|Interaction, Assembly-CSharp
     - Name: filters
       Entry: 7
-      Data: 12|IInteractionFilter[], Assembly-CSharp
+      Data: 11|IInteractionFilter[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
-      Entry: 7
-      Data: 13|TestInteractionFilter, Assembly-CSharp
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: 
-      Entry: 7
-      Data: 14|TestInteractionFilter, Assembly-CSharp
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: 
       Entry: 13
@@ -10510,7 +10673,36 @@ MonoBehaviour:
       Data: 
     - Name: interactionStartedEvent
       Entry: 7
-      Data: 15|InteractionStartedEvent, Assembly-CSharp
+      Data: 12|InteractionStartedEvent, Assembly-CSharp
+    - Name: m_PersistentCalls
+      Entry: 7
+      Data: 13|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+    - Name: m_Calls
+      Entry: 7
+      Data: 14|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_TypeName
+      Entry: 1
+      Data: InteractionStartedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: interactionCompletedEvent
+      Entry: 7
+      Data: 15|InteractionCompletedEvent, Assembly-CSharp
     - Name: m_PersistentCalls
       Entry: 7
       Data: 16|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
@@ -10532,43 +10724,20 @@ MonoBehaviour:
       Data: 
     - Name: m_TypeName
       Entry: 1
-      Data: InteractionStartedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: interactionCompletedEvent
-      Entry: 7
-      Data: 18|InteractionCompletedEvent, Assembly-CSharp
-    - Name: m_PersistentCalls
-      Entry: 7
-      Data: 19|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
-    - Name: m_Calls
-      Entry: 7
-      Data: 20|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
-        UnityEngine.CoreModule]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: m_TypeName
-      Entry: 1
       Data: InteractionCompletedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
     - Name: 
       Entry: 8
       Data: 
+    - Name: hasBeenUsed
+      Entry: 5
+      Data: false
     - Name: keyCodes
       Entry: 6
       Data: 
+    - Name: inputType
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -10580,7 +10749,7 @@ MonoBehaviour:
       Data: 
     - Name: validInteractions
       Entry: 7
-      Data: 21|System.Collections.Generic.List`1[[Interaction, Assembly-CSharp]],
+      Data: 18|System.Collections.Generic.List`1[[Interaction, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
@@ -10596,6 +10765,8 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 256
+  outlineComponent: {fileID: 0}
+  objectActingUpon: {fileID: 0}
 --- !u!65 &1760267357
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10626,7 +10797,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 127
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &1811692105
 MeshCollider:
@@ -12393,7 +12564,7 @@ Transform:
   - {fileID: 1887660571}
   - {fileID: 396856738}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2024293478
 GameObject:
@@ -12461,10 +12632,7 @@ MonoBehaviour:
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 7
-      Data: 3|TestInteractionFilter, Assembly-CSharp
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: 
       Entry: 13
@@ -12474,13 +12642,13 @@ MonoBehaviour:
       Data: 
     - Name: interactionStartedEvent
       Entry: 7
-      Data: 4|InteractionStartedEvent, Assembly-CSharp
+      Data: 3|InteractionStartedEvent, Assembly-CSharp
     - Name: m_PersistentCalls
       Entry: 7
-      Data: 5|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+      Data: 4|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
     - Name: m_Calls
       Entry: 7
-      Data: 6|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+      Data: 5|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
         UnityEngine.CoreModule]], mscorlib
     - Name: 
       Entry: 12
@@ -12503,13 +12671,13 @@ MonoBehaviour:
       Data: 
     - Name: interactionCompletedEvent
       Entry: 7
-      Data: 7|InteractionCompletedEvent, Assembly-CSharp
+      Data: 6|InteractionCompletedEvent, Assembly-CSharp
     - Name: m_PersistentCalls
       Entry: 7
-      Data: 8|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+      Data: 7|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
     - Name: m_Calls
       Entry: 7
-      Data: 9|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+      Data: 8|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
         UnityEngine.CoreModule]], mscorlib
     - Name: 
       Entry: 12
@@ -12530,9 +12698,12 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: hasBeenUsed
+      Entry: 5
+      Data: false
     - Name: keyCodes
       Entry: 7
-      Data: 10|UnityEngine.KeyCode[], UnityEngine.CoreModule
+      Data: 9|UnityEngine.KeyCode[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
       Data: 1
@@ -12545,29 +12716,26 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: inputType
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 11|Interaction, Assembly-CSharp
+      Data: 10|Interaction, Assembly-CSharp
     - Name: filters
       Entry: 7
-      Data: 12|IInteractionFilter[], Assembly-CSharp
+      Data: 11|IInteractionFilter[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
-      Entry: 7
-      Data: 13|TestInteractionFilter, Assembly-CSharp
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: 
-      Entry: 7
-      Data: 14|TestInteractionFilter, Assembly-CSharp
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: 
       Entry: 13
@@ -12577,7 +12745,36 @@ MonoBehaviour:
       Data: 
     - Name: interactionStartedEvent
       Entry: 7
-      Data: 15|InteractionStartedEvent, Assembly-CSharp
+      Data: 12|InteractionStartedEvent, Assembly-CSharp
+    - Name: m_PersistentCalls
+      Entry: 7
+      Data: 13|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+    - Name: m_Calls
+      Entry: 7
+      Data: 14|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_TypeName
+      Entry: 1
+      Data: InteractionStartedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: interactionCompletedEvent
+      Entry: 7
+      Data: 15|InteractionCompletedEvent, Assembly-CSharp
     - Name: m_PersistentCalls
       Entry: 7
       Data: 16|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
@@ -12599,43 +12796,20 @@ MonoBehaviour:
       Data: 
     - Name: m_TypeName
       Entry: 1
-      Data: InteractionStartedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: interactionCompletedEvent
-      Entry: 7
-      Data: 18|InteractionCompletedEvent, Assembly-CSharp
-    - Name: m_PersistentCalls
-      Entry: 7
-      Data: 19|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
-    - Name: m_Calls
-      Entry: 7
-      Data: 20|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
-        UnityEngine.CoreModule]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: m_TypeName
-      Entry: 1
       Data: InteractionCompletedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
     - Name: 
       Entry: 8
       Data: 
+    - Name: hasBeenUsed
+      Entry: 5
+      Data: false
     - Name: keyCodes
       Entry: 6
       Data: 
+    - Name: inputType
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -12647,7 +12821,7 @@ MonoBehaviour:
       Data: 
     - Name: validInteractions
       Entry: 7
-      Data: 21|System.Collections.Generic.List`1[[Interaction, Assembly-CSharp]],
+      Data: 18|System.Collections.Generic.List`1[[Interaction, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
@@ -12663,6 +12837,8 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 256
+  outlineComponent: {fileID: 0}
+  objectActingUpon: {fileID: 0}
 --- !u!65 &2024293481
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12703,5 +12879,5 @@ Transform:
   - {fileID: 1380892284}
   - {fileID: 1979931460}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

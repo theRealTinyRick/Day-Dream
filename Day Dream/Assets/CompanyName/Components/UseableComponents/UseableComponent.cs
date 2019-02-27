@@ -101,6 +101,9 @@ public class UseableComponent : MonoBehaviour {
         useEvent.Invoke();
     }
 
+    /// <summary>
+    /// Is called when the tool has finished being used
+    /// </summary>
     public void StopUse()
     {
         if (!inUse)
@@ -127,6 +130,9 @@ public class UseableComponent : MonoBehaviour {
         cancelUseEvent.Invoke();
     }
 
+    /// <summary>
+    /// handle is to be used specifically for animation uses
+    /// </summary>
     public void Handle()
     {
         if (inUse)

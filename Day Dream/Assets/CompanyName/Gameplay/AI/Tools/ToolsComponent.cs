@@ -11,6 +11,8 @@ public class ToolsComponent : MonoBehaviour {
     [SerializeField]
     protected List<Tools> characterTools = new List<Tools>();
 
+    private Tools currentlyInUse;
+
     public List<Tools> GetCharacterTools()
     {
         return characterTools;
@@ -26,10 +28,38 @@ public class ToolsComponent : MonoBehaviour {
         return characterTools[element].GetComponent<UseableComponent>();
     }
 
-    public void UseTool(int element, out UseableComponent useableComponent)
+    public void UseTool(int element, bool forceUse, out UseableComponent useableComponent)
     {
-        useableComponent = characterTools[element].GetComponent<UseableComponent>();
+        if(currentlyInUse != null)
+        {
+            if(forceUse)
+            {
+                CancelTool();
+            }
+            else
+            {
+                useableComponent = null;
+                return;
+            }
+        }
+        Tools _tool = characterTools[element];
+
+        useableComponent = _tool.GetComponent<UseableComponent>();
+
+        currentlyInUse = _tool;
 
         useableComponent.Use();
+    }
+
+    public void CancelTool()
+    {
+        if(currentlyInUse == null)
+        {
+            return;
+        }
+
+        currentlyInUse.GetComponent<UseableComponent>().CancelUse();
+
+        currentlyInUse = null;
     }
 }

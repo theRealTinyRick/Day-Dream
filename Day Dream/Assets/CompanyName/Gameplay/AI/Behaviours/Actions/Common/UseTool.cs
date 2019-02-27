@@ -34,7 +34,7 @@ namespace BehaviorDesigner.Runtime.Tasks
 
             if (toolsUseable == null)
             {
-                agentsToolComponent.UseTool(tool, out toolsUseable);
+                agentsToolComponent.UseTool(tool, true, out toolsUseable);
             }
             Debug.Log("using tool!");
 
@@ -47,7 +47,11 @@ namespace BehaviorDesigner.Runtime.Tasks
             toolsUseable = null;
             return TaskStatus.Success;
         }
-
+        
+        public override void OnConditionalAbort()
+        {
+            agentsToolComponent.CancelTool();
+        }
 
     }
 }
