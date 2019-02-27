@@ -60,7 +60,7 @@ namespace AH.Max.Gameplay
         private new Rigidbody rigidbody;
         private PlayerStateComponent playerStateComponent;
         private StateComponent stateComponent;
-        private PlayerLedgeFinder playerLedgeFinder;
+        private PlayerLedgeClimber playerLedgeFinder;
 
         private void Awake() 
 		{
@@ -77,7 +77,7 @@ namespace AH.Max.Gameplay
             stateComponent = GetComponent<StateComponent>();
             rigidbody = transform.root.GetComponentInChildren<Rigidbody>();
             playerStateComponent = GetComponent<PlayerStateComponent>();
-            playerLedgeFinder = GetComponent<PlayerLedgeFinder>();
+            playerLedgeFinder = GetComponent<PlayerLedgeClimber>();
 
             InputDriver.jumpButtonEvent.AddListener(Jump);
 		} 

@@ -14,6 +14,8 @@ namespace AH.Max
 
 		protected override void Enable() 
 		{
+            Debug.Log("Gamemanager: I have locked the cursor");
+            Cursor.lockState = CursorLockMode.Locked;
 		}
 
 		protected override void Disable() 

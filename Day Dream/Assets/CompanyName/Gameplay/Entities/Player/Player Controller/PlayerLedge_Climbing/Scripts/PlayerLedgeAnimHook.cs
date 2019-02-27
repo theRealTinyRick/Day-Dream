@@ -26,7 +26,7 @@ public class PlayerLedgeAnimHook : MonoBehaviour
     {
         animator.SetBool(IsClimbingAnimBool, true);
         string _mountAnim = playerGroundedComponent.IsGrounded ? StandingMountAnim : AirMountAnim;
-        animator.Play(_mountAnim);
+        //animator.Play(_mountAnim);
     }
 
     public void PlayClimbAnimation(Vector3 ledgePoint, float inputXValue)
