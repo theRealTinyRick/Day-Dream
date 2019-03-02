@@ -346,6 +346,7 @@ GameObject:
   - component: {fileID: 4806731628541566}
   - component: {fileID: 114778009364619440}
   - component: {fileID: 135572682186139314}
+  - component: {fileID: 114178064149473440}
   m_Layer: 0
   m_Name: Targeting
   m_TagString: Untagged
@@ -1615,7 +1616,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1840773477816844}
-  m_LocalRotation: {x: 0.092052266, y: 0.700398, z: -0.09186919, w: 0.7018041}
+  m_LocalRotation: {x: 0.09205227, y: 0.700398, z: -0.09186918, w: 0.7018041}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1935,7 +1936,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1356110961047170}
-  m_LocalRotation: {x: 0.10480305, y: 0.6986111, z: -0.10459328, w: 0.70001376}
+  m_LocalRotation: {x: 0.104803145, y: 0.6986111, z: -0.10459318, w: 0.70001376}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2046,7 +2047,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1019467382752108}
-  m_LocalRotation: {x: 0.07930584, y: 0.7019493, z: -0.079147324, w: 0.70335877}
+  m_LocalRotation: {x: 0.07930578, y: 0.7019493, z: -0.07914738, w: 0.70335877}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2707,8 +2708,8 @@ MonoBehaviour:
     m_Bias: 0
   m_RecenterToTargetHeading:
     m_enabled: 1
-    m_WaitTime: 3
-    m_RecenteringTime: 2
+    m_WaitTime: 0.25
+    m_RecenteringTime: 1
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
@@ -2900,8 +2901,8 @@ MonoBehaviour:
     m_Bias: 0
   m_RecenterToTargetHeading:
     m_enabled: 0
-    m_WaitTime: 3
-    m_RecenteringTime: 2
+    m_WaitTime: 0.25
+    m_RecenteringTime: 1
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
@@ -2937,6 +2938,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugType: 2
+--- !u!114 &114178064149473440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1251082583888972}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!114 &114196771715817416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3141,7 +3159,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 5
     - Name: 
       Entry: 7
       Data: 
@@ -3184,6 +3202,18 @@ MonoBehaviour:
     - Name: 
       Entry: 1
       Data: IsEvading
+    - Name: 
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: IsLockedOn
     - Name: 
       Entry: 5
       Data: false
@@ -3287,17 +3317,6 @@ MonoBehaviour:
   evadeStartedEvents:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114174623305779222}
-        m_MethodName: DebugLog
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: evaded
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 114313534190973474}
         m_MethodName: SetStateTrue
         m_Mode: 5
@@ -3478,6 +3497,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   queue: []
   timeToClick: 1
+  nonAttackableStates:
+  - IsEvading
+  - IsClimbing
+  groundedState: IsGrounded
   swingBooleans:
   - Swing1
   - Swing2
@@ -3497,6 +3520,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: IsAttacking
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114313534190973474}
+        m_MethodName: SetStateFalse
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: IsEvading
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: AttackStartedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
@@ -3699,18 +3733,43 @@ MonoBehaviour:
   entitiesToTarget: []
   targetableIdentities:
   - {fileID: 11400000, guid: 300f0609edc0c2f4ebb6fb58d64a1c0c, type: 2}
+  targetableLayers:
+    serializedVersion: 2
+    m_Bits: 32768
   currentTarget: {fileID: 0}
   previousTarget: {fileID: 0}
   referenceTransform: {fileID: 0}
   eyeHeightOffset: 2
   lockedOnEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114313534190973474}
+        m_MethodName: SetStateTrue
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: IsLockedOn
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: AH.Max.Gameplay.LockedOnEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   lockedOffEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114313534190973474}
+        m_MethodName: SetStateFalse
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: IsLockedOn
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: AH.Max.Gameplay.LockedOffEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114783546469759672
@@ -3861,8 +3920,8 @@ MonoBehaviour:
     m_Bias: 0
   m_RecenterToTargetHeading:
     m_enabled: 0
-    m_WaitTime: 3
-    m_RecenteringTime: 2
+    m_WaitTime: 0.25
+    m_RecenteringTime: 1
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
@@ -4054,8 +4113,8 @@ MonoBehaviour:
       m_LegacyVelocityFilterStrength: -1
   m_YAxisRecentering:
     m_enabled: 1
-    m_WaitTime: 3
-    m_RecenteringTime: 2
+    m_WaitTime: 0.25
+    m_RecenteringTime: 1
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
@@ -4081,8 +4140,8 @@ MonoBehaviour:
     m_Bias: 0
   m_RecenterToTargetHeading:
     m_enabled: 1
-    m_WaitTime: 3
-    m_RecenteringTime: 2
+    m_WaitTime: 0.25
+    m_RecenteringTime: 1
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_BindingMode: 4

@@ -45,11 +45,11 @@ namespace AH.Max.Gameplay
 		private float time = 0;
 
         [TabGroup(Tabs.Properties)]
-        [ShowInInspector]
-        private List<string> nonAttackableStates = new List<string>();
+        [SerializeField]
+        private string[] nonAttackableStates;
 
         [TabGroup(Tabs.Properties)]
-        [ShowInInspector]
+        [SerializeField]
         private string groundedState = "IsGrounded";
 
         [HideInInspector]
@@ -177,7 +177,7 @@ namespace AH.Max.Gameplay
 
 		private bool EvaluateQueueConditions()
 		{
-            bool _inProperState = !stateComponent.AnyStateTrue(nonAttackableStates) && stateComponent.GetState(groundedState);
+            bool _inProperState = !stateComponent.AnyStateTrue(nonAttackableStates.ToList()) && stateComponent.GetState(groundedState);
 
             if(!playerGroundedComponent.IsGrounded)
             {

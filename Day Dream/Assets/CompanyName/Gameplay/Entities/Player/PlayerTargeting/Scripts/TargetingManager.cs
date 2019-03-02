@@ -39,6 +39,10 @@ namespace AH.Max.Gameplay
 		[SerializeField]
 		private List <IdentityType> targetableIdentities = new List <IdentityType>();
 
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        private LayerMask targetableLayers;
+
 		/// <summary>
 		/// the currently targeted entity
 		/// </summary>
@@ -124,7 +128,6 @@ namespace AH.Max.Gameplay
         {
             if(Input.GetKeyDown(KeyCode.Tab))
             {
-                Debug.Log("using test input update this lol");
                 NextTargetToTheLeft();
             }
         }
@@ -135,14 +138,17 @@ namespace AH.Max.Gameplay
 		/// <param name="other">The other Collider involved in this collision.</param>
 		private void OnTriggerStay(Collider other)
 		{
-			Entity _entity = other.transform.root.GetComponentInChildren<Entity>();
-			if(_entity != null)
-			{
-				if(ValidateEntity(_entity))
-				{
-					AddEntity(_entity);
-				}
-			}
+            if(LayerMaskUtility.IsWithinLayerMask(targetableLayers, other.gameObject.layer))
+            {
+			    Entity _entity = other.transform.root.GetComponentInChildren<Entity>();
+			    if(_entity != null)
+			    {
+				    if(ValidateEntity(_entity))
+				    {
+					    AddEntity(_entity);
+				    }
+			    }
+            }
 		}
 
 		/// <summary>
@@ -259,12 +265,19 @@ namespace AH.Max.Gameplay
             // highlight shit
             if(previousTarget)
             {
-                Outline previousTargetOutline = previousTarget.GetComponentInChildren<Outline>();
-                previousTargetOutline.enabled = false;
+                Outline _previousTargetOutline = previousTarget.GetComponentInChildren<Outline>();
+                if(_previousTargetOutline)
+                {
+                    _previousTargetOutline.enabled = false;
+                }
             }
 
-            Outline currentTargetOutline = currentTarget.GetComponentInChildren<Outline>();
-            currentTargetOutline.enabled = true;
+            Outline _currentTargetOutline = currentTarget.GetComponentInChildren<Outline>();
+
+            if(_currentTargetOutline)
+            {
+                _currentTargetOutline.enabled = true;
+            }
         }
 
         [Button]

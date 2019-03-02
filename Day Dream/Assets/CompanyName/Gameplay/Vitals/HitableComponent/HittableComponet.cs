@@ -32,12 +32,13 @@ public class HittableComponet : MonoBehaviour
 		entity = transform.root.GetComponentInChildren<Entity>();
 	}
 	
-	public void Hit(DamageData data, IdentityType identityType)
+	public void Hit(DamageData data, IdentityType damager)
 	{
 		vitalsComponent.RemoveHealth(data.amount);
 		hitEvent.Invoke();
 	}
 
+    [Button]
 	public void Hit(float damageAmount)
 	{
 		vitalsComponent.RemoveHealth(damageAmount);
