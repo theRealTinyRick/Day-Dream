@@ -56,6 +56,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: dbd116afd2366b3448840c63f5c06030, type: 2}
+    - {fileID: 11400000, guid: 300f0609edc0c2f4ebb6fb58d64a1c0c, type: 2}
     - {fileID: 11400000, guid: ffe400bb2f0650448b87f4ad0db10a68, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -76,7 +77,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 
@@ -85,16 +86,56 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 7
-      Data: 2|System.Collections.Generic.List`1[[AH.Max.System.IdentityType, Assembly-CSharp]],
+      Data: 2|AH.Max.System.DamageMap.DamageAmountAndDamageableEntities, Assembly-CSharp
+    - Name: damageAmount
+      Entry: 4
+      Data: 0
+    - Name: damageableEntities
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[AH.Max.System.IdentityType, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 4|AH.Max.System.DamageMap.DamageAmountAndDamageableEntities, Assembly-CSharp
+    - Name: damageAmount
+      Entry: 4
+      Data: 20
+    - Name: damageableEntities
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[AH.Max.System.IdentityType, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 10
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8
