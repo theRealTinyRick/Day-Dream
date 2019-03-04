@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,96 +8,110 @@ using Sirenix.OdinInspector;
 
 using AH.Max.System;
 
-[System.Serializable]
-public class Stat
+namespace AH.Max.System.Stats
 {
-    public StatType statType;
-
-    ///<Summary>
-    /// The amount shown in the inspector to rep the statType
-    ///</Summary>
-    [TabGroup(Tabs.Stats)]
-    [SerializeField]
-    private float amount;
-    public float Amount
+    [Serializable]
+    public class Stat
     {
-        get
+        /// <summary>
+        /// 
+        /// </summary>
+        [TabGroup(Tabs.Stats)]
+        [SerializeField]
+        public StatType statType;
+
+        ///<Summary>
+        /// The amount shown in the inspector to rep the statType
+        ///</Summary>
+        [TabGroup(Tabs.Stats)]
+        [SerializeField]
+        private float amount;
+        public float Amount
         {
-            return amount;
+            get
+            {
+                return amount;
+            }
+            set
+            {
+                amount = value;
+            }
         }
-        set
+
+        ///<Summary>
+        ///
+        ///</Summary>
+        [TabGroup(Tabs.Stats)]
+        [SerializeField]
+        private float minimumAmount;
+        public float MinimumAmount
         {
-            amount = value;
+            get 
+            {
+                return minimumAmount;
+            }
+            set
+            {
+                minimumAmount = value;
+            }
         }
-    }
 
-    ///<Summary>
-    ///
-    ///</Summary>
-    [TabGroup(Tabs.Stats)]
-    [SerializeField]
-    private float minimumAmount;
-    public float MinimumAmount
-    {
-        get 
+        ///<Summary>
+        ///
+        ///</Summary>
+        [TabGroup(Tabs.Stats)]
+        [SerializeField]
+        private float maximumAmount;
+        public float MaximumAmount
         {
-            return minimumAmount;
+            get 
+            {
+                return maximumAmount;
+            }
+            set
+            {
+                maximumAmount = value;
+            }
         }
-        set
+
+        public void Add()
         {
-            minimumAmount = value;
+            Amount ++;
         }
-    }
 
-    ///<Summary>
-    ///
-    ///</Summary>
-    [TabGroup(Tabs.Stats)]
-    [SerializeField]
-    private float maximumAmount;
-    public float MaximumAmount
-    {
-        get 
+        public void Subtract()
         {
-            return maximumAmount;
+            Amount --;
         }
-        set
+
+        public void Add(float amountToAdd)
         {
-            maximumAmount = value;
+            Amount += amountToAdd;
+
+            if(Amount > MaximumAmount)
+            {
+                Amount = MaximumAmount;
+            }
         }
-    }
 
-    [SerializeField]
-    ///<Summary>
-    ///
-    ///</Summary>
-    public void Add()
-    {
-        Amount ++;
-    }
+        public void Subtract(float amountToSubtract)
+        {
+            Amount -= amountToSubtract;
 
-    public void Subtract()
-    {
-        Amount --;
-    }
+            if(Amount < MinimumAmount)
+            {
+                Amount = MinimumAmount;
+            }
+        }
 
-    public void Add(float amountToAdd)
-    {
-        Amount += amountToAdd;
-    }
+        public void Reset()
+        {
+            Amount = MaximumAmount;
+        }
 
-    public void Subtract(float amountToSubtract)
-    {
-        Amount -= amountToSubtract;
-    }
-
-    public void Reset()
-    {
-        Amount = MaximumAmount;
-    }
-
-    public void RemoveAll()
-    {
-        Amount = MinimumAmount;
+        public void RemoveAll()
+        {
+            Amount = MinimumAmount;
+        }
     }
 }

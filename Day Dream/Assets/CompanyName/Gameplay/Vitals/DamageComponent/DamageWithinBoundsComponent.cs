@@ -55,6 +55,7 @@ public class DamageWithinBoundsComponent : DamageComponent
         }
     }
 
+    [Button]
     public void DealDamage()
     {
         foreach(Entity _entity in targets)

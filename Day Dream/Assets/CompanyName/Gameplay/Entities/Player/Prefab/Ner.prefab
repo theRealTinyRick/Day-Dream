@@ -2047,7 +2047,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1019467382752108}
-  m_LocalRotation: {x: 0.07930578, y: 0.7019493, z: -0.07914738, w: 0.70335877}
+  m_LocalRotation: {x: 0.07930579, y: 0.7019493, z: -0.07914736, w: 0.70335877}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2678,8 +2678,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e7ebe6acacc55f41bcf4b45bcb21b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   identityType: {fileID: 11400000, guid: 9673ad07682967240ae57bf36b83495b, type: 2}
   doNotDestroyOnLoad: 0
+  stats: []
   weaponType: {fileID: 11400000, guid: 31c99df7d70566f4da2f72ae22092865, type: 2}
 --- !u!114 &114018991762940716
 MonoBehaviour:
@@ -3357,8 +3367,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a894488d0c41545b76c7547330c22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   identityType: {fileID: 11400000, guid: ffe400bb2f0650448b87f4ad0db10a68, type: 2}
   doNotDestroyOnLoad: 0
+  stats:
+  - statType: {fileID: 11400000, guid: 8beb7bc4d5e1b3f47b47a497cc2bc074, type: 2}
+    amount: 50
+    minimumAmount: 0
+    maximumAmount: 100
 --- !u!114 &114426740227942980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3786,60 +3810,12 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 8beb7bc4d5e1b3f47b47a497cc2bc074, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: stats
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[AH.Max.System.StatType, Assembly-CSharp],[Stat,
-        Assembly-CSharp]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.EqualityComparer`1+DefaultComparer[[AH.Max.System.StatType,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 7
-      Data: 2|Stat, Assembly-CSharp
-    - Name: statType
-      Entry: 10
-      Data: 0
-    - Name: amount
-      Entry: 4
-      Data: 100
-    - Name: minimumAmount
-      Entry: 4
-      Data: 0
-    - Name: maximumAmount
-      Entry: 4
-      Data: 100
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   entity: {fileID: 0}
   healthStatType: {fileID: 11400000, guid: 8beb7bc4d5e1b3f47b47a497cc2bc074, type: 2}
   addedHealthEvent:
@@ -4005,8 +3981,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07ff22d023c5b240912fafd590c90c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   identityType: {fileID: 11400000, guid: de21f658ff359b744af90657c6e18ee5, type: 2}
   doNotDestroyOnLoad: 1
+  stats: []
   useCameraController: 0
   cameraOffsetPosition: {x: 0, y: 2.43, z: 0}
   cameraLookAtOffset: {x: 0, y: 1.58}

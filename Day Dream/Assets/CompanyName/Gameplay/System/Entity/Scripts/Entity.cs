@@ -1,18 +1,23 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
 using AH.Max.System;
+using AH.Max.System.Stats;
 
 ///<Summary>
 ///The base for every "Actor" in the scene. This will be on every object that we want to interact with. 
 ///</Summary>
 namespace AH.Max
 {
-    public class Entity : MonoBehaviour, IEntity
+    public class Entity : SerializedMonoBehaviour, IEntity
     {
+        /// <summary>
+        /// 
+        /// </summary>
         [TabGroup(Tabs.Entity)]
         [SerializeField]
         private IdentityType identityType;
@@ -21,9 +26,26 @@ namespace AH.Max
             get { return identityType; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [TabGroup(Tabs.Entity)]
         [SerializeField]
         private bool doNotDestroyOnLoad;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [SerializeField]
+        [TabGroup(Tabs.Stats)]
+        private List<Stat> stats = new List<Stat>();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [SerializeField]
+        [TabGroup(Tabs.Stats)]
+        private List<Modifier> modifiers = new List<Modifier>();
 
         public void OnEnable()
         {
@@ -68,6 +90,21 @@ namespace AH.Max
         ///</Summary>
         protected virtual void Disable()
         {
+        }
+
+        public Stat GetStat(StatType statType)
+        {
+            return stats.Find(_stat => _stat.statType == statType);
+        }
+
+        public void SetStat(StatType statType, float amount)
+        {
+            GetStat(statType).Amount = amount;
+        }
+
+        public bool HasStat(StatType statType)
+        {
+            return stats.Find(_stat => _stat.statType == statType) != null;
         }
     }
 }
