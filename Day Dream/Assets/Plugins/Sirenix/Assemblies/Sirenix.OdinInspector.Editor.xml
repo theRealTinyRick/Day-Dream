@@ -132,6 +132,16 @@
             This method subscribes to a lot of different callbacks, in the hopes of catching at least one.
             </summary>
         </member>
+        <member name="M:Sirenix.OdinInspector.Editor.UnityEditorEventUtility.DelayActionThreadSafe(System.Action)">
+            <summary>
+            Sometimes, an idiot overrides a delay action subscription to <see cref="F:UnityEditor.EditorApplication.delayCall"/>,
+            which can be done because the people at Unity didn't know what events were once upon a time.
+            This method subscribes to a lot of different callbacks, in the hopes of catching at least one.
+            <para />
+            As opposed to <see cref="M:Sirenix.OdinInspector.Editor.UnityEditorEventUtility.DelayAction(System.Action)"/>, this method is safe to call from any thread, and will
+            delay the actual subscription to a safe time.
+            </summary>
+        </member>
         <member name="M:Sirenix.OdinInspector.Editor.UnityEditorEventUtility.DelayAction(System.Action)">
             <summary>
             Sometimes, an idiot overrides a delay action subscription to <see cref="F:UnityEditor.EditorApplication.delayCall"/>,
@@ -922,6 +932,11 @@
             Not yet documented.
             </summary>
         </member>
+        <member name="M:Sirenix.OdinInspector.Editor.Drawers.FilePathAttributeDrawer.Initialize">
+            <summary>
+            Initializes the drawer.
+            </summary>
+        </member>
         <member name="M:Sirenix.OdinInspector.Editor.Drawers.FilePathAttributeDrawer.DrawPropertyLayout(UnityEngine.GUIContent)">
             <summary>
             Not yet documented.
@@ -930,6 +945,11 @@
         <member name="T:Sirenix.OdinInspector.Editor.Drawers.FolderPathAttributeDrawer">
             <summary>
             Not yet documented.
+            </summary>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.Drawers.FolderPathAttributeDrawer.Initialize">
+            <summary>
+            Initializes the drawer.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.Drawers.FolderPathAttributeDrawer.DrawPropertyLayout(UnityEngine.GUIContent)">
@@ -2643,7 +2663,7 @@
         </member>
         <member name="T:Sirenix.OdinInspector.Editor.Drawers.TwoDimensionalArrayDrawer`2">
             <summary>
-            Base class for two-dimentional array drawers.
+            Base class for two-dimensional array drawers.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.Drawers.TwoDimensionalArrayDrawer`2.CanDrawTypeFilter(System.Type)">
@@ -2718,26 +2738,6 @@
         <member name="M:Sirenix.OdinInspector.Editor.Drawers.QuaternionDrawer.PopulateGenericMenu(Sirenix.OdinInspector.Editor.InspectorProperty,UnityEditor.GenericMenu)">
             <summary>
             Populates the generic menu for the property.
-            </summary>
-        </member>
-        <member name="T:Sirenix.OdinInspector.Editor.Drawers.SyncListDrawer`2">
-            <summary>
-            SyncList property drawer.
-            </summary>
-        </member>
-        <member name="M:Sirenix.OdinInspector.Editor.Drawers.SyncListDrawer`2.DrawPropertyLayout(UnityEngine.GUIContent)">
-            <summary>
-            Draws the property.
-            </summary>
-        </member>
-        <member name="T:Sirenix.OdinInspector.Editor.Drawers.SyncVarAttributeDrawer">
-            <summary>
-            SyncVar attribute drawer.
-            </summary>
-        </member>
-        <member name="M:Sirenix.OdinInspector.Editor.Drawers.SyncVarAttributeDrawer.DrawPropertyLayout(UnityEngine.GUIContent)">
-            <summary>
-            Draws the property.
             </summary>
         </member>
         <member name="T:Sirenix.OdinInspector.Editor.Drawers.TypeDrawer`1">
@@ -2992,7 +2992,7 @@
             Draws the property.
             </summary>
         </member>
-        <member name="T:Sirenix.OdinInspector.Editor.Drawers.RequiredAttributeDrawer">
+        <member name="T:Sirenix.OdinInspector.Editor.Drawers.RequiredAttributeDrawer`1">
             <summary>
             Draws properties marked with <see cref="T:Sirenix.OdinInspector.RequiredAttribute"/>.
             </summary>
@@ -3000,7 +3000,7 @@
             <seealso cref="T:Sirenix.OdinInspector.InfoBoxAttribute"/>
             <seealso cref="T:Sirenix.OdinInspector.ValidateInputAttribute"/>
         </member>
-        <member name="M:Sirenix.OdinInspector.Editor.Drawers.RequiredAttributeDrawer.DrawPropertyLayout(UnityEngine.GUIContent)">
+        <member name="M:Sirenix.OdinInspector.Editor.Drawers.RequiredAttributeDrawer`1.DrawPropertyLayout(UnityEngine.GUIContent)">
             <summary>
             Draws the property.
             </summary>
@@ -3228,6 +3228,11 @@
             Opens a context menu for any given property on right click. The context menu is populated by all relevant drawers that implements <see cref="T:Sirenix.OdinInspector.Editor.IDefinesGenericMenuItems"/>.
             </summary>
             <seealso cref="T:Sirenix.OdinInspector.Editor.IDefinesGenericMenuItems"/>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.Drawers.PropertyContextMenuDrawer`1.Initialize">
+            <summary>
+            Initializes the drawer.
+            </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.Drawers.PropertyContextMenuDrawer`1.DrawPropertyLayout(UnityEngine.GUIContent)">
             <summary>
@@ -3549,6 +3554,41 @@
             Populates the generic menu for the property.
             </summary>
         </member>
+        <member name="T:Sirenix.OdinInspector.Editor.Examples.AttributeExampleInfo">
+            <summary>
+            Descripes an attribute example.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.Editor.Examples.AttributeExampleInfo.ExampleType">
+            <summary>
+            The type of the example object.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.Editor.Examples.AttributeExampleInfo.Name">
+            <summary>
+            The name of the example.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.Editor.Examples.AttributeExampleInfo.Description">
+            <summary>
+            The description of the example.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.Editor.Examples.AttributeExampleInfo.Code">
+            <summary>
+            Raw code of the example.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.Editor.Examples.AttributeExampleInfo.PreviewObject">
+            <summary>
+            Preview object of the example.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.Editor.Examples.AttributeExampleInfo.Order">
+            <summary>
+            Sorting value of the example. Examples with lower order values should come before examples with higher order values.
+            </summary>
+        </member>
         <member name="T:Sirenix.OdinInspector.Editor.AttributeListExtensions">
             <summary>
             Extension method for List&lt;Attribute&gt;
@@ -3648,6 +3688,26 @@
         <member name="M:Sirenix.OdinInspector.Editor.InspectorPropertyValueGetter`1.GetValues">
             <summary>
             Gets all values from all targets.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.Editor.MenuTreeBrowser.ContentPadding">
+            <summary>
+            The content padding
+            </summary>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.MenuTreeBrowser.DrawMenuTree">
+            <summary>
+            Draws the menu tree.
+            </summary>
+        </member>
+        <member name="P:Sirenix.OdinInspector.Editor.MenuTreeBrowser.Value">
+            <summary>
+            Gets the value selected value.
+            </summary>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.MenuTreeBrowser.ForceRebuildMenuTree">
+            <summary>
+            Invokes BuildMenuTree.
             </summary>
         </member>
         <member name="T:Sirenix.OdinInspector.Editor.OdinDontRegisterAttribute">
@@ -4399,7 +4459,7 @@
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.OdinMenuTree.HandleKeybaordMenuNavigation">
             <summary>
-            Handles the keybaord menu navigation. Call this at the end of your GUI scope, to prevent the menu tree from stealing input events from text fields and such.
+            Handles the keybaord menu navigation. Call this at the end of your GUI scope, to prevent the menu tree from stealing input events from other text fields.
             </summary>
             <returns>Returns true, if anything was changed via the keyboard.</returns>
         </member>
@@ -4467,10 +4527,16 @@
         </member>
         <member name="P:Sirenix.OdinInspector.Editor.OdinMenuTreeDrawingConfig.SearchFunction">
             <summary>
-            Gets or sets the search function.
+            Gets or sets the search function. Null by default.
             </summary>
         </member>
         <member name="F:Sirenix.OdinInspector.Editor.OdinMenuTreeDrawingConfig.ConfirmSlecectionOnDoubleClick">
+            <summary>
+            By default, the MenuTree.Selection is confirmed when menu items are double clicked, 
+            Set this to false if you don't want that behaviour.
+            </summary>
+        </member>
+        <member name="P:Sirenix.OdinInspector.Editor.OdinMenuTreeDrawingConfig.ConfirmSelectionOnDoubleClick">
             <summary>
             By default, the MenuTree.Selection is confirmed when menu items are double clicked, 
             Set this to false if you don't want that behaviour.
@@ -5255,6 +5321,33 @@
              }
              </code>
              </example>
+             <example>
+             <code>
+             private static Type currentSelectedType;
+             private static IEnumerable&lt;Type&gt; currentSource;
+             private static Func&lt;Rect, OdinSelector&lt;Type&gt;&gt; createTypeSelector = (rect) =>
+             {
+                 TypeSelector selector = new TypeSelector(currentSource, false);
+                 selector.SetSelection(currentSelectedType);
+                 selector.ShowInPopup(rect);
+                 return selector;
+             };
+             
+             public static Type DrawTypeSelectorDropdown(GUIContent label, Type selectedType, IEnumerable&lt;Type&gt; source)
+             {
+                 currentSource = source;
+                 currentSelectedType = selectedType;
+             
+                 var dropdownText = selectedType == null ? "None" : selectedType.GetNiceName();
+                 var selected = TypeSelector.DrawSelectorDropdown(label, dropdownText, createTypeSelector);
+                 if (selected != null &amp;&amp; selected.Any())
+                 {
+                     selectedType = selected.FirstOrDefault();
+                 }
+                 return selectedType;
+             }
+             </code>
+             </example>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.TypeSelector.BuildSelectionTree(Sirenix.OdinInspector.Editor.OdinMenuTree)">
             <summary>
@@ -5929,7 +6022,7 @@
             Not yet documented.
             </summary>
         </member>
-        <member name="M:Sirenix.OdinInspector.Editor.EditableKeyValuePair`2.#ctor(`0,`1,System.Boolean)">
+        <member name="M:Sirenix.OdinInspector.Editor.EditableKeyValuePair`2.#ctor(`0,`1,System.Boolean,System.Boolean)">
             <summary>
             Not yet documented.
             </summary>
@@ -6977,13 +7070,13 @@
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.OdinEditor.OnDisable">
-            <summary>
-            Not yet documented.
+            <summary>        
+            Called by Unity.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.OdinEditor.OnEnable">
             <summary>
-            Not yet documented.
+            Called by Unity.
             </summary>
         </member>
         <member name="T:Sirenix.OdinInspector.Editor.UnityPropertyAttributeDrawer`3">
@@ -8643,6 +8736,11 @@
             Returns an IEnumerable that recursively yields all children of the property, depth first.
             </summary>
         </member>
+        <member name="M:Sirenix.OdinInspector.Editor.PropertyChildren.GetExistingChildren">
+            <summary>
+            Gets the property's already created children, in no particular order.
+            </summary>
+        </member>
         <member name="M:Sirenix.OdinInspector.Editor.PropertyChildren.GetEnumerator">
             <summary>
             Gets the enumerator.
@@ -9358,6 +9456,11 @@
             Represents a property in the inspector, and provides the hub for all functionality related to that property.
             </summary>
         </member>
+        <member name="P:Sirenix.OdinInspector.Editor.InspectorProperty.SerializationRoot">
+            <summary>
+            Gets the property which is the ultimate root of this property's serialization.
+            </summary>
+        </member>
         <member name="P:Sirenix.OdinInspector.Editor.InspectorProperty.Name">
             <summary>
             The name of the property.
@@ -9511,7 +9614,7 @@
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.InspectorProperty.Draw(UnityEngine.GUIContent)">
             <summary>
-            Draws this property in the inspector with a given label.
+            Draws this property in the inspector with a given default label. This default label may be overridden by attributes on the drawn property.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.InspectorProperty.PushDraw">
@@ -9779,7 +9882,7 @@
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.PropertyTree.ApplyChanges">
             <summary>
-            Applies all changes made with properties to the inspected target tree values.
+            Applies all changes made with properties to the inspected target tree values, and marks all changed Unity objects dirty.
             </summary>
             <returns>true if any values were changed, otherwise false</returns>
         </member>
@@ -10798,6 +10901,20 @@
             <param name="instance">The instance, for evt. member references.</param>
             <returns>The current string.</returns>
         </member>
+        <member name="M:Sirenix.OdinInspector.Editor.StringMemberHelper.ForceGetString(Sirenix.OdinInspector.Editor.IPropertyValueEntry)">
+            <summary>
+            Gets the string from the StringMemberHelper.
+            </summary>
+            <param name="entry">The property entry, to get the instance reference from.</param>
+            <returns>The current string.</returns>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.StringMemberHelper.ForceGetString(Sirenix.OdinInspector.Editor.InspectorProperty)">
+            <summary>
+            Gets the string from the StringMemberHelper.
+            </summary>
+            <param name="property">The property, to get the instance reference from.</param>
+            <returns>The current string.</returns>
+        </member>
         <member name="M:Sirenix.OdinInspector.Editor.StringMemberHelper.ForceGetString(System.Object)">
             <summary>
             Gets the string from the StringMemberHelper.
@@ -11173,6 +11290,146 @@
             <param name="context">The persistent context object.</param>
             <returns>Returns <c>true</c> when the context is first created. Otherwise <c>false</c>.</returns>
         </member>
+        <member name="M:Sirenix.OdinInspector.Editor.PersistentContext.GetLocal``2(``0,``1)">
+            <summary>
+            Gets a LocalPersistentContext object for the specified key.
+            </summary>
+            <typeparam name="TKey1">The type of the first key.</typeparam>
+            <typeparam name="TValue">The type of the value stored in the context object.</typeparam>
+            <param name="alphaKey">The first key.</param>
+            <param name="defaultValue">The default value, used for when the context object is first created.</param>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.PersistentContext.GetLocal``3(``0,``1,``2)">
+            <summary>
+            Gets a LocalPersistentContext object for the specified keys.
+            </summary>
+            <typeparam name="TKey1">The type of the first key.</typeparam>
+            <typeparam name="TKey2">The type of the second key.</typeparam>
+            <typeparam name="TValue">The type of the value stored in the context object.</typeparam>
+            <param name="alphaKey">The first key.</param>
+            <param name="betaKey">The second key.</param>
+            <param name="defaultValue">The default value, used for when the context object is first created.</param>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.PersistentContext.GetLocal``4(``0,``1,``2,``3)">
+            <summary>
+            Gets a LocalPersistentContext object for the specified keys.
+            </summary>
+            <typeparam name="TKey1">The type of the first key.</typeparam>
+            <typeparam name="TKey2">The type of the second key.</typeparam>
+            <typeparam name="TKey3">The type of the third key.</typeparam>
+            <typeparam name="TValue">The type of the value stored in the context object.</typeparam>
+            <param name="alphaKey">The first key.</param>
+            <param name="betaKey">The second key.</param>
+            <param name="gammaKey">The third key.</param>
+            <param name="defaultValue">The default value, used for when the context object is first created.</param>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.PersistentContext.GetLocal``5(``0,``1,``2,``3,``4)">
+            <summary>
+            Gets a LocalPersistentContext object for the specified keys.
+            </summary>
+            <typeparam name="TKey1">The type of the first key.</typeparam>
+            <typeparam name="TKey2">The type of the second key.</typeparam>
+            <typeparam name="TKey3">The type of the third key.</typeparam>
+            <typeparam name="TKey4">The type of the fourth key.</typeparam>
+            <typeparam name="TValue">The type of the value stored in the context object.</typeparam>
+            <param name="alphaKey">The first key.</param>
+            <param name="betaKey">The second key.</param>
+            <param name="gammaKey">The third key.</param>
+            <param name="deltaKey">The fourth key.</param>
+            <param name="defaultValue">The default value, used for when the context object is first created.</param>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.PersistentContext.GetLocal``6(``0,``1,``2,``3,``4,``5)">
+            <summary>
+            Gets a LocalPersistentContext object for the specified keys.
+            </summary>
+            <typeparam name="TKey1">The type of the first key.</typeparam>
+            <typeparam name="TKey2">The type of the second key.</typeparam>
+            <typeparam name="TKey3">The type of the third key.</typeparam>
+            <typeparam name="TKey4">The type of the fourth key.</typeparam>
+            <typeparam name="TKey5">The type of the fifth key.</typeparam>
+            <typeparam name="TValue">The type of the value stored in the context object.</typeparam>
+            <param name="alphaKey">The first key.</param>
+            <param name="betaKey">The second key.</param>
+            <param name="gammaKey">The third key.</param>
+            <param name="deltaKey">The fourth key.</param>
+            <param name="epsilonKey">The fifth key.</param>
+            <param name="defaultValue">The default value, used for when the context object is first created.</param>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.PersistentContext.GetLocal``2(``0,Sirenix.OdinInspector.Editor.LocalPersistentContext{``1}@)">
+            <summary>
+            Gets a LocalPersistentContext object for the specified key.
+            Returns <c>true</c> when the context is first created. Otherwise <c>false</c>.
+            </summary>
+            <typeparam name="TKey1">The type of the first key.</typeparam>
+            <typeparam name="TValue">The type of the value stored in the context object.</typeparam>
+            <param name="alphaKey">The first key.</param>
+            <param name="context">The persistent context object.</param>
+            <returns>Returns <c>true</c> when the context is first created. Otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.PersistentContext.GetLocal``3(``0,``1,Sirenix.OdinInspector.Editor.LocalPersistentContext{``2}@)">
+            <summary>
+            Gets a LocalPersistentContext object for the specified keys.
+            Returns <c>true</c> when the context is first created. Otherwise <c>false</c>.
+            </summary>
+            <typeparam name="TKey1">The type of the first key.</typeparam>
+            <typeparam name="TKey2">The type of the second key.</typeparam>
+            <typeparam name="TValue">The type of the value stored in the context object.</typeparam>
+            <param name="alphaKey">The first key.</param>
+            <param name="betaKey">The second key.</param>
+            <param name="context">The persistent context object.</param>
+            <returns>Returns <c>true</c> when the context is first created. Otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.PersistentContext.GetLocal``4(``0,``1,``2,Sirenix.OdinInspector.Editor.LocalPersistentContext{``3}@)">
+            <summary>
+            Gets a LocalPersistentContext object for the specified keys.
+            Returns <c>true</c> when the context is first created. Otherwise <c>false</c>.
+            </summary>
+            <typeparam name="TKey1">The type of the first key.</typeparam>
+            <typeparam name="TKey2">The type of the second key.</typeparam>
+            <typeparam name="TKey3">The type of the third key.</typeparam>
+            <typeparam name="TValue">The type of the value stored in the context object.</typeparam>
+            <param name="alphaKey">The first key.</param>
+            <param name="betaKey">The second key.</param>
+            <param name="gammaKey">The third key.</param>
+            <param name="context">The persistent context object.</param>
+            <returns>Returns <c>true</c> when the context is first created. Otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.PersistentContext.GetLocal``5(``0,``1,``2,``3,Sirenix.OdinInspector.Editor.LocalPersistentContext{``4}@)">
+            <summary>
+            Gets a LocalPersistentContext object for the specified keys.
+            Returns <c>true</c> when the context is first created. Otherwise <c>false</c>.
+            </summary>
+            <typeparam name="TKey1">The type of the first key.</typeparam>
+            <typeparam name="TKey2">The type of the second key.</typeparam>
+            <typeparam name="TKey3">The type of the third key.</typeparam>
+            <typeparam name="TKey4">The type of the fourth key.</typeparam>
+            <typeparam name="TValue">The type of the value stored in the context object.</typeparam>
+            <param name="alphaKey">The first key.</param>
+            <param name="betaKey">The second key.</param>
+            <param name="gammaKey">The third key.</param>
+            <param name="deltaKey">The fourth key.</param>
+            <param name="context">The persistent context object.</param>
+            <returns>Returns <c>true</c> when the context is first created. Otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Sirenix.OdinInspector.Editor.PersistentContext.GetLocal``6(``0,``1,``2,``3,``4,Sirenix.OdinInspector.Editor.LocalPersistentContext{``5}@)">
+            <summary>
+            Gets a LocalPersistentContext object for the specified keys.
+            Returns <c>true</c> when the context is first created. Otherwise <c>false</c>.
+            </summary>
+            <typeparam name="TKey1">The type of the first key.</typeparam>
+            <typeparam name="TKey2">The type of the second key.</typeparam>
+            <typeparam name="TKey3">The type of the third key.</typeparam>
+            <typeparam name="TKey4">The type of the fourth key.</typeparam>
+            <typeparam name="TKey5">The type of the fifth key.</typeparam>
+            <typeparam name="TValue">The type of the value stored in the context object.</typeparam>
+            <param name="alphaKey">The first key.</param>
+            <param name="betaKey">The second key.</param>
+            <param name="gammaKey">The third key.</param>
+            <param name="deltaKey">The fourth key.</param>
+            <param name="epsilonKey">The fifth key.</param>
+            <param name="context">The persistent context object.</param>
+            <returns>Returns <c>true</c> when the context is first created. Otherwise <c>false</c>.</returns>
+        </member>
         <member name="T:Sirenix.OdinInspector.Editor.PersistentContextCache">
             <summary>
             Persistent Context cache object.
@@ -11296,6 +11553,11 @@
         <member name="M:Sirenix.OdinInspector.Editor.StaticInspectorWindow.DrawEditor(System.Int32)">
             <summary>
             Draws the editor for the this.CurrentDrawingTargets[index].
+            </summary>
+        </member>
+        <member name="T:Sirenix.OdinInspector.Internal.UnityNetworkingUtility">
+            <summary>
+            Contains references to UnityEngine.Networking types. These types have been removed in Unity 2019+, and thus may be null.
             </summary>
         </member>
         <member name="T:Sirenix.Utilities.Editor.SerializationDebuggerWindow">
