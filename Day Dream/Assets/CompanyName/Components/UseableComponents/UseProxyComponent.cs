@@ -87,6 +87,4 @@ public class UseProxyComponent : MonoBehaviour
     {
         cancelProxyEvent.Invoke();
     }
-
-
 }

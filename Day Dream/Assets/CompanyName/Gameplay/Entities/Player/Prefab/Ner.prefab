@@ -1716,8 +1716,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1190766840344596}
-  m_LocalRotation: {x: 0.13005218, y: -0, z: -0, w: 0.9915072}
-  m_LocalPosition: {x: 0, y: 3.8933334, z: -7.0400004}
+  m_LocalRotation: {x: 0.09205293, y: 0.700398, z: -0.09186848, w: 0.70180416}
+  m_LocalPosition: {x: -1.4073029, y: 4, z: 1.760878}
   m_LocalScale: {x: 1.333333, y: 1.3333336, z: 1.3333333}
   m_Children: []
   m_Father: {fileID: 4238534791626756}
@@ -2047,7 +2047,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1019467382752108}
-  m_LocalRotation: {x: 0.07930579, y: 0.7019493, z: -0.07914736, w: 0.70335877}
+  m_LocalRotation: {x: 0.07930578, y: 0.7019493, z: -0.07914736, w: 0.7033587}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2690,6 +2690,7 @@ MonoBehaviour:
   identityType: {fileID: 11400000, guid: 9673ad07682967240ae57bf36b83495b, type: 2}
   doNotDestroyOnLoad: 0
   stats: []
+  modifiers: []
   weaponType: {fileID: 11400000, guid: 31c99df7d70566f4da2f72ae22092865, type: 2}
 --- !u!114 &114018991762940716
 MonoBehaviour:
@@ -3383,6 +3384,7 @@ MonoBehaviour:
     amount: 50
     minimumAmount: 0
     maximumAmount: 100
+  modifiers: []
 --- !u!114 &114426740227942980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3993,6 +3995,7 @@ MonoBehaviour:
   identityType: {fileID: 11400000, guid: de21f658ff359b744af90657c6e18ee5, type: 2}
   doNotDestroyOnLoad: 1
   stats: []
+  modifiers: []
   useCameraController: 0
   cameraOffsetPosition: {x: 0, y: 2.43, z: 0}
   cameraLookAtOffset: {x: 0, y: 1.58}
