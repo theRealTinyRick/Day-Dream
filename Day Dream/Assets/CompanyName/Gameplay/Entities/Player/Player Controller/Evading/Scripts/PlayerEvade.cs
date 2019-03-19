@@ -33,6 +33,7 @@ namespace AH.Max.Gameplay
         [Tooltip("These are the states where the evade action is available")]
         [TabGroup(Tabs.Properties)]
         public string[] unavailableStates;
+        public string lockedOnState;
 
         [TabGroup(Tabs.Events)]
         public EvadeStartedEvents evadeStartedEvents = new EvadeStartedEvents();
@@ -49,12 +50,14 @@ namespace AH.Max.Gameplay
 
 		private void OnEnable() 
 		{
-			InputDriver.evadeButtonEvent.AddListener(Evade);
+			//InputDriver.evadeButtonEvent.AddListener(Evade);
+            InputDriver.jumpButtonEvent.AddListener(Evade);
 		}
 
 		private void OnDisable() 
 		{
-			InputDriver.evadeButtonEvent.RemoveListener(Evade);	
+		//	InputDriver.evadeButtonEvent.RemoveListener(Evade);	
+            InputDriver.jumpButtonEvent.RemoveListener(Evade);
 		}
 
 		private void Evade()
@@ -102,7 +105,8 @@ namespace AH.Max.Gameplay
 
         private bool CheckState()
         {
-            return !stateComponent.AnyStateTrue(unavailableStates.ToList());
+            return !stateComponent.AnyStateTrue(unavailableStates.ToList())
+                && stateComponent.GetState(lockedOnState);
         }
 
 		private void DefaultDash()

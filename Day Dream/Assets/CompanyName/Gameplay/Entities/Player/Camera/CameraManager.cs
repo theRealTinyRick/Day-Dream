@@ -24,6 +24,9 @@ namespace AH.Max.Gameplay.Camera
         [SerializeField]
         private CinemachineFreeLook cm_cameraController;
 
+        private Transform previousCameraTarget;
+        private Transform currentCameraTarget;
+
         [TabGroup(Tabs.Properties)]
         [SerializeField]
         private Transform cameraFollow;
@@ -61,7 +64,9 @@ namespace AH.Max.Gameplay.Camera
 
         private void Start()
         {
-            if(entity == null)
+            SetCameraTarget(AH.Max.System.EntityManager.Instance.Player.transform);
+
+            if (entity == null)
             {
                 entity = transform.root.GetComponentInChildren<Entity>();
             }
@@ -71,13 +76,15 @@ namespace AH.Max.Gameplay.Camera
                 targetingManager = transform.root.GetComponentInChildren<TargetingManager>();
             }
 
+            /*
             if(playerLedgeFinder == null)
             {
                 playerLedgeFinder = transform.root.GetComponentInChildren<PlayerLedgeClimber>();
             }
+            */
         }
 
-	    private void Update ()
+	    private void FixedUpdate ()
         {
             if(cameraFollow != null)
             {
@@ -85,16 +92,6 @@ namespace AH.Max.Gameplay.Camera
                 {
                     if(targetingManager.CurrentTarget != null)
                     {
-                        Vector3 _targetDirection = targetingManager.CurrentTarget.transform.position - entity.transform.position;
-                        Quaternion _targetRotation = Quaternion.LookRotation(_targetDirection);
-
-                        _targetRotation.x = 0;
-                        _targetRotation.z = 0;
-
-                        //cameraFollow.position = Vector3.Lerp(cameraFollow.position, entity.transform.position + lockedOnStateData.positionOffset, lockedOnStateData.positionDamping);
-                        cameraFollow.rotation = _targetRotation;
-
-                        //cameraLookAt.position = Vector3.Lerp(cameraLookAt.position, transform.position + lockedOnStateData.lookAtOffset, lockedOnStateData.positionDamping);
 
                         cm_cameraController.m_XAxis.m_InputAxisName = "";
                         cm_cameraController.m_YAxis.m_InputAxisName = "";
@@ -105,6 +102,17 @@ namespace AH.Max.Gameplay.Camera
                         cm_cameraController.m_RecenterToTargetHeading.m_enabled = true;
                         cm_cameraController.m_YAxisRecentering.m_enabled = true;
 
+                        Vector3 _targetDirection = targetingManager.CurrentTarget.transform.position - currentCameraTarget.position;
+                        Quaternion _targetRotation = Quaternion.LookRotation(_targetDirection);
+
+                        _targetRotation.x = 0;
+                        _targetRotation.z = 0;
+
+                        cameraFollow.position = currentCameraTarget.position;
+                        cameraLookAt.position = currentCameraTarget.position + (Vector3.up * 2);
+
+                        cameraFollow.rotation = _targetRotation;
+
                         cm_cameraController.m_RecenterToTargetHeading.m_WaitTime = lockedOnStateData.recenterDelay;
                         cm_cameraController.m_YAxisRecentering.m_WaitTime = lockedOnStateData.recenterDelay;
 
@@ -114,6 +122,7 @@ namespace AH.Max.Gameplay.Camera
                         return;
                     }
                 }
+                /*
                 else if(playerLedgeFinder.IsClimbing)
                 {
                     cm_cameraController.m_XAxis.m_InputAxisName = MouseX;
@@ -135,8 +144,12 @@ namespace AH.Max.Gameplay.Camera
 
                     return;
                 }
-
+                */
                 // reset the data
+
+                cameraFollow.position = currentCameraTarget.position;
+                cameraLookAt.position = currentCameraTarget.position + (Vector3.up * 2);
+
                 cm_cameraController.m_XAxis.m_InputAxisName = MouseX;
                 cm_cameraController.m_YAxis.m_InputAxisName = MouseY;
 
@@ -148,21 +161,49 @@ namespace AH.Max.Gameplay.Camera
 
                 cm_cameraController.m_RecenterToTargetHeading.m_enabled = false;
                 cm_cameraController.m_YAxisRecentering.m_enabled = false;
-
-                //cameraFollow.position = Vector3.Lerp(cameraFollow.position, transform.root.position, normalStateData.positionDamping);
-                //cameraFollow.rotation = transform.rotation;
-
-                //  cameraLookAt.position = Vector3.Lerp(cameraLookAt.position, transform.position + normalStateData.lookAtOffset, normalStateData.positionDamping);
             }
 	    }
 
+        public void UpdateCameraTargetPosition()
+        {
+            cameraFollow.position = currentCameraTarget.position;
+
+            if (cameraFollow != null && targetingManager.LockedOn && targetingManager.CurrentTarget != null)
+            {
+                cameraFollow.rotation = currentCameraTarget.rotation;
+            }
+        }
+
+        /// <summary>
+        /// this method is used the 
+        /// </summary>
+        public void SetCameraTarget(Transform newTarget)
+        {
+            if(currentCameraTarget != null)
+            {
+                previousCameraTarget = currentCameraTarget;
+            }
+
+            currentCameraTarget = newTarget;
+        }
+
+        public void RevertCameraTarget()
+        {
+
+        }
+
+        public void SetCameraMode()
+        {
+
+        }
+
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.black;
-            Gizmos.DrawWireCube(cameraFollow.position, Vector3.one * 0.2f);
+            //Gizmos.color = Color.black;
+            //Gizmos.DrawWireCube(cameraFollow.position, Vector3.one * 0.2f);
 
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(cameraLookAt.position, Vector3.one * 0.3f);
+            //Gizmos.color = Color.red;
+            //Gizmos.DrawWireCube(cameraLookAt.position, Vector3.one * 0.3f);
         }
 
     }

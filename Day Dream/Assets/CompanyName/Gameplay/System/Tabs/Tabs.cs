@@ -15,4 +15,5 @@ public class Tabs
 	public const string Stats = "Stats";
 	public const string Events = "Events";
 	public const string Debug = "Debug";
+    public const string InputEvents = "Input Events";
 }

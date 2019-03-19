@@ -21,16 +21,27 @@ namespace AH.Max.System
         [TabGroup(Tabs.Properties)]
 		public DespawnedEvent despawnedEvent = new DespawnedEvent();
 
-        [SerializeField]
+        [ShowInInspector]
         [TabGroup(Tabs.Properties)]
-        public bool spawned;
+        private bool spawned;
+        public bool Spawned 
+        {
+            get 
+            {
+                return spawned;
+            }
+            set 
+            {
+                spawned = value;
+            }
+        }
 
 		private void Start()
 		{
 			entity = GetComponentInChildren<Entity>();
 		}
 
-		public void Spawned()
+		public void OnSpawn()
 		{
 			if(spawnedEvent != null)
 			{
@@ -40,7 +51,7 @@ namespace AH.Max.System
             spawned = true;
 		}
 
-		public void Despawned()
+		public void OnDespawn()
 		{
 			if(despawnedEvent != null)
 			{

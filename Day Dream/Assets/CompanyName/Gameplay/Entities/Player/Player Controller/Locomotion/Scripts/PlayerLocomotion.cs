@@ -48,8 +48,11 @@ namespace AH.Max.Gameplay
         [SerializeField]
         private string isGroundedState;
 
+        [HideInInspector]
 		public Vector3 playerOrientationDirection = new Vector3();
-		public Vector3 playerOrientationDirectionNotNormalized = new Vector3();
+
+        [HideInInspector]
+        public Vector3 playerOrientationDirectionNotNormalized = new Vector3();
 
         private Transform LocomotionOrientationController;
 
@@ -126,18 +129,25 @@ namespace AH.Max.Gameplay
                  return;
             }
 
-            if(!IsGrounded())
+            if (!IsGrounded())
             {
                 _speed = airSpeed;
             }
-            else if(isSprinting)
+            //else if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Locomotion"))
+            //{
+                //_speed = 0;
+            //}
+
+            else if (isSprinting)
             {
                 _speed = sprintSpeed;
             }
+
             else if(isPreparing)
             {
                 _speed = preparedSpeed;
             }
+
 
             if(InputDriver.LocomotionDirection != Vector3.zero)
             {
@@ -229,7 +239,8 @@ namespace AH.Max.Gameplay
 		///</Summary>
 		private bool CanMove()
 		{
-            return !stateComponent.AnyStateTrue(immobileStates.ToList()) && playerOrientationDirection != Vector3.zero;
+            return !stateComponent.AnyStateTrue(immobileStates.ToList())
+                    && playerOrientationDirection != Vector3.zero;
 		}
 
         private bool IsGrounded()

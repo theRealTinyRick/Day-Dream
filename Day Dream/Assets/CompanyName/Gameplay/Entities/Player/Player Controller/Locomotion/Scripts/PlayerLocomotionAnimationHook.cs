@@ -66,35 +66,41 @@ namespace AH.Max.Gameplay
 
 		private void LocomotionAnimation()
 		{
-			Vector3 _forwardVector = transform.forward;
-			Vector3 _moveDirection = playerLocomotion.playerOrientationDirection * InputDriver.LocomotionDirection.magnitude; //multiply here so we can dampen some of the values.
-			Vector3 _crossProduct = Vector3.Cross(_forwardVector, _moveDirection);
+            if (CheckState())
+            {
+                Vector3 _forwardVector = transform.forward;
+			    Vector3 _moveDirection = playerLocomotion.playerOrientationDirection * InputDriver.LocomotionDirection.magnitude; //multiply here so we can dampen some of the values.
+			    Vector3 _crossProduct = Vector3.Cross(_forwardVector, _moveDirection);
 
-			Debug.DrawRay(transform.position, _moveDirection, Color.red);
-			Debug.DrawRay(transform.position, _forwardVector, Color.blue);
-			Debug.DrawRay(transform.position, _crossProduct, Color.green);
+                /*
+    			    Debug.DrawRay(transform.position, _moveDirection, Color.red);
+    			    Debug.DrawRay(transform.position, _forwardVector, Color.blue);
+	    		    Debug.DrawRay(transform.position, _crossProduct, Color.green);
+                */
 
-			if(!isPreparing)
-			{
-                Vector3 _velocoty = rigidbody.velocity;
-                _velocoty.y = 0;
+			    if(!isPreparing)
+			    {
+                    Vector3 _velocoty = rigidbody.velocity;
+                    _velocoty.y = 0;
 
-                verticalAnimatorFloat = (_velocoty.magnitude * Vector3.Dot(_forwardVector, _moveDirection)) / 2;
+                    verticalAnimatorFloat = (_velocoty.magnitude * Vector3.Dot(_forwardVector, _moveDirection)) / 2;
 
-                horizontalAnimatorFloat = ShouldLean ? _crossProduct.y : 0;
-                lockedOnAnimatorFloat = 0;
-            }
-            else
-			{
-                verticalAnimatorFloat = _moveDirection.magnitude * Vector3.Dot(_forwardVector, _moveDirection);
-                horizontalAnimatorFloat = _crossProduct.y;
-                lockedOnAnimatorFloat = 1;
+                    horizontalAnimatorFloat = ShouldLean ? _crossProduct.y : 0;
+                    lockedOnAnimatorFloat = 0;
+                }
+                else
+			    {
+                    verticalAnimatorFloat = _moveDirection.magnitude * Vector3.Dot(_forwardVector, _moveDirection);
+                    horizontalAnimatorFloat = _crossProduct.y;
+                    lockedOnAnimatorFloat = 1;
+                }
+
             }
 		}
 
 		private void ApplyAnimationFloats()
 		{
-			if(CheckState())
+			if(CheckState() /*&& animator.GetCurrentAnimatorStateInfo(0).IsName("Locomotion")*/)
 			{
 			    animator.SetFloat(LockedOn, (float)lockedOnAnimatorFloat);
 		    	animator.SetFloat(Horizontal, Mathf.Lerp(animator.GetFloat(Horizontal), horizontalAnimatorFloat, 0.2f));

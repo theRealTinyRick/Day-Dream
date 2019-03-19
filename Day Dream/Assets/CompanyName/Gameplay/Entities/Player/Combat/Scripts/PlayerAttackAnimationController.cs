@@ -11,14 +11,9 @@ namespace AH.Max.Gameplay
 {
 	public class PlayerAttackAnimationController : MonoBehaviour 
 	{
-		[TabGroup(Tabs.Properties)]
-		[ShowInInspector]
 		private bool isAttacking = false;
 		public bool IsAttacking{ get{ return isAttacking; } }
 
-		[TabGroup(Tabs.Debug)]
-		[Tooltip("This field is only used for debuging and has no barring on the functionality of queuing animations. That is done in the animator controller")]
-		[SerializeField]
 		private List <string> queue = new List<string>();
 
         private int maxNumberOfClicks 
@@ -40,8 +35,6 @@ namespace AH.Max.Gameplay
 		[SerializeField]
 		private float timeToClick;
 
-		[TabGroup(Tabs.Properties)]
-		[ShowInInspector]
 		private float time = 0;
 
         [TabGroup(Tabs.Properties)]
@@ -72,21 +65,11 @@ namespace AH.Max.Gameplay
         [SerializeField]
         public AttackEndedEvent attackEndedEvent = new AttackEndedEvent();
 
-        void Start () 
+		private void OnEnable()
 		{
 			animator = GetComponent<Animator>();
             playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
             stateComponent = GetComponent<StateComponent>();
-		}
-
-		private void OnEnable()
-		{
-			InputDriver.lightAttackButtonEvent.AddListener(QuereyAttack);
-		}
-
-		private void OnDisable()
-		{
-			InputDriver.lightAttackButtonEvent.RemoveListener(QuereyAttack);
 		}
 
 		private void Update()
@@ -128,12 +111,10 @@ namespace AH.Max.Gameplay
 			time = 0;
 			isAttacking = false;
             hasAttacked = false;
-		}
-		
-		///<Summary>
-		/// The input reciever for the standar attack in the game
-		///</Summary>
-		private void QuereyAttack()
+            attackEndedEvent.Invoke();
+        }
+
+        public void LightAttack()
 		{
             if(currentWeaponType == null)
             {
@@ -153,6 +134,9 @@ namespace AH.Max.Gameplay
 			if(EvaluateQueueConditions())
 			{
                 hasAttacked = true;
+				isAttacking = true;
+
+                attackStartedEvent.Invoke();
 
 				currentNumberOfClicks ++;
 				time = 0;
@@ -169,9 +153,6 @@ namespace AH.Max.Gameplay
 				{
 					animator.SetBool(swingBooleans[_index], true);
 				}
-
-                attackStartedEvent.Invoke();
-				isAttacking = true;
 			}
 		}
 
@@ -215,8 +196,6 @@ namespace AH.Max.Gameplay
 					    }
 				    }
 			    }
-
-                attackEndedEvent.Invoke();
             }
 
             return false;

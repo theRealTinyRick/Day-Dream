@@ -12,12 +12,12 @@ using AH.Max.System;
 namespace AH.Max.Gameplay
 {
     [Serializable]
-    public class LockedOnEvent : UnityEngine.Events.UnityEvent
+    public class LockedOnEvent : UnityEngine.Events.UnityEvent<Entity>
     {
     }
 
     [Serializable]
-    public class LockedOffEvent : UnityEngine.Events.UnityEvent
+    public class LockedOffEvent : UnityEngine.Events.UnityEvent<Entity>
     {
     }
 
@@ -84,15 +84,18 @@ namespace AH.Max.Gameplay
 
 		[TabGroup(Tabs.Properties)]
         [SerializeField]
-        private float eyeHeightOffset;
+        public float eyeHeightOffset;
 
         [TabGroup(Tabs.Events)]
         [SerializeField]
-        private LockedOnEvent lockedOnEvent;
+        public LockedOnEvent lockedOnEvent;
 
         [TabGroup(Tabs.Events)]
         [SerializeField]
-        private LockedOffEvent lockedOffEvent;
+        public LockedOffEvent lockedOffEvent;
+
+        public static LockedOnEvent lockedOnStaticEvent = new LockedOnEvent();
+        public static LockedOffEvent lockedOffStaticEvent = new LockedOffEvent();
 
 		private void Start()
 		{
@@ -208,7 +211,6 @@ namespace AH.Max.Gameplay
         /// <summary>
         /// Gets the next target to the right of the references transform
         /// </summary>
-        [Button]
 		public void NextTargetToTheRight()
 		{
             if (lockedOn && currentTarget != null)
@@ -234,7 +236,6 @@ namespace AH.Max.Gameplay
         /// <summary>
         /// gets the next target to the left of the references transform
         /// </summary>
-        [Button]
 		public void NextTargetToTheLeft()
 		{
             if (lockedOn && currentTarget != null)
@@ -250,6 +251,11 @@ namespace AH.Max.Gameplay
                 }
 
                 SetCurrent(entitiesToTarget[_nextTargetIndex]);
+
+                if(lockedOnEvent != null)
+                {
+                    lockedOnEvent.Invoke(entitiesToTarget[_nextTargetIndex]);
+                }
             }
             else
             {
@@ -280,7 +286,6 @@ namespace AH.Max.Gameplay
             }
         }
 
-        [Button]
 		public void LockOn()
 		{
             if (entitiesToTarget.Count <= 0) return;
@@ -293,11 +298,16 @@ namespace AH.Max.Gameplay
             if(_firstTarget != null)
             {
                 SetCurrent(_firstTarget);
-            }
 
-            if(lockedOnEvent != null)
-            {
-                lockedOnEvent.Invoke();
+                if (lockedOnEvent != null)
+                {
+                    lockedOnEvent.Invoke(_firstTarget);
+                }
+
+                if(lockedOnStaticEvent != null)
+                {
+                    lockedOnStaticEvent.Invoke(_firstTarget);
+                }
             }
         }
 
@@ -346,9 +356,11 @@ namespace AH.Max.Gameplay
                     foreach(Entity _entity in entitiesToTarget)
                     {
                         Vector3 _closestDirection = _bestTargetEntity.transform.position - referenceTransform.position;
+                        _closestDirection.y = referenceTransform.position.y;
                         float _angle_1 = Vector3.Angle(referenceTransform.forward, _closestDirection);
 
                         Vector3 _nextDirection = _entity.transform.position - referenceTransform.position;
+                        _nextDirection.y = referenceTransform.position.y;
                         float _angle_2 = Vector3.Angle(referenceTransform.forward, _nextDirection);
 
                         if(_angle_2 < _angle_1)
@@ -413,32 +425,39 @@ namespace AH.Max.Gameplay
             entitiesToTarget = _sortedMapper.Keys.ToList();
 		}
 
-        [Button]
 		public void LockOff()
 		{
-            lockedOn = false;
-            currentTarget = null;
-            previousTarget = null;
-
-            RemoveAllHighlights();
-
-            int _count = entitiesToTarget.Count;
-
-            for(int _index = 0; _index < _count; _index++)
+            if(lockedOn && currentTarget)
             {
-                if(entitiesToTarget.Count > _index)
+                if(lockedOffEvent != null)
                 {
-                    if(entitiesToTarget[_index])
+                    lockedOffEvent.Invoke(currentTarget);
+                }
+
+                if(lockedOffStaticEvent != null)
+                {
+                    lockedOffStaticEvent.Invoke(currentTarget);
+                }
+
+                lockedOn = false;
+                currentTarget = null;
+                previousTarget = null;
+
+                RemoveAllHighlights();
+
+                int _count = entitiesToTarget.Count;
+                for(int _index = 0; _index < _count; _index++)
+                {
+                    if(entitiesToTarget.Count > _index)
                     {
-                        RemoveEntity(entitiesToTarget[_index]);
+                        if(entitiesToTarget[_index])
+                        {
+                            RemoveEntity(entitiesToTarget[_index]);
+                        }
                     }
                 }
             }
 
-            if(lockedOffEvent != null)
-            {
-                lockedOffEvent.Invoke();
-            }
 		}
 
         private void RemoveAllHighlights()

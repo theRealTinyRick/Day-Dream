@@ -20,6 +20,7 @@ namespace AH.Max
         /// </summary>
         [TabGroup(Tabs.Entity)]
         [SerializeField]
+        [InlineEditor]
         private IdentityType identityType;
         public IdentityType IdentityType
         {

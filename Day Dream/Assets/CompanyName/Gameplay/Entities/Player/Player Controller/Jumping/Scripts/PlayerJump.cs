@@ -64,6 +64,7 @@ namespace AH.Max.Gameplay
 
         private void Awake() 
 		{
+            /*
             if(jumpStartedEvent == null)
             {
                 jumpStartedEvent = new JumpStartedEvent();
@@ -80,7 +81,30 @@ namespace AH.Max.Gameplay
             playerLedgeFinder = GetComponent<PlayerLedgeClimber>();
 
             InputDriver.jumpButtonEvent.AddListener(Jump);
+            */
 		} 
+
+        void OnEnable()
+        {
+            if (jumpStartedEvent == null)
+            {
+                jumpStartedEvent = new JumpStartedEvent();
+            }
+
+            if (jumpForwardStartedEvent == null)
+            {
+                jumpForwardStartedEvent = new JumpForwardStartedEvent();
+            }
+
+            stateComponent = GetComponent<StateComponent>();
+            rigidbody = transform.root.GetComponentInChildren<Rigidbody>();
+            playerStateComponent = GetComponent<PlayerStateComponent>();
+            playerLedgeFinder = GetComponent<PlayerLedgeClimber>();
+
+            InputDriver.jumpButtonEvent.AddListener(Jump);
+            playerLeftTheGround = false;
+            playerJumped = false;
+        }
 
         private void OnDisable()
         {

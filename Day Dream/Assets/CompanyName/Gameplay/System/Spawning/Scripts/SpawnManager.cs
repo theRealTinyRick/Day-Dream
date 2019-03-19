@@ -92,7 +92,7 @@ namespace AH.Max.System
 			SpawnableComponent _spawnableComponent = _entity.GetComponentInChildren<SpawnableComponent>();
 			if(_spawnableComponent != null)
 			{
-				_spawnableComponent.Spawned();
+				_spawnableComponent.OnSpawn();
 			}
 
             return _entity;
@@ -122,7 +122,7 @@ namespace AH.Max.System
 
 					spawnPool.Remove(_entity);
 					
-					_spawnableComponent.Spawned();
+					_spawnableComponent.OnSpawn();
 
                     return _entity;
 				}
@@ -152,9 +152,13 @@ namespace AH.Max.System
 					
 					entity.gameObject.SetActive(false);
 
-					_spawnableComponent.Despawned();
+					_spawnableComponent.OnDespawn();
 				}
 			}
+            else
+            {
+                Debug.Log("The spawnable component on " + entity.name + " is null", entity);
+            }
 		}
 
 		///<Summary>

@@ -5,7 +5,7 @@ using UnityEngine;
 
 using AH.Max;
 
-public class PlayerEntity : Entity
+public class PlayerEntity : Character
 {
 	
 }
