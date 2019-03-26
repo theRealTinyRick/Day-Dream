@@ -105,8 +105,8 @@ namespace AH.Max.Gameplay.Camera
                         Vector3 _targetDirection = targetingManager.CurrentTarget.transform.position - currentCameraTarget.position;
                         Quaternion _targetRotation = Quaternion.LookRotation(_targetDirection);
 
-                        _targetRotation.x = 0;
-                        _targetRotation.z = 0;
+                        //_targetRotation.x = 0;
+                        //_targetRotation.z = 0;
 
                         cameraFollow.position = currentCameraTarget.position;
                         cameraLookAt.position = currentCameraTarget.position + (Vector3.up * 2);

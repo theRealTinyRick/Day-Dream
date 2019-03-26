@@ -41,7 +41,12 @@ public class SimpleLedgeClimber : MonoBehaviour
 
     [MinMaxSlider(0, 1)]
     [SerializeField]
-    Vector2 animationTimes;
+    Vector2 animationTimesOne;
+
+    [MinMaxSlider(0, 1)]
+    [SerializeField]
+    Vector2 animationTimesTwo;
+
 
     public AnimationCurve matchTargetSpeed;
 
@@ -118,16 +123,19 @@ public class SimpleLedgeClimber : MonoBehaviour
     {
         animator.Play(ClimbAnim);
         isClimbing = true;
+        rigidBody.useGravity = false;
         rigidBody.isKinematic = true;
 
         yield return new WaitForEndOfFrame();
 
         while (animator.GetCurrentAnimatorStateInfo(0).IsName(ClimbAnim))
         {
-            AnimatorUtilites.MatchTarget(animator, HumanBodyBones.RightHand, ClimbAnim, transform, ledgePoint + (Vector3.up * 0.1f), Quaternion.LookRotation(-ledgeNormal), animationTimes.x, animationTimes.y, matchTargetSpeed.Evaluate(animator.GetCurrentAnimatorStateInfo(0).normalizedTime), 1);
+            AnimatorUtilites.MatchTarget(animator, HumanBodyBones.RightHand, ClimbAnim, transform, ledgePoint + (Vector3.up * 0.1f), Quaternion.LookRotation(-ledgeNormal), animationTimesOne.x, animationTimesOne.y, matchTargetSpeed.Evaluate(animator.GetCurrentAnimatorStateInfo(0).normalizedTime), 1);
+            AnimatorUtilites.MatchTarget(animator, HumanBodyBones.LeftFoot, ClimbAnim, transform, ledgePoint + (Vector3.up * 0.1f), Quaternion.LookRotation(-ledgeNormal), animationTimesTwo.x, animationTimesTwo.y, matchTargetSpeed.Evaluate(animator.GetCurrentAnimatorStateInfo(0).normalizedTime), 1);
             yield return null;
         }
 
+        rigidBody.useGravity = true;
         rigidBody.isKinematic = false;
         isClimbing = false;
         climbCoroutine = null;
