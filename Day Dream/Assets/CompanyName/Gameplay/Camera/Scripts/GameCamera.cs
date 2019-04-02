@@ -88,7 +88,7 @@ public class GameCamera : Entity
 		_lookAtPosition += playerTransform.right * cameraLookAtOffset.x;
 
 		Quaternion _rotation = Quaternion.LookRotation(_lookAtPosition - transform.position);
-
+		
 		return _rotation;
 	}
 

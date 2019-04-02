@@ -131,8 +131,9 @@ public class SimpleLedgeClimber : MonoBehaviour
         while (animator.GetCurrentAnimatorStateInfo(0).IsName(ClimbAnim))
         {
             AnimatorUtilites.MatchTarget(animator, HumanBodyBones.RightHand, ClimbAnim, transform, ledgePoint + (Vector3.up * 0.1f), Quaternion.LookRotation(-ledgeNormal), animationTimesOne.x, animationTimesOne.y, matchTargetSpeed.Evaluate(animator.GetCurrentAnimatorStateInfo(0).normalizedTime), 1);
-            AnimatorUtilites.MatchTarget(animator, HumanBodyBones.LeftFoot, ClimbAnim, transform, ledgePoint + (Vector3.up * 0.1f), Quaternion.LookRotation(-ledgeNormal), animationTimesTwo.x, animationTimesTwo.y, matchTargetSpeed.Evaluate(animator.GetCurrentAnimatorStateInfo(0).normalizedTime), 1);
-            yield return null;
+            yield return new WaitForEndOfFrame();
+            //AnimatorUtilites.MatchTarget(animator, HumanBodyBones.LeftFoot, ClimbAnim, transform, ledgePoint + (Vector3.up * 0.1f), Quaternion.LookRotation(-ledgeNormal), animationTimesTwo.x, animationTimesTwo.y, matchTargetSpeed.Evaluate(animator.GetCurrentAnimatorStateInfo(0).normalizedTime), 1);
+            //yield return null;
         }
 
         rigidBody.useGravity = true;

@@ -53,13 +53,13 @@ public class PlayerGroundedComponent : MonoBehaviour
     public IsNotOnGroundEvent isNotOnGroundEvent = new IsNotOnGroundEvent();
 
     public const string GroundedBool = "IsGrounded";
-
+	
     private Animator animator;
 
     private void Awake()
     {
         animator = transform.root.GetComponentInChildren<Animator>();
-    }
+	}
 
     private void Update()
     {
@@ -79,12 +79,11 @@ public class PlayerGroundedComponent : MonoBehaviour
 		if(raycastOffsets == null)
 		{
 			Debug.LogError("You probably have not set up the raycast offsets on the PlayerGroundedComponent");
-            
             if(isNotOnGroundEvent != null)
             {
                 isNotOnGroundEvent.Invoke();
             }
-
+			
 			return false;
 		} 
 
@@ -92,7 +91,6 @@ public class PlayerGroundedComponent : MonoBehaviour
 		{
 			Vector3 _tp = transform.position + (_position * offsetDistance);
 			_tp.y  = transform.position.y + yOffset;
-
 			RaycastHit _hit;
 			if(Physics.Raycast(_tp, Vector3.down, out _hit, checkDistance, PhysicsLayers.ingnorePlayerLayer))
 			{
@@ -106,7 +104,6 @@ public class PlayerGroundedComponent : MonoBehaviour
 
 				    return true;
                 }
-
 			}
 		}
 

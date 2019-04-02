@@ -128,7 +128,8 @@ namespace AH.Max.Gameplay
 
             if(currentAnimSet == null)
             {
-                currentAnimSet = currentWeaponType.animations;
+                currentAnimSet = GetAnimations();
+                //currentAnimSet = currentWeaponType.animations;
             }
 
 			if(EvaluateQueueConditions())
@@ -201,6 +202,11 @@ namespace AH.Max.Gameplay
             return false;
 		}
 
+        private string[] GetAnimations()
+        {
+            return currentWeaponType.GetAnimations();
+        }
+
         /// <summary>
         /// A response to the tool component getting a weapon
         /// </summary>
@@ -208,7 +214,13 @@ namespace AH.Max.Gameplay
         public void OnToolEquipped(WeaponType weaponType)
         {
             currentWeaponType = weaponType;
-            currentAnimSet = currentWeaponType.animations;
+            SetCurrentAnimations();
+        }
+
+        [Button]
+        public void SetCurrentAnimations()
+        {
+            currentAnimSet = GetAnimations();
         }
 
 		public void AttackEndEvent()

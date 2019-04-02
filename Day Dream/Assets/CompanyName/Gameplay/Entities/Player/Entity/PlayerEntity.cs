@@ -7,5 +7,4 @@ using AH.Max;
 
 public class PlayerEntity : Character
 {
-	
 }

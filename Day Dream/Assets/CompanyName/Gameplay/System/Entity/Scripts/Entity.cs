@@ -55,7 +55,7 @@ namespace AH.Max
                 Debug.LogError("All Entities must have a valid identity type" + gameObject);
                 return;
             }
-
+        
             EntityManager.Instance.RegisterEntity(this);
 
             if(doNotDestroyOnLoad)

@@ -20,7 +20,90 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: animationSets
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String[], mscorlib],[System.Boolean,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EqualityComparer`1+DefaultComparer[[System.String[],
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|System.String[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 1
+      Data: Frank01_1
+    - Name: 
+      Entry: 1
+      Data: Frank01_2
+    - Name: 
+      Entry: 1
+      Data: Frank01_3
+    - Name: 
+      Entry: 1
+      Data: Frank01_4
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|System.String[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 1
+      Data: Frank03_1
+    - Name: 
+      Entry: 1
+      Data: Frank03_2
+    - Name: 
+      Entry: 1
+      Data: Frank03_3
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   animations:
   - Frank01_1
   - Frank01_2
