@@ -4,6 +4,7 @@ using UnityEngine;
 
 using BehaviorDesigner.Runtime;
 using Sirenix.OdinInspector;
+using AH.Max;
 
 public class ToolsComponent : MonoBehaviour {
 

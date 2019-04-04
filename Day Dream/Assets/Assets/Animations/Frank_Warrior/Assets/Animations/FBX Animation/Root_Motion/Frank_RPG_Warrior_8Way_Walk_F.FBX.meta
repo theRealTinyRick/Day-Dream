@@ -243,7 +243,7 @@ ModelImporter:
     400234: upperarm_r
     400236: upperarm_twist_01_l
     400238: upperarm_twist_01_r
-    7400000: Take 001
+    7400000: Frank_RPG_Warrior_8Way_Walk_F
     9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
@@ -258,11 +258,26 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: "Copied Avatar Rig Configuration mis-match. Transform hierarchy
-      does not match:\n\tTransform 'Hips' for human bone 'Hips' not found\n"
-    rigImportWarnings: 
+    rigImportErrors: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
+      copied configuration does not match position in animation file:\n\t'thigh_l'
+      : position error = 2.717677 mm\n\t'thigh_r' : position error = 1.502944 mm\n\t'calf_r'
+      : position error = 1.130926 mm\n\t'lowerarm_l' : position error = 1.148905 mm\n\t'hand_l'
+      : position error = 2.732039 mm\n\t'middle_02_l' : position error = 1.205573
+      mm\n\t'ring_02_l' : position error = 1.315655 mm\n\t'hand_r' : position error
+      = 1.234653 mm\n\t'middle_02_r' : position error = 1.204054 mm\n\t'ring_02_r'
+      : position error = 1.314638 mm\n"
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
+      improve retargeting quality.\n\t'thigh_l' has translation animation that will
+      be discarded.\n\t'calf_l' has translation animation that will be discarded.\n\t'foot_l'
+      has translation animation that will be discarded.\n\t'ball_l' has translation
+      animation that will be discarded.\n\t'thigh_r' has translation animation that
+      will be discarded.\n\t'calf_r' has translation animation that will be discarded.\n\t'foot_r'
+      has translation animation that will be discarded.\n\t'ball_r' has translation
+      animation that will be discarded.\n\t'spine_01' has translation animation that
+      will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -274,7 +289,35 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Frank_RPG_Warrior_8Way_Walk_F
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 50
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

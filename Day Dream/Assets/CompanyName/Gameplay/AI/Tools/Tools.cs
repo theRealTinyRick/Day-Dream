@@ -4,7 +4,11 @@ using UnityEngine;
 
 using AH.Max;
 
-public class Tools : Entity {
+namespace AH.Max
+{
+    public class Tools : Entity 
+    {
 
 
+    }
 }

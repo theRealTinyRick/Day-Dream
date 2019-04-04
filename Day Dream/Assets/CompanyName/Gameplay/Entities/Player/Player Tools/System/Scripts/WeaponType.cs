@@ -21,7 +21,7 @@ public class WeaponType : SerializedScriptableObject
 
     public string[] GetAnimations()
     {
-        string[] _result = animationSets.Keys.FirstOrDefault(_key => animationSets[_key] == false);
+        string[] _result = animationSets.Keys.ToList().Find(_key => animationSets[_key] == false);
 
         if (_result != null)
         {
