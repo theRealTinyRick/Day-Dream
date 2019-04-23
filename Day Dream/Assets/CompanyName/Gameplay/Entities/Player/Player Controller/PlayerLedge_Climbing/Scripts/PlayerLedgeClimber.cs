@@ -95,7 +95,6 @@ namespace AH.Max.Gameplay
         private bool canClimbUp {get {return IsAtNextClimbPoint();}}
 
         private Rigidbody _rigidbody;
-        private WallFinder wallFinder;
         private PlayerGroundedComponent playerGroundedComponent;
         private PlayerStateComponent playerStateComponent;
         private PlayerLedgeAnimHook playerLedgeAnimHook;
@@ -105,7 +104,6 @@ namespace AH.Max.Gameplay
             ledge = Vector3.zero;
 
             _rigidbody = GetComponent<Rigidbody>();
-            wallFinder = GetComponent<WallFinder>();
             playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
             playerStateComponent = GetComponent<PlayerStateComponent>();
             playerLedgeAnimHook = GetComponent<PlayerLedgeAnimHook>();
@@ -144,16 +142,16 @@ namespace AH.Max.Gameplay
         {
             if(isInPosition && isClimbing)
             {
-                if(InputDriver.LocomotionDirection.normalized.z > 0)
+                // if(InputDriver.LocomotionDirection.normalized.z > 0)
+                // {
+                //     StartCoroutine(ClimbupLedge());
+                // }
+                // else
+                // {
+                // }
+                if(IsAtNextClimbPoint())
                 {
-                    StartCoroutine(ClimbupLedge());
-                }
-                else
-                {
-                    if(IsAtNextClimbPoint())
-                    {
-                        Dismount();
-                    }
+                    Dismount();
                 }
             }
             else
@@ -171,13 +169,8 @@ namespace AH.Max.Gameplay
             {
                 isClimbing = true;
                 _rigidbody.isKinematic = true;
-
-                SetLedge(wallFinder.Ledge, wallFinder.WallNormal);
-
                 StartCoroutine(GetInPosition(LedgeWithPlayerOffset(ledge), wallNormal));
-
-                playerLedgeAnimHook.PlayMountAnim();
-
+//              playerLedgeAnimHook.PlayMountAnim();
                 if(ledgeClimbStarted != null)
                 {
                     ledgeClimbStarted.Invoke();
@@ -193,7 +186,7 @@ namespace AH.Max.Gameplay
             isInPosition = false;
             _rigidbody.isKinematic = false;
             ledge = Vector3.zero;
-            playerLedgeAnimHook.Dismount();
+            // playerLedgeAnimHook.Dismount();
 
             ResetRotation();
             
@@ -211,27 +204,45 @@ namespace AH.Max.Gameplay
         public bool CheckValidLedge()
         {
             Vector3 _rayCastOrigin = transform.position;
-            _rayCastOrigin.y += 0.5f;
+            _rayCastOrigin.y += 1;
+
+            Vector3 _horizontaHit = new Vector3();
+            
+            Vector3 _normal = new Vector3();
             RaycastHit _hitResult;
-            if(Physics.Raycast(_rayCastOrigin, Vector3.down, out _hitResult, 100))
+
+            Debug.DrawRay(_rayCastOrigin, transform.forward, Color.red, 5);
+            if(Physics.Raycast(_rayCastOrigin, transform.forward, out _hitResult, 1, layerMask))
             {
-                float _floorHit = _hitResult.point.y;
-                float _ledgeHeight = wallFinder.Ledge.y;
+                _normal = _hitResult.normal;
+                _horizontaHit = _hitResult.point;
 
-                if(_floorHit < _ledgeHeight)
+                _rayCastOrigin = _hitResult.point + transform.forward * 0.2f;
+                _rayCastOrigin += Vector3.up * maxMountHeight;
+
+                Debug.DrawRay(_rayCastOrigin, Vector3.down, Color.red, 5);
+                if(Physics.Raycast(_rayCastOrigin, Vector3.down, out _hitResult, 10, layerMask))
                 {
-                    float _heightDifference = _ledgeHeight - _floorHit;
+                    // float _floorHit = _hitResult.point.y;
+                    // float _ledgeHeight = wallFinder.Ledge.y;
 
-                    float _maxHeight = playerGroundedComponent.IsGrounded ? maxMountHeight : maxAirMountHeight;
-                    float _minHeight = playerGroundedComponent.IsGrounded ? minMountHeight : 0;
+                    // if(_floorHit < _ledgeHeight)
+                    // {
+                    //     float _heightDifference = _ledgeHeight - _floorHit;
 
-                    if(_heightDifference > _minHeight && _heightDifference < _maxHeight)
-                    {
-                        return true;
-                    }
+                    //     float _maxHeight = playerGroundedComponent.IsGrounded ? maxMountHeight : maxAirMountHeight;
+                    //     float _minHeight = playerGroundedComponent.IsGrounded ? minMountHeight : 0;
+
+                    //     if(_heightDifference > _minHeight && _heightDifference < _maxHeight)
+                    //     {
+                    //         return true;
+                    //     }
+                    // }
+                    SetLedge(new Vector3(_horizontaHit.x, _hitResult.point.y, _horizontaHit.z), _normal);
+                    return true;
                 }
             }
-
+            Debug.Log("Not a valid ledge");
             return false;
         }
 
@@ -289,7 +300,8 @@ namespace AH.Max.Gameplay
 
         private bool IsPlayerInTheIdleState()
         {
-            return GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("LedgeIdle");
+            return true;
+            // return GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("LedgeIdle");
         }
 
         private void DetectLedgePoint()
@@ -354,8 +366,7 @@ namespace AH.Max.Gameplay
                                {
                                     SetLedge(_ledge, _normal);
 
-                                    playerLedgeAnimHook.PlayClimbAnimation(LedgeWithPlayerOffset(ledge), horizontalInput);
-
+                                    // playerLedgeAnimHook.PlayClimbAnimation(LedgeWithPlayerOffset(ledge), horizontalInput);
                                     return;
                                }
                             }
@@ -369,6 +380,7 @@ namespace AH.Max.Gameplay
         {
             ledge = ledgePoint;
             wallNormal = normal;
+
             Quaternion _rot = Quaternion.LookRotation(-normal);
             ledgeRotation = _rot;
 

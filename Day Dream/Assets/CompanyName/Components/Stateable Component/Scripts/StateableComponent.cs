@@ -1,150 +1,154 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
 
 using Sirenix.OdinInspector;
 
-[System.Serializable]
-public class State
+namespace AH.Max.Gameplay.Components.Stateable
 {
-    public GameObject model;
-    public float value;
-}
-
-public class StateableComponent : MonoBehaviour
-{
-    [TabGroup(Tabs.Properties)]
-    [SerializeField]
-    private List<State> states = new List<State>();
-
-    private State currentState;
-
-    [TabGroup(Tabs.Properties)]
-    [SerializeField]
-    private bool evaluateOnEnable;
-
-    [TabGroup(Tabs.Properties)]
-    [SerializeField]
-    private float minimumValue;
-
-    [TabGroup(Tabs.Properties)]
-    [SerializeField]
-    private float maximumValue;
-
-    [TabGroup(Tabs.Properties)]
-    [SerializeField]
-    private float currentValue;
-
-    [TabGroup(Tabs.Events)]
-    [SerializeField]
-    StateChangedEvent stateChangedEvent = new StateChangedEvent();
-
-    private void OnEnable ()
+    [Serializable]
+    public class State
     {
-        if(evaluateOnEnable)
-        {
-            Evaluate();
-        }
-	}
+        public GameObject model;
+        public float value;
+    }
 
-    public void Evaluate()
+    public class StateableComponent : MonoBehaviour
     {
-        foreach(State _state in states)
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        private List<State> states = new List<State>();
+
+        private State currentState;
+
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        private bool evaluateOnEnable;
+
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        private float minimumValue;
+
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        private float maximumValue;
+
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        private float currentValue;
+
+        [TabGroup(Tabs.Events)]
+        [SerializeField]
+        StateChangedEvent stateChangedEvent = new StateChangedEvent();
+
+        private void OnEnable ()
         {
-            if(currentValue >= _state.value)
+            if(evaluateOnEnable)
             {
-                currentState = _state;
-                SetStateUp();
-                return;
+                Evaluate();
             }
         }
 
-        if(stateChangedEvent != null)
+        public void Evaluate()
         {
-            stateChangedEvent.Invoke(currentState.model, currentState.value);
-        }
-    }
-
-    private void SetStateUp()
-    {
-        if(currentState == null)
-        {
-            return;
-        }
-
-        foreach(State _state in states)
-        {
-            if(_state == currentState)
+            foreach(State _state in states)
             {
-                _state.model.SetActive(true);
+                if(currentValue >= _state.value)
+                {
+                    currentState = _state;
+                    SetStateUp();
+                    return;
+                }
+            }
+
+            if(stateChangedEvent != null)
+            {
+                stateChangedEvent.Invoke(currentState.model, currentState.value);
+            }
+        }
+
+        private void SetStateUp()
+        {
+            if(currentState == null)
+            {
+                return;
+            }
+
+            foreach(State _state in states)
+            {
+                if(_state == currentState)
+                {
+                    _state.model.SetActive(true);
+                }
+                else
+                {
+                    _state.model.SetActive(false);
+                }
+            }
+        }
+
+        public void SetValue(float value)
+        {
+            currentValue = value;
+            Evaluate();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void IncrementState()
+        {
+            if(states.Count <= 1)
+            {
+                return;
+            }
+
+            float _currentValue = currentValue;
+
+            if(states.IndexOf(currentState) >= states.Count - 1)
+            {
+                _currentValue = maximumValue;
+
+                SetValue(_currentValue);
+
+                return;
             }
             else
             {
-                _state.model.SetActive(false);
+                _currentValue = states[states.IndexOf(currentState) + 1].value;
+
+                SetValue(_currentValue);
             }
         }
-    }
 
-    public void SetValue(float value)
-    {
-        currentValue = value;
-        Evaluate();
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public void IncrementState()
-    {
-        if(states.Count <= 1)
+        /// <summary>
+        /// 
+        /// </summary>
+        public void DecrementState()
         {
-            return;
-        }
+            if (states.Count <= 1)
+            {
+                return;
+            }
 
-        float _currentValue = currentValue;
+            float _currentValue = currentValue;
 
-        if(states.IndexOf(currentState) >= states.Count - 1)
-        {
-            _currentValue = maximumValue;
+            if (states.IndexOf(currentState) <= 1)
+            {
+                _currentValue = minimumValue;
 
-            SetValue(_currentValue);
+                SetValue(_currentValue);
 
-            return;
-        }
-        else
-        {
-            _currentValue = states[states.IndexOf(currentState) + 1].value;
+                return;
+            }
+            else
+            {
+                _currentValue = states[states.IndexOf(currentState) - 1].value;
 
-            SetValue(_currentValue);
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public void DecrementState()
-    {
-        if (states.Count <= 1)
-        {
-            return;
-        }
-
-        float _currentValue = currentValue;
-
-        if (states.IndexOf(currentState) <= 1)
-        {
-            _currentValue = minimumValue;
-
-            SetValue(_currentValue);
-
-            return;
-        }
-        else
-        {
-            _currentValue = states[states.IndexOf(currentState) - 1].value;
-
-            SetValue(_currentValue);
+                SetValue(_currentValue);
+            }
         }
     }
 }

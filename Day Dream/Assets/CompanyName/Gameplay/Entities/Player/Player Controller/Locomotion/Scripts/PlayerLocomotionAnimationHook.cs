@@ -45,7 +45,7 @@ namespace AH.Max.Gameplay
         private Animator animator;
 
         [SerializeField]
-        private string[] unusableStates;
+        private State[] unusableStates;
 
 		private void Start()
 		{

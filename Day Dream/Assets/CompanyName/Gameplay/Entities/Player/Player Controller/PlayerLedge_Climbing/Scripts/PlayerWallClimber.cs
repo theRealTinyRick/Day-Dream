@@ -5,6 +5,16 @@ using UnityEngine;
 
 using Sirenix.OdinInspector;
 
+[System.Serializable]
+public class WallClimbingStartedEvent : UnityEngine.Events.UnityEvent
+{
+}
+
+[System.Serializable]
+public class WallClimbingEndedEvent : UnityEngine.Events.UnityEvent
+{
+}
+
 public class PlayerWallClimber : MonoBehaviour
 {
     public float positionOffSet;
@@ -69,24 +79,33 @@ public class PlayerWallClimber : MonoBehaviour
         }
     }
 
-    [Button]
-    public bool CheckForClimb()
+    public void Action()
+    {
+        if(!isClimbing && CheckForClimb())
+        {
+            return;
+        }
+        else if(isClimbing && inPosition && !isLerping)
+        {
+            Drop();
+        }
+    }
+
+    private bool CheckForClimb()
     {
         RaycastHit hit;
         Vector3 origin = transform.position;
 
         if (Physics.Raycast(origin, transform.forward, out hit, 1, layerMask))
         {
-            if (hit.transform.tag == "Climbable")
-            {
-                InitForClimb(hit);
-                return true;
-            }
+            InitForClimb(hit);
+            return true;
         }
+
         return false;
     }
 
-    public void InitForClimb(RaycastHit hit)
+    private void InitForClimb(RaycastHit hit)
     {
         isClimbing = true;
         rb.isKinematic = true;
@@ -128,7 +147,6 @@ public class PlayerWallClimber : MonoBehaviour
 
             if (!CanMove(moveDir) || moveDir == Vector3.zero)
             {
-                Debug.Log("adsfasdfasdfadsfasdf");
                 return;
             }
 
@@ -161,18 +179,12 @@ public class PlayerWallClimber : MonoBehaviour
     {
         if (moveDir.y > 0)
         {
+            // check if you are at the top of a ledge
             Vector3 o = transform.position;
             o.y += 2.5f;
             RaycastHit ledgeHit;
-            Debug.DrawRay(o, transform.forward, Color.green, 5);
-            if (Physics.Raycast(o, transform.forward, out ledgeHit, 5, layerMask))
-            {
-                if (ledgeHit.transform.tag != "Climbable")
-                {
-                    return false;
-                }
-            }
-            else
+            Debug.DrawRay(o, transform.forward, Color.red, 5);
+            if (!Physics.Raycast(o, transform.forward, out ledgeHit, 5, layerMask))
             {
                 return false;
             }
@@ -197,12 +209,6 @@ public class PlayerWallClimber : MonoBehaviour
 
         if (Physics.Raycast(origin, dir, out hit, dis, layerMask))
         {
-
-            if (hit.transform.tag != "Climbable")
-            {
-                return false;
-            }
-
             helper.position = PosWithOffset(origin, hit.point);
             helper.rotation = Quaternion.LookRotation(-hit.normal);
             return true;
@@ -213,14 +219,8 @@ public class PlayerWallClimber : MonoBehaviour
         float dis2 = 1;
 
         Debug.DrawRay(origin, dir * dis2, Color.blue, 5);
-        if (Physics.Raycast(origin, dir, out hit, dis2))
+        if (Physics.Raycast(origin, dir, out hit, dis2, layerMask))
         {
-
-            if (hit.transform.tag != "Climbable")
-            {
-                return false;
-            }
-
             helper.position = PosWithOffset(origin, hit.point);
             helper.rotation = Quaternion.LookRotation(-hit.normal);
             return true;
@@ -269,14 +269,4 @@ public class PlayerWallClimber : MonoBehaviour
 
         wallClimbingEndedEvent.Invoke();
     }
-}
-
-[System.Serializable]
-public class WallClimbingStartedEvent : UnityEngine.Events.UnityEvent
-{
-}
-
-[System.Serializable]
-public class WallClimbingEndedEvent : UnityEngine.Events.UnityEvent
-{
 }

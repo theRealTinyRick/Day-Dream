@@ -39,11 +39,11 @@ namespace AH.Max.Gameplay
 
         [TabGroup(Tabs.Properties)]
         [SerializeField]
-        private string[] nonAttackableStates;
+        private State[] nonAttackableStates;
 
         [TabGroup(Tabs.Properties)]
         [SerializeField]
-        private string groundedState = "IsGrounded";
+        private State groundedState;
 
         [HideInInspector]
         public string[] swingBooleans = new string[] {"Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6"};
@@ -55,6 +55,8 @@ namespace AH.Max.Gameplay
         private Animator animator;
         private StateComponent stateComponent;
         private PlayerGroundedComponent playerGroundedComponent;
+        private PlayerToolComponent playerToolsComponent;
+
 
         //events
         [TabGroup(Tabs.Events)]
@@ -70,6 +72,7 @@ namespace AH.Max.Gameplay
 			animator = GetComponent<Animator>();
             playerGroundedComponent = GetComponent<PlayerGroundedComponent>();
             stateComponent = GetComponent<StateComponent>();
+            playerToolsComponent = GetComponentInChildren<PlayerToolComponent>();
 		}
 
 		private void Update()
@@ -118,7 +121,10 @@ namespace AH.Max.Gameplay
 		{
             if(currentWeaponType == null)
             {
-                return;
+                currentWeaponType = playerToolsComponent.currentToolType;
+
+                if(currentWeaponType == null)
+                    return; 
             }
 
             if(currentWeaponType.handedness == Handedness.EmptyHands)

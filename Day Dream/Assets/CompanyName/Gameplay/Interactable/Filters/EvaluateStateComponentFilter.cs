@@ -13,7 +13,7 @@ public class EvaluateStateComponentFilter : IInteractionFilter
     public InteractableComponent interactable { get; set; }
     public Interaction interaction { get; set; }
 
-    public string state;
+    public State state;
 
     public bool invertState;
 

@@ -9,28 +9,51 @@ public class SimpleLedgeClimber : MonoBehaviour
 {
     private const string ClimbAnim = "ClimbLedge";
 
+    [TabGroup(Tabs.Properties)]
     [SerializeField]
     private LayerMask climbLayer;
 
+    [TabGroup(Tabs.Properties)]
     [SerializeField]
     private float checkDistance;
 
+    [TabGroup(Tabs.Properties)]
     [SerializeField]
     private float maxClimbHeight;
 
+    [TabGroup(Tabs.Properties)]
     [SerializeField]
     private float minClimbHeight;
 
+    [TabGroup(Tabs.Properties)]
     [SerializeField]
     private float maxCheckAngle;
 
-    //[HideInInspector]
+    [TabGroup("Match Target")]
+    [MinMaxSlider(0, 1)]
+    [SerializeField]
+    Vector2 matchTargetPositionTime;
+
+    [TabGroup("Match Target")]
+    [MinMaxSlider(0, 1)]
+    [SerializeField]
+    Vector2 matchTargetRotationTime;
+
+    [TabGroup("Match Target")]
+    [SerializeField]
+    public AnimationCurve matchTargetPositionSpeed;
+
+    [TabGroup("Match Target")]
+    [SerializeField]
+    public AnimationCurve matchTargetRotationSpeed;
+   
+    [HideInInspector]
     public bool isHoldingJumpButton = false;
 
-    //[HideInInspector]
+    [HideInInspector]
     public bool hasValidLedge = false;
 
-    //[HideInInspector]
+    [HideInInspector]
     public bool isClimbing = false;
 
     private Coroutine climbCoroutine;
@@ -39,16 +62,6 @@ public class SimpleLedgeClimber : MonoBehaviour
     private Vector3 ledgePoint;
     private Vector3 ledgeNormal;
 
-    [MinMaxSlider(0, 1)]
-    [SerializeField]
-    Vector2 animationTimesOne;
-
-    [MinMaxSlider(0, 1)]
-    [SerializeField]
-    Vector2 animationTimesTwo;
-
-
-    public AnimationCurve matchTargetSpeed;
 
     private Rigidbody rigidBody;
 
@@ -130,10 +143,10 @@ public class SimpleLedgeClimber : MonoBehaviour
 
         while (animator.GetCurrentAnimatorStateInfo(0).IsName(ClimbAnim))
         {
-            AnimatorUtilites.MatchTarget(animator, HumanBodyBones.RightHand, ClimbAnim, transform, ledgePoint + (Vector3.up * 0.1f), Quaternion.LookRotation(-ledgeNormal), animationTimesOne.x, animationTimesOne.y, matchTargetSpeed.Evaluate(animator.GetCurrentAnimatorStateInfo(0).normalizedTime), 1);
-            yield return new WaitForEndOfFrame();
-            //AnimatorUtilites.MatchTarget(animator, HumanBodyBones.LeftFoot, ClimbAnim, transform, ledgePoint + (Vector3.up * 0.1f), Quaternion.LookRotation(-ledgeNormal), animationTimesTwo.x, animationTimesTwo.y, matchTargetSpeed.Evaluate(animator.GetCurrentAnimatorStateInfo(0).normalizedTime), 1);
-            //yield return null;
+            float _currentTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            AnimatorUtilites.MatchTargetPosition(animator, HumanBodyBones.RightHand, ClimbAnim, ledgePoint, matchTargetPositionTime.x, matchTargetPositionTime.y, matchTargetPositionSpeed.Evaluate(_currentTime));
+            AnimatorUtilites.MatchTargetRotation(animator, ClimbAnim,  Quaternion.LookRotation(-ledgeNormal), matchTargetRotationTime.x, matchTargetRotationTime.y, matchTargetRotationSpeed.Evaluate(_currentTime));
+            yield return null;
         }
 
         rigidBody.useGravity = true;

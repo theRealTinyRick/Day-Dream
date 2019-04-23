@@ -12,41 +12,41 @@ namespace AH.Max.Gameplay.System.Components
     {
         [TabGroup(Tabs.Properties)]
         [SerializeField]
-        public Dictionary<string, bool> states = new Dictionary<string, bool>();
+        public Dictionary<State, bool> states = new Dictionary<State, bool>();
 
         [TabGroup(Tabs.Events)]
         [SerializeField]
         StateChangedEvent stateChangedEvent = new StateChangedEvent();
 
-        public bool GetState(string stateName)
+        public bool GetState(State state)
         {
             bool _stateValue;
 
-            if(states.TryGetValue(stateName, out _stateValue))
+            if(states.TryGetValue(state, out _stateValue))
             {
                 return _stateValue;
             }
 
-            Debug.LogWarning("The state component could not find the state: " + stateName + ", so we are refturning false ", gameObject);
+            Debug.LogWarning("The state component could not find the state: " + state + ", so we are refturning false ", gameObject);
             return false;
         }
 
-        public bool GetOrCreateState(string stateName, bool defaultValue = false)
+        public bool GetOrCreateState(State state, bool defaultValue = false)
         {
             bool _stateValue;
 
-            if (states.TryGetValue(stateName, out _stateValue))
+            if (states.TryGetValue(state, out _stateValue))
             {
                 return _stateValue;
             }
 
-            states.Add(stateName, defaultValue);
+            states.Add(state, defaultValue);
             return defaultValue;
         }
 
-        public bool HasState(string stateName)
+        public bool HasState(State state)
         {
-            if (states.ContainsKey(stateName))
+            if (states.ContainsKey(state))
             {
                 return true;
             }
@@ -54,15 +54,15 @@ namespace AH.Max.Gameplay.System.Components
             return false;
         }
 
-        public bool SetState(string stateName, bool value)
+        public bool SetState(State state, bool value)
         {
-            if(states.ContainsKey(stateName))
+            if(states.ContainsKey(state))
             {
-                states[stateName] = value;
+                states[state] = value;
 
                 if(stateChangedEvent != null)
                 {
-                    stateChangedEvent.Invoke(stateChangedEvent, stateName);
+                    stateChangedEvent.Invoke(stateChangedEvent, state);
                 }
 
                 return true;
@@ -71,48 +71,48 @@ namespace AH.Max.Gameplay.System.Components
             return false;
         }
 
-        public void SetStateFalse(string stateName)
+        public void SetStateFalse(State state)
         {
-            if (states.ContainsKey(stateName))
+            if (states.ContainsKey(state))
             {
-                states[stateName] = false;
+                states[state] = false;
 
                 if (stateChangedEvent != null)
                 {
-                    stateChangedEvent.Invoke(stateChangedEvent, stateName);
+                    stateChangedEvent.Invoke(stateChangedEvent, state);
                 }
             }
         }
 
-        public void SetStateTrue(string stateName)
+        public void SetStateTrue(State state)
         {
-            if (states.ContainsKey(stateName))
+            if (states.ContainsKey(state))
             {
-                states[stateName] = true;
+                states[state] = true;
 
                 if (stateChangedEvent != null)
                 {
-                    stateChangedEvent.Invoke(stateChangedEvent, stateName);
+                    stateChangedEvent.Invoke(stateChangedEvent, state);
                 }
             }
         }
 
-        public void ReverseState(string stateName)
+        public void ReverseState(State state)
         {
-            if (states.ContainsKey(stateName))
+            if (states.ContainsKey(state))
             {
-                states[stateName] = !states[stateName];
+                states[state] = !states[state];
 
                 if (stateChangedEvent != null)
                 {
-                    stateChangedEvent.Invoke(stateChangedEvent, stateName);
+                    stateChangedEvent.Invoke(stateChangedEvent, state);
                 }
             }
         }
 
         public bool AnyStateTrue()
         {
-            foreach (string _state in states.Keys)
+            foreach (State _state in states.Keys)
             {
                 if (states[_state])
                 {
@@ -123,9 +123,9 @@ namespace AH.Max.Gameplay.System.Components
             return false;
         }
 
-        public bool AnyStateTrue(List<string> states)
+        public bool AnyStateTrue(List<State> states)
         {
-            foreach(string _state in states)
+            foreach(State _state in states)
             {
                 if(this.states[_state])
                 {
@@ -138,7 +138,7 @@ namespace AH.Max.Gameplay.System.Components
 
         public bool AnyStateFalse()
         {
-            foreach (string _state in states.Keys)
+            foreach (State _state in states.Keys)
             {
                 if (!states[_state])
                 {
@@ -149,9 +149,9 @@ namespace AH.Max.Gameplay.System.Components
             return false;
         }
 
-        public bool AnyStateFalse(List<string> states)
+        public bool AnyStateFalse(List<State> states)
         {
-            foreach (string _state in states)
+            foreach (State _state in states)
             {
                 if (this.states.ContainsKey(_state))
                 {

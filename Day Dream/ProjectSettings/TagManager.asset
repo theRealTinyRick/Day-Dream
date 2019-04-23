@@ -32,15 +32,15 @@ TagManager:
   - 
   - Player
   - Environment
-  - Climbable
-  - Global
-  - 
-  - 
+  - SimpleClimbUp
+  - WallClimb
+  - LedgeClimb
+  - Hide
   - 
   - Enemy
   - Platform
   - Loot
-  - 
+  - Global
   - 
   - 
   - 

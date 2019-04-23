@@ -13,10 +13,12 @@ using AH.Max.System;
 using AH.Max;
 
 /// <summary>
-/// Event fired off when a 
+/// 
 /// </summary>
+/// <typeparam name="WeaponType">The current weapon</typeparam>
+/// <typeparam name="WeaponType">the previous weapon</typeparam>
 [System.Serializable]
-public class ToolWasEquipped : UnityEngine.Events.UnityEvent<WeaponType>
+public class ToolWasEquipped : UnityEngine.Events.UnityEvent<WeaponType, WeaponType>
 {
 }
 
@@ -121,7 +123,7 @@ public class PlayerToolComponent : SerializedMonoBehaviour
 
                 if (toolWasEquipped != null)
                 {
-                    toolWasEquipped.Invoke(currentToolType);
+                    toolWasEquipped.Invoke(currentToolType, null);
                 }
             }
         }

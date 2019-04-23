@@ -8,6 +8,13 @@ using Cinemachine;
 
 namespace AH.Max.Gameplay.Camera
 {
+    public enum UpdateMode : int
+    {
+        Normal, 
+        Fixed, 
+        Late
+    }
+
     [Serializable]
     public class StateData
     {
@@ -20,6 +27,10 @@ namespace AH.Max.Gameplay.Camera
 
     public class CameraManager : MonoBehaviour
     {
+        [TabGroup(Tabs.Properties)]
+        [SerializeField]
+        public UpdateMode updateMode;
+        
         [TabGroup(Tabs.Properties)]
         [SerializeField]
         private CinemachineFreeLook cm_cameraController;
@@ -75,20 +86,18 @@ namespace AH.Max.Gameplay.Camera
             {
                 targetingManager = transform.root.GetComponentInChildren<TargetingManager>();
             }
-
-            /*
-            if(playerLedgeFinder == null)
-            {
-                playerLedgeFinder = transform.root.GetComponentInChildren<PlayerLedgeClimber>();
-            }
-            */
         }
 
-	    private void FixedUpdate ()
+        public void LateUpdate()
+        {
+            Tick();
+        }
+
+        private void Tick()
         {
             if(cameraFollow != null)
             {
-		        if(targetingManager.LockedOn)
+                if(targetingManager.LockedOn)
                 {
                     if(targetingManager.CurrentTarget != null)
                     {
@@ -104,6 +113,8 @@ namespace AH.Max.Gameplay.Camera
 
                         Vector3 _targetDirection = targetingManager.CurrentTarget.transform.position - currentCameraTarget.position;
                         Quaternion _targetRotation = Quaternion.LookRotation(_targetDirection);
+
+                        cm_cameraController.m_BindingMode = CinemachineTransposer.BindingMode.WorldSpace;
 
                         //_targetRotation.x = 0;
                         //_targetRotation.z = 0;
@@ -161,8 +172,11 @@ namespace AH.Max.Gameplay.Camera
 
                 cm_cameraController.m_RecenterToTargetHeading.m_enabled = false;
                 cm_cameraController.m_YAxisRecentering.m_enabled = false;
+                cm_cameraController.m_BindingMode = CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp;
+
             }
-	    }
+
+        }
 
         public void UpdateCameraTargetPosition()
         {

@@ -21,18 +21,20 @@ public class WeaponType : SerializedScriptableObject
 
     public string[] GetAnimations()
     {
-        string[] _result = animationSets.Keys.ToList().Find(_key => animationSets[_key] == false);
+        // string[] _result = animationSets.Keys.ToList().Find(_key => animationSets[_key] == false);
 
-        if (_result != null)
-        {
-            return _result;
-        }
+        // if (_result != null)
+        // {
+        //     return _result;
+        // }
 
-        foreach(string[] _key in animationSets.Keys)
-        {
-            animationSets[_key] = false;
-        }
+        // foreach(string[] _key in animationSets.Keys)
+        // {
+        //     animationSets[_key] = false;
+        // }
 
-        return animationSets.Keys.First();
+        // return animationSets.Keys.First();
+
+        return animations;
     } 
 }

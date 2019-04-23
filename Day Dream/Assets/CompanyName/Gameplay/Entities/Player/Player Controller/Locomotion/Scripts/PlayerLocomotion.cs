@@ -42,11 +42,11 @@ namespace AH.Max.Gameplay
 
         [TabGroup(Tabs.Locomotion)]
         [SerializeField]
-        private string[] immobileStates;
+        private State[] immobileStates;
 
         [TabGroup(Tabs.Locomotion)]
         [SerializeField]
-        private string isGroundedState;
+        private State isGroundedState;
 
         [HideInInspector]
 		public Vector3 playerOrientationDirection = new Vector3();
@@ -133,16 +133,10 @@ namespace AH.Max.Gameplay
             {
                 _speed = airSpeed;
             }
-            //else if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Locomotion"))
-            //{
-                //_speed = 0;
-            //}
-
             else if (isSprinting)
             {
                 _speed = sprintSpeed;
             }
-
             else if(isPreparing)
             {
                 _speed = preparedSpeed;

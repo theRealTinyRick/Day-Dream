@@ -64,7 +64,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 5
-      Data: true
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -94,7 +94,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 5
-      Data: false
+      Data: true
     - Name: 
       Entry: 8
       Data: 
@@ -109,5 +109,7 @@ MonoBehaviour:
   - Frank01_2
   - Frank01_3
   - Frank01_4
-  clickTime: 1
+  - Frank01_5
+  - Frank01_6
+  clickTime: 0.5
   handedness: 0

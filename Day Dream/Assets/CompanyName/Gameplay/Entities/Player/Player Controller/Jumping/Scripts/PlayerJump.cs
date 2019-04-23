@@ -51,38 +51,16 @@ namespace AH.Max.Gameplay
 
         [TabGroup(Tabs.Properties)]
         [SerializeField]
-        private string[] unavailableStates;
+        private State[] unavailableStates;
 
         [TabGroup(Tabs.Properties)]
         [SerializeField]
-        private string isGroundedState;
+        private State isGroundedState;
 
         private new Rigidbody rigidbody;
         private PlayerStateComponent playerStateComponent;
         private StateComponent stateComponent;
         private PlayerLedgeClimber playerLedgeFinder;
-
-        private void Awake() 
-		{
-            /*
-            if(jumpStartedEvent == null)
-            {
-                jumpStartedEvent = new JumpStartedEvent();
-            }
-
-            if(jumpForwardStartedEvent == null)
-            {
-                jumpForwardStartedEvent = new JumpForwardStartedEvent();
-            }
-
-            stateComponent = GetComponent<StateComponent>();
-            rigidbody = transform.root.GetComponentInChildren<Rigidbody>();
-            playerStateComponent = GetComponent<PlayerStateComponent>();
-            playerLedgeFinder = GetComponent<PlayerLedgeClimber>();
-
-            InputDriver.jumpButtonEvent.AddListener(Jump);
-            */
-		} 
 
         void OnEnable()
         {
@@ -101,14 +79,12 @@ namespace AH.Max.Gameplay
             playerStateComponent = GetComponent<PlayerStateComponent>();
             playerLedgeFinder = GetComponent<PlayerLedgeClimber>();
 
-            InputDriver.jumpButtonEvent.AddListener(Jump);
             playerLeftTheGround = false;
             playerJumped = false;
         }
 
         private void OnDisable()
         {
-            InputDriver.jumpButtonEvent.RemoveListener(Jump);
         }
 
         private void FixedUpdate()
@@ -158,7 +134,7 @@ namespace AH.Max.Gameplay
             }
         }
 
-        private void Jump()
+        public void Jump()
         {
             if(ShouldJump())
             {

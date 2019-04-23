@@ -32,8 +32,8 @@ namespace AH.Max.Gameplay
         /// </summary>
         [Tooltip("These are the states where the evade action is available")]
         [TabGroup(Tabs.Properties)]
-        public string[] unavailableStates;
-        public string lockedOnState;
+        public State[] unavailableStates;
+        public State lockedOnState;
 
         [TabGroup(Tabs.Events)]
         public EvadeStartedEvents evadeStartedEvents = new EvadeStartedEvents();

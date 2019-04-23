@@ -58,6 +58,8 @@ public class InteractableComponent : SerializedMonoBehaviour
             }
         }
 
+        outlineComponent = transform.root.GetComponentInChildren<Outline>();
+
         if(outlineComponent != null)
         {
             outlineComponent.enabled = false;
