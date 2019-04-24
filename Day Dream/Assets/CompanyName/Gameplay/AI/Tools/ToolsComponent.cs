@@ -14,6 +14,8 @@ public class ToolsComponent : MonoBehaviour {
 
     private Tools currentlyInUse;
 
+    private UseableComponent currentUseableComponent;
+
     public List<Tools> GetCharacterTools()
     {
         return characterTools;
@@ -29,7 +31,7 @@ public class ToolsComponent : MonoBehaviour {
         return characterTools[element].GetComponent<UseableComponent>();
     }
 
-    public void UseTool(int element, bool forceUse, out UseableComponent useableComponent)
+    public void UseTool(int element, bool forceUse)
     {
         if(currentlyInUse != null)
         {
@@ -37,19 +39,19 @@ public class ToolsComponent : MonoBehaviour {
             {
                 CancelTool();
             }
-            else
+            else if(currentUseableComponent.inUse)
             {
-                useableComponent = null;
+                currentUseableComponent = null;
                 return;
             }
         }
         Tools _tool = characterTools[element];
 
-        useableComponent = _tool.GetComponent<UseableComponent>();
+        currentUseableComponent = _tool.GetComponent<UseableComponent>();
 
         currentlyInUse = _tool;
 
-        useableComponent.Use();
+        currentUseableComponent.Use();
     }
 
     public void CancelTool()

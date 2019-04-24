@@ -13,6 +13,8 @@ namespace BehaviorDesigner.Runtime.Tasks
 
         public int tool;
 
+        public bool priorityUse;
+
         private UseableComponent toolsUseable;
 
         private ToolsComponent agentsToolComponent;
@@ -32,17 +34,13 @@ namespace BehaviorDesigner.Runtime.Tasks
                 return TaskStatus.Failure;
             }
 
-            if (toolsUseable == null)
+            toolsUseable = agentsToolComponent.GetToolsUseable(tool);
+
+            if (toolsUseable != null && !toolsUseable.inUse)
             {
-                agentsToolComponent.UseTool(tool, true, out toolsUseable);
+                agentsToolComponent.UseTool(tool, priorityUse);
             }
             Debug.Log("using tool!");
-
-            if(toolsUseable.inUse)
-            {
-                Debug.Log("running!");
-                return TaskStatus.Running;
-            }
 
             toolsUseable = null;
             return TaskStatus.Success;

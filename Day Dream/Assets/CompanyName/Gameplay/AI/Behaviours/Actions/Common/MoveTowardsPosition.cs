@@ -12,6 +12,8 @@ namespace BehaviorDesigner.Runtime.Tasks
 
         public SharedVector3 sharedTargetPosition;
 
+        public SharedFloat stopDistance;
+
         private NavMeshAgent agentNavmeshAgent;
 
         public override TaskStatus OnUpdate()
@@ -30,7 +32,21 @@ namespace BehaviorDesigner.Runtime.Tasks
 
             agent.Value.GetComponent<Animator>().SetBool("IsMoving", true);
 
-            return TaskStatus.Success;
+            if(IsCompleted(stopDistance.Value))
+            {
+                agent.Value.GetComponent<Animator>().SetBool("IsMoving", false);
+                return TaskStatus.Success;
+            }
+
+            return TaskStatus.Running;
+        }
+
+        private bool IsCompleted(float stopDist)
+        {
+            float _value = (agent.Value.transform.position - agentNavmeshAgent.destination).magnitude;
+
+            Debug.Log("distance is: " + _value);
+            return stopDistance.Value >= _value;
         }
 
         public override void OnConditionalAbort()
