@@ -170,7 +170,7 @@ namespace AH.Max.Gameplay
                 isClimbing = true;
                 _rigidbody.isKinematic = true;
                 StartCoroutine(GetInPosition(LedgeWithPlayerOffset(ledge), wallNormal));
-//              playerLedgeAnimHook.PlayMountAnim();
+                playerLedgeAnimHook.PlayMountAnim();
                 if(ledgeClimbStarted != null)
                 {
                     ledgeClimbStarted.Invoke();
@@ -186,7 +186,7 @@ namespace AH.Max.Gameplay
             isInPosition = false;
             _rigidbody.isKinematic = false;
             ledge = Vector3.zero;
-            // playerLedgeAnimHook.Dismount();
+            playerLedgeAnimHook.Dismount();
 
             ResetRotation();
             
@@ -300,8 +300,8 @@ namespace AH.Max.Gameplay
 
         private bool IsPlayerInTheIdleState()
         {
-            return true;
-            // return GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("LedgeIdle");
+            //return true;
+            return GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("LedgeIdle");
         }
 
         private void DetectLedgePoint()
@@ -366,7 +366,7 @@ namespace AH.Max.Gameplay
                                {
                                     SetLedge(_ledge, _normal);
 
-                                    // playerLedgeAnimHook.PlayClimbAnimation(LedgeWithPlayerOffset(ledge), horizontalInput);
+                                    playerLedgeAnimHook.PlayClimbAnimation(LedgeWithPlayerOffset(ledge), horizontalInput);
                                     return;
                                }
                             }
